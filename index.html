@@ -1,103 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bithues Reading Lab | Curated Book Reviews</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --surface-hover: #1a1a25;
-            --border: #2a2a3a;
-            --text: #e8e8f0;
-            --text-dim: #7a7a90;
-            --accent: #7c3aed;
-            --accent-dim: #5b21b6;
-            --accent-glow: rgba(124, 58, 237, 0.3);
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text); }
-        .hero { padding: 5rem 0; text-align: center; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.1; }
-        .hero h1 span { background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 600px; margin: 0 auto 2rem; }
-        .hero-cta { display: inline-flex; gap: 1rem; }
-        .btn { display: inline-block; padding: 0.875rem 1.75rem; border-radius: 8px; font-size: 1rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { background: var(--accent-dim); transform: translateY(-1px); }
-        section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
-        section:last-of-type { border-bottom: none; }
-        .section-header { margin-bottom: 2rem; }
-        .section-header h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; }
-        .features-list { max-width: 600px; margin: 0 auto; }
-        .features-list li { display: flex; gap: 1rem; padding: 1rem 1.25rem; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 0.75rem; font-size: 1.05rem; }
-        .features-list li:last-child { margin-bottom: 0; }
-        footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); }
-        footer p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1rem; }
-        footer a { color: var(--accent); text-decoration: none; margin: 0 0.75rem; }
-        footer a:hover { text-decoration: underline; }
-        @media (max-width: 640px) { .nav-links { display: none; } .hero { padding: 3rem 0; } .hero-cta { flex-direction: column; } }
-    </style>
+ <meta charset="UTF-8">
+ <title>Bithues Reading Lab</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <nav>
-                <a href="/" class="logo">Bithues<span> Reading Lab</span></a>
-                <div class="nav-links">
-                    <a href="/reviews">Reviews</a>
-                    <a href="/categories">Categories</a>
-                    <a href="/about">About</a>
-                </div>
-            </nav>
-        </header>
-        
-        <section class="hero">
-            <h1>Curated book reviews<br><span>that change how you think.</span></h1>
-            <p>Bithues Reading Lab is a curated book review hub for indie authors, solopreneurs, and anyone who wants signal-dense reading. We review books on writing, AI, trading, and psychology — and tell you what's actually worth your time.</p>
-            <div class="hero-cta">
-                <a href="/reviews" class="btn btn-primary">Explore Reviews</a>
-            </div>
-        </section>
-        
-        <section>
-            <div class="section-header">
-                <h2>What You Get</h2>
-                <p>Reviews that cut through the noise.</p>
-            </div>
-            <ul class="features-list">
-                <li>Curated reviews for fiction, speculative nonfiction, and self-help</li>
-                <li>Actionable takeaways, not just summaries</li>
-                <li>Honest takes — we tell you what to skip</li>
-                <li>Links to buy books (affiliate-supported)</li>
-            </ul>
-        </section>
-        
-        <footer>
-            <p>© 2026 Bithues Reading Lab</p>
-            <div>
-                <a href="/">Home</a>
-                <a href="/reviews">Reviews</a>
-                <a href="/categories">Categories</a>
-                <a href="/about">About</a>
-            </div>
-        </footer>
-    </div>
+ <header class="site-header">
+ <div class="container header-inner">
+ <div class="brand">
+ <span class="brand-mark">B</span>
+ <span class="brand-text">Bithues Reading Lab</span>
+ </div>
+ <nav class="nav">
+ <a href="index.html">Home</a>
+ <a href="catalog.html">Catalog</a>
+ </nav>
+ </div>
+ </header>
+
+ <main>
+ <section class="hero">
+ <div class="container hero-inner">
+ <div class="hero-text">
+ <h1>Curated reads for curious minds</h1>
+ <p>
+ Bithues highlights speculative fiction, science, and thoughtful nonfiction—
+ hand‑picked titles for readers who like to explore strange ideas and deep questions.
+ </p>
+ <a class="button primary" href="catalog.html">Browse all books</a>
+ </div>
+ </div>
+ </section>
+
+ <section class="featured">
+ <div class="container">
+ <div class="section-header">
+ <h2>Featured picks</h2>
+ <a class="section-link" href="catalog.html">View full catalog →</a>
+ </div>
+ <div class="book-grid">
+ <!-- These three cards get injected/updated by build_site.py -->
+ <article class="book-card">
+ <div class="book-meta">Elowen Tidebloom</div>
+ <h3 class="book-title">Symbiont Bloom</h3>
+ <p class="book-subtitle">Verdant Nexus #1</p>
+ <div class="book-actions">
+ <a class="button amazon" href="https://amzn.to/47W0PTa" target="_blank" rel="noopener">View on Amazon</a>
+ </div>
+</article>
+
+<article class="book-card">
+ <div class="book-meta">Quantum Chronos</div>
+ <h3 class="book-title">Physics of Insight</h3>
+ <p class="book-subtitle">Awakening the Savant Within</p>
+ <div class="book-actions">
+ <a class="button amazon" href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">View on Amazon</a>
+ </div>
+</article>
+
+<article class="book-card">
+ <div class="book-meta">Michael Jr</div>
+ <h3 class="book-title">Little Mike: Fun at the Beach</h3>
+ <div class="book-actions">
+ <a class="button amazon" href="https://amzn.to/40JEYKU" target="_blank" rel="noopener">View on Amazon</a>
+ </div>
+</article>
+
+<article class="book-card">
+ <div class="book-meta">Jorak Veldt</div>
+ <h3 class="book-title">Rules of Survival</h3>
+ <p class="book-subtitle">Fire, Hunger, and the First Name</p>
+ <div class="book-actions">
+ <a class="button amazon" href="https://amzn.to/3NvIPZ6" target="_blank" rel="noopener">View on Amazon</a>
+ </div>
+</article>
+ </div>
+ </div>
+ </section>
+ </main>
+
+ <footer class="site-footer">
+ <div class="container footer-inner">
+ <span>© <span id="year"></span> Bithues Reading Lab</span>
+ <span class="footer-disclosure">
+ As an Amazon Associate, this site earns from qualifying purchases.
+ </span>
+ </div>
+ </footer>
+
+ <script>
+ document.getElementById('year').textContent = new Date().getFullYear();
+ </script>
 </body>
 </html>
