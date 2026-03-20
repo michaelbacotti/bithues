@@ -15,17 +15,25 @@
         .logo span { color: var(--accent); }
         .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
         .nav-links a:hover, .nav-links a.active { color: var(--text); }
-        .page-header { padding: 3rem 0; }
+        .page-header { padding: 3rem 0 1.5rem; }
         .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
         .page-header p { color: var(--text-dim); }
-        .book-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        
+        .filters { padding: 1rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .filter-btn { padding: 0.5rem 1rem; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; color: var(--text-dim); cursor: pointer; transition: all 0.2s; }
+        .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+        .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        
+        .book-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; display: block; }
+        .book-card.hidden { display: none; }
         .book-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
         .book-card h3 a { color: var(--text); text-decoration: none; }
         .book-card h3 a:hover { color: var(--accent); }
         .book-card .author { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.75rem; }
         .book-card .tldr { color: var(--text-dim); font-size: 0.95rem; }
-        .book-card .meta { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+        .book-card .meta { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
         .book-card .tag { font-size: 0.75rem; padding: 0.25rem 0.5rem; background: var(--border); border-radius: 4px; color: var(--text-dim); }
+        
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.85rem; }
     </style>
@@ -48,153 +56,162 @@
             <p>Browse all 35 curated books</p>
         </section>
         
-        <div class="book-card">
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Fiction">Fiction</button>
+            <button class="filter-btn" data-filter="Nonfiction">Nonfiction</button>
+            <button class="filter-btn" data-filter="Children">Children</button>
+            <button class="filter-btn" data-filter="Science">Science</button>
+            <button class="filter-btn" data-filter="Self-Help">Self-Help</button>
+        </div>
+        
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/1.html">The Dawn of Civilization</a></h3>
             <div class="meta"><span class="tag">Fiction</span><span class="tag">T. Stone</span></div>
             <p class="tldr">When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader's staff. As bears, bandits, and a bronze-armed warlord close in, Koda fights to turn a wandering tribe into a walled village.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/2.html">The Richmond Cipher</a></h3>
             <div class="meta"><span class="tag">Fiction</span><span class="tag">E. Maris</span></div>
             <p class="tldr">In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligence.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/3.html">Red Horizon: Lunar Launch</a></h3>
-            <div class="meta"><span class="tag">Fiction</span><span class="tag">M. A. Hale</span></div>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Sci-Fi</span><span class="tag">M. A. Hale</span></div>
             <p class="tldr">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
-            <div class="meta"><span class="tag">Fiction</span><span class="tag">Alaric Wynn</span></div>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Sci-Fi</span><span class="tag">Alaric Wynn</span></div>
             <p class="tldr">In a world where suffering has been designed out, Orren Myal hears something that doesn't fit—a sense of 'full, but unfinished.'</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/5.html">Living with a Moving Planet</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">J. T. Hartley</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Science</span><span class="tag">J. T. Hartley</span></div>
             <p class="tldr">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/6.html">Beyond the Veil</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">D. E. Harlan</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Science</span><span class="tag">D. E. Harlan</span></div>
             <p class="tldr">A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/8.html">The Power of Changing Your Mind</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Evan R. Cole</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Self-Help</span><span class="tag">Evan R. Cole</span></div>
             <p class="tldr">In a culture that rewards confidence, this book shows how intellectual humility is actually a competitive edge.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/9.html">The Shadow Within</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Elena Maris</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Self-Help</span><span class="tag">Elena Maris</span></div>
             <p class="tldr">Instead of treating reactions as defects, learn to treat them as information—and respond differently.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/10.html">Echoes of Aetheris</a></h3>
-            <div class="meta"><span class="tag">Fiction</span><span class="tag">Aetheri Codex</span></div>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Sci-Fi</span><span class="tag">Aetheri Codex</span></div>
             <p class="tldr">Nine thousand years before history, a wounded alien ship falls onto a frozen steppe. The first hybrid is born.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/11.html">Disclosure 2026</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Marcus Reeve</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Science</span><span class="tag">Marcus Reeve</span></div>
             <p class="tldr">18 rated scenarios for alien first contact—from viral footage to White House landings.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/12.html">Resonance Drift</a></h3>
-            <div class="meta"><span class="tag">Fiction</span><span class="tag">R. Zyrion</span></div>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Sci-Fi</span><span class="tag">R. Zyrion</span></div>
             <p class="tldr">In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/13.html">Symbiont Bloom</a></h3>
-            <div class="meta"><span class="tag">Fiction</span><span class="tag">Elowen Tidebloom</span></div>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Sci-Fi</span><span class="tag">Elowen Tidebloom</span></div>
             <p class="tldr">On volcanic isles of Lumengrove, dawn arrives through living leaf-glass. When the island's pulse skips, a family must unravel a systems puzzle.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/15.html">Physics of Insight</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Quantum Chronos</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Science</span><span class="tag">Quantum Chronos</span></div>
             <p class="tldr">What if genius isn't rare—it's hidden inside every mind, waiting for the right switch?</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/16.html">The Physics of Time</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Quantum Chronos</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Science</span><span class="tag">Quantum Chronos</span></div>
             <p class="tldr">A groundbreaking exploration: what if the universe is a block of spacetime containing all moments?</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Children">
             <h3><a href="reviews/19.html">Microbiology ABC's</a></h3>
             <div class="meta"><span class="tag">Children</span><span class="tag">Michael Bacotti</span></div>
             <p class="tldr">From amoebas to zooplankton, each letter highlights a microbe for kids.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/21.html">The Burning Song</a></h3>
             <div class="meta"><span class="tag">Fiction</span><span class="tag">Rowan Ashcroft</span></div>
             <p class="tldr">When a cave lion marks Aken, the leader makes a choice that breaks every rule: he sends scouts to the coastal strangers.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/22.html">Mindful Memory</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">D. E. Harlan</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Self-Help</span><span class="tag">D. E. Harlan</span></div>
             <p class="tldr">Empowering retirees with science-backed exercises like memory palaces and timeline mapping.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/24.html">Rules of Survival</a></h3>
             <div class="meta"><span class="tag">Fiction</span><span class="tag">Jorak Veldt</span></div>
             <p class="tldr">Roughly one million years ago, a boy learns the band's rules—and pays for them in skin.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Fiction">
             <h3><a href="reviews/25.html">Blood Ember</a></h3>
             <div class="meta"><span class="tag">Fiction</span><span class="tag">Jorak Veldt</span></div>
             <p class="tldr">Three parts trace how survival habits harden into protocol, law, and chant.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Children">
             <h3><a href="reviews/27.html">Little Mike: Fun at the Beach</a></h3>
             <div class="meta"><span class="tag">Children</span><span class="tag">Michael Jr</span></div>
             <p class="tldr">Join Little Mike and his friends as they build an awe-inspiring sand castle.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Children">
             <h3><a href="reviews/28.html">The Quiet Hours</a></h3>
             <div class="meta"><span class="tag">Children</span><span class="tag">Elara Moss</span></div>
             <p class="tldr">Gentle bedtime stories celebrating simple joys—perfect for children and adults who need peace.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Children">
             <h3><a href="reviews/29.html">Little Mike: Learns to Fly</a></h3>
             <div class="meta"><span class="tag">Children</span><span class="tag">Michael Jr</span></div>
             <p class="tldr">Little Mike dreams of flying. With friends, he meets Pilot Thomas who teaches the wonders of airplanes.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/30.html">Discovering Washington DC</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Evelyn Carter</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Travel</span><span class="tag">Evelyn Carter</span></div>
             <p class="tldr">Beyond the monuments—a guide to the real DC from Georgetown to U Street.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Children">
             <h3><a href="reviews/34.html">Little Mike: Builds a Robot</a></h3>
             <div class="meta"><span class="tag">Children</span><span class="tag">Michael Jr</span></div>
             <p class="tldr">Little Mike, John, and May build robots—but they keep falling apart. Through teamwork, they succeed.</p>
         </div>
         
-        <div class="book-card">
+        <div class="book-card" data-category="Nonfiction">
             <h3><a href="reviews/35.html">Time Investing</a></h3>
-            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">H Harvey</span></div>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Self-Help</span><span class="tag">H Harvey</span></div>
             <p class="tldr">A self-help guide showing how to prioritize yourself and your time.</p>
         </div>
         
@@ -203,6 +220,46 @@
         </footer>
     </div>
     
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.book-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filter = btn.dataset.filter;
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (filter === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    const category = card.dataset.category;
+                    if (category === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        // Check if card has the tag
+                        const tags = card.querySelectorAll('.tag');
+                        let hasTag = false;
+                        tags.forEach(tag => {
+                            if (tag.textContent === filter) hasTag = true;
+                        });
+                        if (hasTag) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                }
+            });
+        });
+    });
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
