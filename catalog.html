@@ -1,315 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <title>Bithues Reading Lab – Catalog</title>
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <meta name="description" content="Browse all books in the Bithues Reading Lab collection">
- <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog – Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .page-header { padding: 3rem 0; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header p { color: var(--text-dim); }
+        .book-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        .book-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .book-card h3 a { color: var(--text); text-decoration: none; }
+        .book-card h3 a:hover { color: var(--accent); }
+        .book-card .author { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.75rem; }
+        .book-card .tldr { color: var(--text-dim); font-size: 0.95rem; }
+        .book-card .meta { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+        .book-card .tag { font-size: 0.75rem; padding: 0.25rem 0.5rem; background: var(--border); border-radius: 4px; color: var(--text-dim); }
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
+        footer p { color: var(--text-dim); font-size: 0.85rem; }
+    </style>
 </head>
 <body>
- <header class="site-header">
- <div class="container header-inner">
- <a href="index.html" class="brand">
- <span class="brand-mark">B</span>
- <span class="brand-text">Bithues Reading Lab</span>
- </a>
- <nav class="nav">
- <a href="index.html">Home</a>
- <a href="catalog.html" class="nav-active">Catalog</a>
- </nav>
- </div>
- </header>
-
- <main>
- <section class="catalog-hero">
- <div class="container">
- <div class="catalog-header-content">
- <h1>Book Catalog</h1>
- <p>
- Explore our curated collection of 35 titles, from deep‑time epics
- to speculative science, journals, and children's stories.
- </p>
- </div>
- </section>
-
- <section class="catalog-filters">
- <div class="container">
- <div class="category-tags">
- <a href="catalog.html" class="category-tag active">All Books</a>
- <a href="catalog.html" class="category-tag">Speculative Fiction</a>
- <a href="catalog.html" class="category-tag">Science</a>
- <a href="catalog.html" class="category-tag">Nonfiction</a>
- <a href="catalog.html" class="category-tag">Children's Books</a>
- <a href="catalog.html" class="category-tag">Self-Help</a>
- </div>
- </div>
- </section>
-
- <section class="catalog-list">
- <div class="container">
- <div class="book-grid catalog-grid">
- <a href="book/1.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">The Dawn of Civilization</h3>
- <p class="card-subtitle">A Story of a Prehistoric Tribe&#x27;s Struggle for Survival</p>
- <p class="card-author">by T. Stone</p>
- <p class="card-desc">A prehistoric tale of survival, leadership, and building the first settlement.</p>
-</a>
- <a href="book/2.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">The Richmond Cipher</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by E. Maris</p>
- <p class="card-desc">A Civil War spy thriller set in Confederate Richmond.</p>
-</a>
- <a href="book/3.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Red Horizon: Lunar Launch</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by M. A. Hale</p>
- <p class="card-desc">A space colony saga about humanity&#x27;s future on Mars.</p>
-</a>
- <a href="book/4.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">The Confluence Doctrine</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Alaric Wynn</p>
- <p class="card-desc">A philosophical sci-fi about harmony and what it means to be truly alive.</p>
-</a>
- <a href="book/5.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Living with a Moving Planet</h3>
- <p class="card-subtitle">Deep Time, Human Adaptation, and a Positive Climate Future</p>
- <p class="card-author">by J. T. Hartley</p>
- <p class="card-desc">A deep-time look at climate change and human adaptation.</p>
-</a>
- <a href="book/6.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Beyond the Veil</h3>
- <p class="card-subtitle">Quantum Speculations on Consciousness, Death, and the Universe</p>
- <p class="card-author">by D. E. Harlan</p>
- <p class="card-desc">Quantum speculations on consciousness, death, and what lies beyond.</p>
-</a>
- <a href="book/7.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Veiled Presence</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Bithues</p>
- <p class="card-desc">Exploring the boundaries of reality and self-discovery.</p>
-</a>
- <a href="book/8.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">The Power of Changing Your Mind</h3>
- <p class="card-subtitle">How Intellectual Humility Improves Decisions, Relationships, and Everyday Life</p>
- <p class="card-author">by Evan R. Cole</p>
- <p class="card-desc">How intellectual humility can improve your decisions and relationships.</p>
-</a>
- <a href="book/9.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">The Shadow Within</h3>
- <p class="card-subtitle">A Practical Guide to Safe, Realistic Shadow Work in Everyday Life</p>
- <p class="card-author">by Elena Maris</p>
- <p class="card-desc">A practical guide to safe, realistic shadow work.</p>
-</a>
- <a href="book/10.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Echoes of Aetheris</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Aetheri Codex</p>
- <p class="card-desc">Ancient aliens, evolutionary what-ifs, and cold clinical narration.</p>
-</a>
- <a href="book/11.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Disclosure 2026</h3>
- <p class="card-subtitle">18 Rated Scenarios for Alien First Contact</p>
- <p class="card-author">by Marcus Reeve</p>
- <p class="card-desc">18 rated scenarios for alien first contact.</p>
-</a>
- <a href="book/12.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Resonance Drift</h3>
- <p class="card-subtitle">A Hopepunk Signal</p>
- <p class="card-author">by R. Zyrion</p>
- <p class="card-desc">A cozy hopepunk novella about stewardship and defiant optimism.</p>
-</a>
- <a href="book/13.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Symbiont Bloom</h3>
- <p class="card-subtitle">Verdant Nexus #1</p>
- <p class="card-author">by Elowen Tidebloom</p>
- <p class="card-desc">A solarpunk novel about family, community, and tending to a thriving world.</p>
-</a>
- <a href="book/14.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Otomí</h3>
- <p class="card-subtitle">A Historical Narrative of Land, Ritual, and Continuity</p>
- <p class="card-author">by E. J. Marín</p>
- <p class="card-desc">Historical narrative of land, ritual, and continuity in ancient Mexico.</p>
-</a>
- <a href="book/15.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Physics of Insight</h3>
- <p class="card-subtitle">Awakening the Savant Within</p>
- <p class="card-author">by Quantum Chronos</p>
- <p class="card-desc">Exploring the physics of insight and hidden cognition.</p>
-</a>
- <a href="book/16.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">The Physics of Time</h3>
- <p class="card-subtitle">A Creative Exploration of Consciousness, Spacetime, and the Nature of Temporal Experience</p>
- <p class="card-author">by Quantum Chronos</p>
- <p class="card-desc">A groundbreaking exploration of time and consciousness.</p>
-</a>
- <a href="book/17.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Consciousness in Higher Dimensional Spacetime</h3>
- <p class="card-subtitle">A Dual-Dimensional Theory of Mind and Body</p>
- <p class="card-author">by Quantum Chronos</p>
- <p class="card-desc">A dual-dimensional theory of mind and body.</p>
-</a>
- <a href="book/18.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Quantum Soul Echoes</h3>
- <p class="card-subtitle">Consciousness as Particle and Spacetime Imprint</p>
- <p class="card-author">by Quantum Chronos</p>
- <p class="card-desc">Consciousness as particle and spacetime imprint.</p>
-</a>
- <a href="book/19.html" class="book-card">
- <div class="card-category">Children</div>
- <h3 class="card-title">Microbiology ABC&#x27;s</h3>
- <p class="card-subtitle">Tiny Cells and Microbes from A to Z</p>
- <p class="card-author">by Michael Bacotti</p>
- <p class="card-desc">An A-Z guide to microbiology for kids.</p>
-</a>
- <a href="book/20.html" class="book-card">
- <div class="card-category">Children</div>
- <h3 class="card-title">You Tell the Story</h3>
- <p class="card-subtitle">Everyday Adventures</p>
- <p class="card-author">by Ellie Sunwood</p>
- <p class="card-desc">A draw-and-write storybook for children.</p>
-</a>
- <a href="book/21.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">The Burning Song</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Rowan Ashcroft</p>
- <p class="card-desc">A prehistoric fiction about trust, alliance, and survival.</p>
-</a>
- <a href="book/22.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Mindful Memory</h3>
- <p class="card-subtitle">Thought Experiments and Memory Mapping to Strengthen Your Brain</p>
- <p class="card-author">by D. E. Harlan</p>
- <p class="card-desc">Thought experiments and memory mapping to strengthen your brain.</p>
-</a>
- <a href="book/23.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Shadow Work Journal for Women</h3>
- <p class="card-subtitle">90-Day Guided Prompts to Heal Your Inner Child and Embrace Emotional Freedom</p>
- <p class="card-author">by Luna Sage</p>
- <p class="card-desc">90-day guided prompts for emotional healing.</p>
-</a>
- <a href="book/24.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Rules of Survival</h3>
- <p class="card-subtitle">Fire, Hunger, and the First Name</p>
- <p class="card-author">by Jorak Veldt</p>
- <p class="card-desc">Rules of survival in prehistoric times.</p>
-</a>
- <a href="book/25.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Blood Ember</h3>
- <p class="card-subtitle">Chants of the First</p>
- <p class="card-author">by Jorak Veldt</p>
- <p class="card-desc">How a band&#x27;s survival habits harden into protocol, law, and chant.</p>
-</a>
- <a href="book/26.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">The Orchardist: Harvest</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Kate E Brennan</p>
- <p class="card-desc">A story of near-death experience and a larger world.</p>
-</a>
- <a href="book/27.html" class="book-card">
- <div class="card-category">Children</div>
- <h3 class="card-title">Little Mike: Fun at the Beach</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Michael Jr</p>
- <p class="card-desc">Little Mike&#x27;s fun adventure at the beach.</p>
-</a>
- <a href="book/28.html" class="book-card">
- <div class="card-category">Children</div>
- <h3 class="card-title">The Quiet Hours</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Elara Moss</p>
- <p class="card-desc">Gentle bedtime stories for all ages.</p>
-</a>
- <a href="book/29.html" class="book-card">
- <div class="card-category">Children</div>
- <h3 class="card-title">Little Mike: Learns to Fly</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Michael Jr</p>
- <p class="card-desc">Little Mike learns to fly with Pilot Thomas.</p>
-</a>
- <a href="book/30.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Discovering Washington DC</h3>
- <p class="card-subtitle">A Comprehensive Guide for All Ages</p>
- <p class="card-author">by Evelyn Carter</p>
- <p class="card-desc">A comprehensive guide to Washington DC for all ages.</p>
-</a>
- <a href="book/31.html" class="book-card">
- <div class="card-category">Fiction</div>
- <h3 class="card-title">Echoes of Transcendence</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by L Everwood</p>
- <p class="card-desc">A transformative journey of self-discovery.</p>
-</a>
- <a href="book/32.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">American Journeys</h3>
- <p class="card-subtitle">Exploring Language and American Culture</p>
- <p class="card-author">by C. Everett</p>
- <p class="card-desc">Exploring language and American culture.</p>
-</a>
- <a href="book/33.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Mythical Menagerie</h3>
- <p class="card-subtitle">A Journey Across Cultures and Creatures</p>
- <p class="card-author">by E. Marlowe</p>
- <p class="card-desc">A journey across cultures and mythical creatures.</p>
-</a>
- <a href="book/34.html" class="book-card">
- <div class="card-category">Children</div>
- <h3 class="card-title">Little Mike: Builds a Robot</h3>
- <p class="card-subtitle"></p>
- <p class="card-author">by Michael Jr</p>
- <p class="card-desc">Little Mike and friends build a robot together.</p>
-</a>
- <a href="book/35.html" class="book-card">
- <div class="card-category">Nonfiction</div>
- <h3 class="card-title">Time Investing</h3>
- <p class="card-subtitle">A Self-Help Guide to Valuing Your Own Time</p>
- <p class="card-author">by H Harvey</p>
- <p class="card-desc">A self-help guide to valuing your own time.</p>
-</a>
- </div>
- </div>
- </section>
- </main>
-
- <footer class="site-footer">
- <div class="container footer-inner">
- <div class="footer-brand">Bithues Reading Lab</div>
- <div class="footer-links">
- <span>© <span id="year"></span> All rights reserved</span>
- </div>
- </div>
- </footer>
-
- <script>
- document.getElementById('year').textContent = new Date().getFullYear();
- </script>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="reviews/index.html">Reviews</a>
+                    <a href="catalog.html" class="active">Catalog</a>
+                </div>
+            </nav>
+        </header>
+        
+        <section class="page-header">
+            <h1>Book Catalog</h1>
+            <p>Browse all 35 curated books</p>
+        </section>
+        
+        <div class="book-card">
+            <h3><a href="reviews/1.html">The Dawn of Civilization</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">T. Stone</span></div>
+            <p class="tldr">When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader's staff. As bears, bandits, and a bronze-armed warlord close in, Koda fights to turn a wandering tribe into a walled village.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/2.html">The Richmond Cipher</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">E. Maris</span></div>
+            <p class="tldr">In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligence.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/3.html">Red Horizon: Lunar Launch</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">M. A. Hale</span></div>
+            <p class="tldr">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Alaric Wynn</span></div>
+            <p class="tldr">In a world where suffering has been designed out, Orren Myal hears something that doesn't fit—a sense of 'full, but unfinished.'</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/5.html">Living with a Moving Planet</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">J. T. Hartley</span></div>
+            <p class="tldr">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/6.html">Beyond the Veil</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">D. E. Harlan</span></div>
+            <p class="tldr">A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/8.html">The Power of Changing Your Mind</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Evan R. Cole</span></div>
+            <p class="tldr">In a culture that rewards confidence, this book shows how intellectual humility is actually a competitive edge.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/9.html">The Shadow Within</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Elena Maris</span></div>
+            <p class="tldr">Instead of treating reactions as defects, learn to treat them as information—and respond differently.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/10.html">Echoes of Aetheris</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Aetheri Codex</span></div>
+            <p class="tldr">Nine thousand years before history, a wounded alien ship falls onto a frozen steppe. The first hybrid is born.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/11.html">Disclosure 2026</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Marcus Reeve</span></div>
+            <p class="tldr">18 rated scenarios for alien first contact—from viral footage to White House landings.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/12.html">Resonance Drift</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">R. Zyrion</span></div>
+            <p class="tldr">In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/13.html">Symbiont Bloom</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Elowen Tidebloom</span></div>
+            <p class="tldr">On volcanic isles of Lumengrove, dawn arrives through living leaf-glass. When the island's pulse skips, a family must unravel a systems puzzle.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/15.html">Physics of Insight</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Quantum Chronos</span></div>
+            <p class="tldr">What if genius isn't rare—it's hidden inside every mind, waiting for the right switch?</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/16.html">The Physics of Time</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Quantum Chronos</span></div>
+            <p class="tldr">A groundbreaking exploration: what if the universe is a block of spacetime containing all moments?</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/19.html">Microbiology ABC's</a></h3>
+            <div class="meta"><span class="tag">Children</span><span class="tag">Michael Bacotti</span></div>
+            <p class="tldr">From amoebas to zooplankton, each letter highlights a microbe for kids.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/21.html">The Burning Song</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Rowan Ashcroft</span></div>
+            <p class="tldr">When a cave lion marks Aken, the leader makes a choice that breaks every rule: he sends scouts to the coastal strangers.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/22.html">Mindful Memory</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">D. E. Harlan</span></div>
+            <p class="tldr">Empowering retirees with science-backed exercises like memory palaces and timeline mapping.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/24.html">Rules of Survival</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Jorak Veldt</span></div>
+            <p class="tldr">Roughly one million years ago, a boy learns the band's rules—and pays for them in skin.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/25.html">Blood Ember</a></h3>
+            <div class="meta"><span class="tag">Fiction</span><span class="tag">Jorak Veldt</span></div>
+            <p class="tldr">Three parts trace how survival habits harden into protocol, law, and chant.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/27.html">Little Mike: Fun at the Beach</a></h3>
+            <div class="meta"><span class="tag">Children</span><span class="tag">Michael Jr</span></div>
+            <p class="tldr">Join Little Mike and his friends as they build an awe-inspiring sand castle.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/28.html">The Quiet Hours</a></h3>
+            <div class="meta"><span class="tag">Children</span><span class="tag">Elara Moss</span></div>
+            <p class="tldr">Gentle bedtime stories celebrating simple joys—perfect for children and adults who need peace.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/29.html">Little Mike: Learns to Fly</a></h3>
+            <div class="meta"><span class="tag">Children</span><span class="tag">Michael Jr</span></div>
+            <p class="tldr">Little Mike dreams of flying. With friends, he meets Pilot Thomas who teaches the wonders of airplanes.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/30.html">Discovering Washington DC</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">Evelyn Carter</span></div>
+            <p class="tldr">Beyond the monuments—a guide to the real DC from Georgetown to U Street.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/34.html">Little Mike: Builds a Robot</a></h3>
+            <div class="meta"><span class="tag">Children</span><span class="tag">Michael Jr</span></div>
+            <p class="tldr">Little Mike, John, and May build robots—but they keep falling apart. Through teamwork, they succeed.</p>
+        </div>
+        
+        <div class="book-card">
+            <h3><a href="reviews/35.html">Time Investing</a></h3>
+            <div class="meta"><span class="tag">Nonfiction</span><span class="tag">H Harvey</span></div>
+            <p class="tldr">A self-help guide showing how to prioritize yourself and your time.</p>
+        </div>
+        
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+    
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
