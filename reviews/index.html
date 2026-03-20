@@ -3,152 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Reviews | Bithues Reading Lab</title>
+    <title>All Reviews – Bithues Reading Lab</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --surface-hover: #1a1a25;
-            --border: #2a2a3a;
-            --text: #e8e8f0;
-            --text-dim: #7a7a90;
-            --accent: #7c3aed;
-            --accent-dim: #5b21b6;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            min-height: 100vh;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0f; color: #e8e8f0; line-height: 1.7; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        header { padding: 2rem 0; border-bottom: 1px solid #2a2a3a; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text); }
-        .hero { padding: 4rem 0; text-align: center; }
-        .hero h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
-        .hero p { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
-        .reviews-list { padding: 2rem 0; }
-        .review-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; transition: all 0.2s; }
-        .review-item:hover { border-color: var(--accent); transform: translateY(-2px); }
-        .review-item:last-child { margin-bottom: 0; }
-        .review-item h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-        .review-item h2 a { color: var(--text); text-decoration: none; }
-        .review-item h2 a:hover { color: var(--accent); }
-        .review-item .author { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.75rem; }
-        .review-item .tldr { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
-        .review-item .read-more { display: inline-block; margin-top: 1rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
-        footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); }
-        footer p { color: var(--text-dim); font-size: 0.9rem; }
-        footer a { color: var(--accent); text-decoration: none; margin: 0 0.75rem; }
-        @media (max-width: 640px) { .nav-links { display: none; } }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #e8e8f0; text-decoration: none; }
+        .logo span { color: #7c3aed; }
+        .nav-links a { color: #7a7a90; text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
+        .nav-links a:hover, .nav-links a.active { color: #e8e8f0; }
+        .page-header { padding: 3rem 0; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header p { color: #7a7a90; }
+        .review-card { padding: 1.5rem; background: #12121a; border-radius: 8px; border: 1px solid #2a2a3a; margin-bottom: 1rem; }
+        .review-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .review-card h3 a { color: #e8e8f0; text-decoration: none; }
+        .review-card h3 a:hover { color: #7c3aed; }
+        .review-card .author { color: #7a7a90; font-size: 0.9rem; margin-bottom: 0.75rem; }
+        .review-card .tldr { color: #7a7a90; font-size: 0.95rem; }
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid #2a2a3a; }
+        footer p { color: #7a7a90; font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <nav>
-                <a href="/" class="logo">Bithues<span> Reading Lab</span></a>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
                 <div class="nav-links">
-                    <a href="/reviews">Reviews</a>
-                    <a href="/categories">Categories</a>
-                    <a href="/about">About</a>
+                    <a href="../index.html">Home</a>
+                    <a href="index.html" class="active">Reviews</a>
+                    <a href="../catalog.html">Catalog</a>
                 </div>
             </nav>
         </header>
-        
-        <section class="hero">
-            <h1>Book Reviews</h1>
-            <p>Curated reviews for fiction, speculative nonfiction, and self-help.</p>
+        <section class="page-header">
+            <h1>All Reviews</h1>
+            <p>35 books reviewed</p>
         </section>
-        
-        <div class="reviews-list">
-            <article class="review-item">
-                <h2><a href="/reviews/the-richmond-cipher.html">The Richmond Cipher</a></h2>
-                <p class="author">by E. Maris</p>
-                <p class="tldr">A historical thriller that weaves cryptography, Civil War intrigue, and a family secret into a page-turning mystery.</p>
-                <a href="/reviews/the-richmond-cipher.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/red-horizon-lunar-launch.html">Red Horizon: Lunar Launch</a></h2>
-                <p class="author">by M. A. Hale</p>
-                <p class="tldr">A near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller.</p>
-                <a href="/reviews/red-horizon-lunar-launch.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/the-confluence-doctrine.html">The Confluence Doctrine</a></h2>
-                <p class="author"></p>
-                <p class="tldr">A framework for understanding how multiple trends intersect to create outsized opportunities in business and investing.</p>
-                <a href="/reviews/the-confluence-doctrine.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/living-with-a-moving-planet.html">Living with a Moving Planet</a></h2>
-                <p class="author">by J. T. Hartley</p>
-                <p class="tldr">A hopeful, practical guide to adapting to climate change through personal resilience and systemic thinking.</p>
-                <a href="/reviews/living-with-a-moving-planet.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/beyond-the-veil.html">Beyond the Veil</a></h2>
-                <p class="author"></p>
-                <p class="tldr">A blend of quantum physics concepts and spiritual reflection that attempts to bridge science and consciousness.</p>
-                <a href="/reviews/beyond-the-veil.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/veiled-presence.html">Veiled Presence</a></h2>
-                <p class="author"></p>
-                <p class="tldr">An exploration of how subtle awareness and intuition shape human experience and decision-making.</p>
-                <a href="/reviews/veiled-presence.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/the-power-of-changing-your-mind.html">The Power of Changing Your Mind</a></h2>
-                <p class="author">by Evan R. A. Cole</p>
-                <p class="tldr">A practical guide to intellectual humility and how it improves decisions, relationships, and everyday life.</p>
-                <a href="/reviews/the-power-of-changing-your-mind.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/the-shadow-within.html">The Shadow Within</a></h2>
-                <p class="author">by Elena Maris</p>
-                <p class="tldr">A practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological depth.</p>
-                <a href="/reviews/the-shadow-within.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/quantum-soul-echoes.html">Quantum Soul Echoes</a></h2>
-                <p class="author"></p>
-                <p class="tldr">An exploration of consciousness through quantum mechanics that proposes testable frameworks for understanding mind.</p>
-                <a href="/reviews/quantum-soul-echoes.html" class="read-more">Read Review →</a>
-            </article>
-            
-            <article class="review-item">
-                <h2><a href="/reviews/aetheri-codex.html">Aetheri Codex</a></h2>
-                <p class="author"></p>
-                <p class="tldr">A sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-building masterpiece.</p>
-                <a href="/reviews/aetheri-codex.html" class="read-more">Read Review →</a>
-            </article>
-        </div>
-        
+        <div class="review-card">
+        <h3><a href="1.html">The Dawn of Civilization</a></h3>
+        <p class="author">by T. Stone</p>
+        <p class="tldr">When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader&#x27;s staff and hold their small tribe together. As bears, ba...</p>
+    </div><div class="review-card">
+        <h3><a href="2.html">The Richmond Cipher</a></h3>
+        <p class="author">by E. Maris</p>
+        <p class="tldr">In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligenc...</p>
+    </div><div class="review-card">
+        <h3><a href="3.html">Red Horizon: Lunar Launch</a></h3>
+        <p class="author">by M. A. Hale</p>
+        <p class="tldr">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon—humanity is raising children und...</p>
+    </div><div class="review-card">
+        <h3><a href="4.html">The Confluence Doctrine</a></h3>
+        <p class="author">by Alaric Wynn</p>
+        <p class="tldr">In a world where suffering has been designed out, Orren Myal hears something that doesn&#x27;t fit—a sense of &#x27;full, but unfinished.&#x27; What is life&#x27;s task w...</p>
+    </div><div class="review-card">
+        <h3><a href="5.html">Living with a Moving Planet</a></h3>
+        <p class="author">by J. T. Hartley</p>
+        <p class="tldr">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines for tens of thousands of years....</p>
+    </div><div class="review-card">
+        <h3><a href="6.html">Beyond the Veil</a></h3>
+        <p class="author">by D. E. Harlan</p>
+        <p class="tldr">A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy....</p>
+    </div><div class="review-card">
+        <h3><a href="7.html">Veiled Presence</a></h3>
+        <p class="author">by Bithues</p>
+        <p class="tldr">A transformative journey of self-discovery as seekers venture into realms where echoes of destiny reverberate....</p>
+    </div><div class="review-card">
+        <h3><a href="8.html">The Power of Changing Your Mind</a></h3>
+        <p class="author">by Evan R. Cole</p>
+        <p class="tldr">In a culture that rewards confidence, this book shows how intellectual humility is actually a competitive edge....</p>
+    </div><div class="review-card">
+        <h3><a href="9.html">The Shadow Within</a></h3>
+        <p class="author">by Elena Maris</p>
+        <p class="tldr">Instead of treating reactions as defects, learn to treat them as information—and respond differently in everyday life....</p>
+    </div><div class="review-card">
+        <h3><a href="10.html">Echoes of Aetheris</a></h3>
+        <p class="author">by Aetheri Codex</p>
+        <p class="tldr">Nine thousand years before history, a wounded alien ship falls onto a frozen steppe. The first hybrid is born....</p>
+    </div><div class="review-card">
+        <h3><a href="11.html">Disclosure 2026</a></h3>
+        <p class="author">by Marcus Reeve</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="12.html">Resonance Drift</a></h3>
+        <p class="author">by R. Zyrion</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="13.html">Symbiont Bloom</a></h3>
+        <p class="author">by Elowen Tidebloom</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="14.html">Otomí</a></h3>
+        <p class="author">by E. J. Marín</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="15.html">Physics of Insight</a></h3>
+        <p class="author">by Quantum Chronos</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="16.html">The Physics of Time</a></h3>
+        <p class="author">by Quantum Chronos</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="17.html">Consciousness in Higher Dimensional Spacetime</a></h3>
+        <p class="author">by Quantum Chronos</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="18.html">Quantum Soul Echoes</a></h3>
+        <p class="author">by Quantum Chronos</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="19.html">Microbiology ABC&#x27;s</a></h3>
+        <p class="author">by Michael Bacotti</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="20.html">You Tell the Story</a></h3>
+        <p class="author">by Ellie Sunwood</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="21.html">The Burning Song</a></h3>
+        <p class="author">by Rowan Ashcroft</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="22.html">Mindful Memory</a></h3>
+        <p class="author">by D. E. Harlan</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="23.html">Shadow Work Journal for Women</a></h3>
+        <p class="author">by Luna Sage</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="24.html">Rules of Survival</a></h3>
+        <p class="author">by Jorak Veldt</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="25.html">Blood Ember</a></h3>
+        <p class="author">by Jorak Veldt</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="26.html">The Orchardist: Harvest</a></h3>
+        <p class="author">by Kate E Brennan</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="27.html">Little Mike: Fun at the Beach</a></h3>
+        <p class="author">by Michael Jr</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="28.html">The Quiet Hours</a></h3>
+        <p class="author">by Elara Moss</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="29.html">Little Mike: Learns to Fly</a></h3>
+        <p class="author">by Michael Jr</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="30.html">Discovering Washington DC</a></h3>
+        <p class="author">by Evelyn Carter</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="31.html">Echoes of Transcendence</a></h3>
+        <p class="author">by L Everwood</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="32.html">American Journeys</a></h3>
+        <p class="author">by C. Everett</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="33.html">Mythical Menagerie</a></h3>
+        <p class="author">by E. Marlowe</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="34.html">Little Mike: Builds a Robot</a></h3>
+        <p class="author">by Michael Jr</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div><div class="review-card">
+        <h3><a href="35.html">Time Investing</a></h3>
+        <p class="author">by H Harvey</p>
+        <p class="tldr">A curated title from Bithues Reading Lab....</p>
+    </div>
         <footer>
-            <p>© 2026 Bithues Reading Lab</p>
-            <div>
-                <a href="/">Home</a>
-                <a href="/reviews">Reviews</a>
-                <a href="/categories">Categories</a>
-                <a href="/about">About</a>
-            </div>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
         </footer>
     </div>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
