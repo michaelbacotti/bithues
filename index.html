@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bithues | Stories & Experiments</title>
+    <title>Bithues Auto-Poster | Never Lose Your Best Content</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -44,138 +44,125 @@
         .btn-secondary:hover { border-color: var(--accent); background: var(--surface-hover); }
         section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
         section:last-of-type { border-bottom: none; }
-        .section-header { margin-bottom: 2.5rem; }
+        .section-header { margin-bottom: 2.5rem; text-align: center; }
         .section-header h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
         .section-header p { color: var(--text-dim); font-size: 1.1rem; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.25s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 30px var(--accent-glow); }
-        .card-icon { font-size: 2rem; margin-bottom: 1rem; }
-        .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1rem; }
-        .card-meta { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
-        .features { display: grid; gap: 1.25rem; }
-        .feature { display: flex; gap: 1rem; padding: 1.25rem; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); }
+        .features-list { max-width: 700px; margin: 0 auto; }
+        .features-list li { display: flex; gap: 1rem; padding: 1.25rem; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 1rem; align-items: flex-start; }
+        .features-list li:last-child { margin-bottom: 0; }
         .feature-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .feature h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
-        .feature p { color: var(--text-dim); font-size: 0.9rem; margin: 0; }
+        .feature-text { font-size: 1.05rem; }
+        .steps { max-width: 600px; margin: 0 auto; }
+        .step { display: flex; gap: 1.5rem; padding: 1.5rem; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        .step:last-child { margin-bottom: 0; }
+        .step-num { font-size: 1.5rem; font-weight: 700; color: var(--accent); flex-shrink: 0; width: 2rem; }
+        .step h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .step p { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
+        .cta-section { text-align: center; padding: 5rem 0; }
+        .cta-section p { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 2rem; }
         footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1rem; }
         footer a { color: var(--accent); text-decoration: none; margin: 0 0.75rem; }
         footer a:hover { text-decoration: underline; }
-        @media (max-width: 640px) { .nav-links { display: none; } .hero { padding: 3rem 0; } .hero-cta { flex-direction: column; } section { padding: 3rem 0; } }
+        @media (max-width: 640px) { .nav-links { display: none; } .hero { padding: 3rem 0; } .hero-cta { flex-direction: column; } section { padding: 3rem 0; } .step { gap: 1rem; } }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <nav>
-                <a href="/" class="logo">Bithues<span>.</span></a>
+                <a href="/" class="logo">Bithues<span> Auto-Poster</span></a>
                 <div class="nav-links">
-                    <a href="#books">Books</a>
-                    <a href="#ai-lab">AI Lab</a>
-                    <a href="#projects">Projects</a>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
                 </div>
             </nav>
         </header>
         
         <section class="hero">
-            <h1>Where Stories Meet<br><span>Experiments</span></h1>
-            <p>A creative hub for building story worlds and testing the boundaries of what's possible with AI-assisted creation.</p>
+            <h1>Never lose your<br><span>best content again.</span></h1>
+            <p>Bithues Auto-Poster automatically reposts your top-performing X threads to X and LinkedIn with AI-rewritten hooks. Stay visible while you focus on creating.</p>
             <div class="hero-cta">
-                <a href="#books" class="btn btn-primary">Explore Books</a>
-                <a href="#ai-lab" class="btn btn-secondary">AI Lab</a>
+                <a href="#" class="btn btn-primary">Start Free Trial</a>
+                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
             </div>
         </section>
         
-        <section id="books">
+        <section id="features">
             <div class="section-header">
-                <h2>📚 Books & Worlds</h2>
-                <p>Novels and series spanning sci-fi, romance, and beyond.</p>
+                <h2>What You Get</h2>
+                <p>Everything you need to automate your social presence.</p>
             </div>
-            <div class="cards">
-                <article class="card">
-                    <div class="card-icon">✨</div>
-                    <h3>Featured Series</h3>
-                    <p>Coming soon. Subscribe for updates when books launch.</p>
-                    <span class="card-meta">In Development</span>
-                </article>
-                <article class="card">
-                    <div class="card-icon">✨</div>
-                    <h3>Featured Series</h3>
-                    <p>Coming soon. Subscribe for updates when books launch.</p>
-                    <span class="card-meta">In Development</span>
-                </article>
-                <article class="card">
-                    <div class="card-icon">✨</div>
-                    <h3>Featured Series</h3>
-                    <p>Coming soon. Subscribe for updates when books launch.</p>
-                    <span class="card-meta">In Development</span>
-                </article>
-                <article class="card">
-                    <div class="card-icon">💡</div>
-                    <h3>More Coming Soon</h3>
-                    <p>New worlds and stories in development.</p>
-                    <span class="card-meta">In Progress</span>
-                </article>
-            </div>
+            <ul class="features-list">
+                <li>
+                    <span class="feature-icon">📱</span>
+                    <span class="feature-text">Auto-post to X and LinkedIn on autopilot — no manual sharing required.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">🔥</span>
+                    <span class="feature-text">Automatically repost your best-performing threads to reach new audiences.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">✍️</span>
+                    <span class="feature-text">BacottiBot rewrites hooks to maximize engagement on every repost.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">Simple, no-code setup — connect your account in minutes.</span>
+                </li>
+            </ul>
         </section>
         
-        <section id="ai-lab">
+        <section id="how-it-works">
             <div class="section-header">
-                <h2>🤖 AI & Automation Lab</h2>
-                <p>Exploring creative workflows powered by AI.</p>
+                <h2>How It Works</h2>
+                <p>Three simple steps to automated posting.</p>
             </div>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">✍️</div>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-num">1</span>
                     <div>
-                        <h3>AI-Assisted Writing</h3>
-                        <p>Exploring the intersection of large language models and creative storytelling.</p>
+                        <h3>Connect Your X Account</h3>
+                        <p>Sign in with X and grant permission. We use official API — your credentials are safe.</p>
                     </div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🔄</div>
+                <div class="step">
+                    <span class="step-num">2</span>
                     <div>
-                        <h3>Workflow Tools</h3>
-                        <p>Building tools to streamline content creation and publishing.</p>
+                        <h3>Connect LinkedIn (Optional)</h3>
+                        <p>Add LinkedIn with one click for cross-posting to professional networks.</p>
                     </div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🧪</div>
+                <div class="step">
+                    <span class="step-num">3</span>
                     <div>
-                        <h3>Experiments</h3>
-                        <p>Testing new AI capabilities and creative applications.</p>
+                        <h3>Set and Forget</h3>
+                        <p>BacottiBot picks your top posts, rewrites hooks, and schedules them automatically.</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="projects">
+        <section id="pricing">
             <div class="section-header">
-                <h2>🛠️ Projects</h2>
-                <p>Ventures and experiments in creation.</p>
+                <h2>Simple Pricing</h2>
+                <p>Start free. Upgrade when you're ready.</p>
             </div>
-            <div class="cards">
-                <article class="card">
-                    <div class="card-icon">📖</div>
-                    <h3>Publishing</h3>
-                    <p>Exploring self-publishing and creative distribution.</p>
-                </article>
-                <article class="card">
-                    <div class="card-icon">🌐</div>
-                    <h3>Bithues Platform</h3>
-                    <p>This hub—experiments in web presence and digital storytelling.</p>
-                </article>
-            </div>
+            <p style="text-align: center; color: var(--text-dim); margin-bottom: 2rem;">All plans include 14-day free trial.</p>
+        </section>
+        
+        <section class="cta-section">
+            <p>Start your free trial and never lose your best content again.</p>
+            <a href="#" class="btn btn-primary">Connect Your X Account</a>
         </section>
         
         <footer>
             <p>© 2026 Bithues</p>
             <div>
                 <a href="#">Home</a>
-                <a href="#books">Books</a>
-                <a href="#ai-lab">AI Lab</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
             </div>
         </footer>
     </div>
