@@ -4,17 +4,18 @@
  <meta charset="UTF-8">
  <title>Bithues Reading Lab</title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Curated reads for curious minds - speculative fiction, science, and thoughtful nonfiction">
  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
  <header class="site-header">
  <div class="container header-inner">
- <div class="brand">
+ <a href="index.html" class="brand">
  <span class="brand-mark">B</span>
  <span class="brand-text">Bithues Reading Lab</span>
- </div>
+ </a>
  <nav class="nav">
- <a href="index.html">Home</a>
+ <a href="index.html" class="nav-active">Home</a>
  <a href="catalog.html">Catalog</a>
  </nav>
  </div>
@@ -22,14 +23,14 @@
 
  <main>
  <section class="hero">
- <div class="container hero-inner">
- <div class="hero-text">
+ <div class="container">
+ <div class="hero-content">
  <h1>Curated reads for curious minds</h1>
- <p>
- Bithues highlights speculative fiction, science, and thoughtful nonfiction—
+ <p class="hero-subtitle">
+ Bithues highlights speculative fiction, science, and thoughtful nonfiction — 
  hand‑picked titles for readers who like to explore strange ideas and deep questions.
  </p>
- <a class="button primary" href="catalog.html">Browse all books</a>
+ <a class="button primary" href="catalog.html">Browse Full Catalog</a>
  </div>
  </div>
  </section>
@@ -37,45 +38,72 @@
  <section class="featured">
  <div class="container">
  <div class="section-header">
- <h2>Featured picks</h2>
- <a class="section-link" href="catalog.html">View full catalog →</a>
+ <h2>Featured Picks</h2>
+ <a class="section-link" href="catalog.html">View all 35 books →</a>
  </div>
- <div class="book-grid">
- <!-- These three cards get injected/updated by build_site.py -->
+ <div class="book-grid featured-grid">
  <article class="book-card">
- <div class="book-meta">Elowen Tidebloom</div>
+ <div class="book-header">
+ <span class="book-author">Elowen Tidebloom</span>
  <h3 class="book-title">Symbiont Bloom</h3>
+ </div>
  <p class="book-subtitle">Verdant Nexus #1</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/47W0PTa" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/47W0PTa" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Quantum Chronos</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Quantum Chronos</span>
  <h3 class="book-title">Physics of Insight</h3>
+ </div>
  <p class="book-subtitle">Awakening the Savant Within</p>
- <div class="book-actions">
- <a class="button amazon" href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Michael Jr</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Michael Jr</span>
  <h3 class="book-title">Little Mike: Fun at the Beach</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/40JEYKU" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/40JEYKU" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Jorak Veldt</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Jorak Veldt</span>
  <h3 class="book-title">Rules of Survival</h3>
- <p class="book-subtitle">Fire, Hunger, and the First Name</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3NvIPZ6" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ <p class="book-subtitle">Fire, Hunger, and the First Name</p>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3NvIPZ6" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
+ </div>
+ </div>
+ </section>
+
+ <section class="categories-preview">
+ <div class="container">
+ <div class="section-header">
+ <h2>Browse by Category</h2>
+ </div>
+ <div class="category-tags">
+ <a href="catalog.html" class="category-tag">Speculative Fiction</a>
+ <a href="catalog.html" class="category-tag">Science</a>
+ <a href="catalog.html" class="category-tag">Nonfiction</a>
+ <a href="catalog.html" class="category-tag">Children's Books</a>
+ <a href="catalog.html" class="category-tag">Self-Help</a>
+ </div>
+ </div>
+ </section>
+
+ <section class="about">
+ <div class="container">
+ <div class="about-content">
+ <h2>About Bithues</h2>
+ <p>
+ Bithues Reading Lab curates thought-provoking books across fiction, science, and self-improvement. 
+ We highlight indie authors and unique perspectives that challenge how you think.
+ </p>
+ <p class="disclosure">
+ As an Amazon Associate, we earn from qualifying purchases.
+ </p>
  </div>
  </div>
  </section>
@@ -83,10 +111,10 @@
 
  <footer class="site-footer">
  <div class="container footer-inner">
- <span>© <span id="year"></span> Bithues Reading Lab</span>
- <span class="footer-disclosure">
- As an Amazon Associate, this site earns from qualifying purchases.
- </span>
+ <div class="footer-brand">Bithues Reading Lab</div>
+ <div class="footer-links">
+ <span>© <span id="year"></span> All rights reserved</span>
+ </div>
  </div>
  </footer>
 

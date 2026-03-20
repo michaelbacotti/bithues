@@ -4,15 +4,16 @@
  <meta charset="UTF-8">
  <title>Bithues Reading Lab – Catalog</title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Browse all books in the Bithues Reading Lab collection">
  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
  <header class="site-header">
  <div class="container header-inner">
- <div class="brand">
+ <a href="index.html" class="brand">
  <span class="brand-mark">B</span>
  <span class="brand-text">Bithues Reading Lab</span>
- </div>
+ </a>
  <nav class="nav">
  <a href="index.html">Home</a>
  <a href="catalog.html" class="nav-active">Catalog</a>
@@ -23,319 +24,310 @@
  <main>
  <section class="catalog-hero">
  <div class="container">
- <h1>Catalog</h1>
+ <div class="catalog-header-content">
+ <h1>Book Catalog</h1>
  <p>
- Explore all titles in the Bithues Reading Lab collection, from deep‑time epics
+ Explore our curated collection of 35 titles, from deep‑time epics
  to speculative science, journals, and children's stories.
  </p>
  </div>
  </section>
 
+ <section class="catalog-filters">
+ <div class="container">
+ <div class="category-tags">
+ <a href="catalog.html" class="category-tag active">All Books</a>
+ <a href="catalog.html" class="category-tag">Speculative Fiction</a>
+ <a href="catalog.html" class="category-tag">Science</a>
+ <a href="catalog.html" class="category-tag">Nonfiction</a>
+ <a href="catalog.html" class="category-tag">Children's Books</a>
+ <a href="catalog.html" class="category-tag">Self-Help</a>
+ </div>
+ </div>
+ </section>
+
  <section class="catalog-list">
  <div class="container">
- <div class="book-grid">
- <!-- All book cards injected by build_site.py -->
+ <div class="book-grid catalog-grid">
  <article class="book-card">
- <div class="book-meta">T. Stone</div>
+ <div class="book-header">
+ <span class="book-author">T. Stone</span>
  <h3 class="book-title">The Dawn of Civilization</h3>
+ </div>
  <p class="book-subtitle">A Story of a Prehistoric Tribe&#x27;s Struggle for Survival</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4sYlT3t" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4sYlT3t" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">E. Maris</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">E. Maris</span>
  <h3 class="book-title">The Richmond Cipher</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4snAwxv" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4snAwxv" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">M. A. Hale</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">M. A. Hale</span>
  <h3 class="book-title">Red Horizon: Lunar Launch</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/40NsrpN" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/40NsrpN" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Alaric Wynn</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Alaric Wynn</span>
  <h3 class="book-title">The Confluence Doctrine</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3Pm0iUi" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3Pm0iUi" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">J. T. Hartley</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">J. T. Hartley</span>
  <h3 class="book-title">Living with a Moving Planet</h3>
+ </div>
  <p class="book-subtitle">Deep Time, Human Adaptation, and a Positive Climate Future</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4lHbruZ" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4lHbruZ" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">D. E. Harlan</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">D. E. Harlan</span>
  <h3 class="book-title">Beyond the Veil</h3>
+ </div>
  <p class="book-subtitle">Quantum Speculations on Consciousness, Death, and the Universe</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/480RlWP" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/480RlWP" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Curated title</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Curated title</span>
  <h3 class="book-title">Veiled Presence</h3>
- <div class="book-actions">
- <button class="button amazon" disabled>Link coming soon</button>
  </div>
+ 
+ <div class="book-footer"><span class="button amazon" style="opacity:0.5;cursor:default;">Coming Soon</span></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Evan R. Cole</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Evan R. Cole</span>
  <h3 class="book-title">The Power of Changing Your Mind</h3>
+ </div>
  <p class="book-subtitle">How Intellectual Humility Improves Decisions, Relationships, and Everyday Life</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3PieMVj" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3PieMVj" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Elena Maris</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Elena Maris</span>
  <h3 class="book-title">The Shadow Within</h3>
+ </div>
  <p class="book-subtitle">A Practical Guide to Safe, Realistic Shadow Work in Everyday Life</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4d19yHb" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4d19yHb" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Aetheri Codex</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Aetheri Codex</span>
  <h3 class="book-title">Echoes of Aetheris</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4rN0KIS" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4rN0KIS" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Marcus Reeve</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Marcus Reeve</span>
  <h3 class="book-title">Disclosure 2026</h3>
+ </div>
  <p class="book-subtitle">18 Rated Scenarios for Alien First Contact</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/47hGhV8" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/47hGhV8" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">R. Zyrion</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">R. Zyrion</span>
  <h3 class="book-title">Resonance Drift</h3>
+ </div>
  <p class="book-subtitle">A Hopepunk Signal</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3Pe2EEO" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3Pe2EEO" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Elowen Tidebloom</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Elowen Tidebloom</span>
  <h3 class="book-title">Symbiont Bloom</h3>
+ </div>
  <p class="book-subtitle">Verdant Nexus #1</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/47W0PTa" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/47W0PTa" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">E. J. Marín</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">E. J. Marín</span>
  <h3 class="book-title">Otomí</h3>
+ </div>
  <p class="book-subtitle">A Historical Narrative of Land, Ritual, and Continuity</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/41jPyIE" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/41jPyIE" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Quantum Chronos</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Quantum Chronos</span>
  <h3 class="book-title">Physics of Insight</h3>
+ </div>
  <p class="book-subtitle">Awakening the Savant Within</p>
- <div class="book-actions">
- <a class="button amazon" href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Quantum Chronos</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Quantum Chronos</span>
  <h3 class="book-title">The Physics of Time</h3>
+ </div>
  <p class="book-subtitle">A Creative Exploration of Consciousness, Spacetime, and the Nature of Temporal Experience</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3NCAWRA" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3NCAWRA" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Quantum Chronos</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Quantum Chronos</span>
  <h3 class="book-title">Consciousness in Higher Dimensional Spacetime</h3>
+ </div>
  <p class="book-subtitle">A Dual-Dimensional Theory of Mind and Body</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4siK2lz" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4siK2lz" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Quantum Chronos</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Quantum Chronos</span>
  <h3 class="book-title">Quantum Soul Echoes</h3>
+ </div>
  <p class="book-subtitle">Consciousness as Particle and Spacetime Imprint</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3Pl8NPu" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3Pl8NPu" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Michael Bacotti</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Michael Bacotti</span>
  <h3 class="book-title">Microbiology ABC&#x27;s</h3>
+ </div>
  <p class="book-subtitle">Tiny Cells and Microbes from A to Z</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4cZlh9l" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4cZlh9l" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Ellie Sunwood</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Ellie Sunwood</span>
  <h3 class="book-title">You Tell the Story</h3>
+ </div>
  <p class="book-subtitle">Everyday Adventures</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4smIZAW" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4smIZAW" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Rowan Ashcroft</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Rowan Ashcroft</span>
  <h3 class="book-title">The Burning Song</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4uDlo0F" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4uDlo0F" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">D. E. Harlan</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">D. E. Harlan</span>
  <h3 class="book-title">Mindful Memory</h3>
+ </div>
  <p class="book-subtitle">Thought Experiments and Memory Mapping to Strengthen Your Brain</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4smJrz8" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4smJrz8" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Luna Sage</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Luna Sage</span>
  <h3 class="book-title">Shadow Work Journal for Women</h3>
+ </div>
  <p class="book-subtitle">90-Day Guided Prompts to Heal Your Inner Child and Embrace Emotional Freedom</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3NCBFlM" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3NCBFlM" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Jorak Veldt</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Jorak Veldt</span>
  <h3 class="book-title">Rules of Survival</h3>
+ </div>
  <p class="book-subtitle">Fire, Hunger, and the First Name</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3NvIPZ6" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3NvIPZ6" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Jorak Veldt</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Jorak Veldt</span>
  <h3 class="book-title">Blood Ember</h3>
+ </div>
  <p class="book-subtitle">Chants of the First</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4bLjVwK" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4bLjVwK" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Kate E Brennan</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Kate E Brennan</span>
  <h3 class="book-title">The Orchardist: Harvest</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4rOcr1Z" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4rOcr1Z" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Michael Jr</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Michael Jr</span>
  <h3 class="book-title">Little Mike: Fun at the Beach</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/40JEYKU" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/40JEYKU" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Elara Moss</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Elara Moss</span>
  <h3 class="book-title">The Quiet Hours</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3NOtEKA" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3NOtEKA" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Michael Jr</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Michael Jr</span>
  <h3 class="book-title">Little Mike: Learns to Fly</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4dzhtvy" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4dzhtvy" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Evelyn Carter</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Evelyn Carter</span>
  <h3 class="book-title">Discovering Washington DC</h3>
+ </div>
  <p class="book-subtitle">A Comprehensive Guide for All Ages</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/3Pl9LeA" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/3Pl9LeA" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">L Everwood</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">L Everwood</span>
  <h3 class="book-title">Echoes of Transcendence</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4rOlOyl" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4rOlOyl" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">C. Everett</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">C. Everett</span>
  <h3 class="book-title">American Journeys</h3>
+ </div>
  <p class="book-subtitle">Exploring Language and American Culture</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4cUyAb0" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4cUyAb0" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">E. Marlowe</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">E. Marlowe</span>
  <h3 class="book-title">Mythical Menagerie</h3>
+ </div>
  <p class="book-subtitle">A Journey Across Cultures and Creatures</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/47W2rwc" target="_blank" rel="noopener">View on Amazon</a>
- </div>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/47W2rwc" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">Michael Jr</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">Michael Jr</span>
  <h3 class="book-title">Little Mike: Builds a Robot</h3>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4svSTRa" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ 
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4svSTRa" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
-
-<article class="book-card">
- <div class="book-meta">H Harvey</div>
+ <article class="book-card">
+ <div class="book-header">
+ <span class="book-author">H Harvey</span>
  <h3 class="book-title">Time Investing</h3>
- <p class="book-subtitle">A Self-Help Guide to Valuing Your Own Time</p>
- <div class="book-actions">
- <a class="button amazon" href="https://amzn.to/4sSWsAl" target="_blank" rel="noopener">View on Amazon</a>
  </div>
+ <p class="book-subtitle">A Self-Help Guide to Valuing Your Own Time</p>
+ <div class="book-footer"><a class="button amazon" href="https://amzn.to/4sSWsAl" target="_blank" rel="noopener">View on Amazon</a></div>
 </article>
  </div>
  </div>
@@ -344,10 +336,10 @@
 
  <footer class="site-footer">
  <div class="container footer-inner">
- <span>© <span id="year"></span> Bithues Reading Lab</span>
- <span class="footer-disclosure">
- As an Amazon Associate, this site earns from qualifying purchases.
- </span>
+ <div class="footer-brand">Bithues Reading Lab</div>
+ <div class="footer-links">
+ <span>© <span id="year"></span> All rights reserved</span>
+ </div>
  </div>
  </footer>
 
