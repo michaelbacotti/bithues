@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Lists | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }
+        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }
+        .logo { font-size: 1.25rem; font-weight: 700; }
+        .logo span { color: var(--accent); }
+        .hero { padding: 4rem 0; text-align: center; }
+        .hero h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+        .hero p { color: var(--text-dim); max-width: 600px; margin: 0 auto; }
+        .list { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .list:last-child { margin-bottom: 0; }
+        .list h2 { font-size: 1.35rem; margin-bottom: 0.75rem; }
+        .list p { color: var(--text-dim); margin-bottom: 1rem; }
+        .list ul { list-style: none; }
+        .list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+        .list li:last-child { border-bottom: none; }
+        .list li a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="/" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="/reviews">Reviews</a>
+                    <a href="/categories">Categories</a>
+                    <a href="/reading-lists">Reading Lists</a>
+                    <a href="/about">About</a>
+                </div>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1>Curated Reading Lists</h1>
+            <p>Themed pathways through our reviews.</p>
+        </section>
+        
+        <div class="lists">
+            <article class="list">
+                <h2>Indie-Author Starter Pack</h2>
+                <p>Books that help writers think, write, and publish with confidence.</p>
+                <ul>
+                    <li><a href="/reviews/the-richmond-cipher.html">The Richmond Cipher</a> — Historical thriller craft</li>
+                    <li><a href="/reviews/red-horizon-lunar-launch.html">Red Horizon: Lunar Launch</a> — Sci-fi pacing</li>
+                    <li><a href="/reviews/aetheri-codex.html">Aetheri Codex</a> — World-building mastery</li>
+                </ul>
+            </article>
+            
+            <article class="list">
+                <h2>Speculative Consciousness Bundle</h2>
+                <p>Books about consciousness, death, and the universe for curious minds.</p>
+                <ul>
+                    <li><a href="/reviews/beyond-the-veil.html">Beyond the Veil</a> — Quantum meets spirituality</li>
+                    <li><a href="/reviews/quantum-soul-echoes.html">Quantum Soul Echoes</a> — Testable frameworks</li>
+                    <li><a href="/reviews/veiled-presence.html">Veiled Presence</a> — Intuition and awareness</li>
+                </ul>
+            </article>
+            
+            <article class="list">
+                <h2>Solopreneur Thinking Stack</h2>
+                <p>Books that improve decisions, relationships, and everyday performance.</p>
+                <ul>
+                    <li><a href="/reviews/the-power-of-changing-your-mind.html">The Power of Changing Your Mind</a> — Intellectual humility</li>
+                    <li><a href="/reviews/the-shadow-within.html">The Shadow Within</a> — Practical shadow work</li>
+                    <li><a href="/reviews/the-confluence-doctrine.html">The Confluence Doctrine</a> — Trend analysis</li>
+                </ul>
+            </article>
+        </div>
+        
+        <footer>
+            <p>© 2026 Bithues Reading Lab</p>
+        </footer>
+    </div>
+</body>
+</html>

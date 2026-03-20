@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reviews | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface-hover: #1a1a25;
+            --border: #2a2a3a;
+            --text: #e8e8f0;
+            --text-dim: #7a7a90;
+            --accent: #7c3aed;
+            --accent-dim: #5b21b6;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+        .hero { padding: 4rem 0; text-align: center; }
+        .hero h1 { font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+        .hero p { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
+        .reviews-list { padding: 2rem 0; }
+        .review-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; transition: all 0.2s; }
+        .review-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .review-item:last-child { margin-bottom: 0; }
+        .review-item h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .review-item h2 a { color: var(--text); text-decoration: none; }
+        .review-item h2 a:hover { color: var(--accent); }
+        .review-item .author { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .review-item .tldr { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+        .review-item .read-more { display: inline-block; margin-top: 1rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+        footer { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); }
+        footer p { color: var(--text-dim); font-size: 0.9rem; }
+        footer a { color: var(--accent); text-decoration: none; margin: 0 0.75rem; }
+        @media (max-width: 640px) { .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="/" class="logo">Bithues<span> Reading Lab</span></a>
+                <div class="nav-links">
+                    <a href="/reviews">Reviews</a>
+                    <a href="/categories">Categories</a>
+                    <a href="/about">About</a>
+                </div>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1>Book Reviews</h1>
+            <p>Curated reviews for fiction, speculative nonfiction, and self-help.</p>
+        </section>
+        
+        <div class="reviews-list">
+            <article class="review-item">
+                <h2><a href="/reviews/the-richmond-cipher.html">The Richmond Cipher</a></h2>
+                <p class="author">by E. Maris</p>
+                <p class="tldr">A historical thriller that weaves cryptography, Civil War intrigue, and a family secret into a page-turning mystery.</p>
+                <a href="/reviews/the-richmond-cipher.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/red-horizon-lunar-launch.html">Red Horizon: Lunar Launch</a></h2>
+                <p class="author">by M. A. Hale</p>
+                <p class="tldr">A near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller.</p>
+                <a href="/reviews/red-horizon-lunar-launch.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/the-confluence-doctrine.html">The Confluence Doctrine</a></h2>
+                <p class="author"></p>
+                <p class="tldr">A framework for understanding how multiple trends intersect to create outsized opportunities in business and investing.</p>
+                <a href="/reviews/the-confluence-doctrine.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/living-with-a-moving-planet.html">Living with a Moving Planet</a></h2>
+                <p class="author">by J. T. Hartley</p>
+                <p class="tldr">A hopeful, practical guide to adapting to climate change through personal resilience and systemic thinking.</p>
+                <a href="/reviews/living-with-a-moving-planet.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/beyond-the-veil.html">Beyond the Veil</a></h2>
+                <p class="author"></p>
+                <p class="tldr">A blend of quantum physics concepts and spiritual reflection that attempts to bridge science and consciousness.</p>
+                <a href="/reviews/beyond-the-veil.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/veiled-presence.html">Veiled Presence</a></h2>
+                <p class="author"></p>
+                <p class="tldr">An exploration of how subtle awareness and intuition shape human experience and decision-making.</p>
+                <a href="/reviews/veiled-presence.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/the-power-of-changing-your-mind.html">The Power of Changing Your Mind</a></h2>
+                <p class="author">by Evan R. A. Cole</p>
+                <p class="tldr">A practical guide to intellectual humility and how it improves decisions, relationships, and everyday life.</p>
+                <a href="/reviews/the-power-of-changing-your-mind.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/the-shadow-within.html">The Shadow Within</a></h2>
+                <p class="author">by Elena Maris</p>
+                <p class="tldr">A practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological depth.</p>
+                <a href="/reviews/the-shadow-within.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/quantum-soul-echoes.html">Quantum Soul Echoes</a></h2>
+                <p class="author"></p>
+                <p class="tldr">An exploration of consciousness through quantum mechanics that proposes testable frameworks for understanding mind.</p>
+                <a href="/reviews/quantum-soul-echoes.html" class="read-more">Read Review →</a>
+            </article>
+            
+            <article class="review-item">
+                <h2><a href="/reviews/aetheri-codex.html">Aetheri Codex</a></h2>
+                <p class="author"></p>
+                <p class="tldr">A sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-building masterpiece.</p>
+                <a href="/reviews/aetheri-codex.html" class="read-more">Read Review →</a>
+            </article>
+        </div>
+        
+        <footer>
+            <p>© 2026 Bithues Reading Lab</p>
+            <div>
+                <a href="/">Home</a>
+                <a href="/reviews">Reviews</a>
+                <a href="/categories">Categories</a>
+                <a href="/about">About</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
