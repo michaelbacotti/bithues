@@ -9,24 +9,33 @@
         :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
-        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
-        .logo span { color: var(--accent); }
-        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
-        .nav-links a:hover, .nav-links a.active { color: var(--text); }
-        .hero { padding: 3rem 0; text-align: center; }
+        
+        .sticky-bar {
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 100;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .sticky-bar .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .sticky-bar .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .sticky-bar .logo span { color: var(--accent); }
+        .sticky-bar .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1rem; }
+        .sticky-bar .nav-links a:hover, .sticky-bar .nav-links a.active { color: var(--text); }
+        
+        .hero { padding: 2rem 0; text-align: center; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .hero p { color: var(--text-dim); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2rem; }
-        .featured { padding: 2rem 0; }
-        .featured h2 { font-size: 1.25rem; margin-bottom: 1.5rem; }
+        .featured { padding: 1rem 0 2rem; }
+        .featured h2 { font-size: 1.25rem; margin-bottom: 1rem; }
         .review-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; }
         .review-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
         .review-card h3 a { color: var(--text); text-decoration: none; }
         .review-card h3 a:hover { color: var(--accent); }
         .review-card .author { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.75rem; }
         .review-card .tldr { color: var(--text-dim); font-size: 0.95rem; }
-        .all-reviews { text-align: center; padding: 2rem 0; }
+        .all-reviews { text-align: center; padding: 1rem 0 2rem; }
         .all-reviews a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.85rem; }
@@ -34,55 +43,50 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <nav>
+        <div class="sticky-bar">
+            <div class="nav">
                 <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
                 <div class="nav-links">
                     <a href="index.html" class="active">Home</a>
                     <a href="reviews/index.html">Reviews</a>
                     <a href="catalog.html">Catalog</a>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </div>
+        
         <section class="hero">
             <h1>Curated book reviews that change how you think</h1>
             <p>Bithues Reading Lab is a curated book review hub for indie authors, solopreneurs, and anyone who wants signal-dense reading.</p>
         </section>
+        
         <section class="featured">
             <h2>Featured Reviews</h2>
             <div class="review-card">
-            <h3><a href="reviews/1.html">The Dawn of Civilization</a></h3>
-            <p class="author">by T. Stone</p>
-            <p class="tldr">When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader's staff and hold their small tribe together. As bears, ba...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/2.html">The Richmond Cipher</a></h3>
-            <p class="author">by E. Maris</p>
-            <p class="tldr">In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligenc...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/3.html">Red Horizon: Lunar Launch</a></h3>
-            <p class="author">by M. A. Hale</p>
-            <p class="tldr">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon—humanity is raising children und...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
-            <p class="author">by Alaric Wynn</p>
-            <p class="tldr">In a world where suffering has been designed out, Orren Myal hears something that doesn't fit—a sense of 'full, but unfinished.' What is life's task w...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/5.html">Living with a Moving Planet</a></h3>
-            <p class="author">by J. T. Hartley</p>
-            <p class="tldr">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines for tens of thousands of years....</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/6.html">Beyond the Veil</a></h3>
-            <p class="author">by D. E. Harlan</p>
-            <p class="tldr">A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy....</p>
-        </div>
+                <h3><a href="reviews/1.html">The Dawn of Civilization</a></h3>
+                <p class="author">by T. Stone</p>
+                <p class="tldr">When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader's staff. As bears, bandits, and a bronze-armed warlord close in, Koda fights to turn a wandering tribe into a walled village.</p>
+            </div>
+            <div class="review-card">
+                <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
+                <p class="author">by Alaric Wynn</p>
+                <p class="tldr">In a world where suffering has been designed out, Orren Myal hears something that doesn't fit—a sense of 'full, but unfinished.' What is life's task within harmony?</p>
+            </div>
+            <div class="review-card">
+                <h3><a href="reviews/8.html">The Power of Changing Your Mind</a></h3>
+                <p class="author">by Evan R. Cole</p>
+                <p class="tldr">In a culture that rewards confidence, this book shows how intellectual humility is actually a competitive edge for better decisions.</p>
+            </div>
         </section>
+        
         <section class="all-reviews">
             <a href="reviews/index.html">View all 35 reviews →</a>
         </section>
+        
         <footer>
             <p>© <span id="year"></span> Bithues Reading Lab</p>
         </footer>
     </div>
+    
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
