@@ -140,4 +140,8 @@
     <loc>https://bithues.com/articles/little-mike-series.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://bithues.com/articles/shadow-work-guide.html</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
