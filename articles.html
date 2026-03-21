@@ -254,6 +254,22 @@
         });
     });
     
+    // Add reading time to article cards
+    document.querySelectorAll('.article-card').forEach(card => {
+        const excerpt = card.querySelector('.excerpt');
+        if (excerpt) {
+            const words = excerpt.textContent.split(/\s+/).length;
+            const minutes = Math.max(1, Math.ceil(words / 200));
+            const meta = card.querySelector('.meta');
+            if (meta) {
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'word-count';
+                timeSpan.textContent = ' ' + minutes + ' min read';
+                meta.appendChild(timeSpan);
+            }
+        }
+    });
+    
     searchInput.addEventListener('input', filterCards);
     
     document.getElementById('year').textContent = new Date().getFullYear();
