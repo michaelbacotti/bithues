@@ -18,11 +18,13 @@
         .sticky-bar .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1rem; }
         .sticky-bar .nav-links a:hover, .sticky-bar .nav-links a.active { color: var(--text); }
         
-        .page-header { padding: 2rem 0; }
+        .page-header { padding: 1.5rem 0; background: var(--bg); }
         .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
         .page-header p { color: var(--text-dim); }
         
-        .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .sticky-filters { position: sticky; top: 70px; background: var(--bg); z-index: 90; padding: 0.75rem 0; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+        
+        .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .filter-btn { padding: 0.4rem 0.8rem; font-size: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; color: var(--text-dim); cursor: pointer; }
         .filter-btn:hover { border-color: var(--accent); color: var(--text); }
         .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
@@ -60,68 +62,117 @@
             <p>In-depth thoughts on books, reading, and ideas.</p>
         </section>
         
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="Book Lists">Book Lists</button>
-            <button class="filter-btn" data-filter="Science">Science</button>
-            <button class="filter-btn" data-filter="Speculative Fiction">Speculative Fiction</button>
-            <button class="filter-btn" data-filter="Parenting">Parenting</button>
-            <button class="filter-btn" data-filter="Children">Children</button>
-            <button class="filter-btn" data-filter="Psychology">Psychology</button>
+        <div class="sticky-filters">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Book Lists">Book Lists</button>
+                <button class="filter-btn" data-filter="Science">Science</button>
+                <button class="filter-btn" data-filter="Speculative Fiction">Speculative Fiction</button>
+                <button class="filter-btn" data-filter="Parenting">Parenting</button>
+                <button class="filter-btn" data-filter="Children">Children</button>
+                <button class="filter-btn" data-filter="Psychology">Psychology</button>
+                <button class="filter-btn" data-filter="Gift Guides">Gift Guides</button>
+                <button class="filter-btn" data-filter="Trends">Trends</button>
+                <button class="filter-btn" data-filter="Behind the Scenes">Behind the Scenes</button>
+            </div>
         </div>
         
+        <!-- Article 1 -->
         <div class="article-card" data-tags="Book Lists">
             <h3><a href="articles/books-change-how-you-think.html">5 Mind-Bending Books That Will Change How You Think</a></h3>
             <p class="excerpt">Five books that will reshape how you see reality, time, consciousness, and your own mind.</p>
-            <div class="meta">
-                <span class="tag">Book Lists</span>
-                <span class="word-count">1,400 words</span>
-            </div>
+            <div class="meta"><span class="tag">Book Lists</span></div>
         </div>
         
+        <!-- Article 2 -->
         <div class="article-card" data-tags="Science">
             <h3><a href="articles/quantum-physics-beginners.html">Quantum Physics for Beginners</a></h3>
             <p class="excerpt">Wave-particle duality, superposition, entanglement, and what it means for consciousness. Quantum physics explained simply.</p>
-            <div class="meta">
-                <span class="tag">Science</span>
-                <span class="word-count">2,000 words</span>
-            </div>
+            <div class="meta"><span class="tag">Science</span></div>
         </div>
         
+        <!-- Article 3 -->
         <div class="article-card" data-tags="Speculative Fiction">
             <h3><a href="articles/hopepunk-fiction.html">The Rise of Hopepunk Fiction</a></h3>
             <p class="excerpt">Why dark, gritty sci-fi is giving way to stories that imagine a better tomorrow. Discover the hopepunk genre and essential reads.</p>
-            <div class="meta">
-                <span class="tag">Speculative Fiction</span>
-                <span class="word-count">1,800 words</span>
-            </div>
+            <div class="meta"><span class="tag">Speculative Fiction</span></div>
         </div>
         
+        <!-- Article 4 -->
         <div class="article-card" data-tags="Parenting">
             <h3><a href="articles/kids-reading-guide.html">How to Get Kids Into Reading</a></h3>
             <p class="excerpt">Practical strategies to inspire a love of reading in children, from toddlers to teens.</p>
-            <div class="meta">
-                <span class="tag">Parenting</span>
-                <span class="word-count">1,600 words</span>
-            </div>
+            <div class="meta"><span class="tag">Parenting</span></div>
         </div>
         
+        <!-- Article 5 -->
         <div class="article-card" data-tags="Children">
             <h3><a href="articles/little-mike-series.html">Meet Little Mike: Adventures That Spark Imagination</a></h3>
             <p class="excerpt">Discover the Little Mike book series by Michael Jr. — wholesome stories about the beach, flying, and building robots.</p>
-            <div class="meta">
-                <span class="tag">Children</span>
-                <span class="word-count">900 words</span>
-            </div>
+            <div class="meta"><span class="tag">Children</span></div>
         </div>
         
+        <!-- Article 6 -->
         <div class="article-card" data-tags="Psychology">
             <h3><a href="articles/shadow-work-guide.html">Shadow Work: What It Is and Why It Matters</a></h3>
             <p class="excerpt">A practical guide to shadow work psychology — what it is, why it matters, and how to do it without the mystical fluff.</p>
-            <div class="meta">
-                <span class="tag">Psychology</span>
-                <span class="word-count">1,200 words</span>
-            </div>
+            <div class="meta"><span class="tag">Psychology</span></div>
+        </div>
+        
+        <!-- Article 7 -->
+        <div class="article-card" data-tags="Speculative Fiction">
+            <h3><a href="articles/best-sci-fi-2026.html">Best Sci-Fi Books of 2026</a></h3>
+            <p class="excerpt">Hopepunk, first contact thrillers, and indie voices define the year. Our curated list of the best science fiction of 2026.</p>
+            <div class="meta"><span class="tag">Speculative Fiction</span></div>
+        </div>
+        
+        <!-- Article 8 -->
+        <div class="article-card" data-tags="Speculative Fiction">
+            <h3><a href="articles/hopepunk-beginners-guide.html">Beginner's Guide to Hopepunk</a></h3>
+            <p class="excerpt">What is hopepunk? A beginner's guide to the sci-fi movement that's reimagining the future.</p>
+            <div class="meta"><span class="tag">Speculative Fiction</span></div>
+        </div>
+        
+        <!-- Article 9 -->
+        <div class="article-card" data-tags="Book Lists">
+            <h3><a href="articles/books-like-physics-of-time.html">If You Loved The Physics of Time, Read These</a></h3>
+            <p class="excerpt">Books that explore consciousness, quantum physics, and the nature of reality. The Quantum Chronos reading order and similar titles.</p>
+            <div class="meta"><span class="tag">Book Lists</span></div>
+        </div>
+        
+        <!-- Article 10 -->
+        <div class="article-card" data-tags="Behind the Scenes">
+            <h3><a href="articles/meet-indie-authors.html">Meet the Indie Authors of Bithues</a></h3>
+            <p class="excerpt">Get to know the independent authors behind the books we review — their stories, inspirations, and what drives them to write.</p>
+            <div class="meta"><span class="tag">Behind the Scenes</span></div>
+        </div>
+        
+        <!-- Article 11 -->
+        <div class="article-card" data-tags="Book Lists">
+            <h3><a href="articles/reading-challenge-2026.html">One Book a Month Reading Challenge 2026</a></h3>
+            <p class="excerpt">A curated reading challenge: one book a month for 12 months. Expand your mind with our curated picks.</p>
+            <div class="meta"><span class="tag">Book Lists</span></div>
+        </div>
+        
+        <!-- Article 12 -->
+        <div class="article-card" data-tags="Behind the Scenes">
+            <h3><a href="articles/how-we-review-books.html">How We Review Books at Bithues</a></h3>
+            <p class="excerpt">Behind the scenes at bithues — our book review process, philosophy, and what makes us different.</p>
+            <div class="meta"><span class="tag">Behind the Scenes</span></div>
+        </div>
+        
+        <!-- Article 13 -->
+        <div class="article-card" data-tags="Gift Guides">
+            <h3><a href="articles/books-for-dad-gift-guide.html">Best Books for Dad</a></h3>
+            <p class="excerpt">Looking for the perfect gift for Dad? These books from bithues will delight every type of reader.</p>
+            <div class="meta"><span class="tag">Gift Guides</span></div>
+        </div>
+        
+        <!-- Article 14 -->
+        <div class="article-card" data-tags="Trends">
+            <h3><a href="articles/why-indie-authors-rising.html">Why Indie Authors Are Rising</a></h3>
+            <p class="excerpt">The publishing landscape is shifting. Here's why independent authors are thriving — and what it means for readers.</p>
+            <div class="meta"><span class="tag">Trends</span></div>
         </div>
         
         <footer>
