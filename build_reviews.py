@@ -78,6 +78,181 @@ REVIEWS = {
         "who": "Readers who enjoy ancient aliens without the camp, evolutionary what-ifs.",
         "verdict": "An atmospheric, grounded take on ancient astronaut theory."
     },
+    11: {
+        "title": "Disclosure 2026", "author": "Marcus Reeve", "subtitle": "18 Rated Scenarios for Alien First Contact",
+        "tldr": "From viral smartphone footage to White House landings, this book analyzes 18 pathways to alien disclosure—each rated for plausibility based on decades of testimony.",
+        "takeaways": ["Disclosure isn't a single event—it's a spectrum of possibilities", "Government secrecy has legitimate national security dimensions", "The Drake equation suggests we're likely not alone"],
+        "who": "UFO disclosure enthusiasts, preppers, and anyone asking 'what if?'",
+        "verdict": "A thorough, balanced analysis of one of humanity's most profound potential pivots."
+    },
+    12: {
+        "title": "Resonance Drift", "author": "R. Zyrion", "subtitle": "A Hopepunk Signal",
+        "tldr": "In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.",
+        "takeaways": ["Hopepunk is about building better worlds, not just hoping for them", "Stewardship of place creates deep belonging", "Cozy settings can hold profound themes"],
+        "who": "Fans of Becky Chambers and Martha Wells—serene sci-fi where community matters.",
+        "verdict": "A comforting hug of a novella that proves optimism is a valid literary stance."
+    },
+    13: {
+        "title": "Symbiont Bloom", "author": "Elowen Tidebloom", "subtitle": "Verdant Nexus #1",
+        "tldr": "On volcanic isles of Lumengrove, dawn arrives through living leaf-glass. When the island's pulse skips, a family must unravel a systems puzzle.",
+        "takeaways": ["Eco-worldbuilding shows how organisms and environments co-create reality", "Paying attention to patterns reveals deeper truths", "No villains—only Paradise nudging caretakers to pay attention"],
+        "who": "Readers who love eco-worldbuilding and stories where people do the right thing.",
+        "verdict": "A lush, thoughtful start to a series that treats ecology as spiritual practice."
+    },
+    14: {
+        "title": "Otomí", "author": "E. J. Marín", "subtitle": "A Historical Narrative of Land, Ritual, and Continuity",
+        "tldr": "Through the eyes of a young ritual apprentice, follow one drought-stricken year in an Otomí village.",
+        "takeaways": ["Indigenous knowledge holds ecological wisdom accumulated over millennia", "Ritual connects communities to land and each other", "Historical fiction can recover erased perspectives"],
+        "who": "Bernard Cornwell fans and lovers of indigenous historical fiction.",
+        "verdict": "A respectful, immersive reconstruction of ancient life."
+    },
+    15: {
+        "title": "Physics of Insight", "author": "Quantum Chronos", "subtitle": "Awakening the Savant Within",
+        "tldr": "What if genius isn't rare—it's hidden inside every mind, waiting for the right switch?",
+        "takeaways": ["Savant skills exist on a spectrum in everyone", "The 'savant switch' can be triggered by various conditions", "Understanding cognitive limits expands what we attempt"],
+        "who": "Readers who loved The Physics of Time and want more on consciousness.",
+        "verdict": "A disciplined exploration of mind's untapped architecture."
+    },
+    16: {
+        "title": "The Physics of Time", "author": "Quantum Chronos", "subtitle": "A Creative Exploration of Consciousness, Spacetime, and the Nature of Temporal Experience",
+        "tldr": "A groundbreaking exploration: what if the universe is a block of spacetime containing all moments, yet consciousness navigates through it?",
+        "takeaways": ["Block universe theory suggests past, present, and future coexist", "Consciousness may 'actualize' possibilities into experience", "Time flow may be an illusion—yet experience is real"],
+        "who": "Physicists, philosophers, and curious minds willing to think radically.",
+        "verdict": "A mind-expanding tour de force that leaves you rethinking reality."
+    },
+    17: {
+        "title": "Consciousness in Higher Dimensional Spacetime", "author": "Quantum Chronos", "subtitle": "A Dual-Dimensional Theory of Mind and Body",
+        "tldr": "What if consciousness doesn't exist in the same spacetime as the body? A radical extension of Einstein's relativity into the domain of mind.",
+        "takeaways": ["Consciousness may exist in a different dimensional space than physical matter", "The hard problem may require new mathematics to solve", "Awareness could be non-local in ways physics is only beginning to explore"],
+        "who": "Anyone fascinated by consciousness foundations and physics meets neuroscience.",
+        "verdict": "Speculative but rigorous—an intellectual adventure."
+    },
+    18: {
+        "title": "Quantum Soul Echoes", "author": "Quantum Chronos", "subtitle": "Consciousness as Particle and Spacetime Imprint",
+        "tldr": "What if consciousness is what spacetime remembers? Two models synthesized in this rigorous exploration.",
+        "takeaways": ["Consciousness may leave traces in spacetime itself", "Quantum coherence could persist beyond biological death", "The 'soul' concept gains unexpected scientific footing"],
+        "who": "Readers of Penrose and Hameroff—those who demand rigor and wonder.",
+        "verdict": "A synthesis that bridges physics, philosophy, and spirituality."
+    },
+    19: {
+        "title": "Microbiology ABC's", "author": "Michael Bacotti", "subtitle": "Tiny Cells and Microbes from A to Z",
+        "tldr": "From amoebas to zooplankton, each letter highlights a microbe or cell structure with colorful illustrations.",
+        "takeaways": ["The microbial world is more diverse than all other life combined", "Our immune cells are specialized warriors defending us daily", "Microbes are partners, not just pathogens"],
+        "who": "Curious kids who ask about germs. Parents seeking screen-free STEM learning.",
+        "verdict": "A colorful, accessible introduction to the invisible world."
+    },
+    20: {
+        "title": "You Tell the Story", "author": "Ellie Sunwood", "subtitle": "Everyday Adventures",
+        "tldr": "A draw-and-write storybook where children look at pictures, then write and draw their own stories.",
+        "takeaways": ["Creative writing builds confidence and communication skills", "Open-ended prompts encourage imagination", "Screen-free activities develop focus and creativity"],
+        "who": "Children 4-8 and parents looking for creative, screen-free activities.",
+        "verdict": "A blank canvas for young imaginations to fill."
+    },
+    21: {
+        "title": "The Burning Song", "author": "Rowan Ashcroft", "subtitle": "",
+        "tldr": "When a cave lion marks Aken, the leader makes a choice that breaks every rule: he sends scouts to the coastal strangers.",
+        "takeaways": ["Trust between tribes required enormous vulnerability", "Leadership sometimes means breaking tradition to save your people", "The courage to reach out defines human progress"],
+        "who": "Readers who love character-driven stories and authentic historical fiction.",
+        "verdict": "A powerful story about the moment one people decided to trust another."
+    },
+    22: {
+        "title": "Mindful Memory", "author": "D. E. Harlan", "subtitle": "Thought Experiments and Memory Mapping to Strengthen Your Brain",
+        "tldr": "Empowering retirees with science-backed exercises like memory palaces and timeline mapping.",
+        "takeaways": ["Memory palaces have 2,500 years of evidence behind them", "Neuroplasticity means brains can change at any age", "Active recall beats passive review for retention"],
+        "who": "Retirees seeking to sharpen cognition. Anyone building emotional resilience.",
+        "verdict": "Practical tools backed by neuroscience, accessible to anyone."
+    },
+    23: {
+        "title": "Shadow Work Journal for Women", "author": "Luna Sage", "subtitle": "90-Day Guided Prompts to Heal Your Inner Child and Embrace Emotional Freedom",
+        "tldr": "A beginner-friendly 90-day journal with warm prompts for emotional healing.",
+        "takeaways": ["Inner child work helps reparent your younger self", "Awareness is the first step—action completes the journey", "Journaling creates a record of growth over time"],
+        "who": "Women 25-45 feeling stuck in anxiety or people-pleasing.",
+        "verdict": "A gentle, structured path to emotional freedom."
+    },
+    24: {
+        "title": "Rules of Survival", "author": "Jorak Veldt", "subtitle": "Fire, Hunger, and the First Name",
+        "tldr": "Roughly one million years ago, a boy learns the band's rules—water order, ember law, watch—and pays for them in skin.",
+        "takeaways": ["Survival rules are learned through pain and repetition", "Early humans lived with constant danger but strong community", "The gap between childhood and adulthood was terrifyingly short"],
+        "who": "Fans of deep-time settings and anthropologically grounded survival fiction.",
+        "verdict": "A visceral, unflinching look at prehistoric childhood."
+    },
+    25: {
+        "title": "Blood Ember", "author": "Jorak Veldt", "subtitle": "Chants of the First",
+        "tldr": "Three parts trace how survival habits harden into protocol, law, and chant. From fire to spear to echo.",
+        "takeaways": ["Ritual may have evolved from survival necessity", "Chants served practical purposes before artistic ones", "Culture is technology made social"],
+        "who": "Readers who like deep-time settings and stories of how culture forms.",
+        "verdict": "A thought-provoking exploration of civilization's roots."
+    },
+    26: {
+        "title": "The Orchardist: Harvest", "author": "Kate E Brennan", "subtitle": "",
+        "tldr": "Diane Kessler falls from a ladder—in that moment, she doesn't come back. A story of near-death experience.",
+        "takeaways": ["Near-death experiences often transform how people see life", "The boundary between this world and 'after' may be thinner than we think", "Coming back changes you irreversibly"],
+        "who": "Readers who enjoy literary fiction with spiritual themes.",
+        "verdict": "A tender, haunting exploration of what lies beyond."
+    },
+    27: {
+        "title": "Little Mike: Fun at the Beach", "author": "Michael Jr", "subtitle": "",
+        "tldr": "Join Little Mike and his friends as they build an awe-inspiring sand castle.",
+        "takeaways": ["Teamwork makes dreams bigger", "Creativity thrives in play", "Every child can be a hero"],
+        "who": "Children 3-8 and parents who enjoy wholesome illustrated books.",
+        "verdict": "A cheerful, positive story about friendship and creativity."
+    },
+    28: {
+        "title": "The Quiet Hours", "author": "Elara Moss", "subtitle": "",
+        "tldr": "Gentle bedtime stories celebrating simple joys—perfect for children seeking comfort.",
+        "takeaways": ["Peaceful endings help children process the day", "Simple pleasures are worth celebrating", "Bedtime can be a sacred ritual"],
+        "who": "Children needing comfort and adults who need peaceful escape.",
+        "verdict": "A calming collection that lulls and comforts."
+    },
+    29: {
+        "title": "Little Mike: Learns to Fly", "author": "Michael Jr", "subtitle": "",
+        "tldr": "Little Mike dreams of flying. With friends John and May, he meets Pilot Thomas who teaches the wonders of airplanes.",
+        "takeaways": ["Dreams are worth pursuing", "Mentors appear in unexpected places", "Courage means trying even when it's scary"],
+        "who": "Children 3-8 fascinated by planes. Parents wanting positive values.",
+        "verdict": "An inspiring story about following your dreams."
+    },
+    30: {
+        "title": "Discovering Washington DC", "author": "Evelyn Carter", "subtitle": "A Comprehensive Guide for All Ages",
+        "tldr": "Beyond the monuments—a guide to the real DC. Stroll Georgetown's cobblestones, tap your feet to jazz, taste a half-smoke.",
+        "takeaways": ["DC is more than museums and monuments", "Neighborhoods have distinct personalities", "Local favorites reveal a city's soul"],
+        "who": "Tourists, history hounds, and anyone planning a DC visit.",
+        "verdict": "The insider's guide to Washington that official tourism misses."
+    },
+    31: {
+        "title": "Echoes of Transcendence", "author": "L Everwood", "subtitle": "",
+        "tldr": "Where boundaries of reality blur, seekers embark on a transformative journey. Guided by ancient prophecies, they unveil mysteries.",
+        "takeaways": ["Transformation requires stepping into the unknown", "Ancient wisdom may hold keys to modern awakening", "The journey inward is as real as any external adventure"],
+        "who": "Readers who enjoy transformative fiction and self-discovery.",
+        "verdict": "A mystical journey through realms of possibility."
+    },
+    32: {
+        "title": "American Journeys", "author": "C. Everett", "subtitle": "Exploring Language and American Culture",
+        "tldr": "For those moving to or visiting the US—or anyone eager to enhance English through immersive content.",
+        "takeaways": ["Language and culture are inseparable", "Immersion accelerates learning", "American diversity is its greatest strength"],
+        "who": "ESL learners, immigrants, and anyone curious about American culture.",
+        "verdict": "A cultural companion for the American journey."
+    },
+    33: {
+        "title": "Mythical Menagerie", "author": "E. Marlowe", "subtitle": "A Journey Across Cultures and Creatures",
+        "tldr": "A thrilling journey through cultures exploring mythical creatures. Discover how dragons and shape-shifters shaped cultural identities.",
+        "takeaways": ["Every culture creates creatures that reflect its values", "Myths encode collective wisdom", "The same creature means different things across cultures"],
+        "who": "Mythology enthusiasts and readers who enjoy cultural explorations.",
+        "verdict": "A fascinating tour of humanity's imaginary bestiary."
+    },
+    34: {
+        "title": "Little Mike: Builds a Robot", "author": "Michael Jr", "subtitle": "",
+        "tldr": "Little Mike, John, and May build robots—but they keep falling apart. Through teamwork, they create a robot that tells stories.",
+        "takeaways": ["Failure is part of invention", "Teamwork beats individual genius", "Persistence pays off"],
+        "who": "Children 3-8 and families who enjoy teamwork stories.",
+        "verdict": "A fun, empowering story about never giving up."
+    },
+    35: {
+        "title": "Time Investing", "author": "H Harvey", "subtitle": "A Self-Help Guide to Valuing Your Own Time",
+        "tldr": "A self-help guide showing how to prioritize yourself and your time. Strategies for investing in yourself.",
+        "takeaways": ["Time is your most precious resource—spend it intentionally", "Saying no to others is saying yes to yourself", "Self-investment compounds over time"],
+        "who": "Anyone feeling time-slippage and wanting to prioritize what matters.",
+        "verdict": "Practical wisdom for reclaiming your most valuable asset."
+    },
 }
 
 def parse_tracker():
