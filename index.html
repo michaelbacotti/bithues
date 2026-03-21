@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bithues Reading Lab | Curated Book Reviews</title>
+    <title>bithues | Curated book reviews for curious minds</title>
+    <meta name="description" content="Curated book reviews for curious minds. Discover indie authors and thoughtful reads.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
@@ -19,7 +20,9 @@
         .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .hero p { color: var(--text-dim); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2rem; }
         .featured { padding: 2rem 0; }
-        .featured h2 { font-size: 1.25rem; margin-bottom: 1.5rem; }
+        .featured h2 { font-size: 1.25rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .featured .refresh { font-size: 0.8rem; color: var(--text-dim); cursor: pointer; }
+        .featured .refresh:hover { color: var(--accent); }
         .review-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; }
         .review-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
         .review-card h3 a { color: var(--text); text-decoration: none; }
@@ -36,7 +39,7 @@
     <div class="container">
         <header>
             <nav>
-                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <a href="index.html" class="logo">bithues<span> Reading Lab</span></a>
                 <div class="nav-links">
                     <a href="index.html" class="active">Home</a>
                     <a href="reviews/index.html">Reviews</a>
@@ -47,43 +50,74 @@
         </header>
         <section class="hero">
             <h1>Curated book reviews that change how you think</h1>
-            <p>Bithues Reading Lab is a curated book review hub for indie authors, solopreneurs, and anyone who wants signal-dense reading.</p>
+            <p>bithues is a curated book review hub for indie authors, solopreneurs, and anyone who wants signal-dense reading.</p>
         </section>
         <section class="featured">
-            <h2>Featured Reviews</h2>
-            <div class="review-card">
-            <h3><a href="reviews/1.html">The Dawn of Civilization</a></h3>
-            <p class="author">by T. Stone</p>
-            <p class="tldr">When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader's staff and hold their small tribe together. As bears, ba...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/2.html">The Richmond Cipher</a></h3>
-            <p class="author">by E. Maris</p>
-            <p class="tldr">In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligenc...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/3.html">Red Horizon: Lunar Launch</a></h3>
-            <p class="author">by M. A. Hale</p>
-            <p class="tldr">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon—humanity is raising children und...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
-            <p class="author">by Alaric Wynn</p>
-            <p class="tldr">In a world where suffering has been designed out, Orren Myal hears something that doesn't fit—a sense of 'full, but unfinished.' What is life's task w...</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/5.html">Living with a Moving Planet</a></h3>
-            <p class="author">by J. T. Hartley</p>
-            <p class="tldr">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines for tens of thousands of years....</p>
-        </div><div class="review-card">
-            <h3><a href="reviews/6.html">Beyond the Veil</a></h3>
-            <p class="author">by D. E. Harlan</p>
-            <p class="tldr">A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy....</p>
-        </div>
+            <h2>Featured Reviews <span class="refresh" onclick="rotateFeatured()">↻ New picks</span></h2>
+            <div id="featured-books"></div>
         </section>
         <section class="all-reviews">
             <a href="reviews/index.html">View all 35 reviews →</a>
         </section>
         <footer>
-            <p>© <span id="year"></span> Bithues Reading Lab</p>
+            <p>© <span id="year"></span> bithues</p>
         </footer>
     </div>
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    
+    <script>
+    const books = [
+        { id: 1, title: "The Dawn of Civilization", author: "T. Stone", category: "Fiction", tldr: "When a brutal winter kills his father, sixteen-year-old Koda fights to turn a wandering tribe into a walled village.", url: "reviews/1.html" },
+        { id: 2, title: "The Richmond Cipher", author: "E. Maris", category: "Fiction", tldr: "In Confederate Richmond, Mary carries secrets in her memory as she moves through the Executive Mansion.", url: "reviews/2.html" },
+        { id: 3, title: "Red Horizon: Lunar Launch", author: "M. A. Hale", category: "Fiction", tldr: "Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars.", url: "reviews/3.html" },
+        { id: 4, title: "The Confluence Doctrine", author: "Alaric Wynn", category: "Fiction", tldr: "In a world where suffering has been designed out, Orren hears something that doesn't fit.", url: "reviews/4.html" },
+        { id: 5, title: "Living with a Moving Planet", author: "J. T. Hartley", category: "Nonfiction", tldr: "Drawing on deep-time climate records, this book shows how humans have adapted.", url: "reviews/5.html" },
+        { id: 6, title: "Beyond the Veil", author: "D. E. Harlan", category: "Nonfiction", tldr: "A careful tour of evidence around what happens when we die.", url: "reviews/6.html" },
+        { id: 8, title: "The Power of Changing Your Mind", author: "Evan R. Cole", category: "Nonfiction", tldr: "In a culture that rewards confidence, this book shows how intellectual humility is a competitive edge.", url: "reviews/8.html" },
+        { id: 9, title: "The Shadow Within", author: "Elena Maris", category: "Nonfiction", tldr: "Instead of treating reactions as defects, learn to treat them as information.", url: "reviews/9.html" },
+        { id: 10, title: "Echoes of Aetheris", author: "Aetheri Codex", category: "Fiction", tldr: "Nine thousand years before history, a wounded alien ship falls onto a frozen steppe.", url: "reviews/10.html" },
+        { id: 11, title: "Disclosure 2026", author: "Marcus Reeve", category: "Nonfiction", tldr: "18 rated scenarios for alien first contact.", url: "reviews/11.html" },
+        { id: 12, title: "Resonance Drift", author: "R. Zyrion", category: "Fiction", tldr: "In Eden Prime's biolum spires, harmony hums—until a family detects a pulse.", url: "reviews/12.html" },
+        { id: 13, title: "Symbiont Bloom", author: "Elowen Tidebloom", category: "Fiction", tldr: "On volcanic isles of Lumengrove, dawn arrives through living leaf-glass.", url: "reviews/13.html" },
+        { id: 15, title: "Physics of Insight", author: "Quantum Chronos", category: "Nonfiction", tldr: "What if genius isn't rare—it's hidden inside every mind?", url: "reviews/15.html" },
+        { id: 16, title: "The Physics of Time", author: "Quantum Chronos", category: "Nonfiction", tldr: "A groundbreaking exploration: what if the universe is a block of spacetime?", url: "reviews/16.html" },
+        { id: 21, title: "The Burning Song", author: "Rowan Ashcroft", category: "Fiction", tldr: "When a cave lion marks Aken, the leader makes a choice that breaks every rule.", url: "reviews/21.html" },
+        { id: 22, title: "Mindful Memory", author: "D. E. Harlan", category: "Nonfiction", tldr: "Empowering retirees with science-backed exercises like memory palaces.", url: "reviews/22.html" },
+        { id: 24, title: "Rules of Survival", author: "Jorak Veldt", category: "Fiction", tldr: "Roughly one million years ago, a boy learns the band's rules—and pays for them.", url: "reviews/24.html" },
+        { id: 25, title: "Blood Ember", author: "Jorak Veldt", category: "Fiction", tldr: "Three parts trace how survival habits harden into protocol, law, and chant.", url: "reviews/25.html" },
+        { id: 27, title: "Little Mike: Fun at the Beach", author: "Michael Jr", category: "Children", tldr: "Join Little Mike and his friends as they build an awe-inspiring sand castle.", url: "reviews/27.html" },
+        { id: 28, title: "The Quiet Hours", author: "Elara Moss", category: "Children", tldr: "Gentle bedtime stories celebrating simple joys.", url: "reviews/28.html" },
+        { id: 29, title: "Little Mike: Learns to Fly", author: "Michael Jr", category: "Children", tldr: "Little Mike dreams of flying. With friends, he meets Pilot Thomas.", url: "reviews/29.html" },
+        { id: 30, title: "Discovering Washington DC", author: "Evelyn Carter", category: "Nonfiction", tldr: "Beyond the monuments—a guide to the real DC.", url: "reviews/30.html" },
+        { id: 34, title: "Little Mike: Builds a Robot", author: "Michael Jr", category: "Children", tldr: "Little Mike, John, and May build robots—but they keep falling apart.", url: "reviews/34.html" },
+        { id: 35, title: "Time Investing", author: "H Harvey", category: "Nonfiction", tldr: "A self help guide showing how to prioritize yourself and your time.", url: "reviews/35.html" }
+    ];
+    
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+    
+    function renderFeatured() {
+        const shuffled = shuffle([...books]).slice(0, 3);
+        const container = document.getElementById('featured-books');
+        container.innerHTML = shuffled.map(book => `
+            <div class="review-card">
+                <h3><a href="${book.url}">${book.title}</a></h3>
+                <p class="author">by ${book.author} · <span style="color: #7a7a90; font-size: 0.8rem;">${book.category}</span></p>
+                <p class="tldr">${book.tldr}</p>
+            </div>
+        `).join('');
+    }
+    
+    function rotateFeatured() {
+        renderFeatured();
+    }
+    
+    renderFeatured();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
