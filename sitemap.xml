@@ -132,4 +132,8 @@
     <loc>https://bithues.com/articles/kids-reading-guide.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://bithues.com/articles/books-change-how-you-think.html</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
