@@ -24,6 +24,10 @@
         
         .sticky-filters { position: sticky; top: 70px; background: var(--bg); z-index: 90; padding: 0.75rem 0; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
         
+        .search-box { margin-bottom: 1rem; }
+        .search-box input { width: 100%; padding: 0.75rem 1rem; font-size: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); }
+        .search-box input:focus { outline: none; border-color: var(--accent); }
+        
         .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .filter-btn { padding: 0.4rem 0.8rem; font-size: 0.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; color: var(--text-dim); cursor: pointer; }
         .filter-btn:hover { border-color: var(--accent); color: var(--text); }
@@ -61,6 +65,10 @@
             <h1>Articles</h1>
             <p>In-depth thoughts on books, reading, and ideas.</p>
         </section>
+        
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search articles...">
+        </div>
         
         <div class="sticky-filters">
             <div class="filters">
@@ -183,24 +191,33 @@
     <script>
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.article-card');
+    const searchInput = document.getElementById('search-input');
+    
+    function filterCards() {
+        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        cards.forEach(card => {
+            const tags = card.dataset.tags || '';
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const excerpt = card.querySelector('.excerpt').textContent.toLowerCase();
+            
+            const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+            const matchesSearch = searchTerm === '' || title.includes(searchTerm) || excerpt.includes(searchTerm);
+            
+            card.classList.toggle('hidden', !(matchesFilter && matchesSearch));
+        });
+    }
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            const filter = btn.dataset.filter;
-            
-            cards.forEach(card => {
-                if (filter === 'all') {
-                    card.classList.remove('hidden');
-                } else {
-                    const tags = card.dataset.tags;
-                    card.classList.toggle('hidden', !tags.includes(filter));
-                }
-            });
+            filterCards();
         });
     });
+    
+    searchInput.addEventListener('input', filterCards);
     
     document.getElementById('year').textContent = new Date().getFullYear();
     </script>
