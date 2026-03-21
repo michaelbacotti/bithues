@@ -196,4 +196,16 @@
     <loc>https://bithues.com/about.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://bithues.com/articles/how-to-read-more-books.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bithues.com/articles/speed-reading-basics.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bithues.com/articles/read-more-this-year.html</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
