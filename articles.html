@@ -4,20 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articles – bithues</title>
+    <meta name="description" content="In-depth articles on books, reading, and ideas.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         
-        .sticky-bar {
-            position: sticky;
-            top: 0;
-            background: var(--bg);
-            z-index: 100;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border);
-        }
+        .sticky-bar { position: sticky; top: 0; background: var(--bg); z-index: 100; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
         .sticky-bar .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
         .sticky-bar .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }
         .sticky-bar .logo span { color: var(--accent); }
@@ -28,12 +22,12 @@
         .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
         .page-header p { color: var(--text-dim); }
         
-        .coming-soon {
-            text-align: center;
-            padding: 4rem 0;
-        }
-        .coming-soon h2 { font-size: 1.5rem; margin-bottom: 1rem; }
-        .coming-soon p { color: var(--text-dim); max-width: 500px; margin: 0 auto; }
+        .article-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        .article-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .article-card h3 a { color: var(--text); text-decoration: none; }
+        .article-card h3 a:hover { color: var(--accent); }
+        .article-card .excerpt { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .article-card .meta { font-size: 0.8rem; color: var(--text-dim); }
         
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.85rem; }
@@ -58,9 +52,22 @@
             <p>In-depth thoughts on books, reading, and ideas.</p>
         </section>
         
-        <div class="coming-soon">
-            <h2>Coming Soon</h2>
-            <p>We're working on in-depth articles about books, reading trends, and ideas. Check back soon!</p>
+        <div class="article-card">
+            <h3><a href="articles/hopepunk-fiction.html">The Rise of Hopepunk Fiction</a></h3>
+            <p class="excerpt">Why dark, gritty sci-fi is giving way to stories that imagine a better tomorrow. Discover the hopepunk genre and essential reads.</p>
+            <p class="meta">Speculative Fiction • 1,800 words</p>
+        </div>
+        
+        <div class="article-card">
+            <h3><a href="articles/quantum-physics-beginners.html">Quantum Physics for Beginners</a></h3>
+            <p class="excerpt">Wave-particle duality, superposition, entanglement, and what it means for consciousness. Quantum physics explained simply.</p>
+            <p class="meta">Science • 2,000 words</p>
+        </div>
+        
+        <div class="article-card">
+            <h3><a href="articles/kids-reading-guide.html">How to Get Kids Into Reading</a></h3>
+            <p class="excerpt">Practical strategies to inspire a love of reading in children, from toddlers to teens.</p>
+            <p class="meta">Parenting • 1,600 words</p>
         </div>
         
         <footer>
