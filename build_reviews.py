@@ -149,6 +149,7 @@ def generate_homepage():
                     <a href="index.html" class="active">Home</a>
                     <a href="reviews/index.html">Reviews</a>
                     <a href="catalog.html">Catalog</a>
+                    <a href="articles.html">Articles</a>
                 </div>
             </nav>
         </header>
@@ -235,6 +236,7 @@ def generate_review(book_id, book_info):
                     <a href="../index.html">Home</a>
                     <a href="index.html">Reviews</a>
                     <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
                 </div>
             </nav>
         </header>
@@ -315,6 +317,7 @@ def main():
                     <a href="../index.html">Home</a>
                     <a href="index.html" class="active">Reviews</a>
                     <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
                 </div>
             </nav>
         </header>

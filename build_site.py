@@ -187,7 +187,9 @@ def render_detail_page(book):
    </a>
    <nav class="nav">
     <a href="../index.html">Home</a>
+    <a href="../reviews/index.html">Reviews</a>
     <a href="../catalog.html" class="nav-active">Catalog</a>
+    <a href="../articles.html">Articles</a>
    </nav>
   </div>
  </header>
