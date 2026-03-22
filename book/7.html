@@ -67,5 +67,64 @@
  <script>
   document.getElementById('year').textContent = new Date().getFullYear();
  </script>
+<button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.querySelector('.theme-toggle');
+        if (html.getAttribute('data-theme') === 'light') {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    // Back to Top
+    window.onscroll = function() {
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+    };
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Social Share
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
+    }
+    
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    }
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

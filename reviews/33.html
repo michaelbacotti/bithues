@@ -16,7 +16,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { bg: #0a0a0f; surface: #12121a; border: #2a2a3a; text: #e8e8f0; text-dim: #7a7a90; accent: #7c3aed; accent-dim: #5b21b6; }
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0f; color: #e8e8f0; line-height: 1.7; min-height: 100vh; }
+        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0f; color: #e8e8f0; line-height: 1.7; min-height: 100vh; }
         .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
         header { padding: 2rem 0; border-bottom: 1px solid #2a2a3a; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
@@ -48,7 +48,7 @@
         <header>
             <nav>
                 <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
-                <div class="nav-links">
+                <div class="nav-links"><button class="theme-toggle" onclick="toggleTheme()">🌙</button>
                     <a href="../index.html">Home</a>
                     <a href="index.html">Reviews</a>
                     <a href="../catalog.html">Catalog</a>
@@ -73,10 +73,79 @@
             </div>
             <div class="affiliate"><p>As an Amazon Associate, we earn from qualifying purchases.</p><a href="https://amzn.to/47W2rwc" target="_blank" rel="noopener">Buy on Amazon</a></div>
         </article>
-        <footer>
+        
+        <div class="share-section">
+            <h3>Share this article</h3>
+            <div class="share-buttons">
+                <button class="share-btn" onclick="shareTwitter()">𝕏 Twitter</button>
+                <button class="share-btn" onclick="shareFacebook()">📘 Facebook</button>
+                <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+            </div>
+        </div>
+        
+<footer>
             <p>© <span id="year"></span> Bithues Reading Lab</p>
         </footer>
     </div>
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.querySelector('.theme-toggle');
+        if (html.getAttribute('data-theme') === 'light') {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    // Back to Top
+    window.onscroll = function() {
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+    };
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Social Share
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
+    }
+    
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    }
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

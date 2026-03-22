@@ -14,21 +14,44 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #2a2a3a;
+            --text: #e8e8f0;
+            --text-dim: #7a7a90;
+            --accent: #7c3aed;
+            --bg-secondary: #151520;
+        }
+        [data-theme="light"] {
+            --bg: #f5f5f5;
+            --surface: #ffffff;
+            --border: #e0e0e0;
+            --text: #1a1a1a;
+            --text-dim: #666666;
+            --accent: #7c3aed;
+            --bg-secondary: #ebebeb;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; transition: background 0.3s, color 0.3s; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
         header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
         .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 1rem; }
         .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
         .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        
+        /* Theme Toggle */
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.5rem 1rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; transition: all 0.3s; }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+        
         .hero { padding: 3rem 0; text-align: center; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .hero p { color: var(--text-dim); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2rem; }
         .featured { padding: 2rem 0; }
         .featured h2 { font-size: 1.25rem; margin-bottom: 1.5rem; }
-        .review-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        .review-card { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; transition: background 0.3s, border-color 0.3s; }
         .review-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
         .review-card h3 a { color: var(--text); text-decoration: none; }
         .review-card h3 a:hover { color: var(--accent); }
@@ -38,6 +61,15 @@
         .all-reviews a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.85rem; }
+        
+        /* Back to Top */
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 50px; height: 50px; background: var(--accent); color: white; border: none; border-radius: 50%; font-size: 1.5rem; cursor: pointer; opacity: 0; transition: opacity 0.3s; z-index: 1000; }
+        .back-to-top.visible { opacity: 1; }
+        
+        /* Social Share */
+        .share-buttons { display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
+        .share-btn { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text-dim); cursor: pointer; font-size: 0.85rem; text-decoration: none; transition: all 0.2s; }
+        .share-btn:hover { border-color: var(--accent); color: var(--text); }
     </style>
 </head>
 <body>
@@ -48,6 +80,90 @@
                 <div class="nav-links">
                     <a href="index.html" class="active">Home</a>
                     <a href="reviews/index.html">Reviews</a>
+                    <a href="catalog.html">Catalog</a>
+                    <a href="articles.html">Articles</a>
+                    <a href="about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1>Curated book reviews that change how you think</h1>
+            <p>Bithues is a curated book review hub for indie authors, solopreneurs, and anyone who wants signal-dense reading.</p>
+        </section>
+        
+        <section class="featured">
+            <h2>Featured Reviews</h2>
+            <div class="review-card">
+                <h3><a href="reviews/16.html">The Physics of Time</a></h3>
+                <p class="author">by Quantum Chronos</p>
+                <p class="tldr">A groundbreaking exploration: what if the universe is a block of spacetime containing all moments?</p>
+            </div>
+            <div class="review-card">
+                <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
+                <p class="author">by Alaric Wynn</p>
+                <p class="tldr">In a world where suffering has been designed out, one person notices something that doesn't fit.</p>
+            </div>
+            <div class="review-card">
+                <h3><a href="reviews/12.html">Resonance Drift</a></h3>
+                <p class="author">by R. Zyrion</p>
+                <p class="tldr">In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.</p>
+            </div>
+        </section>
+        
+        <section class="all-reviews">
+            <a href="reviews/index.html">View all 35 reviews →</a>
+        </section>
+        
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+    
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    
+    <script>
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.querySelector('.theme-toggle');
+        if (html.getAttribute('data-theme') === 'light') {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+    
+    // Back to Top
+    const backToTop = document.querySelector('.back-to-top');
+    window.onscroll = function() {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    };
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
                     <a href="catalog.html">Catalog</a>
                     <a href="articles.html">Articles</a>
                     <a href="about.html">About</a>
