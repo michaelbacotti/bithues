@@ -99,23 +99,57 @@
         </section>
         
         <section class="featured">
-            <h2>Featured Reviews</h2>
-            <div class="review-card">
-                <h3><a href="reviews/16.html">The Physics of Time</a></h3>
-                <p class="author">by Quantum Chronos</p>
-                <p class="tldr">A groundbreaking exploration: what if the universe is a block of spacetime containing all moments?</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h2 style="font-size:1.25rem;margin:0;">Featured Reviews</h2>
+                <button onclick="shuffleFeatured()" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:0.4rem 1rem;cursor:pointer;color:var(--text-dim);font-size:0.85rem;">↻ New picks</button>
             </div>
-            <div class="review-card">
-                <h3><a href="reviews/4.html">The Confluence Doctrine</a></h3>
-                <p class="author">by Alaric Wynn</p>
-                <p class="tldr">In a world where suffering has been designed out, one person notices something that doesn't fit.</p>
-            </div>
-            <div class="review-card">
-                <h3><a href="reviews/12.html">Resonance Drift</a></h3>
-                <p class="author">by R. Zyrion</p>
-                <p class="tldr">In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.</p>
+            <div id="featured-reviews">
+                <!-- Loaded via JavaScript -->
             </div>
         </section>
+        
+        <script>
+        const allBooks = [
+            {url:"reviews/1.html",title:"The Dawn of Civilization",author:"T. Stone",tldr:"Sixteen-year-old Koda must help his tribe survive a brutal winter in prehistoric times."},
+            {url:"reviews/2.html",title:"The Richmond Cipher",author:"E. Maris",tldr:"In Confederate Richmond, Mary carries secrets in her memory that could change everything."},
+            {url:"reviews/3.html",title:"Red Horizon: Lunar Launch",author:"M. A. Hale",tldr:"Commander Marcus Hale must launch the Eos Ark to deliver colonists to Mars."},
+            {url:"reviews/4.html",title:"The Confluence Doctrine",author:"Alaric Wynn",tldr:"In a world where suffering has been designed out, one person notices something that doesn't fit."},
+            {url:"reviews/5.html",title:"Living with a Moving Planet",author:"J. T. Hartley",tldr:"How humans have adapted to changing baselines for tens of thousands of years."},
+            {url:"reviews/6.html",title:"Beyond the Veil",author:"D. E. Harlan",tldr:"A careful tour of evidence around what happens when we die."},
+            {url:"reviews/7.html",title:"Veiled Presence",author:"E. C. Stroud",tldr:"A transformative journey of self-discovery and intuition."},
+            {url:"reviews/8.html",title:"The Power of Changing Your Mind",author:"Evan R. Cole",tldr:"How intellectual humility is a competitive edge in a confidence-obsessed culture."},
+            {url:"reviews/9.html",title:"The Shadow Within",author:"Elena Maris",tldr:"Learn to treat reactions as information—and respond differently."},
+            {url:"reviews/10.html",title:"Echoes of Aetheris",author:"Marcus Chen",tldr:"Four unlikely heroes must master forgotten magic to stop a war that could destroy their world."},
+            {url:"reviews/12.html",title:"Resonance Drift",author:"Sarah Webb",tldr:"A deep space signal arrives from the edge of the solar system—humanity is not alone."},
+            {url:"reviews/13.html",title:"Symbiont Bloom",author:"Dr. Alex Kim",tldr:"First contact with aliens who aren't hostile—they're symbiotic."},
+            {url:"reviews/14.html",title:"Otomí",author:"Maria Santos",tldr:"A small bookstore in Mexico holds doors to other worlds."},
+            {url:"reviews/15.html",title:"Physics of Insight",author:"Dr. James Chen",tldr:"How physics shapes our understanding of consciousness."},
+            {url:"reviews/16.html",title:"The Physics of Time",author:"David Park",tldr:"What is time? Why does it seem to flow? Can it be reversed?"},
+            {url:"reviews/21.html",title:"The Burning Song",author:"Aria Storm",tldr:"A mute girl can hear the songs of stars—and her silence is more powerful."},
+            {url:"reviews/22.html",title:"Mindful Memory",author:"Dr. Sarah Lee",tldr:"How to improve your memory through mindfulness techniques."},
+            {url:"reviews/24.html",title:"Rules of Survival",author:"Jack Carter",tldr:"In a world where teenagers fight to the death on live TV, one girl decides to burn it all down."},
+            {url:"reviews/25.html",title:"Blood Ember",author:"Vera Blackwood",tldr:"A vampire detective investigates a murder that threatens to expose the supernatural world."}
+        ];
+        
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function shuffleFeatured() {
+            const container = document.getElementById('featured-reviews');
+            const shuffled = shuffleArray([...allBooks]).slice(0, 3);
+            container.innerHTML = shuffled.map(book => 
+                '<div class="review-card"><h3><a href="' + book.url + '">' + book.title + '</a></h3><p class="author">by ' + book.author + '</p><p class="tldr">' + book.tldr + '</p></div>'
+            ).join('');
+        }
+        
+        // Load random featured on page load
+        shuffleFeatured();
+        </script>
         
         <section class="all-reviews">
             <a href="reviews/index.html">View all 35 reviews →</a>
