@@ -97,10 +97,10 @@
 
     <script>
         const stories = [
-            { title: "The Last Signal", genre: "Sci-Fi", excerpt: "Dr. Chen receives a message from deep space — but the sender has been dead for ten thousand years.", url: "stories/1.html", wordCount: 2500 },
-            { title: "The Last Winter", genre: "Historical Fiction", excerpt: "In prehistoric times, a young man must walk into the white to save his tribe.", url: "stories/2.html", wordCount: 3800 },
-            { title: "What the Silence Knew", genre: "Historical Mystery", excerpt: "Mary has a gift: she remembers everything. But some secrets are meant to be hidden.", url: "stories/3.html", wordCount: 4200 },
-            { title: "The Ones Who Wait", genre: "Space Opera", excerpt: "250 children. One mission. And something waiting in the void between stars.", url: "stories/4.html", wordCount: 5100 },
+            { title: "The Last Signal", genre: "Sci-Fi", excerpt: "Dr. Chen receives a message from deep space — but the sender has been dead for ten thousand years.", url: "stories/1.html", wordCount: 2500, readTime: 8 },
+            { title: "The Last Winter", genre: "Historical Fiction", excerpt: "In prehistoric times, a young man must walk into the white to save his tribe.", url: "stories/2.html", wordCount: 3800, readTime: 13 },
+            { title: "What the Silence Knew", genre: "Historical Mystery", excerpt: "Mary has a gift: she remembers everything. But some secrets are meant to be hidden.", url: "stories/3.html", wordCount: 4200, readTime: 14 },
+            { title: "The Ones Who Wait", genre: "Space Opera", excerpt: "250 children. One mission. And something waiting in the void between stars.", url: "stories/4.html", wordCount: 5100, readTime: 17 },
         ];
 
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -113,7 +113,7 @@
                     <span class="genre-tag">${story.genre}</span>
                     <h3><a href="${story.url}">${story.title}</a></h3>
                     <p class="excerpt">${story.excerpt}</p>
-                    <p class="meta">${story.wordCount.toLocaleString()} words</p>
+                    <p class="meta">${story.wordCount.toLocaleString()} words · ${story.readTime} min read</p>
                 </div>
             `).join('');
         }
