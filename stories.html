@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Original short stories in every genre — sci-fi, fantasy, horror, mystery, and more. Free stories with book recommendations at the end.">
+    <meta property="og:title" content="Short Stories | Bithues Reading Lab">
+    <meta property="og:description" content="Original short stories in every genre. Free to read, with book recommendations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bithues.com/stories.html">
+    <title>Short Stories | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+        nav a.active { color: var(--accent); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; }
+        
+        .sticky-filters { position: sticky; top: 0; background: var(--bg); padding: 1rem 0; border-bottom: 1px solid var(--border); z-index: 100; margin-bottom: 2rem; }
+        .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+        .filter-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 1rem; cursor: pointer; color: var(--text-dim); font-size: 0.85rem; transition: all 0.2s; }
+        .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        
+        .story-grid { display: grid; gap: 1.5rem; margin-bottom: 3rem; }
+        .story-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s; }
+        .story-card:hover { border-color: var(--accent); }
+        .story-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .story-card h3 a { color: var(--text); text-decoration: none; }
+        .story-card .genre-tag { display: inline-block; background: var(--accent); color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 12px; margin-bottom: 0.75rem; }
+        .story-card .excerpt { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .story-card .meta { font-size: 0.8rem; color: var(--text-dim); }
+        
+        .cta-banner { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-align: center; margin: 3rem 0; }
+        .cta-banner h3 { margin-bottom: 1rem; }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
+        
+        @media (max-width: 600px) {
+            nav { justify-content: center; }
+            nav a { margin: 0 0.75rem; font-size: 0.9rem; }
+            .filters { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="index.html">Home</a>
+                    <a href="catalog.html">Catalog</a>
+                    <a href="articles.html">Articles</a>
+                    <a href="stories.html" class="active">Stories</a>
+                    <a href="about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <section style="padding: 2rem 0;">
+            <h1 style="font-size: 2rem; margin-bottom: 1rem;">Original Short Stories</h1>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Free original stories in every genre. Read for free, discover your next favorite book.</p>
+            
+            <div class="sticky-filters">
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="Sci-Fi">Sci-Fi</button>
+                    <button class="filter-btn" data-filter="Fantasy">Fantasy</button>
+                    <button class="filter-btn" data-filter="Horror">Horror</button>
+                    <button class="filter-btn" data-filter="Mystery">Mystery</button>
+                    <button class="filter-btn" data-filter="Nonfiction">Nonfiction</button>
+                </div>
+            </div>
+            
+            <div class="story-grid" id="storyGrid">
+                <!-- Stories will be loaded here -->
+            </div>
+        </section>
+
+        <div class="cta-banner">
+            <h3>📝 Want to Submit a Story?</h3>
+            <p style="color: var(--text-dim);">We're always looking for original short stories. Contact us about featuring your work.</p>
+        </div>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        const stories = [
+            { title: "The Last Signal", genre: "Sci-Fi", excerpt: "Dr. Chen receives a message from deep space — but the sender has been dead for ten thousand years.", url: "stories/1.html", wordCount: 2500 },
+            { title: "The Memory Thief", genre: "Fantasy", excerpt: "In a world where memories can be stolen, one woman discovers her own memories have been stolen — by herself.", url: "stories/2.html", wordCount: 1800 },
+            { title: "The House That Remembered", genre: "Horror", excerpt: "The house wasn't haunted. It was waiting. And now it's waiting for you.", url: "stories/3.html", wordCount: 2200 },
+            { title: "The Vanishing Hour", genre: "Mystery", excerpt: "Every Tuesday at 3pm, one hour disappears. No one remembers it. Everyone loses something.", url: "stories/4.html", wordCount: 1900 },
+            { title: "The Weight of Tomorrow", genre: "Nonfiction", excerpt: "A meditation on time, choice, and the weight of the future.", url: "stories/5.html", wordCount: 1200 },
+        ];
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const storyGrid = document.getElementById('storyGrid');
+        
+        function renderStories(filter) {
+            const filtered = filter === 'all' ? stories : stories.filter(s => s.genre === filter);
+            storyGrid.innerHTML = filtered.map(story => `
+                <div class="story-card" data-genre="${story.genre}">
+                    <span class="genre-tag">${story.genre}</span>
+                    <h3><a href="${story.url}">${story.title}</a></h3>
+                    <p class="excerpt">${story.excerpt}</p>
+                    <p class="meta">${story.wordCount.toLocaleString()} words</p>
+                </div>
+            `).join('');
+        }
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderStories(btn.dataset.filter);
+            });
+        });
+        
+        renderStories('all');
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

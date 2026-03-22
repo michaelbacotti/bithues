@@ -282,3 +282,7 @@
     <loc>https://bithues.com/articles/complete-fantasy-encyclopedia.html</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://bithues.com/stories.html</loc>
+    <changefreq>weekly</changefreq>
+  </url>
