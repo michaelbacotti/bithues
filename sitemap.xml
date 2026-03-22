@@ -208,4 +208,11 @@
     <loc>https://bithues.com/articles/read-more-this-year.html</loc>
     <priority>0.7</priority>
   </url>
-</urlset>
+</urlset>  <url>
+    <loc>https://bithues.com/articles/books-like-physics-of-time.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://bithues.com/articles/books-like-project-hail-mary.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>

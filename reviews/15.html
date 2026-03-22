@@ -41,7 +41,13 @@
         .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: #7c3aed; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; }
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid #2a2a3a; }
         footer p { color: #7a7a90; font-size: 0.85rem; }
-    </style>
+    
+        .related-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .related-section h3 { font-size: 1.25rem; margin-bottom: 1.5rem; }
+        .related-books { display: grid; gap: 1rem; }
+        .related-card { display: block; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); text-decoration: none; color: var(--text); }
+        .related-card:hover { border-color: var(--accent); }
+        .related-info h4 { font-size: 1rem; font-weight: 500; }</style>
 </head>
 <body>
     <div class="container">
@@ -74,6 +80,22 @@
             <div class="affiliate"><p>As an Amazon Associate, we earn from qualifying purchases.</p><a href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">Buy on Amazon</a></div>
         </article>
         
+        
+        <div class="related-section">
+            <h3>You Might Also Like</h3>
+            <div class="related-books">
+                <a href="16.html" class="related-card">
+                    <div class="related-info">
+                        <h4>The Physics of Time</h4>
+                    </div>
+                </a><a href="17.html" class="related-card">
+                    <div class="related-info">
+                        <h4>Consciousness in Higher Dimensional Spacetime</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <div class="share-section">
             <h3>Share this article</h3>
             <div class="share-buttons">
