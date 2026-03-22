@@ -274,3 +274,11 @@
   <url>
     <loc>https://bithues.com/reviews/33.html</loc>
   </url>
+  <url>
+    <loc>https://bithues.com/articles/ultimate-sci-fi-guide.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://bithues.com/articles/complete-fantasy-encyclopedia.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
