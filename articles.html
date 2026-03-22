@@ -57,6 +57,17 @@
         .article-card .tag { font-size: 0.7rem; padding: 0.2rem 0.5rem; background: var(--border); border-radius: 4px; color: var(--text-dim); }
         .article-card .word-count { font-size: 0.8rem; color: var(--text-dim); }
         
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .article-card { padding: 1rem; }
+            .article-card h3 { font-size: 1.1rem; }
+            .article-card .excerpt { font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .filters { gap: 0.4rem; }
+            .filter-btn { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+            .sticky-bar h1 { font-size: 1.25rem; }
+            .nav-links a { font-size: 0.8rem; margin-left: 0.75rem; }
+        }
+        
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.85rem; }
     </style>
