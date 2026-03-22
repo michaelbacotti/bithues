@@ -79,6 +79,9 @@
                 <button class="filter-btn" data-filter="Fiction">Fiction</button>
                 <button class="filter-btn" data-filter="Nonfiction">Nonfiction</button>
                 <button class="filter-btn" data-filter="Children">Children</button>
+                <input type="text" id="searchCatalog" placeholder="Search catalog..." 
+                    style="padding:0.4rem 0.8rem;font-size:0.8rem;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text);margin-left:auto;width:180px;">
+                <button class="filter-btn" data-filter="Children">Children</button>
                 <button class="filter-btn" data-filter="Science">Science</button>
                 <button class="filter-btn" data-filter="Self-Help">Self-Help</button>
             </div>
@@ -265,6 +268,22 @@
         });
     });
     
+    // Catalog search
+    const searchCatalog = document.getElementById('searchCatalog');
+    if (searchCatalog) {
+        searchCatalog.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    }
+    
     document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 <button class="back-to-top" onclick="scrollToTop()">↑</button>
@@ -326,5 +345,6 @@
     
     document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+<script src="search.js"></script>
 </body>
 </html>

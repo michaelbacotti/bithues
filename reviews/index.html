@@ -54,9 +54,12 @@
                 </div>
             </nav>
         </header>
-        <section class="page-header">
+        <section class="page-header" style="margin-bottom: 2rem;">
+            <p class="breadcrumbs" style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem;"><a href="../index.html" style="color: var(--accent); text-decoration: none;">Home</a> › Reviews</p>
             <h1>All Reviews</h1>
             <p>35 books reviewed</p>
+            <input type="text" id="searchReviews" placeholder="Search reviews..." 
+                style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);width:100%;max-width:300px;">
         </section>
         <div class="review-card">
         <h3><a href="1.html">The Dawn of Civilization</a></h3>
@@ -262,6 +265,24 @@
     }
     
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Search reviews
+    const searchReviews = document.getElementById('searchReviews');
+    const reviewCards = document.querySelectorAll('.review-card');
+    if (searchReviews) {
+        searchReviews.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            reviewCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
     </script>
+<script src="../search.js"></script>
 </body>
 </html>
