@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free games on Bithues Reading Lab - Trivia, word games, and more!">
+    <title>Games | Bithues Reading Lab</title>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+        nav a:hover, nav a.active { color: var(--text); }
+        
+        .page-header { padding: 3rem 0; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { color: var(--text-dim); font-size: 1.1rem; }
+        
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; padding: 2rem 0; }
+        
+        .game-card { padding: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center; transition: all 0.3s; text-decoration: none; color: var(--text); }
+        .game-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(124, 58, 237, 0.2); }
+        .game-card .icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .game-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .game-card p { color: var(--text-dim); font-size: 0.95rem; }
+        
+        .section-title { font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--accent); }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="index.html">Home</a>
+                    <a href="catalog.html">Catalog</a>
+                    <a href="articles.html">Articles</a>
+                    <a href="stories.html">Stories</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="games.html" class="active">Games</a>
+                    <a href="about.html">About</a>
+                </div>
+            </nav>
+        </header>
+
+        <section class="page-header">
+            <h1>🎮 Games</h1>
+            <p>Fun games for book lovers and word enthusiasts!</p>
+        </section>
+
+        <h2 class="section-title">📚 Book Games</h2>
+        <div class="game-grid">
+            <a href="games/book-trivia.html" class="game-card">
+                <span class="icon">📖</span>
+                <h3>Book Trivia</h3>
+                <p>Test your knowledge of books and authors!</p>
+            </a>
+            <a href="games/genre-quiz.html" class="game-card">
+                <span class="icon">🔮</span>
+                <h3>Genre Quiz</h3>
+                <p>What book should you read next?</p>
+            </a>
+            <a href="games/speed-reader.html" class="game-card">
+                <span class="icon">⚡</span>
+                <h3>Speed Reader</h3>
+                <p>Test and improve your reading speed</p>
+            </a>
+            <a href="games/word-search.html" class="game-card">
+                <span class="icon">🔤</span>
+                <h3>Word Search</h3>
+                <p>Find hidden words in the grid</p>
+            </a>
+            <a href="games/story-starter.html" class="game-card">
+                <span class="icon">✍️</span>
+                <h3>Story Starter</h3>
+                <p>Use random prompts to spark your creativity</p>
+            </a>
+        </div>
+
+        <h2 class="section-title">🧠 Word & Puzzle Games</h2>
+        <div class="game-grid">
+            <a href="games/wordle.html" class="game-card">
+                <span class="icon">🟩</span>
+                <h3>Wordle Clone</h3>
+                <p>Guess the 5-letter word in 6 tries</p>
+            </a>
+            <a href="games/memory-match.html" class="game-card">
+                <span class="icon">🃏</span>
+                <h3>Memory Match</h3>
+                <p>Find all matching pairs</p>
+            </a>
+            <a href="games/quiz-trivia.html" class="game-card">
+                <span class="icon">❓</span>
+                <h3>Trivia Challenge</h3>
+                <p>Random trivia questions</p>
+            </a>
+        </div>
+
+        <h2 class="section-title">🎮 Classic Games</h2>
+        <div class="game-grid">
+            <a href="games/tic-tac-toe.html" class="game-card">
+                <span class="icon">⭕</span>
+                <h3>Tic-Tac-Toe</h3>
+                <p>Classic X and O game</p>
+            </a>
+            <a href="games/snake.html" class="game-card">
+                <span class="icon">🐍</span>
+                <h3>Snake</h3>
+                <p>Collect food, avoid hitting yourself</p>
+            </a>
+        </div>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

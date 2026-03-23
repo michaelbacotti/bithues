@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Reader | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 1rem; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; }
+        header { padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        header a { color: var(--accent); text-decoration: none; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        
+        .word-display { font-size: 3rem; font-weight: bold; padding: 3rem; background: var(--surface); border-radius: 12px; margin: 2rem 0; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+        
+        .controls { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .speed-control { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+        .speed-control label { color: var(--text-dim); }
+        .speed-control input { width: 80px; padding: 0.5rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-align: center; }
+        
+        .buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+        .btn:hover { opacity: 0.9; }
+        
+        .stats { color: var(--text-dim); margin-top: 1rem; }
+        
+        @media (max-width: 600px) { .word-display { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="games.html">← Back to Games</a>
+            <h1>⚡ Speed Reader</h1>
+            <p>Test and improve your reading speed</p>
+        </header>
+        
+        <div class="word-display" id="wordDisplay">Press Start</div>
+        
+        <div class="controls">
+            <div class="speed-control">
+                <label>Words per minute:</label>
+                <input type="number" id="speedInput" value="200" min="50" max="1000" step="50">
+            </div>
+            <div class="buttons">
+                <button class="btn btn-primary" id="startBtn" onclick="startReading()">Start</button>
+                <button class="btn btn-secondary" onclick="stopReading()">Stop</button>
+                <button class="btn btn-secondary" onclick="resetReading()">Reset</button>
+            </div>
+            <div class="stats">
+                Progress: <span id="progress">0</span> / <span id="totalWords">0</span> words
+            </div>
+        </div>
+        
+        <p style="color: var(--text-dim); font-size: 0.9rem;">
+            Classic speed reading technique - focus on the center word. 
+            Try starting at 150 WPM and work up!
+        </p>
+    </div>
+
+    <script>
+        const sampleText = `The reading speed of an average person is about 200 to 250 words per minute. 
+With practice you can increase this to 400 or even 500 words per minute. 
+The key is to focus on the center of each word and avoid subvocalization. 
+Subvocalization is the habit of silently pronouncing each word in your head. 
+By eliminating this habit you can dramatically increase your reading speed.
+Regular practice will help you develop this skill. Many successful people are fast readers.
+Reading is one of the most valuable skills you can develop. It opens doors to knowledge.
+The more you read the faster you will become. Keep practicing and you will see results.`;
+
+        const words = sampleText.split(/\s+/);
+        let currentWord = 0;
+        let interval = null;
+        let wpm = 200;
+        
+        function startReading() {
+            if (interval) clearInterval(interval);
+            wpm = parseInt(document.getElementById('speedInput').value);
+            const ms = 60000 / wpm;
+            
+            document.getElementById('totalWords').textContent = words.length;
+            document.getElementById('startBtn').textContent = 'Running...';
+            
+            interval = setInterval(() => {
+                if (currentWord < words.length) {
+                    document.getElementById('wordDisplay').textContent = words[currentWord];
+                    document.getElementById('progress').textContent = currentWord + 1;
+                    currentWord++;
+                } else {
+                    stopReading();
+                }
+            }, ms);
+        }
+        
+        function stopReading() {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+            }
+            document.getElementById('startBtn').textContent = 'Start';
+        }
+        
+        function resetReading() {
+            stopReading();
+            currentWord = 0;
+            document.getElementById('wordDisplay').textContent = 'Press Start';
+            document.getElementById('progress').textContent = '0';
+        }
+    </script>
+</body>
+</html>

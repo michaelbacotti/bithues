@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Trivia | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; --correct: #10b981; --wrong: #ef4444; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 1rem; }
+        .container { max-width: 600px; margin: 0 auto; }
+        header { text-align: center; padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        header a { color: var(--accent); text-decoration: none; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .score { color: var(--text-dim); margin-bottom: 2rem; }
+        
+        .question-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .question { font-size: 1.1rem; margin-bottom: 1.5rem; }
+        
+        .options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .option { padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; text-align: left; color: var(--text); font-size: 1rem; }
+        .option:hover { border-color: var(--accent); }
+        .option.correct { background: var(--correct); border-color: var(--correct); color: white; }
+        .option.wrong { background: var(--wrong); border-color: var(--wrong); color: white; }
+        .option.disabled { pointer-events: none; }
+        
+        .next-btn { display: none; width: 100%; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; margin-top: 1rem; }
+        .next-btn:hover { opacity: 0.9; }
+        
+        .result { text-align: center; display: none; }
+        .result h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .result p { color: var(--text-dim); margin-bottom: 1rem; }
+        .restart { padding: 1rem 2rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            .question { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="games.html">← Back to Games</a>
+            <h1>📖 Book Trivia</h1>
+        </header>
+        
+        <div id="quiz">
+            <div class="score">Score: <span id="score">0</span> / <span id="total">0</span></div>
+            <div class="question-card">
+                <p class="question" id="question">Loading question...</p>
+                <div class="options" id="options"></div>
+            </div>
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+        </div>
+        
+        <div class="result" id="result">
+            <h2>🎉 Quiz Complete!</h2>
+            <p>You scored <span id="finalScore">0</span> out of <span id="finalTotal">0</span></p>
+            <button class="restart" onclick="restartQuiz()">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Who wrote 'The Great Gatsby'?", options: ["Ernest Hemingway", "F. Scott Fitzgerald", "John Steinbeck", "William Faulkner"], correct: 1 },
+            { q: "What is the first book of the Bible?", options: ["Genesis", "Exodus", "Leviticus", "Numbers"], correct: 0 },
+            { q: "Who wrote '1984'?", options: ["Aldous Huxley", "George Orwell", "Ray Bradbury", "H.G. Wells"], correct: 1 },
+            { q: "Which author wrote 'Harry Potter'?", options: ["J.R.R. Tolkien", "J.K. Rowling", "Stephen King", "C.S. Lewis"], correct: 1 },
+            { q: "What genre is 'The Hobbit'?", options: ["Science Fiction", "Fantasy", "Mystery", "Romance"], correct: 1 },
+            { q: "Who wrote 'Pride and Prejudice'?", options: ["Emily Bronte", "Jane Austen", "Mary Shelley", "Charlotte Bronte"], correct: 1 },
+            { q: "What is the name of Sherlock Holmes' assistant?", options: ["Dr. Watson", "Inspector Lestrade", "Mycroft Holmes", "Colonel Sebastian"], correct: 0 },
+            { q: "Who wrote 'The Catcher in the Rye'?", options: ["J.D. Salinger", "F. Scott Fitzgerald", "John Steinbeck", "Harper Lee"], correct: 0 },
+            { q: "Which book features the character 'Atticus Finch'?", options: ["The Great Gatsby", "To Kill a Mockingbird", "Of Mice and Men", "The Grapes of Wrath"], correct: 1 },
+            { q: "What is the longest book in the Bible?", options: ["Psalms", "Genesis", "Exodus", "Isaiah"], correct: 0 },
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').textContent = q.q;
+            document.getElementById('total').textContent = questions.length;
+            
+            const opts = document.getElementById('options');
+            opts.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(i);
+                opts.appendChild(btn);
+            });
+            
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+        
+        function selectOption(i) {
+            const q = questions[currentQuestion];
+            const opts = document.querySelectorAll('.option');
+            
+            opts.forEach((opt, idx) => {
+                opt.classList.add('disabled');
+                if (idx === q.correct) opt.classList.add('correct');
+            });
+            
+            if (i === q.correct) {
+                score++;
+                document.getElementById('score').textContent = score;
+            } else {
+                opts[i].classList.add('wrong');
+            }
+            
+            document.getElementById('nextBtn').style.display = currentQuestion < questions.length - 1 ? 'block' : 'none';
+            if (currentQuestion === questions.length - 1) {
+                setTimeout(showResult, 500);
+            }
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            loadQuestion();
+        }
+        
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalTotal').textContent = questions.length;
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').textContent = '0';
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            loadQuestion();
+        }
+        
+        loadQuestion();
+    </script>
+</body>
+</html>
