@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Authors featured on Bithues Reading Lab - Browse all book authors">
+    <meta property="og:title" content="Authors | Bithues Reading Lab">
+    <meta property="og:description" content="Browse all authors featured on Bithues Reading Lab">
+    <title>Authors | Bithues Reading Lab</title>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a;
+            --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed;
+        }
+        [data-theme="light"] {
+            --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0;
+            --text: #1a1a1a; --text-dim: #666666;
+        }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+        nav a:hover, nav a.active { color: var(--text); }
+        
+        .page-header { padding: 3rem 0; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .page-header p { color: var(--text-dim); font-size: 1.1rem; }
+        
+        .authors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem 0; }
+        
+        .author-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-align: center; transition: all 0.3s; }
+        .author-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .author-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .author-card h3 a { color: var(--text); text-decoration: none; }
+        .author-card h3 a:hover { color: var(--accent); }
+        .author-card .book-count { color: var(--text-dim); font-size: 0.9rem; }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="index.html">Home</a>
+                    <a href="catalog.html">Catalog</a>
+                    <a href="articles.html">Articles</a>
+                    <a href="stories.html">Stories</a>
+                    <a href="authors.html" class="active">Authors</a>
+                    <a href="about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()" style="background:none;border:1px solid var(--border);border-radius:20px;padding:0.5rem 1rem;cursor:pointer;color:var(--text-dim)">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <section class="page-header">
+            <h1>Authors</h1>
+            <p>Browse all authors featured on Bithues Reading Lab</p>
+        </section>
+
+        <section class="authors-grid">
+            
+            <div class="author-card">
+                <h3><a href="authors/aetheri-codex.html">Aetheri Codex</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/alaric-wynn.html">Alaric Wynn</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/c-everett.html">C. Everett</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/d-e-harlan.html">D. E. Harlan</a></h3>
+                <p class="book-count">8 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/ec-stroud.html">E. C. Stroud</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/elara-moss.html">Elara Moss</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/elena-maris.html">Elena Maris</a></h3>
+                <p class="book-count">8 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/ellie-sunwood.html">Ellie Sunwood</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/elowen-tidebloom.html">Elowen Tidebloom</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/evan-r-cole.html">Evan R. Cole</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/evelyn-carter.html">Evelyn Carter</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/h-harvey.html">H Harvey</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/j-t-hartley.html">J. T. Hartley</a></h3>
+                <p class="book-count">8 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/jorak-veldt.html">Jorak Veldt</a></h3>
+                <p class="book-count">8 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/kate-e-brennan.html">Kate E Brennan</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/l-everwood.html">L Everwood</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/luna-sage.html">Luna Sage</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/m-a-hale.html">M. A. Hale</a></h3>
+                <p class="book-count">8 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/marcus-reeve.html">Marcus Reeve</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/quantum-chronos.html">Quantum Chronos</a></h3>
+                <p class="book-count">10 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/r-zyrion.html">R. Zyrion</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/rowan-ashcroft.html">Rowan Ashcroft</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+            <div class="author-card">
+                <h3><a href="authors/t-stone.html">T. Stone</a></h3>
+                <p class="book-count">7 books</p>
+            </div>
+            
+        </section>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

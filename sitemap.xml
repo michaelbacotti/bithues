@@ -522,4 +522,9 @@
     <loc>https://bithues.com/authors/t-stone.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://bithues.com/authors.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
