@@ -527,4 +527,21 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Category Pages -->
+  <url><loc>https://bithues.com/category/science-fiction.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/fantasy.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/mystery.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/thriller.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/nonfiction.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/historical-fiction.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/self-help.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/children.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/romance.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/dystopian.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/adventure.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/spiritual.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/literary.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/mythology.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/science.html</loc><priority>0.7</priority></url>
+  <url><loc>https://bithues.com/category/cultural.html</loc><priority>0.7</priority></url>
 </urlset>
