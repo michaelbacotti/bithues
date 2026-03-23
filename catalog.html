@@ -57,6 +57,15 @@
         
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); }
         footer p { color: var(--text-dim); font-size: 0.85rem; }
+        
+        /* Nav Search */
+        .nav-search { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.5rem 1rem; color: var(--text); font-size: 0.85rem; width: 120px; }
+        .nav-search:focus { outline: none; border-color: var(--accent); width: 180px; }
+        .nav-search::placeholder { color: var(--text-dim); }
+        .search-results { position: absolute; top: 100%; right: 1rem; width: 280px; max-height: 350px; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; display: none; }
+        .search-results.show { display: block; }
+        .search-results a { display: block; padding: 0.75rem 1rem; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+        .search-results a:hover { background: var(--bg-secondary); }
     </style>
 </head>
 <body>
@@ -64,7 +73,8 @@
         <div class="sticky-bar">
             <div class="nav">
                 <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
-                <div class="nav-links"><button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                <div class="nav-links"><input type="text" id="navSearch" placeholder="Search..." class="nav-search" oninput="searchSite(this.value)">
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
                     <a href="index.html">Home</a>
                     
                     <a href="catalog.html" class="active">Catalog</a>
@@ -346,5 +356,34 @@
     
     document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+    <script>
+    function searchSite(query) {
+        const results = document.getElementById('searchResults');
+        if (!query || query.length < 2) { results.classList.remove('show'); results.innerHTML = ''; return; }
+        query = query.toLowerCase();
+        const resultsList = [];
+        if (typeof siteData !== 'undefined') {
+            siteData.books.forEach(book => {
+                if (book.title.toLowerCase().includes(query) || book.keywords.includes(query)) {
+                    resultsList.push({title: book.title, url: book.url, type: 'Book'});
+                }
+            });
+            siteData.articles.forEach(article => {
+                if (article.title.toLowerCase().includes(query) || article.keywords.includes(query)) {
+                    resultsList.push({title: article.title, url: article.url, type: 'Article'});
+                }
+            });
+        }
+        if (resultsList.length === 0) { results.innerHTML = '<a href="#">No results</a>'; }
+        else { results.innerHTML = resultsList.slice(0,10).map(r => '<a href="' + r.url + '"><strong>' + r.title + '</strong><br><span style="font-size:0.8rem;color:var(--text-dim)">' + r.type + '</span></a>').join(''); }
+        results.classList.add('show');
+    }
+    document.addEventListener('click', function(e) {
+        const search = document.getElementById('navSearch');
+        const results = document.getElementById('searchResults');
+        if (search && !search.contains(e.target) && results && !results.contains(e.target)) { results.classList.remove('show'); }
+    });
+    </script>
+    <div id="searchResults" class="search-results"></div>
 </body>
 </html>
