@@ -57,7 +57,7 @@
         <div class="sticky-bar">
             <div class="nav">
                 <a href="index.html" class="logo">bithues<span> Reading Lab</span></a>
-                <div class="nav-links"><input type="text" id="navSearch" placeholder="Search..." class="nav-search" oninput="searchSite(this.value)">
+                <div class="nav-links"><input type="text" id="navSearch" placeholder="Search..." class="nav-search" onclick="openSearch()" onkeydown="if(event.key==='Enter') openSearch()">
                     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
                     <a href="index.html">Home</a>
                     

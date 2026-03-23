@@ -70,7 +70,7 @@
                     <a href="about.html">About</a>
                     <a href="category/science-fiction.html">Categories</a>
                     <a href="authors.html">Authors</a>
-                    <input type="text" id="navSearch" placeholder="Search..." class="nav-search" oninput="searchSite(this.value)">
+                    <input type="text" id="navSearch" placeholder="Search..." class="nav-search" onclick="openSearch()" onkeydown="if(event.key==='Enter') openSearch()">
                     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
                 </div>
             </nav>

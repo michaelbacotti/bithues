@@ -52,6 +52,15 @@ function initSearch() {
     searchResults = document.getElementById('searchResults');
     
     // Debounced search - faster typing
+    // Handle Enter key
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch();
+        }
+    });
+    
+    // Handle input (debounced)
     searchInput.addEventListener('input', () => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(performSearch, 150);
