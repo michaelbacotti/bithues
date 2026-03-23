@@ -43,6 +43,16 @@
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
         .logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.dropdown { position: relative; display: inline-block; }
+.dropbtn { color: var(--text-dim); text-decoration: none; padding: 0.5rem 0.75rem; cursor: pointer; display: block; }
+.dropdown-content { display: none; position: absolute; background: var(--surface); min-width: 150px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); border-radius: 8px; z-index: 1000; top: 100%; }
+.dropdown-content a { color: var(--text); padding: 10px 14px; text-decoration: none; display: block; font-size: 0.9rem; }
+.dropdown-content a:hover { background: var(--border); }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown:hover .dropbtn { color: var(--text); }
+.nav-search { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; color: var(--text); font-size: 0.85rem; width: 100px; cursor: pointer; }
+
         .nav-links { display: flex; align-items: center; gap: 1rem; }
         .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin-left: 1.5rem; }
         .nav-links a:hover, .nav-links a.active { color: var(--text); }

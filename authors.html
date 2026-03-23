@@ -51,8 +51,40 @@
     <div class="container">
         <header>
             <nav>
-                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
-                <div>
+            <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <div class="dropdown">
+                    <span class="dropbtn">Catalog ▾</span>
+                    <div class="dropdown-content">
+                        <a href="catalog.html">All Books</a>
+                        <a href="category/science-fiction.html">Sci-Fi</a>
+                        <a href="category/fantasy.html">Fantasy</a>
+                        <a href="category/mystery.html">Mystery</a>
+                        <a href="category/nonfiction.html">Nonfiction</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span class="dropbtn">Stories ▾</span>
+                    <div class="dropdown-content">
+                        <a href="stories.html">All Stories</a>
+                        <a href="stories/36.html">Latest</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span class="dropbtn">Games ▾</span>
+                    <div class="dropdown-content">
+                        <a href="games.html">All Games</a>
+                        <a href="games/book-trivia.html">Book Trivia</a>
+                        <a href="games/wordle.html">Wordle</a>
+                    </div>
+                </div>
+                <a href="authors.html">Authors</a>
+                <a href="about.html">About</a>
+                <input type="text" class="nav-search" placeholder="Search..." onclick="openSearch()" onkeydown="if(event.key==='Enter') openSearch()">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </div>
+        </nav>
                     <a href="index.html">Home</a>
                     <a href="catalog.html">Catalog</a>
                     <a href="articles.html">Articles</a>
