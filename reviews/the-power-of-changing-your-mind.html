@@ -32,7 +32,15 @@
         .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }
         .affiliate { border: 1px solid var(--accent); text-align: center; }
         .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }
-    </style>
+    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }
+.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.similar-card h3 a { color: var(--text); text-decoration: none; }
+.similar-card h3 a:hover { color: var(--accent); }
+.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }
+</style>
 
     <script type="application/ld+json">
 {
@@ -132,5 +140,5 @@
     
     document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-</body>
+<section class="similar-books"><h2>Books Like This</h2><div class="similar-grid"><div class='similar-card'><h3><a href='reviews/8.html'>The Power of Changing Your Mind</a></h3><p class='author'>by Evan R. Cole</p></div></div></section></body>
 </html>
