@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D. E. Harlan - Books reviewed on Bithues Reading Lab">
+    <meta property="og:title" content="D. E. Harlan | Bithues Reading Lab">
+    <meta property="og:description" content="Books by D. E. Harlan reviewed on Bithues Reading Lab">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://bithues.com/authors/d-e-harlan.html">
+    <title>D. E. Harlan | Bithues Reading Lab</title>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+        .author-header { padding: 3rem 0; text-align: center; }
+        .author-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .author-header p { color: var(--text-dim); font-size: 1.1rem; }
+        .books-section { padding: 2rem 0; }
+        .books-section h2 { font-size: 1.5rem; margin-bottom: 2rem; }
+        .book-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1.5rem; }
+        .book-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .book-card h3 a { color: var(--text); text-decoration: none; }
+        .book-card h3 a:hover { color: var(--accent); }
+        .book-card .tldr { color: var(--text-dim); margin-bottom: 1rem; }
+        .book-card .meta { font-size: 0.9rem; color: var(--text-dim); }
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="../index.html">Home</a>
+                    <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
+                    <a href="../stories.html">Stories</a>
+                    <a href="../about.html">About</a>
+                </div>
+            </nav>
+        </header>
+        <section class="author-header">
+            <h1>D. E. Harlan</h1>
+            <p>2 books reviewed</p>
+        </section>
+        <section class="books-section">
+            <h2>Books by D. E. Harlan</h2>
+            <div class="book-card">
+                <h3><a href="../reviews/22.html">Mindful Memory</a></h3>
+                <p class="tldr">Empowering retirees with science-backed exercises like memory palaces and timeline mapping.</p>
+                <div class="meta"><a href="../reviews/22.html">Read Review →</a></div>
+            </div><div class="book-card">
+                <h3><a href="../reviews/6.html">Beyond the Veil</a></h3>
+                <p class="tldr">A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy.</p>
+                <div class="meta"><a href="../reviews/6.html">Read Review →</a></div>
+            </div>
+        </section>
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
