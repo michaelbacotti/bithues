@@ -630,5 +630,13 @@
     "url": "stories/20.html",
     "type": "story",
     "genre": "Short Story"
+  },
+  {
+    "title": "Whispers in the Vortex",
+    "author": "",
+    "desc": "Quantum physics meets higher dimensions in a Johannesburg laboratory. A story about light carrying 48-dimensional secrets.",
+    "url": "stories/36.html",
+    "type": "story",
+    "genre": "Sci-Fi"
   }
 ]

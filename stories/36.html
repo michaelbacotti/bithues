@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Original sci-fi short story — Whispers in the Vortex. Quantum physics meets higher dimensions in a Johannesburg laboratory.">
+    <meta property="og:title" content="Whispers in the Vortex - Short Story | Bithues">
+    <meta property="og:description" content="Original sci-fi short story. Free to read.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://bithues.com/stories/36.html">
+    <title>Whispers in the Vortex | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.9; font-size: 1.1rem; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; font-family: -apple-system, sans-serif; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; font-family: -apple-system, sans-serif; }
+        nav a.active { color: var(--accent); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; }
+        
+        .story-header { padding: 3rem 0 2rem; text-align: center; }
+        .story-header h1 { font-size: 2.25rem; margin-bottom: 1rem; line-height: 1.2; font-family: -apple-system, sans-serif; }
+        .story-header .meta { color: var(--text-dim); font-size: 0.95rem; font-family: -apple-system, sans-serif; }
+        .story-header .genre-tag { display: inline-block; background: var(--accent); color: white; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 15px; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        
+        .story-content { padding: 2rem 0; }
+        .story-content p { margin-bottom: 1.5rem; text-indent: 2em; }
+        .story-content p:first-of-type { text-indent: 0; }
+        .story-content p:first-of-type::first-letter { font-size: 3.5rem; float: left; line-height: 1; margin-right: 0.5rem; color: var(--accent); font-weight: 700; }
+        
+        .book-promo { background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 2rem; margin: 3rem 0; text-align: center; }
+        .book-promo h3 { font-size: 1.25rem; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        .book-promo p { color: var(--text-dim); margin-bottom: 1.5rem; font-size: 1rem; }
+        .book-promo a { display: inline-block; background: var(--accent); color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-family: -apple-system, sans-serif; transition: opacity 0.2s; }
+        .book-promo a:hover { opacity: 0.9; }
+        
+        .share-buttons { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .share-buttons p { color: var(--text-dim); margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .share-links { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .share-btn { padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; }
+        
+        .story-footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
+        .story-footer a { color: var(--accent); text-decoration: none; font-family: -apple-system, sans-serif; }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; font-family: -apple-system, sans-serif; }
+        
+        @media (max-width: 600px) {
+            .story-header h1 { font-size: 1.75rem; }
+            .story-content p:first-of-letter { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="../index.html">Home</a>
+                    <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
+                    <a href="../stories.html" class="active">Stories</a>
+                    <a href="../about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="story-header">
+                <span class="genre-tag">Sci-Fi</span>
+                <h1>Whispers in the Vortex</h1>
+                <p class="meta">750 words · 3 min read</p>
+            </div>
+
+            <div class="story-content">
+                <p>Dr. Lena Nkosi wiped sweat from her brow in the Wits Structured Light Laboratory. The Johannesburg night pressed against the windows as the laser sang its high-pitched hymn. A beta-barium borate crystal split pump photons into entangled twins via spontaneous parametric down-conversion—standard ritual, yet tonight it felt like ritual magic.</p>
+
+                <p>"Set the SLM for ℓ up to ±7 modes," she told her grad student, Jamal. Spatial light modulators painted helical phase masks, imparting orbital angular momentum. Photons became twisted donuts of light, carrying quantized twists: the higher the |ℓ|, the more dimensions in their quantum alphabet.</p>
+
+                <p>The coincidence detector ticked like a Geiger counter on steroids. Data streamed. At d=7 qudits per photon, the joint OAM spectrum bloomed.</p>
+
+                <p>Then the topology software—custom-coded with Rajesh's non-Abelian gauge theory—lit up.</p>
+
+                <p>"Holy… look at this manifold," Jamal gasped. The screen showed nested spheres, topological charges wrapping in complex dances. For d=7, the space was 48-dimensional: 7² − 1 = 48. Over seventeen thousand distinct invariants, each a robust signature immune to the noise that usually devoured quantum states.</p>
+
+                <p>"Intrinsic topology in the entanglement," Lena whispered. "Not imposed. Born from the light itself. Skyrmion-like textures but in full 48D glory. Equivalent to 't Hooft-Polyakov monopoles floating in the photon pairs."</p>
+
+                <p>Rajesh Patel appeared on the screen from Huzhou University, eyes wide. "Exactly as predicted. These are not just mathematical. In string theory, our 3+1 spacetime is a brane in higher dimensions. Compactified extras curl inside the Planck scale. But OAM light naturally couples to these geometries! The vortices are unwinding the hidden dimensions, letting us peek at the true topology of the vacuum."</p>
+
+                <p>Jamal, the skeptic turned believer, chuckled nervously. "Next you'll say it's like Bohm's implicate order—everything enfolded in every photon, the whole universe in a sunbeam."</p>
+
+                <p>Rajesh grinned. "Why not? Fringe today, physics tomorrow. Some ancient texts spoke of light having many layers. Maybe 48 resonates with something deeper. For now, think practically: topological quantum memory. Channels that heal themselves. A new era of quantum comms where information laughs at decoherence."</p>
+
+                <p>They couldn't resist. Lena directed a beam of filtered sunlight into the apparatus. Weak signal, but there—the spectral lines flickered with faint topological echoes. The dimensions hid in plain sight, in every ray that had ever touched Earth.</p>
+
+                <p>As sunrise painted the lab gold, Lena stepped outside. She tilted her face to the light. Photons danced across her skin, each carrying secret 48-dimensional symphonies.</p>
+
+                <p>The light wasn't empty. It was always singing the universe's full score.</p>
+
+                <p>The team would publish in Nature Communications. But Lena knew: this was more than a paper. It was an invitation to see reality anew.</p>
+            </div>
+
+            <div class="book-promo">
+                <h3>📚 Enjoyed "Whispers in the Vortex"?</h3>
+                <p>Dive deeper into the quantum realm with Quantum Chronos's exploration of higher dimensions and consciousness.</p>
+                            <div class="share-buttons">
+                <p>Share this story:</p>
+                <div class="share-links">
+                    <a href="#" onclick="shareTwitter()" class="share-btn" style="background:#1da1f2;color:white;">Twitter</a>
+                    <a href="#" onclick="shareFacebook()" class="share-btn" style="background:#4267b2;color:white;">Facebook</a>
+                    <a href="#" onclick="shareLinkedIn()" class="share-btn" style="background:#0077b5;color:white;">LinkedIn</a>
+                </div>
+            </div>
+
+            <a href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">Explore Quantum Chronos Books on Amazon →</a>
+            </div>
+            
+            <div class="story-footer">
+                <p><a href="../stories.html">← Back to all stories</a></p>
+            </div>
+        </article>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.querySelector('.theme-toggle').textContent = '☀️';
+        }
+        
+        function shareTwitter() {
+            const url = encodeURIComponent('https://bithues.com/stories/36.html');
+            const text = encodeURIComponent('Whispers in the Vortex - A quantum physics short story');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+        
+        function shareFacebook() {
+            window.open('https://www.facebook.com/sharer/sharer.php?u=https://bithues.com/stories/36.html', '_blank');
+        }
+        
+        function shareLinkedIn() {
+            window.open('https://www.linkedin.com/sharing/share-offsite/?url=https://bithues.com/stories/36.html', '_blank');
+        }
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
