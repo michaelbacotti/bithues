@@ -22,7 +22,7 @@
             --text: #1a1a1a; --text-dim: #666666;
         }
         body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
         header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
@@ -34,14 +34,15 @@
         .page-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .page-header p { color: var(--text-dim); font-size: 1.1rem; }
         
-        .authors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem 0; }
+        .authors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; padding: 2rem 0; }
         
         .author-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-align: center; transition: all 0.3s; }
         .author-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-        .author-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .author-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
         .author-card h3 a { color: var(--text); text-decoration: none; }
         .author-card h3 a:hover { color: var(--accent); }
-        .author-card .book-count { color: var(--text-dim); font-size: 0.9rem; }
+        .author-card .genre { display: inline-block; background: var(--accent); color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 10px; margin-bottom: 0.5rem; }
+        .author-card .book-count { color: var(--text-dim); font-size: 0.85rem; }
         
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
     </style>
@@ -72,117 +73,140 @@
             
             <div class="author-card">
                 <h3><a href="authors/aetheri-codex.html">Aetheri Codex</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Mythology & Folklore</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/alaric-wynn.html">Alaric Wynn</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Alternative History</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/c-everett.html">C. Everett</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Mystery</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/d-e-harlan.html">D. E. Harlan</a></h3>
-                <p class="book-count">8 books</p>
+                <span class="genre">Nonfiction</span>
+                <p class="book-count">2 books</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/ec-stroud.html">E. C. Stroud</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Consciousness & Spirituality</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/elara-moss.html">Elara Moss</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Fantasy</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/elena-maris.html">Elena Maris</a></h3>
-                <p class="book-count">8 books</p>
+                <span class="genre">Science Fiction</span>
+                <p class="book-count">2 books</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/ellie-sunwood.html">Ellie Sunwood</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Romance</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/elowen-tidebloom.html">Elowen Tidebloom</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Magical Realism</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/evan-r-cole.html">Evan R. Cole</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Technical Nonfiction</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/evelyn-carter.html">Evelyn Carter</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Self-Help</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/h-harvey.html">H Harvey</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Spiritual Fiction</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/j-t-hartley.html">J. T. Hartley</a></h3>
-                <p class="book-count">8 books</p>
+                <span class="genre">Environment & Climate</span>
+                <p class="book-count">2 books</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/jorak-veldt.html">Jorak Veldt</a></h3>
-                <p class="book-count">8 books</p>
+                <span class="genre">Adventure</span>
+                <p class="book-count">2 books</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/kate-e-brennan.html">Kate E Brennan</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Thriller</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/l-everwood.html">L Everwood</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Children's Fiction</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/luna-sage.html">Luna Sage</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Dark Fantasy</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/m-a-hale.html">M. A. Hale</a></h3>
-                <p class="book-count">8 books</p>
+                <span class="genre">Science Fiction</span>
+                <p class="book-count">2 books</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/marcus-reeve.html">Marcus Reeve</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Science Fiction</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/quantum-chronos.html">Quantum Chronos</a></h3>
-                <p class="book-count">10 books</p>
+                <span class="genre">Quantum Physics</span>
+                <p class="book-count">4 books</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/r-zyrion.html">R. Zyrion</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Epic Fantasy</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/rowan-ashcroft.html">Rowan Ashcroft</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Dystopian Fiction</span>
+                <p class="book-count">1 book</p>
             </div>
             
             <div class="author-card">
                 <h3><a href="authors/t-stone.html">T. Stone</a></h3>
-                <p class="book-count">7 books</p>
+                <span class="genre">Historical Fiction</span>
+                <p class="book-count">1 book</p>
             </div>
             
         </section>
