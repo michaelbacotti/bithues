@@ -87,6 +87,7 @@
                     <button class="filter-btn" data-filter="Horror">Horror</button>
                     <button class="filter-btn" data-filter="Mystery">Mystery</button>
                     <button class="filter-btn" data-filter="Nonfiction">Nonfiction</button>
+                    <button class="filter-btn" data-filter="bookmarked">★ My Bookmarks</button>
                 </div>
             </div>
             
@@ -148,7 +149,16 @@
         const storyGrid = document.getElementById('storyGrid');
         
         function renderStories(filter) {
-            const filtered = filter === 'all' ? stories : stories.filter(s => s.genre === filter);
+            let filtered;
+            if (filter === 'all') {
+                filtered = stories;
+            } else if (filter === 'bookmarked') {
+                const bookmarks = JSON.parse(localStorage.getItem('bithuesBookmarks') || '[]');
+                const bookmarkedUrls = bookmarks.map(b => b.url);
+                filtered = stories.filter(s => bookmarkedUrls.includes(s.url));
+            } else {
+                filtered = stories.filter(s => s.genre === filter);
+            }
             storyGrid.innerHTML = filtered.map(story => `
                 <div class="story-card" data-genre="${story.genre}">
                     <span class="genre-tag">${story.genre}</span>
@@ -157,6 +167,10 @@
                     <p class="meta">${story.wordCount.toLocaleString()} words · ${story.readTime} min read</p>
                 </div>
             `).join('');
+            
+            if (filter === 'bookmarked' && filtered.length === 0) {
+                storyGrid.innerHTML = '<p style="text-align:center;color:var(--text-dim);padding:2rem;">No bookmarks yet. Click "+ Bookmark" on any story to save it here!</p>';
+            }
         }
         
         filterBtns.forEach(btn => {
@@ -204,6 +218,14 @@
         else { results.innerHTML = resultsList.slice(0,10).map(r => '<a href="' + r.url + '"><strong>' + r.title + '</strong><br><span style="font-size:0.8rem;color:var(--text-dim)">' + r.type + '</span></a>').join(''); }
         results.classList.add('show');
     }
+    document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            const search = document.getElementById('navSearch');
+            if (search) search.focus();
+        }
+    });
+    
     document.addEventListener('click', function(e) {
         const search = document.getElementById('navSearch');
         const results = document.getElementById('searchResults');

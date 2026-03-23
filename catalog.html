@@ -378,6 +378,14 @@
         else { results.innerHTML = resultsList.slice(0,10).map(r => '<a href="' + r.url + '"><strong>' + r.title + '</strong><br><span style="font-size:0.8rem;color:var(--text-dim)">' + r.type + '</span></a>').join(''); }
         results.classList.add('show');
     }
+    document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            const search = document.getElementById('navSearch');
+            if (search) search.focus();
+        }
+    });
+    
     document.addEventListener('click', function(e) {
         const search = document.getElementById('navSearch');
         const results = document.getElementById('searchResults');

@@ -70,7 +70,8 @@
             <div class="story-header">
                 <span class="genre-tag">Political Thriller</span>
                 <h1>The Disclosure</h1>
-                <p class="meta">3,800 words · 13 min read</p>
+                <div class="bookmark-btn-container" style="text-align:right;margin-bottom:0.5rem;"><button onclick="toggleBookmark()" style="background:none;border:1px solid var(--border);border-radius:15px;padding:0.3rem 0.8rem;cursor:pointer;font-size:0.8rem;color:var(--text-dim);">+ Bookmark</button></div>
+        <p class="meta">3,800 words · 13 min read</p>
             </div>
             
             <div class="story-content">
@@ -203,17 +204,47 @@
         document.documentElement.setAttribute('data-theme', savedTheme);
         
         document.getElementById('year').textContent = new Date().getFullYear();
+        updateBookmarkBtn();
     </script>
     <script>
     function shareTwitter() {
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent(document.title);
-        window.open('https://twitter.com/intent/tweet?url=' + url + '        document.getElementById('year').textContent = new Date().getFullYear();text=' + title, '_blank');
+        window.open('https://twitter.com/intent/tweet?url=' + url + '        document.getElementById('year').textContent = new Date().getFullYear();
+        updateBookmarkBtn();text=' + title, '_blank');
     }
     function shareFacebook() {
         const url = encodeURIComponent(window.location.href);
         window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
     }
+    function toggleBookmark() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        let bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        const url = window.location.href;
+        const title = document.querySelector(".story-header h1").textContent;
+        
+        if (bookmarks.find(b => b.url === url)) {
+            bookmarks = bookmarks.filter(b => b.url !== url);
+            btn.textContent = "+ Bookmark";
+            btn.style.color = "var(--text-dim)";
+        } else {
+            bookmarks.push({url, title, date: new Date().toISOString()});
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+        localStorage.setItem("bithuesBookmarks", JSON.stringify(bookmarks));
+    }
+    
+    function updateBookmarkBtn() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        if (!btn) return;
+        const bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        if (bookmarks.find(b => b.url === window.location.href)) {
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+    }
+    
     function shareLinkedIn() {
         const url = encodeURIComponent(window.location.href);
         window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');

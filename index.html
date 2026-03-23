@@ -272,7 +272,15 @@
         }
         
         // Close search results when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            const search = document.getElementById('navSearch');
+            if (search) search.focus();
+        }
+    });
+    
+    document.addEventListener('click', function(e) {
             const search = document.getElementById('navSearch');
             const results = document.getElementById('searchResults');
             if (search && !search.contains(e.target) && results && !results.contains(e.target)) {
