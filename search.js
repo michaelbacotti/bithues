@@ -1,9 +1,501 @@
 // Enhanced Site Search with relevance scoring, fuzzy matching, and suggestions
 
 const siteData = {
-    books: [{"title": "Shadow Work Journal for Women", "author": "Luna Sage", "url": "reviews/23.html", "desc": "A beginner-friendly 90-day journal with warm prompts for emotional healing.", "keywords": "a beginner-friendly 90-day journal with warm prompts for emotional healing."}, {"title": "Time Investing", "author": "H Harvey", "url": "reviews/35.html", "desc": "A self-help guide showing how to prioritize yourself and your time. Strategies for investing in yourself.", "keywords": "a self-help guide showing how to prioritize yourself and your time. strategies for investing in your"}, {"title": "The Shadow Within", "author": "Elena Maris", "url": "reviews/9.html", "desc": "Instead of treating reactions as defects, learn to treat them as information—and respond differently in everyday life.", "keywords": "instead of treating reactions as defects, learn to treat them as information—and respond differently"}, {"title": "Microbiology ABC&#x27;s", "author": "Michael Bacotti", "url": "reviews/19.html", "desc": "From amoebas to zooplankton, each letter highlights a microbe or cell structure with colorful illustrations.", "keywords": "from amoebas to zooplankton, each letter highlights a microbe or cell structure with colorful illust"}, {"title": "Living with a Moving Planet", "author": "J. T. Hartley", "url": "reviews/5.html", "desc": "Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines for tens of thousands of years.", "keywords": "drawing on deep-time climate records and archaeology, this book shows how humans have adapted to cha"}, {"title": "Physics of Insight", "author": "Quantum Chronos", "url": "reviews/15.html", "desc": "What if genius isn&#x27;t rare—it&#x27;s hidden inside every mind, waiting for the right switch?", "keywords": "what if genius isn&#x27;t rare—it&#x27;s hidden inside every mind, waiting for the right switch?"}, {"title": "The Power of Changing Your Mind", "author": "Evan R. A. Cole", "url": "reviews/the-power-of-changing-your-mind.html", "desc": "A practical guide to intellectual humility and how it improves decisions, relationships, and everyday life.", "keywords": "a practical guide to intellectual humility and how it improves decisions, relationships, and everyda"}, {"title": "Otomí", "author": "E. J. Marín", "url": "reviews/14.html", "desc": "Through the eyes of a young ritual apprentice, follow one drought-stricken year in an Otomí village.", "keywords": "through the eyes of a young ritual apprentice, follow one drought-stricken year in an otomí village."}, {"title": "The Confluence Doctrine", "author": "Alaric Wynn", "url": "reviews/4.html", "desc": "In a world where suffering has been designed out, Orren Myal hears something that doesn&#x27;t fit—a sense of &#x27;full, but unfinished.&#x27; What i", "keywords": "in a world where suffering has been designed out, orren myal hears something that doesn&#x27;t fit—a"}, {"title": "The Confluence Doctrine | Bithues Reading Lab</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        [data-theme=\"light\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\n        nav { padding: 1rem 0; }\n        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }\n        .logo span { color: var(--accent); }\n        .nav-links { margin-top: 1rem; }\n        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin: 0 0.75rem; }\n        .review { padding: 3rem 0; }\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; }\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\n        .author { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem; }\n        .tldr { font-size: 1.15rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\n        ul { list-style: none; margin-bottom: 2rem; }\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1.5rem; }\n        .affiliate { border-color: var(--accent); text-align: center; }\n        .affiliate p { color: var(--text-dim); margin-bottom: 1rem; }\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\n\n    <script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Book\",\n  \"name\": \"The Confluence Doctrine | Bithues Reading Lab</title>\\n    <style>\\n        * { margin: 0; padding: 0; box-sizing: border-box; }\\n        [data-theme=\\\"light\\\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\\n        nav { padding: 1rem 0; }\\n        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text); text-decoration: none; }\\n        .logo span { color: var(--accent); }\\n        .nav-links { margin-top: 1rem; }\\n        .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; margin: 0 0.75rem; }\\n        .review { padding: 3rem 0; }\\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); text-decoration: none; font-size: 0.9rem; }\\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\\n        .author { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem; }\\n        .tldr { font-size: 1.15rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\\n        ul { list-style: none; margin-bottom: 2rem; }\\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1.5rem; }\\n        .affiliate { border-color: var(--accent); text-align: center; }\\n        .affiliate p { color: var(--text-dim); margin-bottom: 1rem; }\\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\\n</head>\\n<body>\\n    <div class=\\\"container\\\">\\n        <header>\\n            <nav><a href=\\\"/\\\" class=\\\"logo\\\">Bithues<span> Reading Lab</span></a>\\n            <div class=\\\"nav-links\\\"><button class=\\\"theme-toggle\\\" onclick=\\\"toggleTheme()\\\">\\ud83c\\udf19</button><a href=\\\"/reviews\\\">Reviews</a><a href=\\\"/categories\\\">Categories</a><a href=\\\"/about\\\">About</a></div>\\n            </nav>\\n        </header>\\n        <article class=\\\"review\\\">\\n            <a href=\\\"/reviews\\\" class=\\\"back-link\\\">\\u2190 All Reviews</a>\\n            <h1>The Confluence Doctrine</h1>\\n            <p class=\\\"author\\\"></p>\\n            <p class=\\\"tldr\\\">A framework for understanding how multiple trends intersect to create outsized opportunities in business and investing.</p>\\n            <div class=\\\"takeaways\\\">\\n                <h2>Key Takeaways</h2>\\n                <ul>\\n                    <li>The \\\"confluence\\\" concept provides a fresh lens for market analysis</li>\\n                    <li>Case studies span tech, energy, and healthcare</li>\\n                    <li>Practical enough for active investors, theoretical enough for strategists</li>\\n                    <li>Could benefit from more concrete decision frameworks</li>\\n                </ul>\\n            </div>\\n            <div class=\\\"who\\\"><strong>Who should read this:</strong> Investors, founders, and strategists looking for an edge in trend analysis.</div>\\n            <div class=\\\"verdict\\\"><strong>Verdict:</strong> Worth reading for the concept alone, even if you skip the deeper case studies.</div>\\n            <div class=\\\"affiliate\\\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\\\"#\\\" target=\\\"_blank\\\">Buy on Amazon\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Affiliate</a></div>\\n        </article>\\n        \\n        <div class=\\\"share-section\\\">\\n            <h3>Share this article</h3>\\n            <div class=\\\"share-buttons\\\">\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareTwitter()\\\">\\ud835\\udd4f Twitter</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareFacebook()\\\">\\ud83d\\udcd8 Facebook</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareLinkedIn()\\\">\\ud83d\\udcbc LinkedIn</button>\\n            </div>\\n        </div>\\n        \\n<footer><p>\\u00a9 2026 Bithues Reading Lab</p></footer>\\n    </div>\\n<button class=\\\"back-to-top\\\" onclick=\\\"scrollToTop()\\\">\\u2191</button>\\n\\n    <script>\\n    // Theme Toggle\\n    function toggleTheme() {\\n        const html = document.documentElement;\\n        const btn = document.querySelector('.theme-toggle');\\n        if (html.getAttribute('data-theme') === 'light') {\\n            html.setAttribute('data-theme', 'dark');\\n            btn.textContent = '\\ud83c\\udf19';\\n            localStorage.setItem('theme', 'dark');\\n        } else {\\n            html.setAttribute('data-theme', 'light');\\n            btn.textContent = '\\u2600\\ufe0f';\\n            localStorage.setItem('theme', 'light');\\n        }\\n    }\\n    \\n    // Load saved theme\\n    const savedTheme = localStorage.getItem('theme');\\n    if (savedTheme === 'light') {\\n        document.documentElement.setAttribute('data-theme', 'light');\\n    }\\n    \\n    // Back to Top\\n    window.onscroll = function() {\\n        const backToTop = document.querySelector('.back-to-top');\\n        if (backToTop) {\\n            if (window.scrollY > 300) {\\n                backToTop.classList.add('visible');\\n            } else {\\n                backToTop.classList.remove('visible');\\n            }\\n        }\\n    };\\n    \\n    function scrollToTop() {\\n        window.scrollTo({ top: 0, behavior: 'smooth' });\\n    }\\n    \\n    // Social Share\\n    function shareTwitter() {\\n        const url = encodeURIComponent(window.location.href);\\n        const title = encodeURIComponent(document.title);\\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\\n    }\\n    \\n    function shareFacebook() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\\n    }\\n    \\n    function shareLinkedIn() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\\n    }\\n    \\n    document.getElementById('year').textContent = new Date().getFullYear();\\n    </script>\\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div></div></section></body>\\n</html>\"\n  },\n  \"description\": \"A framework for understanding how multiple trends intersect to create outsized opportunities in business and investing.\",\n  \"url\": \"https://bithues.com/reviews/the-confluence-doctrine.html\"\n}\n    </script>\n</head>\n<body>\n    <div class=\"container\">\n        <header>\n            <nav><a href=\"/\" class=\"logo\">Bithues<span> Reading Lab</span></a>\n            <div class=\"nav-links\"><button class=\"theme-toggle\" onclick=\"toggleTheme()\">🌙</button><a href=\"/reviews\">Reviews</a><a href=\"/categories\">Categories</a><a href=\"/about\">About</a></div>\n            </nav>\n        </header>\n        <article class=\"review\">\n            <a href=\"/reviews\" class=\"back-link\">← All Reviews</a>\n            <h1>The Confluence Doctrine</h1>\n            <p class=\"author\"></p>\n            <p class=\"tldr\">A framework for understanding how multiple trends intersect to create outsized opportunities in business and investing.</p>\n            <div class=\"takeaways\">\n                <h2>Key Takeaways</h2>\n                <ul>\n                    <li>The \"confluence\" concept provides a fresh lens for market analysis</li>\n                    <li>Case studies span tech, energy, and healthcare</li>\n                    <li>Practical enough for active investors, theoretical enough for strategists</li>\n                    <li>Could benefit from more concrete decision frameworks</li>\n                </ul>\n            </div>\n            <div class=\"who\"><strong>Who should read this:</strong> Investors, founders, and strategists looking for an edge in trend analysis.</div>\n            <div class=\"verdict\"><strong>Verdict:</strong> Worth reading for the concept alone, even if you skip the deeper case studies.</div>\n            <div class=\"affiliate\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\"#\" target=\"_blank\">Buy on Amazon", "author": "Affiliate</a></div>\n        </article>\n        \n        <div class=\"share-section\">\n            <h3>Share this article</h3>\n            <div class=\"share-buttons\">\n                <button class=\"share-btn\" onclick=\"shareTwitter()\">𝕏 Twitter</button>\n                <button class=\"share-btn\" onclick=\"shareFacebook()\">📘 Facebook</button>\n                <button class=\"share-btn\" onclick=\"shareLinkedIn()\">💼 LinkedIn</button>\n            </div>\n        </div>\n        \n<footer><p>© 2026 Bithues Reading Lab</p></footer>\n    </div>\n<button class=\"back-to-top\" onclick=\"scrollToTop()\">↑</button>\n\n    <script>\n    // Theme Toggle\n    function toggleTheme() {\n        const html = document.documentElement;\n        const btn = document.querySelector('.theme-toggle');\n        if (html.getAttribute('data-theme') === 'light') {\n            html.setAttribute('data-theme', 'dark');\n            btn.textContent = '🌙';\n            localStorage.setItem('theme', 'dark');\n        } else {\n            html.setAttribute('data-theme', 'light');\n            btn.textContent = '☀️';\n            localStorage.setItem('theme', 'light');\n        }\n    }\n    \n    // Load saved theme\n    const savedTheme = localStorage.getItem('theme');\n    if (savedTheme === 'light') {\n        document.documentElement.setAttribute('data-theme', 'light');\n    }\n    \n    // Back to Top\n    window.onscroll = function() {\n        const backToTop = document.querySelector('.back-to-top');\n        if (backToTop) {\n            if (window.scrollY > 300) {\n                backToTop.classList.add('visible');\n            } else {\n                backToTop.classList.remove('visible');\n            }\n        }\n    };\n    \n    function scrollToTop() {\n        window.scrollTo({ top: 0, behavior: 'smooth' });\n    }\n    \n    // Social Share\n    function shareTwitter() {\n        const url = encodeURIComponent(window.location.href);\n        const title = encodeURIComponent(document.title);\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\n    }\n    \n    function shareFacebook() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\n    }\n    \n    function shareLinkedIn() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\n    }\n    \n    document.getElementById('year').textContent = new Date().getFullYear();\n    </script>\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div></div></section></body>\n</html>", "url": "reviews/the-confluence-doctrine.html", "desc": "A framework for understanding how multiple trends intersect to create outsized opportunities in business and investing.", "keywords": "a framework for understanding how multiple trends intersect to create outsized opportunities in busi"}, {"title": "Quantum Soul Echoes", "author": "Quantum Chronos", "url": "reviews/18.html", "desc": "What if consciousness is what spacetime remembers? Two models synthesized in this rigorous exploration.", "keywords": "what if consciousness is what spacetime remembers? two models synthesized in this rigorous explorati"}, {"title": "The Power of Changing Your Mind", "author": "Evan R. Cole", "url": "reviews/8.html", "desc": "In a culture that rewards confidence, this book shows how intellectual humility is actually a competitive edge.", "keywords": "in a culture that rewards confidence, this book shows how intellectual humility is actually a compet"}, {"title": "Little Mike: Builds a Robot", "author": "Michael Jr", "url": "reviews/34.html", "desc": "Little Mike, John, and May build robots—but they keep falling apart. Through teamwork, they create a robot that tells stories.", "keywords": "little mike, john, and may build robots—but they keep falling apart. through teamwork, they create a"}, {"title": "Mindful Memory", "author": "D. E. Harlan", "url": "reviews/22.html", "desc": "Empowering retirees with science-backed exercises like memory palaces and timeline mapping.", "keywords": "empowering retirees with science-backed exercises like memory palaces and timeline mapping."}, {"title": "Little Mike: Learns to Fly", "author": "Michael Jr", "url": "reviews/29.html", "desc": "Little Mike dreams of flying. With friends John and May, he meets Pilot Thomas who teaches the wonders of airplanes.", "keywords": "little mike dreams of flying. with friends john and may, he meets pilot thomas who teaches the wonde"}, {"title": "The Richmond Cipher", "author": "E. Maris", "url": "reviews/the-richmond-cipher.html", "desc": "A historical thriller that weaves cryptography, Civil War intrigue, and a family secret into a page-turning mystery.", "keywords": "a historical thriller that weaves cryptography, civil war intrigue, and a family secret into a page-"}, {"title": "Red Horizon: Lunar Launch", "author": "M. A. Hale", "url": "reviews/3.html", "desc": "Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon—humanity is raising children und", "keywords": "commander marcus hale must launch the eos ark to deliver 250 young colonists to mars. but uap hover "}, {"title": "Symbiont Bloom", "author": "Elowen Tidebloom", "url": "reviews/13.html", "desc": "On volcanic isles of Lumengrove, dawn arrives through living leaf-glass. When the island&#x27;s pulse skips, a family must unravel a systems puzzle.", "keywords": "on volcanic isles of lumengrove, dawn arrives through living leaf-glass. when the island&#x27;s puls"}, {"title": "Blood Ember", "author": "Jorak Veldt", "url": "reviews/25.html", "desc": "Three parts trace how survival habits harden into protocol, law, and chant. From fire to spear to echo.", "keywords": "three parts trace how survival habits harden into protocol, law, and chant. from fire to spear to ec"}, {"title": "Mythical Menagerie", "author": "E. Marlowe", "url": "reviews/33.html", "desc": "A thrilling journey through cultures exploring mythical creatures. Discover how dragons and shape-shifters shaped cultural identities.", "keywords": "a thrilling journey through cultures exploring mythical creatures. discover how dragons and shape-sh"}, {"title": "Living with a Moving Planet", "author": "J. T. Hartley", "url": "reviews/living-with-a-moving-planet.html", "desc": "A hopeful, practical guide to adapting to climate change through personal resilience and systemic thinking.", "keywords": "a hopeful, practical guide to adapting to climate change through personal resilience and systemic th"}, {"title": "American Journeys", "author": "C. Everett", "url": "reviews/32.html", "desc": "For those moving to or visiting the US—or anyone eager to enhance English through immersive content.", "keywords": "for those moving to or visiting the us—or anyone eager to enhance english through immersive content."}, {"title": "Rules of Survival", "author": "Jorak Veldt", "url": "reviews/24.html", "desc": "Roughly one million years ago, a boy learns the band&#x27;s rules—water order, ember law, watch—and pays for them in skin.", "keywords": "roughly one million years ago, a boy learns the band&#x27;s rules—water order, ember law, watch—and "}, {"title": "Resonance Drift", "author": "R. Zyrion", "url": "reviews/12.html", "desc": "In Eden Prime&#x27;s biolum spires, harmony hums—until a family detects a pulse that defies the weave.", "keywords": "in eden prime&#x27;s biolum spires, harmony hums—until a family detects a pulse that defies the weav"}, {"title": "The Richmond Cipher", "author": "E. Maris", "url": "reviews/2.html", "desc": "In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligenc", "keywords": "in confederate richmond, 1863, mary carries secrets in her memory as she moves through the executive"}, {"title": "The Quiet Hours", "author": "Elara Moss", "url": "reviews/28.html", "desc": "Gentle bedtime stories celebrating simple joys—perfect for children seeking comfort.", "keywords": "gentle bedtime stories celebrating simple joys—perfect for children seeking comfort."}, {"title": "Disclosure 2026", "author": "Marcus Reeve", "url": "reviews/11.html", "desc": "From viral smartphone footage to White House landings, this book analyzes 18 pathways to alien disclosure—each rated for plausibility based on decades", "keywords": "from viral smartphone footage to white house landings, this book analyzes 18 pathways to alien discl"}, {"title": "The Dawn of Civilization", "author": "T. Stone", "url": "reviews/1.html", "desc": "When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader&#x27;s staff and hold their small tribe together. As bear", "keywords": "when a brutal winter kills his father, sixteen-year-old koda watches uluk take up the leader&#x27;s "}, {"title": "The Shadow Within", "author": "Elena Maris", "url": "reviews/the-shadow-within.html", "desc": "A practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological depth.", "keywords": "a practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological d"}, {"title": "Echoes of Transcendence", "author": "L Everwood", "url": "reviews/31.html", "desc": "Where boundaries of reality blur, seekers embark on a transformative journey. Guided by ancient prophecies, they unveil mysteries.", "keywords": "where boundaries of reality blur, seekers embark on a transformative journey. guided by ancient prop"}, {"title": "Little Mike: Fun at the Beach", "author": "Michael Jr", "url": "reviews/27.html", "desc": "Join Little Mike and his friends as they build an awe-inspiring sand castle.", "keywords": "join little mike and his friends as they build an awe-inspiring sand castle."}, {"title": "The Orchardist: Harvest", "author": "Kate E Brennan", "url": "reviews/26.html", "desc": "Diane Kessler falls from a ladder—in that moment, she doesn&#x27;t come back. A story of near-death experience.", "keywords": "diane kessler falls from a ladder—in that moment, she doesn&#x27;t come back. a story of near-death "}, {"title": "Discovering Washington DC", "author": "Evelyn Carter", "url": "reviews/30.html", "desc": "Beyond the monuments—a guide to the real DC. Stroll Georgetown&#x27;s cobblestones, tap your feet to jazz, taste a half-smoke.", "keywords": "beyond the monuments—a guide to the real dc. stroll georgetown&#x27;s cobblestones, tap your feet to"}, {"title": "Quantum Soul Echoes | Bithues Reading Lab</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        [data-theme=\"light\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\n        .logo { font-size: 1.25rem; font-weight: 700; }\n        .logo span { color: var(--accent); }\n        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }\n        .review { padding: 3rem 0; }\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\n        .author { color: var(--text-dim); margin-bottom: 1.5rem; }\n        .tldr { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\n        ul { list-style: none; margin-bottom: 2rem; }\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }\n        .affiliate { border: 1px solid var(--accent); text-align: center; }\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\n\n    <script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Book\",\n  \"name\": \"Quantum Soul Echoes | Bithues Reading Lab</title>\\n    <style>\\n        * { margin: 0; padding: 0; box-sizing: border-box; }\\n        [data-theme=\\\"light\\\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\\n        .logo { font-size: 1.25rem; font-weight: 700; }\\n        .logo span { color: var(--accent); }\\n        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }\\n        .review { padding: 3rem 0; }\\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }\\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\\n        .author { color: var(--text-dim); margin-bottom: 1.5rem; }\\n        .tldr { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\\n        ul { list-style: none; margin-bottom: 2rem; }\\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }\\n        .affiliate { border: 1px solid var(--accent); text-align: center; }\\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\\n</head>\\n<body>\\n    <div class=\\\"container\\\">\\n        <header><nav><a href=\\\"/\\\" class=\\\"logo\\\">Bithues<span> Reading Lab</span></nav></header>\\n        <article class=\\\"review\\\">\\n            <a href=\\\"/reviews\\\" class=\\\"back-link\\\">\\u2190 All Reviews</a>\\n            <h1>Quantum Soul Echoes</h1>\\n            <p class=\\\"author\\\"></p>\\n            <p class=\\\"tldr\\\">An exploration of consciousness through quantum mechanics that proposes testable frameworks for understanding mind.</p>\\n            <div class=\\\"takeaways\\\"><h2>Key Takeaways</h2><ul><li>Engages seriously with both physics and philosophy</li><li>Proposes specific hypotheses, not vague speculation</li><li>Acknowledges what we don't know</li><li>Some concepts are genuinely mind-expanding</li></ul></div>\\n            <div class=\\\"who\\\"><strong>Who should read this:</strong> Curious minds at the intersection of science and spirituality.</div>\\n            <div class=\\\"verdict\\\"><strong>Verdict:</strong> Not for everyone, but fascinating for the right reader.</div>\\n            <div class=\\\"affiliate\\\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\\\"#\\\">Buy on Amazon\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Affiliate</a></div>\\n        </article>\\n        \\n        <div class=\\\"share-section\\\">\\n            <h3>Share this article</h3>\\n            <div class=\\\"share-buttons\\\">\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareTwitter()\\\">\\ud835\\udd4f Twitter</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareFacebook()\\\">\\ud83d\\udcd8 Facebook</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareLinkedIn()\\\">\\ud83d\\udcbc LinkedIn</button>\\n            </div>\\n        </div>\\n        \\n<footer><p>\\u00a9 2026 Bithues Reading Lab</p></footer>\\n    </div>\\n<button class=\\\"back-to-top\\\" onclick=\\\"scrollToTop()\\\">\\u2191</button>\\n\\n    <script>\\n    // Theme Toggle\\n    function toggleTheme() {\\n        const html = document.documentElement;\\n        const btn = document.querySelector('.theme-toggle');\\n        if (html.getAttribute('data-theme') === 'light') {\\n            html.setAttribute('data-theme', 'dark');\\n            btn.textContent = '\\ud83c\\udf19';\\n            localStorage.setItem('theme', 'dark');\\n        } else {\\n            html.setAttribute('data-theme', 'light');\\n            btn.textContent = '\\u2600\\ufe0f';\\n            localStorage.setItem('theme', 'light');\\n        }\\n    }\\n    \\n    // Load saved theme\\n    const savedTheme = localStorage.getItem('theme');\\n    if (savedTheme === 'light') {\\n        document.documentElement.setAttribute('data-theme', 'light');\\n    }\\n    \\n    // Back to Top\\n    window.onscroll = function() {\\n        const backToTop = document.querySelector('.back-to-top');\\n        if (backToTop) {\\n            if (window.scrollY > 300) {\\n                backToTop.classList.add('visible');\\n            } else {\\n                backToTop.classList.remove('visible');\\n            }\\n        }\\n    };\\n    \\n    function scrollToTop() {\\n        window.scrollTo({ top: 0, behavior: 'smooth' });\\n    }\\n    \\n    // Social Share\\n    function shareTwitter() {\\n        const url = encodeURIComponent(window.location.href);\\n        const title = encodeURIComponent(document.title);\\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\\n    }\\n    \\n    function shareFacebook() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\\n    }\\n    \\n    function shareLinkedIn() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\\n    }\\n    \\n    document.getElementById('year').textContent = new Date().getFullYear();\\n    </script>\\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/29.html'>Little Mike: Learns to Fly</a></h3><p class='author'>by Michael Jr</p></div></div></section></body>\\n</html>\"\n  },\n  \"description\": \"An exploration of consciousness through quantum mechanics that proposes testable frameworks for understanding mind.\",\n  \"url\": \"https://bithues.com/reviews/quantum-soul-echoes.html\"\n}\n    </script>\n</head>\n<body>\n    <div class=\"container\">\n        <header><nav><a href=\"/\" class=\"logo\">Bithues<span> Reading Lab</span></nav></header>\n        <article class=\"review\">\n            <a href=\"/reviews\" class=\"back-link\">← All Reviews</a>\n            <h1>Quantum Soul Echoes</h1>\n            <p class=\"author\"></p>\n            <p class=\"tldr\">An exploration of consciousness through quantum mechanics that proposes testable frameworks for understanding mind.</p>\n            <div class=\"takeaways\"><h2>Key Takeaways</h2><ul><li>Engages seriously with both physics and philosophy</li><li>Proposes specific hypotheses, not vague speculation</li><li>Acknowledges what we don't know</li><li>Some concepts are genuinely mind-expanding</li></ul></div>\n            <div class=\"who\"><strong>Who should read this:</strong> Curious minds at the intersection of science and spirituality.</div>\n            <div class=\"verdict\"><strong>Verdict:</strong> Not for everyone, but fascinating for the right reader.</div>\n            <div class=\"affiliate\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\"#\">Buy on Amazon", "author": "Affiliate</a></div>\n        </article>\n        \n        <div class=\"share-section\">\n            <h3>Share this article</h3>\n            <div class=\"share-buttons\">\n                <button class=\"share-btn\" onclick=\"shareTwitter()\">𝕏 Twitter</button>\n                <button class=\"share-btn\" onclick=\"shareFacebook()\">📘 Facebook</button>\n                <button class=\"share-btn\" onclick=\"shareLinkedIn()\">💼 LinkedIn</button>\n            </div>\n        </div>\n        \n<footer><p>© 2026 Bithues Reading Lab</p></footer>\n    </div>\n<button class=\"back-to-top\" onclick=\"scrollToTop()\">↑</button>\n\n    <script>\n    // Theme Toggle\n    function toggleTheme() {\n        const html = document.documentElement;\n        const btn = document.querySelector('.theme-toggle');\n        if (html.getAttribute('data-theme') === 'light') {\n            html.setAttribute('data-theme', 'dark');\n            btn.textContent = '🌙';\n            localStorage.setItem('theme', 'dark');\n        } else {\n            html.setAttribute('data-theme', 'light');\n            btn.textContent = '☀️';\n            localStorage.setItem('theme', 'light');\n        }\n    }\n    \n    // Load saved theme\n    const savedTheme = localStorage.getItem('theme');\n    if (savedTheme === 'light') {\n        document.documentElement.setAttribute('data-theme', 'light');\n    }\n    \n    // Back to Top\n    window.onscroll = function() {\n        const backToTop = document.querySelector('.back-to-top');\n        if (backToTop) {\n            if (window.scrollY > 300) {\n                backToTop.classList.add('visible');\n            } else {\n                backToTop.classList.remove('visible');\n            }\n        }\n    };\n    \n    function scrollToTop() {\n        window.scrollTo({ top: 0, behavior: 'smooth' });\n    }\n    \n    // Social Share\n    function shareTwitter() {\n        const url = encodeURIComponent(window.location.href);\n        const title = encodeURIComponent(document.title);\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\n    }\n    \n    function shareFacebook() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\n    }\n    \n    function shareLinkedIn() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\n    }\n    \n    document.getElementById('year').textContent = new Date().getFullYear();\n    </script>\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/29.html'>Little Mike: Learns to Fly</a></h3><p class='author'>by Michael Jr</p></div></div></section></body>\n</html>", "url": "reviews/quantum-soul-echoes.html", "desc": "An exploration of consciousness through quantum mechanics that proposes testable frameworks for understanding mind.", "keywords": "an exploration of consciousness through quantum mechanics that proposes testable frameworks for unde"}, {"title": "Echoes of Aetheris", "author": "Aetheri Codex", "url": "reviews/10.html", "desc": "Nine thousand years before history, a wounded alien ship falls onto a frozen steppe. The first hybrid is born.", "keywords": "nine thousand years before history, a wounded alien ship falls onto a frozen steppe. the first hybri"}, {"title": "Aetheri Codex | Bithues Reading Lab</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        [data-theme=\"light\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\n        .logo { font-size: 1.25rem; font-weight: 700; }\n        .logo span { color: var(--accent); }\n        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }\n        .review { padding: 3rem 0; }\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\n        .author { color: var(--text-dim); margin-bottom: 1.5rem; }\n        .tldr { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\n        ul { list-style: none; margin-bottom: 2rem; }\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }\n        .affiliate { border: 1px solid var(--accent); text-align: center; }\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\n\n    <script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Book\",\n  \"name\": \"Aetheri Codex | Bithues Reading Lab</title>\\n    <style>\\n        * { margin: 0; padding: 0; box-sizing: border-box; }\\n        [data-theme=\\\"light\\\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\\n        .logo { font-size: 1.25rem; font-weight: 700; }\\n        .logo span { color: var(--accent); }\\n        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }\\n        .review { padding: 3rem 0; }\\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }\\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\\n        .author { color: var(--text-dim); margin-bottom: 1.5rem; }\\n        .tldr { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\\n        ul { list-style: none; margin-bottom: 2rem; }\\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }\\n        .affiliate { border: 1px solid var(--accent); text-align: center; }\\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\\n</head>\\n<body>\\n    <div class=\\\"container\\\">\\n        <header><nav><a href=\\\"/\\\" class=\\\"logo\\\">Bithues<span> Reading Lab</span></nav></header>\\n        <article class=\\\"review\\\">\\n            <a href=\\\"/reviews\\\" class=\\\"back-link\\\">\\u2190 All Reviews</a>\\n            <h1>Aetheri Codex</h1>\\n            <p class=\\\"author\\\"></p>\\n            <p class=\\\"tldr\\\">A sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-building masterpiece.</p>\\n            <div class=\\\"takeaways\\\"><h2>Key Takeaways</h2><ul><li>World-building is meticulous without being overwhelming</li><li>Multiple POV characters each have distinct voices</li><li>The magic/tech balance feels fresh</li><li>Sequel setup is satisfying without being a cliffhanger</li></ul></div>\\n            <div class=\\\"who\\\"><strong>Who should read this:</strong> Fans of detailed world-building and epic-scale sci-fi.</div>\\n            <div class=\\\"verdict\\\"><strong>Verdict:</strong> Impressive debut that delivers on both action and atmosphere.</div>\\n            <div class=\\\"affiliate\\\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\\\"#\\\">Buy on Amazon\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Affiliate</a></div>\\n        </article>\\n        \\n        <div class=\\\"share-section\\\">\\n            <h3>Share this article</h3>\\n            <div class=\\\"share-buttons\\\">\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareTwitter()\\\">\\ud835\\udd4f Twitter</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareFacebook()\\\">\\ud83d\\udcd8 Facebook</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareLinkedIn()\\\">\\ud83d\\udcbc LinkedIn</button>\\n            </div>\\n        </div>\\n        \\n<footer><p>\\u00a9 2026 Bithues Reading Lab</p></footer>\\n    </div>\\n<button class=\\\"back-to-top\\\" onclick=\\\"scrollToTop()\\\">\\u2191</button>\\n\\n    <script>\\n    // Theme Toggle\\n    function toggleTheme() {\\n        const html = document.documentElement;\\n        const btn = document.querySelector('.theme-toggle');\\n        if (html.getAttribute('data-theme') === 'light') {\\n            html.setAttribute('data-theme', 'dark');\\n            btn.textContent = '\\ud83c\\udf19';\\n            localStorage.setItem('theme', 'dark');\\n        } else {\\n            html.setAttribute('data-theme', 'light');\\n            btn.textContent = '\\u2600\\ufe0f';\\n            localStorage.setItem('theme', 'light');\\n        }\\n    }\\n    \\n    // Load saved theme\\n    const savedTheme = localStorage.getItem('theme');\\n    if (savedTheme === 'light') {\\n        document.documentElement.setAttribute('data-theme', 'light');\\n    }\\n    \\n    // Back to Top\\n    window.onscroll = function() {\\n        const backToTop = document.querySelector('.back-to-top');\\n        if (backToTop) {\\n            if (window.scrollY > 300) {\\n                backToTop.classList.add('visible');\\n            } else {\\n                backToTop.classList.remove('visible');\\n            }\\n        }\\n    };\\n    \\n    function scrollToTop() {\\n        window.scrollTo({ top: 0, behavior: 'smooth' });\\n    }\\n    \\n    // Social Share\\n    function shareTwitter() {\\n        const url = encodeURIComponent(window.location.href);\\n        const title = encodeURIComponent(document.title);\\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\\n    }\\n    \\n    function shareFacebook() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\\n    }\\n    \\n    function shareLinkedIn() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\\n    }\\n    \\n    document.getElementById('year').textContent = new Date().getFullYear();\\n    </script>\\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/29.html'>Little Mike: Learns to Fly</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div></div></section></body>\\n</html>\"\n  },\n  \"description\": \"A sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-building masterpiece.\",\n  \"url\": \"https://bithues.com/reviews/aetheri-codex.html\"\n}\n    </script>\n</head>\n<body>\n    <div class=\"container\">\n        <header><nav><a href=\"/\" class=\"logo\">Bithues<span> Reading Lab</span></nav></header>\n        <article class=\"review\">\n            <a href=\"/reviews\" class=\"back-link\">← All Reviews</a>\n            <h1>Aetheri Codex</h1>\n            <p class=\"author\"></p>\n            <p class=\"tldr\">A sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-building masterpiece.</p>\n            <div class=\"takeaways\"><h2>Key Takeaways</h2><ul><li>World-building is meticulous without being overwhelming</li><li>Multiple POV characters each have distinct voices</li><li>The magic/tech balance feels fresh</li><li>Sequel setup is satisfying without being a cliffhanger</li></ul></div>\n            <div class=\"who\"><strong>Who should read this:</strong> Fans of detailed world-building and epic-scale sci-fi.</div>\n            <div class=\"verdict\"><strong>Verdict:</strong> Impressive debut that delivers on both action and atmosphere.</div>\n            <div class=\"affiliate\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\"#\">Buy on Amazon", "author": "Affiliate</a></div>\n        </article>\n        \n        <div class=\"share-section\">\n            <h3>Share this article</h3>\n            <div class=\"share-buttons\">\n                <button class=\"share-btn\" onclick=\"shareTwitter()\">𝕏 Twitter</button>\n                <button class=\"share-btn\" onclick=\"shareFacebook()\">📘 Facebook</button>\n                <button class=\"share-btn\" onclick=\"shareLinkedIn()\">💼 LinkedIn</button>\n            </div>\n        </div>\n        \n<footer><p>© 2026 Bithues Reading Lab</p></footer>\n    </div>\n<button class=\"back-to-top\" onclick=\"scrollToTop()\">↑</button>\n\n    <script>\n    // Theme Toggle\n    function toggleTheme() {\n        const html = document.documentElement;\n        const btn = document.querySelector('.theme-toggle');\n        if (html.getAttribute('data-theme') === 'light') {\n            html.setAttribute('data-theme', 'dark');\n            btn.textContent = '🌙';\n            localStorage.setItem('theme', 'dark');\n        } else {\n            html.setAttribute('data-theme', 'light');\n            btn.textContent = '☀️';\n            localStorage.setItem('theme', 'light');\n        }\n    }\n    \n    // Load saved theme\n    const savedTheme = localStorage.getItem('theme');\n    if (savedTheme === 'light') {\n        document.documentElement.setAttribute('data-theme', 'light');\n    }\n    \n    // Back to Top\n    window.onscroll = function() {\n        const backToTop = document.querySelector('.back-to-top');\n        if (backToTop) {\n            if (window.scrollY > 300) {\n                backToTop.classList.add('visible');\n            } else {\n                backToTop.classList.remove('visible');\n            }\n        }\n    };\n    \n    function scrollToTop() {\n        window.scrollTo({ top: 0, behavior: 'smooth' });\n    }\n    \n    // Social Share\n    function shareTwitter() {\n        const url = encodeURIComponent(window.location.href);\n        const title = encodeURIComponent(document.title);\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\n    }\n    \n    function shareFacebook() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\n    }\n    \n    function shareLinkedIn() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\n    }\n    \n    document.getElementById('year').textContent = new Date().getFullYear();\n    </script>\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/29.html'>Little Mike: Learns to Fly</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div></div></section></body>\n</html>", "url": "reviews/aetheri-codex.html", "desc": "A sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-building masterpiece.", "keywords": "a sci-fi/fantasy hybrid where ancient knowledge systems collide with advanced technology in a world-"}, {"title": "Beyond the Veil | Bithues Reading Lab</title>\n    <style>\n        * { margin: 0; padding: 0; box-sizing: border-box; }\n        [data-theme=\"light\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\n        .logo { font-size: 1.25rem; font-weight: 700; }\n        .logo span { color: var(--accent); }\n        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }\n        .review { padding: 3rem 0; }\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\n        .author { color: var(--text-dim); margin-bottom: 1.5rem; }\n        .tldr { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\n        ul { list-style: none; margin-bottom: 2rem; }\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }\n        .affiliate { border: 1px solid var(--accent); text-align: center; }\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\n\n    <script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Book\",\n  \"name\": \"Beyond the Veil | Bithues Reading Lab</title>\\n    <style>\\n        * { margin: 0; padding: 0; box-sizing: border-box; }\\n        [data-theme=\\\"light\\\"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; } :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }\\n        body { transition: background 0.3s, color 0.3s; font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }\\n        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }\\n        header, footer { padding: 2rem 0; border-bottom: 1px solid var(--border); text-align: center; }\\n        .logo { font-size: 1.25rem; font-weight: 700; }\\n        .logo span { color: var(--accent); }\\n        nav a { color: var(--text-dim); text-decoration: none; margin: 0 0.75rem; }\\n        .review { padding: 3rem 0; }\\n        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }\\n        h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }\\n        .author { color: var(--text-dim); margin-bottom: 1.5rem; }\\n        .tldr { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }\\n        h2 { font-size: 1.25rem; margin-bottom: 1rem; }\\n        ul { list-style: none; margin-bottom: 2rem; }\\n        li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }\\n        .who, .verdict, .affiliate { padding: 1.5rem; background: var(--surface); border-radius: 8px; margin-bottom: 1.5rem; }\\n        .affiliate { border: 1px solid var(--accent); text-align: center; }\\n        .affiliate a { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; }\\n    .similar-books { padding: 2rem 0; border-top: 1px solid var(--border); margin-top: 2rem; }\n.similar-books h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }\n.similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }\n.similar-card { padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }\n.similar-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }\n.similar-card h3 a { color: var(--text); text-decoration: none; }\n.similar-card h3 a:hover { color: var(--accent); }\n.similar-card .author { color: var(--text-dim); font-size: 0.85rem; }\n</style>\\n</head>\\n<body>\\n    <div class=\\\"container\\\">\\n        <header><nav><a href=\\\"/\\\" class=\\\"logo\\\">Bithues<span> Reading Lab</span></nav></header>\\n        <article class=\\\"review\\\">\\n            <a href=\\\"/reviews\\\" class=\\\"back-link\\\">\\u2190 All Reviews</a>\\n            <h1>Beyond the Veil</h1>\\n            <p class=\\\"author\\\"></p>\\n            <p class=\\\"tldr\\\">A blend of quantum physics concepts and spiritual reflection that attempts to bridge science and consciousness.</p>\\n            <div class=\\\"takeaways\\\"><h2>Key Takeaways</h2><ul><li>Makes complex quantum ideas accessible without dumbing down</li><li>The \\\"guided reflections\\\" are genuinely useful for personal inquiry</li><li>Takes a non-dogmatic approach to spirituality</li><li>Some claims stretch scientific plausibility</li></ul></div>\\n            <div class=\\\"who\\\"><strong>Who should read this:</strong> Readers interested in consciousness who are tired of rigid materialism.</div>\\n            <div class=\\\"verdict\\\"><strong>Verdict:</strong> Interesting for open-minded readers, though the quantum spirituality connection is debatable.</div>\\n            <div class=\\\"affiliate\\\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\\\"#\\\">Buy on Amazon\",\n  \"author\": {\n    \"@type\": \"Person\",\n    \"name\": \"Affiliate</a></div>\\n        </article>\\n        \\n        <div class=\\\"share-section\\\">\\n            <h3>Share this article</h3>\\n            <div class=\\\"share-buttons\\\">\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareTwitter()\\\">\\ud835\\udd4f Twitter</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareFacebook()\\\">\\ud83d\\udcd8 Facebook</button>\\n                <button class=\\\"share-btn\\\" onclick=\\\"shareLinkedIn()\\\">\\ud83d\\udcbc LinkedIn</button>\\n            </div>\\n        </div>\\n        \\n<footer><p>\\u00a9 2026 Bithues Reading Lab</p></footer>\\n    </div>\\n<button class=\\\"back-to-top\\\" onclick=\\\"scrollToTop()\\\">\\u2191</button>\\n\\n    <script>\\n    // Theme Toggle\\n    function toggleTheme() {\\n        const html = document.documentElement;\\n        const btn = document.querySelector('.theme-toggle');\\n        if (html.getAttribute('data-theme') === 'light') {\\n            html.setAttribute('data-theme', 'dark');\\n            btn.textContent = '\\ud83c\\udf19';\\n            localStorage.setItem('theme', 'dark');\\n        } else {\\n            html.setAttribute('data-theme', 'light');\\n            btn.textContent = '\\u2600\\ufe0f';\\n            localStorage.setItem('theme', 'light');\\n        }\\n    }\\n    \\n    // Load saved theme\\n    const savedTheme = localStorage.getItem('theme');\\n    if (savedTheme === 'light') {\\n        document.documentElement.setAttribute('data-theme', 'light');\\n    }\\n    \\n    // Back to Top\\n    window.onscroll = function() {\\n        const backToTop = document.querySelector('.back-to-top');\\n        if (backToTop) {\\n            if (window.scrollY > 300) {\\n                backToTop.classList.add('visible');\\n            } else {\\n                backToTop.classList.remove('visible');\\n            }\\n        }\\n    };\\n    \\n    function scrollToTop() {\\n        window.scrollTo({ top: 0, behavior: 'smooth' });\\n    }\\n    \\n    // Social Share\\n    function shareTwitter() {\\n        const url = encodeURIComponent(window.location.href);\\n        const title = encodeURIComponent(document.title);\\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\\n    }\\n    \\n    function shareFacebook() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\\n    }\\n    \\n    function shareLinkedIn() {\\n        const url = encodeURIComponent(window.location.href);\\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\\n    }\\n    \\n    document.getElementById('year').textContent = new Date().getFullYear();\\n    </script>\\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div></div></section></body>\\n</html>\"\n  },\n  \"description\": \"A blend of quantum physics concepts and spiritual reflection that attempts to bridge science and consciousness.\",\n  \"url\": \"https://bithues.com/reviews/beyond-the-veil.html\"\n}\n    </script>\n</head>\n<body>\n    <div class=\"container\">\n        <header><nav><a href=\"/\" class=\"logo\">Bithues<span> Reading Lab</span></nav></header>\n        <article class=\"review\">\n            <a href=\"/reviews\" class=\"back-link\">← All Reviews</a>\n            <h1>Beyond the Veil</h1>\n            <p class=\"author\"></p>\n            <p class=\"tldr\">A blend of quantum physics concepts and spiritual reflection that attempts to bridge science and consciousness.</p>\n            <div class=\"takeaways\"><h2>Key Takeaways</h2><ul><li>Makes complex quantum ideas accessible without dumbing down</li><li>The \"guided reflections\" are genuinely useful for personal inquiry</li><li>Takes a non-dogmatic approach to spirituality</li><li>Some claims stretch scientific plausibility</li></ul></div>\n            <div class=\"who\"><strong>Who should read this:</strong> Readers interested in consciousness who are tired of rigid materialism.</div>\n            <div class=\"verdict\"><strong>Verdict:</strong> Interesting for open-minded readers, though the quantum spirituality connection is debatable.</div>\n            <div class=\"affiliate\"><p>You can support this site by buying the book through the affiliate link below:</p><a href=\"#\">Buy on Amazon", "author": "Affiliate</a></div>\n        </article>\n        \n        <div class=\"share-section\">\n            <h3>Share this article</h3>\n            <div class=\"share-buttons\">\n                <button class=\"share-btn\" onclick=\"shareTwitter()\">𝕏 Twitter</button>\n                <button class=\"share-btn\" onclick=\"shareFacebook()\">📘 Facebook</button>\n                <button class=\"share-btn\" onclick=\"shareLinkedIn()\">💼 LinkedIn</button>\n            </div>\n        </div>\n        \n<footer><p>© 2026 Bithues Reading Lab</p></footer>\n    </div>\n<button class=\"back-to-top\" onclick=\"scrollToTop()\">↑</button>\n\n    <script>\n    // Theme Toggle\n    function toggleTheme() {\n        const html = document.documentElement;\n        const btn = document.querySelector('.theme-toggle');\n        if (html.getAttribute('data-theme') === 'light') {\n            html.setAttribute('data-theme', 'dark');\n            btn.textContent = '🌙';\n            localStorage.setItem('theme', 'dark');\n        } else {\n            html.setAttribute('data-theme', 'light');\n            btn.textContent = '☀️';\n            localStorage.setItem('theme', 'light');\n        }\n    }\n    \n    // Load saved theme\n    const savedTheme = localStorage.getItem('theme');\n    if (savedTheme === 'light') {\n        document.documentElement.setAttribute('data-theme', 'light');\n    }\n    \n    // Back to Top\n    window.onscroll = function() {\n        const backToTop = document.querySelector('.back-to-top');\n        if (backToTop) {\n            if (window.scrollY > 300) {\n                backToTop.classList.add('visible');\n            } else {\n                backToTop.classList.remove('visible');\n            }\n        }\n    };\n    \n    function scrollToTop() {\n        window.scrollTo({ top: 0, behavior: 'smooth' });\n    }\n    \n    // Social Share\n    function shareTwitter() {\n        const url = encodeURIComponent(window.location.href);\n        const title = encodeURIComponent(document.title);\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\n    }\n    \n    function shareFacebook() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\n    }\n    \n    function shareLinkedIn() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\n    }\n    \n    document.getElementById('year').textContent = new Date().getFullYear();\n    </script>\n<section class=\"similar-books\"><h2>Books Like This</h2><div class=\"similar-grid\"><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div></div></section></body>\n</html>", "url": "reviews/beyond-the-veil.html", "desc": "A blend of quantum physics concepts and spiritual reflection that attempts to bridge science and consciousness.", "keywords": "a blend of quantum physics concepts and spiritual reflection that attempts to bridge science and con"}, {"title": "The Burning Song", "author": "Rowan Ashcroft", "url": "reviews/21.html", "desc": "When a cave lion marks Aken, the leader makes a choice that breaks every rule: he sends scouts to the coastal strangers.", "keywords": "when a cave lion marks aken, the leader makes a choice that breaks every rule: he sends scouts to th"}, {"title": "Consciousness in Higher Dimensional Spacetime", "author": "Quantum Chronos", "url": "reviews/17.html", "desc": "What if consciousness doesn&#x27;t exist in the same spacetime as the body? A radical extension of Einstein&#x27;s relativity into the domain of mind.", "keywords": "what if consciousness doesn&#x27;t exist in the same spacetime as the body? a radical extension of e"}, {"title": "Veiled Presence", "author": "E.C. Stroud", "url": "reviews/7.html", "desc": "In Veiled Presence: Questions on Earth's Silent Neighbors, researcher E. C. Stroud walks carefully through the modern UAP/UFO record—not to proclaim a", "keywords": "in veiled presence: questions on earth's silent neighbors, researcher e. c. stroud walks carefully t"}, {"title": "Beyond the Veil", "author": "D. E. Harlan", "url": "reviews/6.html", "desc": "A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy.", "keywords": "a careful tour of evidence around what happens when we die, drawing on nde research, quantum physics"}, {"title": "The Physics of Time", "author": "Quantum Chronos", "url": "reviews/16.html", "desc": "A groundbreaking exploration: what if the universe is a block of spacetime containing all moments, yet consciousness navigates through it?", "keywords": "a groundbreaking exploration: what if the universe is a block of spacetime containing all moments, y"}, {"title": "Red Horizon: Lunar Launch", "author": "M. A. Hale", "url": "reviews/red-horizon-lunar-launch.html", "desc": "A near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller.", "keywords": "a near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller."}, {"title": "You Tell the Story", "author": "Ellie Sunwood", "url": "reviews/20.html", "desc": "A draw-and-write storybook where children look at pictures, then write and draw their own stories.", "keywords": "a draw-and-write storybook where children look at pictures, then write and draw their own stories."}],
-    stories: [{"title": "The Ember Song", "url": "stories/23.html", "desc": "", "keywords": ""}, {"title": "The Last Gift", "url": "stories/35.html", "desc": "", "keywords": ""}, {"title": "The Humble Mind", "url": "stories/9.html", "desc": "", "keywords": ""}, {"title": "The Question", "url": "stories/19.html", "desc": "", "keywords": ""}, {"title": "Echoes of the Designed", "url": "stories/5.html", "desc": "", "keywords": ""}, {"title": "The Last Song", "url": "stories/15.html", "desc": "", "keywords": ""}, {"title": "The Door Between Worlds", "url": "stories/14.html", "desc": "", "keywords": ""}, {"title": "The Ones Who Wait", "url": "stories/4.html", "desc": "", "keywords": ""}, {"title": "The Forgotten Minute", "url": "stories/18.html", "desc": "", "keywords": ""}, {"title": "They Walk Among Us", "url": "stories/8.html", "desc": "", "keywords": ""}, {"title": "The First Word", "url": "stories/34.html", "desc": "", "keywords": ""}, {"title": "The Last Arena", "url": "stories/22.html", "desc": "", "keywords": ""}, {"title": "The Echoes Return", "url": "stories/29.html", "desc": "", "keywords": ""}, {"title": "What the Silence Knew", "url": "stories/3.html", "desc": "", "keywords": ""}, {"title": "The Borrowed Life", "url": "stories/13.html", "desc": "", "keywords": ""}, {"title": "Fun at the Beach", "url": "stories/25.html", "desc": "", "keywords": ""}, {"title": "The Time Auction", "url": "stories/33.html", "desc": "", "keywords": ""}, {"title": "Builds a Robot", "url": "stories/32.html", "desc": "", "keywords": ""}, {"title": "The Harvest", "url": "stories/24.html", "desc": "", "keywords": ""}, {"title": "The Disclosure", "url": "stories/12.html", "desc": "", "keywords": ""}, {"title": "The Last Winter", "url": "stories/2.html", "desc": "", "keywords": ""}, {"title": "City of Wonders", "url": "stories/28.html", "desc": "", "keywords": ""}, {"title": "The Forbidden Library", "url": "stories/11.html", "desc": "", "keywords": ""}, {"title": "The Last Signal", "url": "stories/1.html", "desc": "", "keywords": ""}, {"title": "The Mythical Search", "url": "stories/31.html", "desc": "", "keywords": ""}, {"title": "Learns to Fly", "url": "stories/27.html", "desc": "", "keywords": ""}, {"title": "The Quiet Town", "url": "stories/26.html", "desc": "", "keywords": ""}, {"title": "American Voices", "url": "stories/30.html", "desc": "", "keywords": ""}, {"title": "The Other Side", "url": "stories/10.html", "desc": "", "keywords": ""}, {"title": "The Shadow Garden", "url": "stories/21.html", "desc": "", "keywords": ""}, {"title": "Blood Ties", "url": "stories/17.html", "desc": "", "keywords": ""}, {"title": "The Space Between", "url": "stories/7.html", "desc": "", "keywords": ""}, {"title": "The Last Garden", "url": "stories/6.html", "desc": "", "keywords": ""}, {"title": "Rules of the Game", "url": "stories/16.html", "desc": "", "keywords": ""}, {"title": "The Sound Between Stars", "url": "stories/20.html", "desc": "", "keywords": ""}],
-    articles: []  // Top articles only
+    "books": [
+        {
+            "title": "Shadow Work Journal for Women",
+            "author": "Luna Sage",
+            "url": "reviews/23.html",
+            "desc": "A beginner-friendly 90-day journal with warm prompts for emotional healing.",
+            "keywords": "a beginner-friendly 90-day journal with warm prompts for emotional healing."
+        },
+        {
+            "title": "Time Investing",
+            "author": "H Harvey",
+            "url": "reviews/35.html",
+            "desc": "A self-help guide showing how to prioritize yourself and your time. Strategies for investing in yourself.",
+            "keywords": "a self-help guide showing how to prioritize yourself and your time. strategies for investing in your"
+        },
+        {
+            "title": "The Shadow Within",
+            "author": "Elena Maris",
+            "url": "reviews/9.html",
+            "desc": "Instead of treating reactions as defects, learn to treat them as information\u2014and respond differently in everyday life.",
+            "keywords": "instead of treating reactions as defects, learn to treat them as information\u2014and respond differently"
+        },
+        {
+            "title": "Microbiology ABC&#x27;s",
+            "author": "Michael Bacotti",
+            "url": "reviews/19.html",
+            "desc": "From amoebas to zooplankton, each letter highlights a microbe or cell structure with colorful illustrations.",
+            "keywords": "from amoebas to zooplankton, each letter highlights a microbe or cell structure with colorful illust"
+        },
+        {
+            "title": "Living with a Moving Planet",
+            "author": "J. T. Hartley",
+            "url": "reviews/5.html",
+            "desc": "Drawing on deep-time climate records and archaeology, this book shows how humans have adapted to changing baselines for tens of thousands of years.",
+            "keywords": "drawing on deep-time climate records and archaeology, this book shows how humans have adapted to cha"
+        },
+        {
+            "title": "Physics of Insight",
+            "author": "Quantum Chronos",
+            "url": "reviews/15.html",
+            "desc": "What if genius isn&#x27;t rare\u2014it&#x27;s hidden inside every mind, waiting for the right switch?",
+            "keywords": "what if genius isn&#x27;t rare\u2014it&#x27;s hidden inside every mind, waiting for the right switch?"
+        },
+        {
+            "title": "The Power of Changing Your Mind",
+            "author": "Evan R. A. Cole",
+            "url": "reviews/the-power-of-changing-your-mind.html",
+            "desc": "A practical guide to intellectual humility and how it improves decisions, relationships, and everyday life.",
+            "keywords": "a practical guide to intellectual humility and how it improves decisions, relationships, and everyda"
+        },
+        {
+            "title": "Otom\u00ed",
+            "author": "E. J. Mar\u00edn",
+            "url": "reviews/14.html",
+            "desc": "Through the eyes of a young ritual apprentice, follow one drought-stricken year in an Otom\u00ed village.",
+            "keywords": "through the eyes of a young ritual apprentice, follow one drought-stricken year in an otom\u00ed village."
+        },
+        {
+            "title": "The Confluence Doctrine",
+            "author": "Alaric Wynn",
+            "url": "reviews/4.html",
+            "desc": "In a world where suffering has been designed out, Orren Myal hears something that doesn&#x27;t fit\u2014a sense of &#x27;full, but unfinished.&#x27; What i",
+            "keywords": "in a world where suffering has been designed out, orren myal hears something that doesn&#x27;t fit\u2014a"
+        },
+        {
+            "title": "Quantum Soul Echoes",
+            "author": "Quantum Chronos",
+            "url": "reviews/18.html",
+            "desc": "What if consciousness is what spacetime remembers? Two models synthesized in this rigorous exploration.",
+            "keywords": "what if consciousness is what spacetime remembers? two models synthesized in this rigorous explorati"
+        },
+        {
+            "title": "The Power of Changing Your Mind",
+            "author": "Evan R. Cole",
+            "url": "reviews/8.html",
+            "desc": "In a culture that rewards confidence, this book shows how intellectual humility is actually a competitive edge.",
+            "keywords": "in a culture that rewards confidence, this book shows how intellectual humility is actually a compet"
+        },
+        {
+            "title": "Little Mike: Builds a Robot",
+            "author": "Michael Jr",
+            "url": "reviews/34.html",
+            "desc": "Little Mike, John, and May build robots\u2014but they keep falling apart. Through teamwork, they create a robot that tells stories.",
+            "keywords": "little mike, john, and may build robots\u2014but they keep falling apart. through teamwork, they create a"
+        },
+        {
+            "title": "Mindful Memory",
+            "author": "D. E. Harlan",
+            "url": "reviews/22.html",
+            "desc": "Empowering retirees with science-backed exercises like memory palaces and timeline mapping.",
+            "keywords": "empowering retirees with science-backed exercises like memory palaces and timeline mapping."
+        },
+        {
+            "title": "Little Mike: Learns to Fly",
+            "author": "Michael Jr",
+            "url": "reviews/29.html",
+            "desc": "Little Mike dreams of flying. With friends John and May, he meets Pilot Thomas who teaches the wonders of airplanes.",
+            "keywords": "little mike dreams of flying. with friends john and may, he meets pilot thomas who teaches the wonde"
+        },
+        {
+            "title": "The Richmond Cipher",
+            "author": "E. Maris",
+            "url": "reviews/the-richmond-cipher.html",
+            "desc": "A historical thriller that weaves cryptography, Civil War intrigue, and a family secret into a page-turning mystery.",
+            "keywords": "a historical thriller that weaves cryptography, civil war intrigue, and a family secret into a page-"
+        },
+        {
+            "title": "Red Horizon: Lunar Launch",
+            "author": "M. A. Hale",
+            "url": "reviews/3.html",
+            "desc": "Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon\u2014humanity is raising children und",
+            "keywords": "commander marcus hale must launch the eos ark to deliver 250 young colonists to mars. but uap hover "
+        },
+        {
+            "title": "Symbiont Bloom",
+            "author": "Elowen Tidebloom",
+            "url": "reviews/13.html",
+            "desc": "On volcanic isles of Lumengrove, dawn arrives through living leaf-glass. When the island&#x27;s pulse skips, a family must unravel a systems puzzle.",
+            "keywords": "on volcanic isles of lumengrove, dawn arrives through living leaf-glass. when the island&#x27;s puls"
+        },
+        {
+            "title": "Blood Ember",
+            "author": "Jorak Veldt",
+            "url": "reviews/25.html",
+            "desc": "Three parts trace how survival habits harden into protocol, law, and chant. From fire to spear to echo.",
+            "keywords": "three parts trace how survival habits harden into protocol, law, and chant. from fire to spear to ec"
+        },
+        {
+            "title": "Mythical Menagerie",
+            "author": "E. Marlowe",
+            "url": "reviews/33.html",
+            "desc": "A thrilling journey through cultures exploring mythical creatures. Discover how dragons and shape-shifters shaped cultural identities.",
+            "keywords": "a thrilling journey through cultures exploring mythical creatures. discover how dragons and shape-sh"
+        },
+        {
+            "title": "Living with a Moving Planet",
+            "author": "J. T. Hartley",
+            "url": "reviews/living-with-a-moving-planet.html",
+            "desc": "A hopeful, practical guide to adapting to climate change through personal resilience and systemic thinking.",
+            "keywords": "a hopeful, practical guide to adapting to climate change through personal resilience and systemic th"
+        },
+        {
+            "title": "American Journeys",
+            "author": "C. Everett",
+            "url": "reviews/32.html",
+            "desc": "For those moving to or visiting the US\u2014or anyone eager to enhance English through immersive content.",
+            "keywords": "for those moving to or visiting the us\u2014or anyone eager to enhance english through immersive content."
+        },
+        {
+            "title": "Rules of Survival",
+            "author": "Jorak Veldt",
+            "url": "reviews/24.html",
+            "desc": "Roughly one million years ago, a boy learns the band&#x27;s rules\u2014water order, ember law, watch\u2014and pays for them in skin.",
+            "keywords": "roughly one million years ago, a boy learns the band&#x27;s rules\u2014water order, ember law, watch\u2014and "
+        },
+        {
+            "title": "Resonance Drift",
+            "author": "R. Zyrion",
+            "url": "reviews/12.html",
+            "desc": "In Eden Prime&#x27;s biolum spires, harmony hums\u2014until a family detects a pulse that defies the weave.",
+            "keywords": "in eden prime&#x27;s biolum spires, harmony hums\u2014until a family detects a pulse that defies the weav"
+        },
+        {
+            "title": "The Richmond Cipher",
+            "author": "E. Maris",
+            "url": "reviews/2.html",
+            "desc": "In Confederate Richmond, 1863, Mary carries secrets in her memory as she moves through the Executive Mansion. Every word she hears becomes intelligenc",
+            "keywords": "in confederate richmond, 1863, mary carries secrets in her memory as she moves through the executive"
+        },
+        {
+            "title": "The Quiet Hours",
+            "author": "Elara Moss",
+            "url": "reviews/28.html",
+            "desc": "Gentle bedtime stories celebrating simple joys\u2014perfect for children seeking comfort.",
+            "keywords": "gentle bedtime stories celebrating simple joys\u2014perfect for children seeking comfort."
+        },
+        {
+            "title": "Disclosure 2026",
+            "author": "Marcus Reeve",
+            "url": "reviews/11.html",
+            "desc": "From viral smartphone footage to White House landings, this book analyzes 18 pathways to alien disclosure\u2014each rated for plausibility based on decades",
+            "keywords": "from viral smartphone footage to white house landings, this book analyzes 18 pathways to alien discl"
+        },
+        {
+            "title": "The Dawn of Civilization",
+            "author": "T. Stone",
+            "url": "reviews/1.html",
+            "desc": "When a brutal winter kills his father, sixteen-year-old Koda watches Uluk take up the leader&#x27;s staff and hold their small tribe together. As bear",
+            "keywords": "when a brutal winter kills his father, sixteen-year-old koda watches uluk take up the leader&#x27;s "
+        },
+        {
+            "title": "The Shadow Within",
+            "author": "Elena Maris",
+            "url": "reviews/the-shadow-within.html",
+            "desc": "A practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological depth.",
+            "keywords": "a practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological d"
+        },
+        {
+            "title": "Echoes of Transcendence",
+            "author": "L Everwood",
+            "url": "reviews/31.html",
+            "desc": "Where boundaries of reality blur, seekers embark on a transformative journey. Guided by ancient prophecies, they unveil mysteries.",
+            "keywords": "where boundaries of reality blur, seekers embark on a transformative journey. guided by ancient prop"
+        },
+        {
+            "title": "Little Mike: Fun at the Beach",
+            "author": "Michael Jr",
+            "url": "reviews/27.html",
+            "desc": "Join Little Mike and his friends as they build an awe-inspiring sand castle.",
+            "keywords": "join little mike and his friends as they build an awe-inspiring sand castle."
+        },
+        {
+            "title": "The Orchardist: Harvest",
+            "author": "Kate E Brennan",
+            "url": "reviews/26.html",
+            "desc": "Diane Kessler falls from a ladder\u2014in that moment, she doesn&#x27;t come back. A story of near-death experience.",
+            "keywords": "diane kessler falls from a ladder\u2014in that moment, she doesn&#x27;t come back. a story of near-death "
+        },
+        {
+            "title": "Discovering Washington DC",
+            "author": "Evelyn Carter",
+            "url": "reviews/30.html",
+            "desc": "Beyond the monuments\u2014a guide to the real DC. Stroll Georgetown&#x27;s cobblestones, tap your feet to jazz, taste a half-smoke.",
+            "keywords": "beyond the monuments\u2014a guide to the real dc. stroll georgetown&#x27;s cobblestones, tap your feet to"
+        },
+        {
+            "title": "Echoes of Aetheris",
+            "author": "Aetheri Codex",
+            "url": "reviews/10.html",
+            "desc": "Nine thousand years before history, a wounded alien ship falls onto a frozen steppe. The first hybrid is born.",
+            "keywords": "nine thousand years before history, a wounded alien ship falls onto a frozen steppe. the first hybri"
+        },
+        {
+            "title": "The Burning Song",
+            "author": "Rowan Ashcroft",
+            "url": "reviews/21.html",
+            "desc": "When a cave lion marks Aken, the leader makes a choice that breaks every rule: he sends scouts to the coastal strangers.",
+            "keywords": "when a cave lion marks aken, the leader makes a choice that breaks every rule: he sends scouts to th"
+        },
+        {
+            "title": "Consciousness in Higher Dimensional Spacetime",
+            "author": "Quantum Chronos",
+            "url": "reviews/17.html",
+            "desc": "What if consciousness doesn&#x27;t exist in the same spacetime as the body? A radical extension of Einstein&#x27;s relativity into the domain of mind.",
+            "keywords": "what if consciousness doesn&#x27;t exist in the same spacetime as the body? a radical extension of e"
+        },
+        {
+            "title": "Veiled Presence",
+            "author": "E.C. Stroud",
+            "url": "reviews/7.html",
+            "desc": "In Veiled Presence: Questions on Earth's Silent Neighbors, researcher E. C. Stroud walks carefully through the modern UAP/UFO record\u2014not to proclaim a",
+            "keywords": "in veiled presence: questions on earth's silent neighbors, researcher e. c. stroud walks carefully t"
+        },
+        {
+            "title": "Beyond the Veil",
+            "author": "D. E. Harlan",
+            "url": "reviews/6.html",
+            "desc": "A careful tour of evidence around what happens when we die, drawing on NDE research, quantum physics, and philosophy.",
+            "keywords": "a careful tour of evidence around what happens when we die, drawing on nde research, quantum physics"
+        },
+        {
+            "title": "The Physics of Time",
+            "author": "Quantum Chronos",
+            "url": "reviews/16.html",
+            "desc": "A groundbreaking exploration: what if the universe is a block of spacetime containing all moments, yet consciousness navigates through it?",
+            "keywords": "a groundbreaking exploration: what if the universe is a block of spacetime containing all moments, y"
+        },
+        {
+            "title": "Red Horizon: Lunar Launch",
+            "author": "M. A. Hale",
+            "url": "reviews/red-horizon-lunar-launch.html",
+            "desc": "A near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller.",
+            "keywords": "a near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller."
+        },
+        {
+            "title": "You Tell the Story",
+            "author": "Ellie Sunwood",
+            "url": "reviews/20.html",
+            "desc": "A draw-and-write storybook where children look at pictures, then write and draw their own stories.",
+            "keywords": "a draw-and-write storybook where children look at pictures, then write and draw their own stories."
+        }
+    ],
+    "stories": [
+        {
+            "title": "The Ember Song",
+            "url": "stories/23.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Last Gift",
+            "url": "stories/35.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Humble Mind",
+            "url": "stories/9.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Question",
+            "url": "stories/19.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "Echoes of the Designed",
+            "url": "stories/5.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Last Song",
+            "url": "stories/15.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Door Between Worlds",
+            "url": "stories/14.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Ones Who Wait",
+            "url": "stories/4.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Forgotten Minute",
+            "url": "stories/18.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "They Walk Among Us",
+            "url": "stories/8.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The First Word",
+            "url": "stories/34.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Last Arena",
+            "url": "stories/22.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Echoes Return",
+            "url": "stories/29.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "What the Silence Knew",
+            "url": "stories/3.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Borrowed Life",
+            "url": "stories/13.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "Fun at the Beach",
+            "url": "stories/25.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Time Auction",
+            "url": "stories/33.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "Builds a Robot",
+            "url": "stories/32.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Harvest",
+            "url": "stories/24.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Disclosure",
+            "url": "stories/12.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Last Winter",
+            "url": "stories/2.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "City of Wonders",
+            "url": "stories/28.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Forbidden Library",
+            "url": "stories/11.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Last Signal",
+            "url": "stories/1.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Mythical Search",
+            "url": "stories/31.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "Learns to Fly",
+            "url": "stories/27.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Quiet Town",
+            "url": "stories/26.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "American Voices",
+            "url": "stories/30.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Other Side",
+            "url": "stories/10.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Shadow Garden",
+            "url": "stories/21.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "Blood Ties",
+            "url": "stories/17.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Space Between",
+            "url": "stories/7.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Last Garden",
+            "url": "stories/6.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "Rules of the Game",
+            "url": "stories/16.html",
+            "desc": "",
+            "keywords": ""
+        },
+        {
+            "title": "The Sound Between Stars",
+            "url": "stories/20.html",
+            "desc": "",
+            "keywords": ""
+        }
+    ],
+    "articles": []
 };
 
 // Popular searches for empty state
@@ -47,154 +539,102 @@ function initSearch() {
         </div>
     `;
     document.body.appendChild(modal);
-    
+
+    searchModal = modal;
     searchInput = document.getElementById('searchInput');
     searchResults = document.getElementById('searchResults');
     
-    // Debounced search - faster typing
-    // Handle Enter key
+    searchInput.addEventListener('input', handleSearch);
     searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            performSearch();
-        }
+        if (e.key === 'Escape') closeSearch();
     });
     
-    // Handle input (debounced)
-    searchInput.addEventListener('input', () => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(performSearch, 150);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeSearch();
     });
     
     document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
             openSearch();
-        }
-        if (e.key === 'Escape') {
-            closeSearch();
         }
     });
 }
 
 function openSearch() {
     initSearch();
-    const modal = document.getElementById('searchModal');
-    modal.style.display = 'block';
+    searchModal.style.display = 'block';
     searchInput.focus();
-    document.body.style.overflow = 'hidden';
-    showEmptyState();
+    showPopularSearches();
 }
 
 function closeSearch() {
-    const modal = document.getElementById('searchModal');
-    if (modal) modal.style.display = 'none';
-    document.body.style.overflow = '';
+    if (searchModal) {
+        searchModal.style.display = 'none';
+    }
 }
 
-function showEmptyState() {
-    let html = '<div style="padding:1rem;">';
-    html += '<p style="color:var(--text-dim);margin-bottom:1rem;font-size:0.9rem;">Popular searches:</p>';
+function showPopularSearches() {
+    let html = '<div style="padding:1rem;"><p style="color:var(--text-dim);margin-bottom:1rem;">Popular searches:</p>';
     html += '<div style="display:flex;flex-wrap:wrap;gap:0.5rem;">';
     popularSearches.forEach(ps => {
-        html += `<button onclick="quickSearch('${ps.query}')" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:0.5rem 1rem;color:var(--text);cursor:pointer;font-size:0.9rem;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">${ps.label}</button>`;
+        html += `<button onclick="searchInput.value='${ps.query}';handleSearch()" style="background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:0.5rem 1rem;cursor:pointer;color:var(--text);font-size:0.9rem;">${ps.label}</button>`;
     });
     html += '</div></div>';
     searchResults.innerHTML = html;
 }
 
-function quickSearch(query) {
-    searchInput.value = query;
-    performSearch();
+function handleSearch() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        const query = searchInput.value.toLowerCase().trim();
+        if (query.length < 2) {
+            showPopularSearches();
+            return;
+        }
+        performSearch(query);
+    }, 150);
 }
 
-// Score how well a result matches the query
-function scoreResult(item, query) {
-    const text = (item.title + ' ' + (item.author || '') + ' ' + (item.keywords || item.desc || '')).toLowerCase();
-    const q = query.toLowerCase();
+function performSearch(query) {
+    const allData = [...siteData.books, ...siteData.stories, ...siteData.articles];
     
-    let score = 0;
+    const results = allData.map(item => {
+        const titleMatch = item.title.toLowerCase().includes(query);
+        const descMatch = item.desc && item.desc.toLowerCase().includes(query);
+        const keywordsMatch = item.keywords && item.keywords.toLowerCase().includes(query);
+        const authorMatch = item.author && item.author.toLowerCase().includes(query);
+        
+        let score = 0;
+        if (titleMatch) score += 10;
+        if (descMatch) score += 5;
+        if (keywordsMatch) score += 3;
+        if (authorMatch) score += 5;
+        
+        return { ...item, score };
+    }).filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score);
     
-    // Exact title match (highest)
-    if (item.title.toLowerCase().includes(q)) score += 100;
-    // Title starts with query
-    if (item.title.toLowerCase().startsWith(q)) score += 50;
-    // Author match
-    if (item.author && item.author.toLowerCase().includes(q)) score += 30;
-    // Keyword/desc match
-    if (text.includes(q)) score += 10;
-    // Fuzzy match (partial)
-    if (fuzzyMatch(q, text)) score += 5;
-    
-    return score;
-}
-
-function fuzzyMatch(query, text) {
-    let qi = 0;
-    for (let i = 0; i < text.length && qi < query.length; i++) {
-        if (text[i] === query[qi]) qi++;
-    }
-    return qi >= query.length * 0.7;  // 70% match threshold
+    displayResults(results, query);
 }
 
 function highlightMatch(text, query) {
-    if (!query || query.length < 2) return text;
-    const regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-    return text.replace(regex, '<mark style="background:var(--accent);color:white;padding:0 2px;border-radius:2px;">$1</mark>');
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<mark style="background:var(--accent);color:white;padding:0 0.2rem;border-radius:2px;">$1</mark>');
 }
 
-function performSearch() {
-    const query = searchInput.value.trim();
-    const resultsDiv = document.getElementById('searchResults');
-    
-    if (query.length < 2) {
-        showEmptyState();
+function displayResults(results, query) {
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-dim);">No results found. Try different keywords.</div>';
         return;
     }
     
-    // Score and sort all results
-    let allResults = [];
+    const books = results.filter(r => r.url && r.url.startsWith('reviews/'));
+    const stories = results.filter(r => r.url && r.url.startsWith('stories/'));
+    const articles = results.filter(r => r.url && !r.url.startsWith('reviews/') && !r.url.startsWith('stories/'));
     
-    // Books
-    siteData.books.forEach(book => {
-        const score = scoreResult(book, query);
-        if (score > 0) {
-            allResults.push({ ...book, type: 'book', score });
-        }
-    });
-    
-    // Stories
-    siteData.stories.forEach(story => {
-        const score = scoreResult(story, query);
-        if (score > 0) {
-            allResults.push({ ...story, type: 'story', score });
-        }
-    });
-    
-    // Articles
-    siteData.articles.forEach(article => {
-        const score = scoreResult(article, query);
-        if (score > 0) {
-            allResults.push({ ...article, type: 'article', score });
-        }
-    });
-    
-    // Sort by score (highest first)
-    allResults.sort((a, b) => b.score - a.score);
-    
-    // Limit results
-    allResults = allResults.slice(0, 12);
-    
-    if (allResults.length === 0) {
-        resultsDiv.innerHTML = '<p style="color:var(--text-dim);padding:2rem;text-align:center;">No results found for "<strong>' + query + '</strong>"</p>';
-        return;
-    }
-    
-    // Render results grouped by type
     let html = '';
-    const books = allResults.filter(r => r.type === 'book');
-    const stories = allResults.filter(r => r.type === 'story');
-    const articles = allResults.filter(r => r.type === 'article');
     
     if (books.length > 0) {
         html += '<div style="margin-bottom:1.5rem;"><h4 style="color:var(--accent);font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.75rem;">📚 Books</h4>';
@@ -228,7 +668,7 @@ function performSearch() {
         html += '</div>';
     }
     
-    resultsDiv.innerHTML = html;
+    searchResults.innerHTML = html;
 }
 
 function addSearchButton() {

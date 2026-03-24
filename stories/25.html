@@ -175,8 +175,7 @@
     function shareTwitter() {
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent(document.title);
-        window.open('https://twitter.com/intent/tweet?url=' + url + '        document.getElementById('year').textContent = new Date().getFullYear();
-        updateBookmarkBtn();text=' + title, '_blank');
+        window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
     }
     function shareFacebook() {
         const url = encodeURIComponent(window.location.href);
