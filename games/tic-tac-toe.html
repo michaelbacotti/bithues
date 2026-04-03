@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 1rem; text-align: center; }
+        .container { max-width: 400px; margin: 0 auto; }
+        header { padding: 1rem 0; margin-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        header a { color: var(--accent); text-decoration: none; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        
+        .status { font-size: 1.2rem; margin-bottom: 1rem; color: var(--accent); }
+        
+        .board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-width: 300px; margin: 0 auto 1rem; }
+        .cell { width: 90px; height: 90px; background: var(--surface); border: 2px solid var(--border); border-radius: 8px; font-size: 3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .cell:hover { border-color: var(--accent); }
+        
+        .btn { padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
+ crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="games.html">← Back to Games</a>
+            <h1 class="header">⭕ Tic-Tac-Toe</h1>
+        </header>
+        
+        <div class="status" id="status">Your turn (X)</div>
+        <div class="board" id="board"></div>
+        <button class="btn" onclick="initGame()">New Game</button>
+    </div>
+
+    <script>
+        let board = [];
+        let currentPlayer = 'X';
+        let gameOver = false;
+        
+        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        
+        function initGame() {
+            board = ['','','','','','','','',''];
+            currentPlayer = 'X';
+            gameOver = false;
+            document.getElementById('status').textContent = 'Your turn (X)';
+            
+            const boardEl = document.getElementById('board');
+            boardEl.innerHTML = '';
+            
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.onclick = () => makeMove(i);
+                boardEl.appendChild(cell);
+            }
+        }
+        
+        function makeMove(i) {
+            if (gameOver || board[i]) return;
+            
+            board[i] = currentPlayer;
+            document.getElementById('board').children[i].textContent = currentPlayer;
+            
+            // Check win
+            for (const [a,b,c] of wins) {
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    document.getElementById('status').textContent = `🎉 ${currentPlayer} wins!`;
+                    gameOver = true;
+                    return;
+                }
+            }
+            
+            // Check draw
+            if (!board.includes('')) {
+                document.getElementById('status').textContent = "It's a draw!";
+                gameOver = true;
+                return;
+            }
+            
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            document.getElementById('status').textContent = currentPlayer === 'X' ? 'Your turn (X)' : "Computer's turn (O)";
+            
+            if (currentPlayer === 'O') {
+                setTimeout(computerMove, 500);
+            }
+        }
+        
+        function computerMove() {
+            const empty = board.map((v,i) => v === '' ? i : -1).filter(i => i >= 0);
+            if (empty.length && !gameOver) {
+                makeMove(empty[Math.floor(Math.random() * empty.length)]);
+            }
+        }
+        
+        initGame();
+    </script>
+</body>
+</html>

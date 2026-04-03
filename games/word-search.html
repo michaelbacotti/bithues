@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; --found: #10b981; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 1rem; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; }
+        header { padding: 1rem 0; margin-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        header a { color: var(--accent); text-decoration: none; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        
+        .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem; padding: 1rem; background: var(--surface); border-radius: 8px; }
+        .word { padding: 0.25rem 0.75rem; background: var(--bg); border-radius: 4px; font-size: 0.9rem; }
+        .word.found { background: var(--found); color: white; text-decoration: line-through; }
+        
+        .grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; margin: 0 auto 1rem; max-width: 400px; }
+        .cell { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); font-size: 0.9rem; cursor: pointer; user-select: none; }
+        .cell.selected { background: var(--accent); color: white; }
+        .cell.found { background: var(--found); color: white; }
+        
+        .btn { padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+        
+        @media (max-width: 500px) { .grid { max-width: 300px; } .cell { font-size: 0.7rem; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
+ crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="games.html">← Back to Games</a>
+            <h1 class="header">🔤 Word Search</h1>
+            <p>Find the book-related words!</p>
+        </header>
+        
+        <div class="word-list" id="wordList"></div>
+        <div class="grid" id="grid"></div>
+        <button class="btn" onclick="initGame()">New Game</button>
+    </div>
+
+    <script>
+        const wordBank = [
+            ['NOVEL', 'STORY', 'BOOK', 'READ', 'PAGE', 'PLOT', 'GENRE', 'AUTHOR', 'TITLE', 'CHAPTER'],
+            ['FICTION', 'MYSTERY', 'SCIFI', 'FANTASY', 'ROMANCE', 'THRILLER', 'HORROR', 'POETRY', 'ESSAY', 'MEMOIR'],
+            ['PROLOGUE', 'EPILOGUE', 'PROTAGONIST', 'ANTAGONIST', 'CLIFFHANGER', 'SYNOPSIS', 'MANUSCRIPT', 'PUBLISHER']
+        ];
+        
+        let gridSize = 10;
+        let grid = [];
+        let words = [];
+        let foundWords = [];
+        
+        function initGame() {
+            words = wordBank[Math.floor(Math.random() * wordBank.length)].slice(0, 6);
+            foundWords = [];
+            generateGrid();
+            render();
+        }
+        
+        function generateGrid() {
+            grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(''));
+            
+            words.forEach(word => {
+                const directions = [[0,1], [1,0], [1,1], [1,-1]];
+                let placed = false;
+                
+                for (let attempt = 0; attempt < 50 && !placed; attempt++) {
+                    const dir = directions[Math.floor(Math.random() * directions.length)];
+                    const startRow = Math.floor(Math.random() * gridSize);
+                    const startCol = Math.floor(Math.random() * gridSize);
+                    
+                    if (canPlace(word, startRow, startCol, dir)) {
+                        for (let i = 0; i < word.length; i++) {
+                            grid[startRow + i*dir[0]][startCol + i*dir[1]] = word[i];
+                        }
+                        placed = true;
+                    }
+                }
+            });
+            
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    if (!grid[r][c]) {
+                        grid[r][c] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                    }
+                }
+            }
+        }
+        
+        function canPlace(word, row, col, dir) {
+            if (row + dir[0]*word.length >= gridSize || col + dir[1]*word.length >= gridSize) return false;
+            if (col + dir[1]*word.length < 0) return false;
+            
+            for (let i = 0; i < word.length; i++) {
+                const cell = grid[row + i*dir[0]][col + i*dir[1]];
+                if (cell && cell !== word[i]) return false;
+            }
+            return true;
+        }
+        
+        function render() {
+            const list = document.getElementById('wordList');
+            list.innerHTML = words.map(w => 
+                `<span class="word ${foundWords.includes(w) ? 'found' : ''}">${w}</span>`
+            ).join('');
+            
+            const gridEl = document.getElementById('grid');
+            gridEl.innerHTML = '';
+            gridEl.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+            
+            for (let r = 0; r < gridSize; r++) {
+                for (let c = 0; c < gridSize; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.textContent = grid[r][c];
+                    cell.onclick = () => selectCell(r, c, cell);
+                    gridEl.appendChild(cell);
+                }
+            }
+        }
+        
+        function selectCell(r, c, cell) {
+            cell.classList.toggle('selected');
+            
+            // Check if all words found
+            const selected = document.querySelectorAll('.cell.selected');
+            if (selected.length >= 5) {
+                checkSelection();
+            }
+        }
+        
+        function checkSelection() {
+            // Simple: just check if random selection works
+            // For full game, would need drag-select logic
+            alert('Drag to select words! (Coming soon)');
+            document.querySelectorAll('.cell.selected').forEach(c => c.classList.remove('selected'));
+        }
+        
+        initGame();
+    </script>
+</body>
+</html>

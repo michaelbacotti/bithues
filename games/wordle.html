@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; --correct: #10b981; --present: #f59e0b; --wrong: #3f3f46; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 1rem; text-align: center; }
+        .container { max-width: 400px; margin: 0 auto; }
+        header { padding: 1rem 0; margin-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        header a { color: var(--accent); text-decoration: none; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 1rem 0; }
+        .row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+        .cell { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; border: 2px solid var(--border); background: var(--surface); }
+        .cell.correct { background: var(--correct); border-color: var(--correct); }
+        .cell.present { background: var(--present); border-color: var(--present); }
+        .cell.wrong { background: var(--wrong); border-color: var(--wrong); }
+        .cell.active { border-color: var(--accent); }
+        
+        .keyboard { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 1rem; }
+        .key { padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+        .key.correct { background: var(--correct); color: white; border-color: var(--correct); }
+        .key.present { background: var(--present); color: white; border-color: var(--present); }
+        .key.wrong { background: var(--wrong); color: white; border-color: var(--wrong); }
+        
+        .message { padding: 1rem; margin: 1rem 0; background: var(--surface); border-radius: 8px; }
+        
+        @media (max-width: 400px) { .cell { width: 45px; height: 45px; font-size: 1.2rem; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
+ crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="games.html">← Back to Games</a>
+            <h1 class="header">🟩 Wordle Clone</h1>
+            <p>Guess the 5-letter word in 6 tries</p>
+        </header>
+        
+        <div class="grid" id="grid"></div>
+        <div class="message" id="message"></div>
+        <div class="keyboard" id="keyboard"></div>
+    </div>
+
+    <script>
+        const words = ['READ', 'BOOK', 'STORY', 'WORDS', 'PAGES', 'WRITE', 'NOVEL', 'PLOTS', 'GENRE', 'TITLE', 'AUTHOR', 'READS', 'PAPER', 'INDEX', 'WORDS'];
+        const answer = words[Math.floor(Math.random() * words.length)];
+        let currentRow = 0;
+        let currentCol = 0;
+        let gameOver = false;
+        
+        const keyboard = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+        
+        function init() {
+            // Build grid
+            const grid = document.getElementById('grid');
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                for (let j = 0; j < 5; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.id = `cell-${i}-${j}`;
+                    row.appendChild(cell);
+                }
+                grid.appendChild(row);
+            }
+            
+            // Build keyboard
+            const kb = document.getElementById('keyboard');
+            keyboard.forEach((row, ri) => {
+                row.split('').forEach(letter => {
+                    const key = document.createElement('button');
+                    key.className = 'key';
+                    key.textContent = letter;
+                    key.onclick = () => typeLetter(letter);
+                    kb.appendChild(key);
+                });
+                if (ri === 2) {
+                    const enter = document.createElement('button');
+                    enter.className = 'key';
+                    enter.textContent = 'ENTER';
+                    enter.onclick = checkWord;
+                    kb.appendChild(enter);
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') checkWord();
+                else if (e.key === 'Backspace') deleteLetter();
+                else if (/^[A-Z]$/.test(e.key)) typeLetter(e.key);
+            });
+        }
+        
+        function typeLetter(l) {
+            if (gameOver || currentCol >= 5) return;
+            document.getElementById(`cell-${currentRow}-${currentCol}`).textContent = l;
+            currentCol++;
+        }
+        
+        function deleteLetter() {
+            if (gameOver || currentCol <= 0) return;
+            currentCol--;
+            document.getElementById(`cell-${currentRow}-${currentCol}`).textContent = '';
+        }
+        
+        function checkWord() {
+            if (currentCol < 5) return;
+            
+            let guess = '';
+            for (let i = 0; i < 5; i++) {
+                guess += document.getElementById(`cell-${currentRow}-${i}`).textContent;
+            }
+            
+            const result = [];
+            const answerChars = answer.split('');
+            
+            // First pass: correct positions
+            for (let i = 0; i < 5; i++) {
+                if (guess[i] === answer[i]) {
+                    result[i] = 'correct';
+                    answerChars[i] = null;
+                }
+            }
+            
+            // Second pass: wrong positions
+            for (let i = 0; i < 5; i++) {
+                if (!result[i]) {
+                    const idx = answerChars.indexOf(guess[i]);
+                    if (idx >= 0) {
+                        result[i] = 'present';
+                        answerChars[idx] = null;
+                    } else {
+                        result[i] = 'wrong';
+                    }
+                }
+            }
+            
+            // Update cells
+            for (let i = 0; i < 5; i++) {
+                const cell = document.getElementById(`cell-${currentRow}-${i}`);
+                cell.classList.add(result[i]);
+                
+                // Update keyboard
+                const key = document.querySelector(`.key:not([id])`);
+                document.querySelectorAll('.key').forEach(k => {
+                    if (k.textContent === guess[i] && !k.classList.contains('correct')) {
+                        k.classList.remove('present', 'wrong');
+                        k.classList.add(result[i]);
+                    }
+                });
+            }
+            
+            if (guess === answer) {
+                document.getElementById('message').textContent = '🎉 You won!';
+                gameOver = true;
+            } else if (currentRow >= 5) {
+                document.getElementById('message').textContent = `Game over! Word was ${answer}`;
+                gameOver = true;
+            } else {
+                currentRow++;
+                currentCol = 0;
+            }
+        }
+        
+        init();
+    </script>
+</body>
+</html>

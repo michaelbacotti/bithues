@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Bithues Reading Lab</title>
+  <meta name="description" content="About Bithues Reading Lab — our mission to help readers discover great books.">
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-brand">Bithues <span>Reading Lab</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="stories.html">Stories</a>
+      <a href="catalog.html">Reviews</a>
+      <a href="articles.html">Articles</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="forecast.html">Forecast</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-eyebrow">Bithues Reading Lab</div>
+    <h1>About <em>Us</em></h1>
+    <p class="hero-sub">Our mission to help readers discover great books — honestly and independently.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- ── MISSION ── -->
+  <section class="section">
+    <div class="section-title">What We Do</div>
+    <div class="mission">
+      <p><strong>Our Mission:</strong> To cut through the noise of thousands of new books released each year and help readers find the ones actually worth their time.</p>
+    </div>
+    <p style="margin-top:1.5rem;">Every book on Bithues is personally reviewed. We don't do star ratings or plot summaries — we focus on what you'll actually get from reading it. Our reviews answer the questions that matter:</p>
+    <ul style="margin:1rem 0 2rem 1.5rem;color:var(--text-body);">
+      <li>What will you learn?</li>
+      <li>Who is this book for?</li>
+      <li>Is it worth your time?</li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── VALUES ── -->
+  <section class="section">
+    <div class="section-title">What We Believe</div>
+    <div class="cards-grid">
+      <div class="card">
+        <h3>Quality Over Quantity</h3>
+        <p>We'd rather have 35 excellent reviews than 350 mediocre ones. Every book on our site has been read cover to cover and thoughtfully evaluated.</p>
+      </div>
+      <div class="card">
+        <h3>Indie Authors Matter</h3>
+        <p>Big publishers have marketing budgets. Indie authors have passion and creativity. We give indie authors a fair shot because great stories come from everywhere.</p>
+      </div>
+      <div class="card">
+        <h3>Honesty Over Kindness</h3>
+        <p>We'd rather tell you a book isn't worth your time than pad a review. Our readers trust us to be honest, and we take that seriously.</p>
+      </div>
+      <div class="card">
+        <h3>Reading Should Change You</h3>
+        <p>The best books don't just entertain — they shift how you see the world. We seek out books that challenge assumptions and expand horizons.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── WHAT YOU'LL FIND ── -->
+  <section class="section">
+    <div class="section-title">What You'll Find Here</div>
+    <div class="cards-grid">
+      <div class="card">
+        <h3>📚 Book Reviews</h3>
+        <p>Detailed, honest reviews of fiction and non-fiction. No plot spoilers — just what you'll actually learn and who each book is for.</p>
+      </div>
+      <div class="card">
+        <h3>✍️ Articles</h3>
+        <p>Deep dives on genres, reading lists, and book recommendations. Curated guides to help you find your next favorite read.</p>
+      </div>
+      <div class="card">
+        <h3>📂 Curated Catalogs</h3>
+        <p>Books organized by genre and category. From sci-fi to self-help, find exactly what you're looking for.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── WHO WE ARE ── -->
+  <section class="section">
+    <div class="section-title">Who We Are</div>
+    <p>Bithues was created by readers, for readers. We started with a simple idea: book reviews should help people find books they'll actually love, not just list plot points.</p>
+    <p style="margin-top:1rem;">We're not here to please publishers or chase trends. We're here to help you find books that matter.</p>
+    <p style="margin-top:1rem;">Have a book recommendation? Want to suggest a title for review? Just want to say hello? <a href="contact.html" style="color:var(--gold);">We'd love to hear from you.</a></p>
+    <p style="margin-top:2rem;font-size:1.1rem;color:var(--navy);font-weight:600;">Happy reading!</p>
+
+    <div style="margin-top:2rem;">
+      <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:.75rem;">Share this page</h3>
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareTwitter()">𝕏 Twitter</button>
+        <button class="share-btn" onclick="shareFacebook()">📘 Facebook</button>
+        <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    function shareTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title);
+      window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
+    }
+    function shareFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+    }
+    function shareLinkedIn() {
+      const url = encodeURIComponent(window.location.href);
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+    }
+    window.onscroll = function() {
+      const btn = document.querySelector('.back-to-top');
+      if (window.scrollY > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

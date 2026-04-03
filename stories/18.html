@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Original literary fiction short story — The Forgotten Minute. A man wakes to find one minute of his life has vanished entirely.">
+    <meta property="og:title" content="The Forgotten Minute - Short Story | Bithues">
+    <meta property="og:description" content="Original literary fiction short story. Free to read.">
+    <meta property="og:type" content="article">
+    <title>The Forgotten Minute | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #4a90a4; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.9; font-size: 1.1rem; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; font-family: -apple-system, sans-serif; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; font-family: -apple-system, sans-serif; }
+        nav a.active { color: var(--accent); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; }
+        .story-header { padding: 3rem 0 2rem; text-align: center; }
+        .story-header h1 { font-size: 2.25rem; margin-bottom: 1rem; line-height: 1.2; font-family: -apple-system, sans-serif; }
+        .story-header .meta { color: var(--text-dim); font-size: 0.95rem; font-family: -apple-system, sans-serif; }
+        .story-header .genre-tag { display: inline-block; background: var(--accent); color: white; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 15px; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        .story-content { padding: 2rem 0; }
+        .story-content p { margin-bottom: 1.5rem; text-indent: 2em; }
+        .story-content p:first-of-type { text-indent: 0; }
+        .story-content p:first-of-type::first-letter { font-size: 3.5rem; float: left; line-height: 1; margin-right: 0.5rem; color: var(--accent); font-weight: 700; }
+        .book-promo { background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 2rem; margin: 3rem 0; text-align: center; }
+        .book-promo h3 { font-size: 1.25rem; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        .book-promo p { color: var(--text-dim); margin-bottom: 1.5rem; font-size: 1rem; }
+        .share-buttons { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .share-buttons p { color: var(--text-dim); margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .share-links { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .share-btn { padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; }
+        .story-footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
+        .story-footer a { color: var(--accent); text-decoration: none; font-family: -apple-system, sans-serif; }
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; font-family: -apple-system, sans-serif; }
+        @media (max-width: 600px) { .story-header h1 { font-size: 1.75rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="breadcrumb" style="padding:1rem 0;color:var(--text-dim);font-size:0.85rem;">
+                <a href="../index.html">Home</a> → <a href="../stories.html">Stories</a> → <span>The Forgotten Minute</span>
+            </div>
+            <nav>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="../index.html">Home</a>
+                    <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
+                    <a href="../stories.html" class="active">Stories</a>
+                    <a href="../about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="story-header">
+                <span class="genre-tag">Literary Fiction</span>
+                <h1 class="header">The Forgotten Minute</h1>
+                <div class="bookmark-btn-container" style="text-align:right;margin-bottom:0.5rem;"><button onclick="toggleBookmark()" style="background:none;border:1px solid var(--border);border-radius:15px;padding:0.3rem 0.8rem;cursor:pointer;font-size:0.8rem;color:var(--text-dim);">+ Bookmark</button></div>
+                <p class="meta">2,400 words · 8 min read</p>
+            </div>
+            
+            <div class="story-content">
+                <p>He woke at 6:47 and knew, immediately, that something was wrong. Not alarming — not the sharp wrongness of a nightmare or the dull wrongness of illness. A quieter wrongness. The wrongness of a sentence with a word missing, of a room where the furniture has been rearranged by a few inches. He lay still and listened to the refrigerator hum and the distant sound of a garbage truck and his own breathing, which was normal, and he could not identify what was different.</p>
+
+                <p>He got up. He walked to the kitchen. On the counter beside the sink was a coffee cup, ceramic, blue, his favorite, and it was half-full of coffee that had gone cold. He stared at it for a moment. He did not remember pouring it. He did not remember making it. He made coffee every morning in a ritual that had not changed in twelve years — kettle, French press, two minutes of waiting — and he could not recall, try as he might, making this cup. But there it was. Half-full. Cold. Evidence.</p>
+
+                <p>He drank it anyway. It tasted like cold coffee and the particular staleness of something that had been sitting too long. He poured the rest down the sink and stood at the window and looked at the backyard, where the oak tree was dropping its leaves in the windless morning, and he thought: I am forgetting things now. I am fifty-three and I am forgetting things.</p>
+
+                <p>The phone was on the nightstand. He picked it up to check the time — 7:04 — and noticed the call log. The last entry was 6:48. Incoming. Duration: one minute. He did not recognize the number. He did not remember answering the phone. He did not remember making a call, though the log clearly showed that at 6:48, someone had called him and he had spoken to them for sixty seconds, and he had no memory of it whatsoever.</p>
+
+                <p>He sat down on the edge of the bed. He pressed the call-back option. The phone rang four times and a woman's voice answered — not a recorded message, a real voice, female, older, with an accent he couldn't place.</p>
+
+                <p>"Hello?"</p>
+
+                <p>"Hi," he said. "I'm sorry to call you back — I just noticed a call on my log that I don't remember making. Did you call me this morning?"</p>
+
+                <p>A pause. "I don't think so. What number are you returning?"</p>
+
+                <p>He read his own number back to her. She laughed — a small, uncertain sound. "That's not my number. I don't know who you are. But I hope you're having a good morning."</p>
+
+                <p>She hung up. He sat with the phone in his hand and felt the wrongness sharpen into something he could name. Not a forgotten thing. An absent thing. A minute of his life that had not been forgotten but excised — removed from the record as if it had never existed, leaving only the edges, the seams.</p>
+
+                <p>He showered. He dressed. He left for work at his usual time and took his usual route and listened to the radio and did not hear any of it because he was counting the minutes, tracking the shape of the morning, waiting for something to slip again. The minute had gone at 6:48. He had woken at 6:47. Between 6:47 and 6:48, something had happened — or not happened — or happened in a direction he could not follow.</p>
+
+                <p>At the office, he sat at his desk and opened his email and found nothing unusual. Twenty-three new messages. Routine. He scrolled through them without reading and checked his calendar — a meeting at ten, a conference call at two, a dinner with clients at seven. All of it ordinary. All of it as it should be. He could find no evidence of the missing minute anywhere except in the places it should not have been: the coffee cup, the call log, the ragged edge of his own memory.</p>
+
+                <p>His colleague Diane came by his desk around nine-thirty. She leaned against the doorframe and said, "You okay? You look like you didn't sleep."</p>
+
+                <p>"I slept. I just — I lost a minute this morning. This morning, I mean. I lost sixty seconds somewhere."</p>
+
+                <p>Diane raised an eyebrow. "Lost how?"</p>
+
+                <p>"I don't know. I woke up and there was coffee I didn't pour and a call I didn't make and I can't account for the time between — I mean, I can account for it, I was here, I was awake, but I can't remember it. It's just gone."</p>
+
+                <p>"Like a blackout?"</p>
+
+                <p>"No. A blackout is when you forget. This is different. This is when something didn't happen. When the minute was — I don't know. Removed."</p>
+
+                <p>Diane studied him for a moment. She had a way of looking at people that was both kind and appraising, as though she were simultaneously trying to help and trying to decide if he needed professional help. "Have you talked to a doctor?"</p>
+
+                <p>"About losing one minute?"</p>
+
+                <p>"About losing any amount of time. Memory blanks can be a symptom of lots of things. Stress, sleep deprivation, something neurological. Even if it is just one minute." She paused. "Especially if it's just one minute. A minute is a weird amount of time to lose."</p>
+
+                <p>He had not thought of it that way. He had been so focused on the strangeness of the loss that he had not considered its precision. One minute. Not an hour, not a morning, not a general fog — a specific, demarcated absence, as though someone had taken scissors to the film of his life and cut out a single frame.</p>
+
+                <p>The day continued. He attended the meeting and made notes he would not remember making. He took the conference call and contributed to a conversation he would not recall initiating. He ate lunch at his desk and read the same paragraph of an article three times without understanding it. And through all of it, the question persisted: what had happened in the minute? What had he done, or said, or thought, or failed to do, that was so significant it needed to be removed?</p>
+
+                <p>He left the office at six. He took the same route home. He cooked dinner — pasta, garlic bread, a glass of wine — and sat at the kitchen table and tried to reconstruct the morning. 6:47, waking. 6:48, the call log showed. 6:49, presumably, waking had continued, the day had begun in earnest. Between those two points — between the moment of waking and the moment of the call — there should have been movement, thought, breath. But there was nothing. A gap. A seam.</p>
+
+                <p>He washed the dishes. He watched the news. He went to bed at his usual time and set the alarm for 6:30 and lay in the dark and listened to the house settle and the refrigerator hum and the particular silence of a night when nothing is happening and everything is.</p>
+
+                <p>He woke at 6:30 and lay very still.</p>
+
+                <p>The alarm had not gone off yet. He had woken on his own, three minutes early, in the gray light before dawn. He lay and watched the ceiling and waited. 6:31. 6:32. 6:33. The alarm went off at 6:30 and he had woken at 6:30 and the three minutes he had been awake before the alarm were still there, intact, remembered — the cool side of the pillow, the weight of the blanket, the sound of a bird outside beginning its morning song. No gap. No seam. Just the ordinary continuity of being conscious, minute by minute, the way consciousness was supposed to work.</p>
+
+                <p>He got up. He made coffee — this time he watched himself do it, watched the kettle, watched the steam, watched the pour, watched the minute hand of the clock on the wall move from 6:47 to 6:48 and beyond. He was there. He was present. The minute passed and he was in it, fully and completely, with nothing missing and nothing removed.</p>
+
+                <p>He drank his coffee standing at the window. The oak tree had dropped more leaves overnight. The garbage truck was making its rounds. The world was ordinary and continuous and present and he was in it, he was here, he had not been extracted from it.</p>
+
+                <p>But he could not stop thinking about yesterday. About the minute that was not there. About the woman on the phone who had said I hope you're having a good morning and had meant it, or seemed to, and had hung up and returned to whatever her life was, a life that intersected with his for sixty seconds and then receded, leaving no trace except a number in a call log and a silence where a memory should have been.</p>
+
+                <p>He called in sick to work. He did not know why — he was not sick, he felt fine — but something told him to stay home, to be here, to be present in the house where the minute had gone missing. He sat in the kitchen and then in the living room and then in the backyard and he watched the oak tree and he waited for something to happen, though he did not know what he was waiting for.</p>
+
+                <p>At 11:15, the doorbell rang.</p>
+
+                <p>He opened the door. There was no one there. But on the doorstep, placed carefully on the mat as though left by hand, was a small object — a brass key, old, tarnished, with a tag attached by a thin chain. The tag was metal, slightly curved, and engraved with a single word: AFTER.</p>
+
+                <p>He picked up the key. It was heavier than it looked and warm, as though it had been held recently, as though it had been waiting for him. He turned it over in his hands and looked for a lock it might fit and found none. He looked up and down the street and saw no one. He went back inside and sat at the kitchen table with the key in front of him and tried to understand what it meant, and as he sat there, trying, he felt something shift — not outside him but inside, in the place where time lived, in the place where minutes accumulated and were stored and could be retrieved or lost or given away.</p>
+
+                <p>The key did not unlock anything. But it opened something. And what it opened was the understanding that the minute had not been stolen. The minute had been borrowed. And whatever had been borrowed was coming back — not as memory, not as event, but as this: a key to a door he had not known existed, in a house he had not known he was building, in a future he had not known he was walking toward.</p>
+
+                <p>He put the key in his pocket. He went outside and sat on the porch and watched the oak tree drop its leaves one by one into the windless morning. He was here. He was now. He was the next minute, and the one after that, and the one after that, each one arriving on time and leaving on time and leaving behind it the accumulated evidence of a life that was being lived, however strangely, however incompletely, one minute at a time.</p>
+
+                <p>Somewhere, far away, a woman answered her phone and heard a silence on the other end, and she said, "I hope you're having a good morning," and she meant it, and she hung up, and she went on with her day, which was also being lived one minute at a time, and the minutes were also accumulating, and the gaps between them were also there, and the mystery of their existence was also, in its own quiet way, unbearable.</p>
+
+                <p>He sat on the porch. The key was in his pocket. The minute was gone and the key was here and he was here and the oak tree was dropping its leaves and the world was continuing, relentlessly, minute by minute, into a future he could not see and did not know and would, somehow, have to trust.</p>
+            </div>
+            
+            <div class="book-promo">
+    <h3>If You Liked "The Forgotten Minute"...</h3>
+    <p>Try: <strong>Physics of Insight</strong> by Quantum Chronos — Awakening the savant within through perception</p>
+    <a href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank" rel="noopener">Buy on Amazon</a>
+</div>
+            
+            <div class="share-buttons">
+                <p>Share this story:</p>
+                <div class="share-links">
+                    <a href="#" onclick="shareTwitter()" class="share-btn" style="background:#1da1f2;color:white;">Twitter</a>
+                    <a href="#" onclick="shareFacebook()" class="share-btn" style="background:#4267b2;color:white;">Facebook</a>
+                    <a href="#" onclick="shareLinkedIn()" class="share-btn" style="background:#0077b5;color:white;">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="story-footer">
+                <p><a href="../stories.html">← Back to all stories</a></p>
+            </div>
+        </article>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+        updateBookmarkBtn();
+    </script>
+    <script>
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
+    }
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+    }
+    function toggleBookmark() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        let bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        const url = window.location.href;
+        const title = document.querySelector(".story-header h1").textContent;
+        
+        if (bookmarks.find(b => b.url === url)) {
+            bookmarks = bookmarks.filter(b => b.url !== url);
+            btn.textContent = "+ Bookmark";
+            btn.style.color = "var(--text-dim)";
+        } else {
+            bookmarks.push({url, title, date: new Date().toISOString()});
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+        localStorage.setItem("bithuesBookmarks", JSON.stringify(bookmarks));
+    }
+    
+    function updateBookmarkBtn() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        if (!btn) return;
+        const bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        if (bookmarks.find(b => b.url === window.location.href)) {
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bithues Reading Lab - Discover your next favorite book. Curated reviews on sci-fi, fantasy, self-help, and more. Honest recommendations for avid readers.">
+    <meta property="og:title" content="Bithues Reading Lab | Curated Book Reviews">
+    <meta property="og:description" content="Discover your next favorite book. Curated reviews on sci-fi, fantasy, self-help, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bithues.com/">
+    <title>Bithues Reading Lab | Curated Book Reviews</title>
+    <!-- Google Fonts - Inter + Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
+ crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="catalog.html">Reviews</a></li>
+                    <li><a href="reading-lists.html">Reading Lists</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="stories.html">Stories</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="press.html">Press</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><input type="text" id="navSearch" placeholder="Search…" class="nav-search" onclick="openSearch()" onkeydown="if(event.key==='Enter') openSearch()"></li>
+                    <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="searchResults" class="search-results"></div>
+
+        <section class="hero">
+            <h1>Curated book reviews that change how you think</h1>
+            <p>We read new books every week and surface the 1–2 ideas that actually matter, with links to buy, share, or pitch your own title.</p>
+        </section>
+
+        <!-- Category Chips -->
+        <div class="category-chips">
+            <a href="category/self-help.html" class="category-chip">Self-Help</a>
+            <a href="category/science-fiction.html" class="category-chip">Sci-Fi</a>
+            <a href="category/fantasy.html" class="category-chip">Fantasy</a>
+            <a href="category/nonfiction.html" class="category-chip">Nonfiction</a>
+            <a href="category/thriller.html" class="category-chip">Thriller</a>
+        </div>
+
+        <!-- Content Band: New This Week -->
+        <section class="content-band">
+            <h2>📚 New this week</h2>
+            <div class="band-grid">
+                <div class="band-item">
+                    <h3><a href="reviews/35.html">Time Investing</a></h3>
+                    <p>A self-help guide showing how to prioritize yourself and your time.</p>
+                </div>
+                <div class="band-item">
+                    <h3><a href="reviews/23.html">Shadow Work Journal</a></h3>
+                    <p>A beginner-friendly 90-day journal with warm prompts for emotional healing.</p>
+                </div>
+                <div class="band-item">
+                    <h3><a href="reviews/24.html">Rules of Survival</a></h3>
+                    <p>In a world where teenagers fight to the death on live TV, one girl decides to burn it all down.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured">
+            <div class="section-header-row">
+                <h2>Featured Reviews</h2>
+                <button onclick="shuffleFeatured()" class="shuffle-btn">↻ New picks</button>
+            </div>
+            <div id="featured-reviews">
+                <!-- Loaded via JavaScript -->
+            </div>
+        </section>
+
+        <script>
+        const allBooks = [
+            {url:"reviews/1.html",title:"The Dawn of Civilization",author:"T. Stone",tldr:"Sixteen-year-old Koda must help his tribe survive a brutal winter in prehistoric times.",category:"Adventure / Fiction",time:"~2 hrs",density:6},
+            {url:"reviews/2.html",title:"The Richmond Cipher",author:"E. Maris",tldr:"In Confederate Richmond, Mary carries secrets in her memory that could change everything.",category:"Historical Fiction",time:"~3 hrs",density:7},
+            {url:"reviews/3.html",title:"Red Horizon: Lunar Launch",author:"M. A. Hale",tldr:"Commander Marcus Hale must launch the Eos Ark to deliver colonists to Mars.",category:"Sci-Fi",time:"~4 hrs",density:5},
+            {url:"reviews/4.html",title:"The Confluence Doctrine",author:"Alaric Wynn",tldr:"In a world where suffering has been designed out, one person notices something that doesn't fit.",category:"Sci-Fi / Dystopian",time:"~3 hrs",density:8},
+            {url:"reviews/5.html",title:"Living with a Moving Planet",author:"J. T. Hartley",tldr:"How humans have adapted to changing baselines for tens of thousands of years.",category:"Nonfiction / Science",time:"~5 hrs",density:7},
+            {url:"reviews/6.html",title:"Beyond the Veil",author:"D. E. Harlan",tldr:"A careful tour of evidence around what happens when we die.",category:"Spiritual / Nonfiction",time:"~3 hrs",density:6},
+            {url:"reviews/7.html",title:"Veiled Presence",author:"E. C. Stroud",tldr:"A transformative journey of self-discovery and intuition.",category:"Self-Help / Spiritual",time:"~2 hrs",density:5},
+            {url:"reviews/8.html",title:"The Power of Changing Your Mind",author:"Evan R. Cole",tldr:"How intellectual humility is a competitive edge in a confidence-obsessed culture.",category:"Mindset / Nonfiction",time:"~2 hrs",density:8},
+            {url:"reviews/9.html",title:"The Shadow Within",author:"Elena Maris",tldr:"Learn to treat reactions as information—and respond differently.",category:"Self-Help / Mindset",time:"~2 hrs",density:7},
+            {url:"reviews/10.html",title:"Echoes of Aetheris",author:"Marcus Chen",tldr:"Four unlikely heroes must master forgotten magic to stop a war that could destroy their world.",category:"Fantasy",time:"~6 hrs",density:6},
+            {url:"reviews/12.html",title:"Resonance Drift",author:"Sarah Webb",tldr:"A deep space signal arrives from the edge of the solar system—humanity is not alone.",category:"Sci-Fi",time:"~4 hrs",density:7},
+            {url:"reviews/13.html",title:"Symbiont Bloom",author:"Dr. Alex Kim",tldr:"First contact with aliens who aren't hostile—they're symbiotic.",category:"Sci-Fi",time:"~3 hrs",density:6},
+            {url:"reviews/14.html",title:"Otomí",author:"Maria Santos",tldr:"A small bookstore in Mexico holds doors to other worlds.",category:"Fantasy / Literary",time:"~3 hrs",density:7},
+            {url:"reviews/15.html",title:"Physics of Insight",author:"Dr. James Chen",tldr:"How physics shapes our understanding of consciousness.",category:"Science / Nonfiction",time:"~4 hrs",density:8},
+            {url:"reviews/16.html",title:"The Physics of Time",author:"David Park",tldr:"What is time? Why does it seem to flow? Can it be reversed?",category:"Science / Nonfiction",time:"~3 hrs",density:7},
+            {url:"reviews/21.html",title:"The Burning Song",author:"Aria Storm",tldr:"A mute girl can hear the songs of stars—and her silence is more powerful.",category:"Fantasy / Adventure",time:"~5 hrs",density:6},
+            {url:"reviews/22.html",title:"Mindful Memory",author:"Dr. Sarah Lee",tldr:"How to improve your memory through mindfulness techniques.",category:"Self-Help / Nonfiction",time:"~2 hrs",density:6},
+            {url:"reviews/24.html",title:"Rules of Survival",author:"Jack Carter",tldr:"In a world where teenagers fight to the death on live TV, one girl decides to burn it all down.",category:"Dystopian / Thriller",time:"~4 hrs",density:7},
+            {url:"reviews/25.html",title:"Blood Ember",author:"Vera Blackwood",tldr:"A vampire detective investigates a murder that threatens to expose the supernatural world.",category:"Thriller / Mystery",time:"~3 hrs",density:5},
+            {url:"reviews/23.html",title:"Shadow Work Journal for Women",author:"Luna Sage",tldr:"A beginner-friendly 90-day journal with warm prompts for emotional healing.",category:"Self-Help / Journal",time:"~1 hr",density:4},
+            {url:"reviews/35.html",title:"Time Investing",author:"H Harvey",tldr:"A self-help guide showing how to prioritize yourself and your time.",category:"Self-Help / Mindset",time:"~2 hrs",density:7}
+        ];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function shuffleFeatured() {
+            const container = document.getElementById('featured-reviews');
+            const shuffled = shuffleArray([...allBooks]).slice(0, 3);
+            container.innerHTML = shuffled.map(book => {
+                const densityDots = '<span class="density-dot"></span>'.repeat(book.density);
+                return '<div class="review-card"><div class="review-meta"><span class="review-tag">' + book.category + '</span><span class="review-time">' + book.time + '</span><span class="review-idea-density">' + densityDots + '</span></div><h3><a href="' + book.url + '">' + book.title + '</a></h3><p class="author">by ' + book.author + '</p><p class="tldr">' + book.tldr + '</p></div>';
+            }).join('');
+        }
+
+        shuffleFeatured();
+        </script>
+
+        <section class="all-reviews">
+            <a href="reviews/index.html">View all 35 reviews →</a>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <div class="newsletter-section">
+            <h3>📬 Get the weekly shortlist</h3>
+            <p>One email, Friday mornings. The 2–3 best new books we reviewed that week, plus one curated reading list. No fluff.</p>
+            <form class="newsletter-form" action="#" method="post">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p class="form-note">Join 1,200+ readers. Unsubscribe anytime.</p>
+        </div>
+
+        <!-- Author CTA -->
+        <div class="author-cta">
+            <h3>For authors: how to get reviewed</h3>
+            <p>We're always looking for great books to feature. Pitch us your title and we'll consider it for our next review.</p>
+            <a href="author-pitch.html">Submit a book pitch →</a>
+        </div>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.querySelector('.theme-toggle');
+        if (html.getAttribute('data-theme') === 'light') {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    mobileMenuBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('open');
+    });
+
+    // Back to Top
+    const backToTop = document.querySelector('.back-to-top');
+    window.onscroll = function() {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

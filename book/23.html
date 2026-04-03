@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+ <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+ <title>Shadow Work Journal for Women - Bithues Reading Lab</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Shadow Work Journal for Women - A beginner-friendly 90-day journal with warm prompts for emotional healing. From awareness to inner child work to integration—emerging confident and f">
+ <link rel="stylesheet" href="../styles.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
+ crossorigin="anonymous"></script>
+</head>
+<body>
+ <header class="site-header">
+  <div class="container header-inner">
+   <a href="../index.html" class="brand">
+    <span class="brand-mark">B</span>
+    <span class="brand-text">Bithues Reading Lab</span>
+   </a>
+   <nav class="nav">
+    <a href="../index.html">Home</a>
+    <a href="../reviews/index.html">Reviews</a>
+    <a href="../catalog.html" class="nav-active">Catalog</a>
+    <a href="../articles.html">Articles</a>
+   </nav>
+  </div>
+ </header>
+
+ <main>
+  <section class="detail-hero">
+   <div class="container">
+    <a href="../catalog.html" class="back-link">← Back to Catalog</a>
+    <div class="detail-content">
+     <span class="detail-category">Nonfiction</span>
+     <h1 class="header"> class="detail-title">Shadow Work Journal for Women</h1>
+     <p class="detail-subtitle">90-Day Guided Prompts to Heal Your Inner Child and Embrace Emotional Freedom</p>
+     <p class="detail-author">by Luna Sage</p>
+     <div class="detail-description">
+      <h2>About this book</h2>
+      <p>A beginner-friendly 90-day journal with warm prompts for emotional healing. From awareness to inner child work to integration—emerging confident and free.</p>
+     </div>
+     <div class="detail-who">
+      <h2>Who would enjoy this</h2>
+      <p>Women 25-45 feeling stuck in anxiety or people-pleasing.</p>
+     </div>
+     <div class="detail-actions"><a class="btn-buy" href="https://amzn.to/3NCBFlM" target="_blank" rel="noopener">Buy on Amazon</a></div>
+    </div>
+   </div>
+  </section>
+ </main>
+
+ <footer class="site-footer">
+  <div class="container footer-inner">
+   <div class="footer-brand">Bithues Reading Lab</div>
+   <div class="footer-links">
+    <span>© <span id="year"></span> All rights reserved</span>
+   </div>
+  </div>
+ </footer>
+
+ <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+ </script>
+<button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+    // Theme Toggle
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.querySelector('.theme-toggle');
+        if (html.getAttribute('data-theme') === 'light') {
+            html.setAttribute('data-theme', 'dark');
+            btn.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            btn.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    // Back to Top
+    window.onscroll = function() {
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+    };
+    
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Social Share
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
+    }
+    
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+    }
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
