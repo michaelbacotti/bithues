@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speed Reader | Bithues Reading Lab</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
-        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 1rem; text-align: center; }
-        .container { max-width: 600px; margin: 0 auto; }
-        header { padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
-        header a { color: var(--accent); text-decoration: none; }
-        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        
-        .story-select { margin-bottom: 1rem; padding: 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 1rem; width: 100%; max-width: 300px; }
-        
-        .word-display { font-size: 3rem; font-weight: bold; padding: 3rem; background: var(--surface); border-radius: 12px; margin: 2rem 0; min-height: 200px; display: flex; align-items: center; justify-content: center; }
-        
-        .controls { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        .speed-control { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
-        .speed-control label { color: var(--text-dim); }
-        .speed-control input { width: 80px; padding: 0.5rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-align: center; }
-        
-        .buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
-        .btn:hover { opacity: 0.9; }
-        
-        .stats { color: var(--text-dim); margin-top: 1rem; }
-        .current-story { color: var(--accent); font-size: 0.9rem; margin-top: 0.5rem; }
-        
-        @media (max-width: 600px) { .word-display { font-size: 2rem; } }
-    </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
- crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speed Reader</title>
+  <meta name="description" content="Speed reader test on Bithues Reading Lab" />
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
 </head>
 <body>
+  <nav>
+    <div class="nav-brand">Bithues <span>Reading Lab</span></div>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../stories.html">Stories</a>
+      <a href="../catalog.html">Reviews</a>
+      <a href="../articles.html">Articles</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+  </nav>
+  <header class="hero" style="padding:3rem 2rem;">
+    <div class="hero-eyebrow">Game</div>
+    <h1>Speed Reader</h1>
+    <p class="hero-sub"></p>
+  </header>
+  <div class="divider"></div>
+
     <div class="container">
         <header>
             <a href="games.html">← Back to Games</a>
@@ -159,5 +150,11 @@
             document.getElementById('progress').textContent = '0';
         }
     </script>
+  <footer>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
+  </footer>
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
