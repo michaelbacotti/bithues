@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-
- <meta charset="UTF-8">
-    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
- <title>Little Mike: Learns to Fly - Bithues Reading Lab</title>
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <meta name="description" content="Little Mike: Learns to Fly - Little Mike dreams of flying. With friends John and May, he meets Pilot Thomas who teaches the wonders of airplanes. A high-flying adventure.">
- <link rel="stylesheet" href="../styles.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
- crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Mike: Learns to Fly</title>
+  <meta name="description" content="Little Mike: Learns to Fly - Little Mike dreams of flying. With friends John and May, he meets Pilot Thomas who teaches the wonders of airplanes. A high-flying adventure." />
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
 </head>
 <body>
+  <nav>
+    <div class="nav-brand">Bithues <span>Reading Lab</span></div>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../stories.html">Stories</a>
+      <a href="../catalog.html">Reviews</a>
+      <a href="../articles.html">Articles</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>    </div>
+  </nav>
+  <header class="hero" style="padding:3rem 2rem;">
+    <div class="hero-eyebrow">Children</div>
+    <h1>Little Mike: Learns to Fly_H1</h1>
+    <p class="hero-sub">SUBLittle Mike: Learns to Fly</p>
+  </header>
+  <div class="divider"></div>
+
  <header class="site-header">
   <div class="container header-inner">
    <a href="../index.html" class="brand">
@@ -58,76 +67,12 @@
   </section>
  </main>
 
- <footer class="site-footer">
-  <div class="container footer-inner">
-   <div class="footer-brand">Bithues Reading Lab</div>
-   <div class="footer-links">
-    <span>© <span id="year"></span> All rights reserved</span>
-   </div>
-  </div>
- </footer>
-
- <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
- </script>
-<button class="back-to-top" onclick="scrollToTop()">↑</button>
-
-    <script>
-    // Theme Toggle
-    function toggleTheme() {
-        const html = document.documentElement;
-        const btn = document.querySelector('.theme-toggle');
-        if (html.getAttribute('data-theme') === 'light') {
-            html.setAttribute('data-theme', 'dark');
-            btn.textContent = '🌙';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            html.setAttribute('data-theme', 'light');
-            btn.textContent = '☀️';
-            localStorage.setItem('theme', 'light');
-        }
-    }
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-    }
-    
-    // Back to Top
-    window.onscroll = function() {
-        const backToTop = document.querySelector('.back-to-top');
-        if (backToTop) {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        }
-    };
-    
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    // Social Share
-    function shareTwitter() {
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent(document.title);
-        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
-    }
-    
-    function shareFacebook() {
-        const url = encodeURIComponent(window.location.href);
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
-    }
-    
-    function shareLinkedIn() {
-        const url = encodeURIComponent(window.location.href);
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
-    }
-    
-    document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+   <footer>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
+  </footer>
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
+</html></body>
 </html>
