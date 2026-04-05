@@ -9,20 +9,20 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <nav>
-    <div class="nav-brand">Bithues <span>Reading Lab</span></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="stories.html">Stories</a>
-      <a href="catalog.html">Reviews</a>
-      <a href="articles.html">Articles</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
+  <div class="nav-brand">Bithues <span>Reading Lab</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="stories.html">Stories</a>
+    <a href="catalog.html">Reviews</a>
+    <a href="articles.html">Articles</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
   <header class="hero" style="padding:3rem 2rem;">
     <div class="hero-eyebrow">Featured</div>
     <h1>Authors</h1>
@@ -32,25 +32,17 @@
 
     <div class="container">
         <header>
-            <nav class="navbar">
-                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-                    <span></span><span></span><span></span>
-                </button>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="catalog.html">Reviews</a></li>
-                    <li><a href="reading-lists.html">Reading Lists</a></li>
-                    <li><a href="articles.html">Articles</a></li>
-                    <li><a href="stories.html">Stories</a></li>
-                    <li><a href="authors.html" class="active">Authors</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="press.html">Press</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><input type="text" id="navSearch" placeholder="Search…" class="nav-search" onclick="openSearch()" onkeydown="if(event.key==='Enter') openSearch()"></li>
-                    <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
-                </ul>
-            </nav>
+            <nav>
+  <div class="nav-brand">Bithues <span>Reading Lab</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="stories.html">Stories</a>
+    <a href="catalog.html">Reviews</a>
+    <a href="articles.html">Articles</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
         </header>
         <div id="searchResults" class="search-results"></div>
 
@@ -202,9 +194,11 @@
         </section>
 
           <footer>
-    <div class="brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
-  </footer>
+  <div class="footer-content">
+    <p>&copy; 2024 Bithues Reading Lab. All rights reserved.</p>
+    <p>Helping readers discover their next favorite story.</p>
+  </div>
+</footer>
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
