@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Science Fiction books reviewed on Bithues Reading Lab">
+    <meta property="og:title" content="Science Fiction Books | Bithues Reading Lab">
+    <meta property="og:description" content="Browse Science Fiction book reviews on Bithues Reading Lab">
+    <title>Science Fiction Books | Bithues Reading Lab</title>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
+        nav a:hover, nav a.active { color: var(--text); }
+        
+        .page-header { padding: 3rem 0; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { color: var(--text-dim); font-size: 1.1rem; }
+        
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem 0; }
+        .book-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: all 0.3s; }
+        .book-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .book-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .book-card h3 a { color: var(--text); text-decoration: none; }
+        .book-card h3 a:hover { color: var(--accent); }
+        .book-card .author { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .book-card .tldr { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6; }
+        .book-card .read-more { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+        
+        .genre-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 2rem; }
+        .genre-tag { padding: 0.5rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+        .genre-tag:hover { border-color: var(--accent); color: var(--text); }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
+ crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="index.html">Home</a>
+                    <a href="catalog.html">Catalog</a>
+                    <a href="articles.html">Articles</a>
+                    <a href="stories.html">Stories</a>
+                    <a href="authors.html">Authors</a>
+                    <a href="about.html">About</a>
+                </div>
+            </nav>
+        </header>
+
+        <section class="page-header">
+            <h1 class="header">Science Fiction Books</h1>
+            <p>5 books in this genre</p>
+        </section>
+
+        <section class="book-grid">
+            <div class="book-card">
+            <h3><a href="reviews/9.html">The Shadow Within</a></h3>
+            <p class="author">by Elena Maris</p>
+            <p class="tldr">Instead of treating reactions as defects, learn to treat them as information—and respond differently in everyday life....</p>
+            <a href="reviews/9.html" class="read-more">Read Review →</a>
+        </div><div class="book-card">
+            <h3><a href="reviews/3.html">Red Horizon: Lunar Launch</a></h3>
+            <p class="author">by M. A. Hale</p>
+            <p class="tldr">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars. But UAP hover above the horizon—humanity is raising children und...</p>
+            <a href="reviews/3.html" class="read-more">Read Review →</a>
+        </div><div class="book-card">
+            <h3><a href="reviews/11.html">Disclosure 2026</a></h3>
+            <p class="author">by Marcus Reeve</p>
+            <p class="tldr">From viral smartphone footage to White House landings, this book analyzes 18 pathways to alien disclosure—each rated for plausibility based on decades...</p>
+            <a href="reviews/11.html" class="read-more">Read Review →</a>
+        </div><div class="book-card">
+            <h3><a href="reviews/the-shadow-within.html">The Shadow Within</a></h3>
+            <p class="author">by Elena Maris</p>
+            <p class="tldr">A practical, grounded guide to shadow work that avoids mysticism while acknowledging psychological depth....</p>
+            <a href="reviews/the-shadow-within.html" class="read-more">Read Review →</a>
+        </div><div class="book-card">
+            <h3><a href="reviews/red-horizon-lunar-launch.html">Red Horizon: Lunar Launch</a></h3>
+            <p class="author">by M. A. Hale</p>
+            <p class="tldr">A near-future lunar colony faces sabotage and political intrigue in this fast-paced sci-fi thriller....</p>
+            <a href="reviews/red-horizon-lunar-launch.html" class="read-more">Read Review →</a>
+        </div>
+        </section>
+
+        <section class="genre-tags">
+            <a href="category/science-fiction.html" class="genre-tag">Science Fiction</a>
+            <a href="category/fantasy.html" class="genre-tag">Fantasy</a>
+            <a href="category/mystery.html" class="genre-tag">Mystery</a>
+            <a href="category/thriller.html" class="genre-tag">Thriller</a>
+            <a href="category/nonfiction.html" class="genre-tag">Nonfiction</a>
+            <a href="category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
+            <a href="category/self-help.html" class="genre-tag">Self-Help</a>
+            <a href="category/children.html" class="genre-tag">Children's Fiction</a>
+            <a href="category/romance.html" class="genre-tag">Romance</a>
+            <a href="category/dystopian.html" class="genre-tag">Dystopian</a>
+        </section>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

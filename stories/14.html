@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Original magical realism short story — The Door Between Worlds. An elderly shoe repairman in Havana discovers the stories worn into every sole.">
+    <meta property="og:title" content="The Door Between Worlds - Short Story | Bithues">
+    <meta property="og:description" content="Original magical realism short story. Free to read.">
+    <meta property="og:type" content="article">
+    <title>The Door Between Worlds | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #c9a84c; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.9; font-size: 1.1rem; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; font-family: -apple-system, sans-serif; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; font-family: -apple-system, sans-serif; }
+        nav a.active { color: var(--accent); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; }
+        .story-header { padding: 3rem 0 2rem; text-align: center; }
+        .story-header h1 { font-size: 2.25rem; margin-bottom: 1rem; line-height: 1.2; font-family: -apple-system, sans-serif; }
+        .story-header .meta { color: var(--text-dim); font-size: 0.95rem; font-family: -apple-system, sans-serif; }
+        .story-header .genre-tag { display: inline-block; background: var(--accent); color: #1a1a1a; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 15px; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        .story-content { padding: 2rem 0; }
+        .story-content p { margin-bottom: 1.5rem; text-indent: 2em; }
+        .story-content p:first-of-type { text-indent: 0; }
+        .story-content p:first-of-type::first-letter { font-size: 3.5rem; float: left; line-height: 1; margin-right: 0.5rem; color: var(--accent); font-weight: 700; }
+        .book-promo { background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 2rem; margin: 3rem 0; text-align: center; }
+        .book-promo h3 { font-size: 1.25rem; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        .book-promo p { color: var(--text-dim); margin-bottom: 1.5rem; font-size: 1rem; }
+        .share-buttons { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .share-buttons p { color: var(--text-dim); margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .share-links { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .share-btn { padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; }
+        .story-footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
+        .story-footer a { color: var(--accent); text-decoration: none; font-family: -apple-system, sans-serif; }
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; font-family: -apple-system, sans-serif; }
+        @media (max-width: 600px) { .story-header h1 { font-size: 1.75rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="breadcrumb" style="padding:1rem 0;color:var(--text-dim);font-size:0.85rem;">
+                <a href="../index.html">Home</a> → <a href="../stories.html">Stories</a> → <span>The Door Between Worlds</span>
+            </div>
+            <nav>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="../index.html">Home</a>
+                    <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
+                    <a href="../stories.html" class="active">Stories</a>
+                    <a href="../about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="story-header">
+                <span class="genre-tag">Magical Realism</span>
+                <h1 class="header">The Door Between Worlds</h1>
+                <div class="bookmark-btn-container" style="text-align:right;margin-bottom:0.5rem;"><button onclick="toggleBookmark()" style="background:none;border:1px solid var(--border);border-radius:15px;padding:0.3rem 0.8rem;cursor:pointer;font-size:0.8rem;color:var(--text-dim);">+ Bookmark</button></div>
+                <p class="meta">2,900 words · 10 min read</p>
+            </div>
+            
+            <div class="story-content">
+                <p>The first pair of shoes he ever resoled was his mother's, and he was eleven years old, and he felt it immediately: the echo in his fingertips, the tremor of something running through the rubber and into his skin like a current. His mother's feet, her walk to the market, her standing at the stove, her dancing at a wedding in 1952 when she was seventeen and the world was still possible. He pulled his hands back and stared at the shoe and his mother said, "Rafael, what's wrong?" and he said, "Nothing," because he did not have the language for what had just happened and would not have it for another forty years.</p>
+
+                <p>He was seventy-three now. The shop on Calle Obispo was small and smelled of leather and glue and the particular sweetness of old rubber. He had worked alone since his wife passed, since Carmen, who had understood what he carried and had never asked him to explain it. She had simply learned to leave him alone when he held a new pair of shoes in his hands, to let him stand very still with his eyes closed while the wearer's life moved through him — the tourist from Madrid with the grief in her heels, the old fisherman whose sandals carried the salt of fifty years, the boy who had walked twelve blocks to his first job interview and whose shoes remembered the trembling hope in his chest.</p>
+
+                <p>He understood, now, what he was. Not a shoemaker — everyone was a shoemaker if they had hands and patience. He was something else. A keeper of paths. A reader of the ground.</p>
+
+                <p>The woman came in on a Thursday. He knew it was a Thursday because the light through the window had that particular quality, amber and tired, and because Thursdays had always been Carmen's day to visit the botanica on Zanja Street and come home with incense and a new candle for Saint Lazarus. The woman was perhaps sixty, or perhaps much older — there was a hardness in her face that made age difficult to calculate. She carried a shoebox, brown cardboard, unremarkable, and she set it on the counter with the careful deliberateness of someone setting down something heavier than it looked.</p>
+
+                <p>"My husband left these," she said. "Thirty years ago. He took the suitcase and his good boots and these — these were the ones he left behind. I kept them. I don't know why I kept them."</p>
+
+                <p>Rafael looked at her. She was wearing cream-colored sandals, thin-strapped, the kind that leave marks on the skin. Her feet had known the sidewalks of this city the way his had — intimately, daily, through joy and sorrow and the ordinary accumulation of a life.</p>
+
+                <p>"You want me to resole them?"</p>
+
+                <p>"I don't know what I want." She touched the box with one finger, then withdrew. "Someone told me you could fix things. That you had hands for things other people couldn't see."</p>
+
+                <p>Rafael did not answer. He took the box and opened it. Inside were a pair of men's dress shoes, black, scuffed at the toe, the left heel worn unevenly from decades of use before they were abandoned. He lifted the right shoe by its edge and held it. He closed his eyes.</p>
+
+                <p>And then he was somewhere else.</p>
+
+                <p>He was walking — but not his walk, not Rafael's walk with its flat-footed patience and the slight hitch in the left knee from a fall off a bicycle when he was nine. This was a different gait, bouncier, younger, a man who moved through the world as though it owed him something and he had not yet been proven wrong. He smelled coffee and cigarette smoke and the particular sweetness of a woman — not Carmen, something before Carmen, someone he had loved before he knew what love would cost. The sun was warm on his face and he was happy, genuinely happy, and the happiness was so sharp and clean that Rafael had to open his eyes to escape it because it was unbearable, because it was not his happiness and it ached.</p>
+
+                <p>He put the shoe down. He picked up the left one.</p>
+
+                <p>This time it was different. The walk was heavier, slower. There was a weight in the chest that hadn't been there before, a grayness settling into the margins of everything. He was still walking the same streets — he recognized the corner of Neptuno and Reina, the broken mosaic step at the pharmacy on San Rafael — but now the steps were heavy with something that had accumulated, layer upon layer, like sediment at the bottom of a river. Regret. He had never felt it so plainly, not in himself, not in the thousands of shoes that had passed through his hands. The man who had worn these shoes had carried a specific, crystalline regret, and it was in the leather, in the stitching, in the very atoms of the heel worn down to nothing by thirty years of walking away.</p>
+
+                <p>Rafael set the shoe down. He was trembling.</p>
+
+                <p>"They're from thirty years ago," he said quietly. "But he kept wearing them."</p>
+
+                <p>The woman was watching him. Her face had changed — there was something open now, something exposed. "He sent letters. For the first two years. Then they stopped. I didn't know if he was alive or dead. I never found out. I just — I just waited."</p>
+
+                <p>"You're still waiting."</p>
+
+                <p>"I don't know how to stop."</p>
+
+                <p>Rafael looked at the shoes. He understood, now, what they held. Not just one man's journey — but the echo of the woman who had stayed. He could feel her in the room, even though she hadn't touched these shoes. The waiting had seeped into them somehow, through proximity, through thirty years of the box sitting somewhere in her apartment, the box opened and closed, the box held and set down. The shoe remembered her the way the air remembers perfume.</p>
+
+                <p>"The man who wore these," Rafael said carefully, "he was happy once. When he put them on, he was young, and he was going somewhere that mattered, and the world was open." He paused. "But the last time he wore them, he was carrying something terrible. Something he'd done. Or something he hadn't done and couldn't live with not fixing."</p>
+
+                <p>The woman's eyes were wet. She didn't wipe them. "He left because of me," she said. "Because of what I'd found out. He'd done something — before we married — something that I discovered. And he couldn't stay and he couldn't explain, and so he just — he went. And I've spent thirty years wondering if I should have let him explain."</p>
+
+                <p>Rafael picked up the shoe again. He held it gently, the way you hold a bird that might fly away. "He's alive," he said, and he knew it the way he knew things, not logically but completely. "He's alive and he's far away and he thinks about you every day. He thinks about you the way you think about him. He's not suffering more than you are, but he's suffering. He's been suffering since the day he left."</p>
+
+                <p>"How do you know that?"</p>
+
+                <p>"Because the shoes told me." He turned the shoe over. The sole was worn in a pattern he recognized now — the way a man walks when he is walking from something he cannot outpace. "They always tell me."</p>
+
+                <p>The woman looked at the shoes for a long time. The light through the window had shifted; it was later than she'd thought. Outside, Havana hummed with its eternal music — a radio playing something old, a man arguing, a child laughing. The city that never stopped, that kept moving even when you stood still.</p>
+
+                <p>"Should I keep waiting?" she asked. "Should I keep waiting or should I finally put him down?"</p>
+
+                <p>This was the question Rafael had been asked a hundred times, in a hundred variations, by the shoes that passed through his hands. And his answer was always the same, because the shoes always told the same truth: that love was not a thing you could close like a book, but it was also not a door you had to leave open forever. That waiting was a choice, and not-waiting was also a choice, and both choices could be made with dignity.</p>
+
+                <p>"You should know what you feel," he said. "Not what you think you should feel. Not what anyone else would feel in your place. What you actually feel, right now, in your own body, when you think about him."</p>
+
+                <p>"I'm afraid if I stop waiting, I'll forget him."</p>
+
+                <p>"You won't forget him. You can't. He's in you now. He's been in you for thirty years. You've walked with him, dreamed with him, argued with him in the dark — all of that is in you. The shoes aren't him. The shoes are just where he's been. You're where he lives."</p>
+
+                <p>The woman was quiet. Then she reached out and touched the shoe, just with one fingertip, the way you touch something sacred.</p>
+
+                <p>"Keep them," she said. "Fix them or don't. I don't think I need them anymore."</p>
+
+                <p>She left. Rafael watched her go — watched the way she walked, her cream-colored sandals, her weight shifting from heel to toe with the particular rhythm of someone who has walked these streets her whole life. She didn't look back. He hoped she wouldn't. Hoped she would go home and open her windows and let the sea air in and sit in the chair by the window where she had probably sat every evening for thirty years, and sit there, and not wait. Just be. Just be present, for once, in a room where no one was coming through the door.</p>
+
+                <p>He turned back to the shoes. He picked up the left one and held it, and this time he went deeper, past the regret, past the departure, into something older. He felt the man as a boy — small, dark-eyed, running through the streets of Old Havana with a sack of mangoes his mother had sent him to sell. He felt the boy's joy, pure and uncomplicated, the joy of running fast in a city that was all miracle and possibility. He felt the first time the boy had kissed a girl behind a curtain and how his heart had seemed too large for his chest. He felt the wedding, his own wedding, the shoes on his feet and the love so overwhelming he had to look away from it, had to stare at the floor to keep from weeping.</p>
+
+                <p>The shoes remembered all of it. Every step of a life, documented in the wear of leather and the compression of rubber, a biography written in the grammar of distance traveled. This was what he did — what he had always done. He read the unwritten pages. He translated the footsteps into meaning. He held the evidence of a human life in his hands and bore witness to it, quietly, without judgment, the way a priest holds a confession.</p>
+
+                <p>He set the shoes down on the counter. He did not know if he would resole them. Perhaps he would. Perhaps he would keep them in the shop, in the cabinet where he kept the other orphan shoes — the ones whose owners had died, or disappeared, or simply never came back. Perhaps one day the man would return to this city, to these streets, and feel something pull at him, some echo in his old worn feet, and he would find the shop on Obispo Street and sit in the chair across from Rafael and say, "The shoes. I left them with a woman, thirty years ago."</p>
+
+                <p>Rafael would hand them back. And then he would watch what happened next.</p>
+
+                <p>Or perhaps not. Perhaps the shoes would stay here forever, held in trust, waiting for a story to complete itself. This was also a kind of living. This was also a way of keeping faith.</p>
+
+                <p>He turned back to the workbench. There were other shoes waiting — a child's sneakers, a nurse's clogs, a pair of red heels for a woman who danced at the Tropicana on weekends. Each of them carrying its cargo, each of them ready to be read. He picked up the first one and closed his eyes and let the next life move through him, patient and ceaseless and full of the world's enormous, unbearable weight.</p>
+
+                <p>Outside, the light faded over Havana. Somewhere, a woman walked home in cream-colored sandals and did not look back. Somewhere, a man who had been running for thirty years sat down and rested his feet. And in the shop on Obispo Street, a shoemaker continued his work — not fixing shoes, exactly, but tending to the evidence of what it meant to be human and moving and alive in a world that wore you down, step by step, until the soles of your shoes were as thin as memory and twice as honest.</p>
+            </div>
+            
+            <div class="book-promo">
+    <h3>If You Liked "The Door Between Worlds"...</h3>
+    <p>Try: <strong>Echoes of Transcendence</strong> by L Everwood — Magical and spiritual journeys between worlds</p>
+    <a href="https://amzn.to/4rOlOyl" target="_blank" rel="noopener">Buy on Amazon</a>
+</div>
+            
+            <div class="share-buttons">
+                <p>Share this story:</p>
+                <div class="share-links">
+                    <a href="#" onclick="shareTwitter()" class="share-btn" style="background:#1da1f2;color:white;">Twitter</a>
+                    <a href="#" onclick="shareFacebook()" class="share-btn" style="background:#4267b2;color:white;">Facebook</a>
+                    <a href="#" onclick="shareLinkedIn()" class="share-btn" style="background:#0077b5;color:white;">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="story-footer">
+                <p><a href="../stories.html">← Back to all stories</a></p>
+            </div>
+        </article>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+        updateBookmarkBtn();
+    </script>
+    <script>
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
+    }
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+    }
+    function toggleBookmark() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        let bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        const url = window.location.href;
+        const title = document.querySelector(".story-header h1").textContent;
+        
+        if (bookmarks.find(b => b.url === url)) {
+            bookmarks = bookmarks.filter(b => b.url !== url);
+            btn.textContent = "+ Bookmark";
+            btn.style.color = "var(--text-dim)";
+        } else {
+            bookmarks.push({url, title, date: new Date().toISOString()});
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+        localStorage.setItem("bithuesBookmarks", JSON.stringify(bookmarks));
+    }
+    
+    function updateBookmarkBtn() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        if (!btn) return;
+        const bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        if (bookmarks.find(b => b.url === window.location.href)) {
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alien Disclosure 2026: The Year Everything Changed — And What Comes Next</title>
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --card: #111827;
+            --border: #1f2d3d;
+            --accent: #7c3aed;
+            --accent2: #06b6d4;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --gold: #f59e0b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2.5rem;
+        }
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.2rem;
+        }
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #e2e8f0, #7c3aed, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+        .subtitle {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .meta span { display: flex; align-items: center; gap: 0.3rem; }
+        h2 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        h3 { font-size: 1.2rem; color: var(--accent2); margin: 1.5rem 0 0.6rem; }
+        p { margin-bottom: 1rem; color: var(--text); }
+        strong { color: #f1f5f9; }
+        .lead {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            border-left: 3px solid var(--accent);
+            padding-left: 1.2rem;
+            margin: 1.5rem 0 2rem;
+            font-style: italic;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent2);
+            margin-bottom: 0.5rem;
+        }
+        .card-date {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 0.8rem;
+        }
+        .timeline { position: relative; padding-left: 2rem; margin: 1.5rem 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent2));
+        }
+        .timeline-item { position: relative; margin-bottom: 1.5rem; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.4rem;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+            transform: translateX(-4px);
+        }
+        .timeline-date { font-size: 0.8rem; color: var(--accent2); font-weight: 700; margin-bottom: 0.2rem; }
+        .fringe-box {
+            background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(6,182,212,0.1));
+            border: 1px solid rgba(124,58,237,0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .fringe-box h3 { color: var(--accent); margin-top: 0; }
+        .fringe-list { list-style: none; padding: 0; }
+        .fringe-list li { padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--muted); }
+        .fringe-list li:last-child { border-bottom: none; }
+        .fringe-list li::before { content: '◆ '; color: var(--accent2); }
+        .books-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+        .books-section h2 { border: none; margin-top: 0; display: block; text-align: center; }
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .book-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .book-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .book-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .book-title { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; }
+        .book-link { display: inline-block; margin-top: 0.6rem; color: var(--accent2); font-size: 0.8rem; text-decoration: none; font-weight: 600; }
+        .book-link:hover { color: var(--accent); text-decoration: underline; }
+        .skeptics-box {
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.25);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .skeptics-box h3 { color: #ef4444; }
+        .quote {
+            font-style: italic;
+            color: var(--muted);
+            border-left: 3px solid var(--gold);
+            padding: 0.8rem 1.2rem;
+            margin: 1.2rem 0;
+            background: rgba(245,158,11,0.05);
+            border-radius: 0 8px 8px 0;
+        }
+        .quote cite { display: block; margin-top: 0.4rem; font-size: 0.85rem; color: var(--gold); font-style: normal; }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .share-bar { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+        .share-bar a {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 0.4rem 0.9rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .share-bar a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .toc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0 2rem;
+        }
+        .toc-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.8rem; }
+        .toc ol { padding-left: 1.3rem; color: var(--muted); }
+        .toc ol li { padding: 0.25rem 0; }
+        .toc ol li a { color: var(--accent2); text-decoration: none; }
+        .toc ol li a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<header>
+    <div class="tag">Speculative Nonfiction</div>
+    <h1>Alien Disclosure 2026</h1>
+    <p class="subtitle">The Year Everything Changed — And What Comes Next</p>
+    <div class="meta">
+        <span>📅 April 3, 2026</span>
+        <span>⏱ 18 min read</span>
+        <span>🏷 UFO / Disclosure / Fringe Theory</span>
+    </div>
+</header>
+
+<div class="toc">
+    <div class="toc-title">In This Article</div>
+    <ol>
+        <li><a href="#lead">The Disclosure Clock Is Ticking</a></li>
+        <li><a href="#grusch">The Man Who Broke the Seal: David Grusch</a></li>
+        <li><a href="#trump">Trump's February Directive</a></li>
+        <li><a href="#gaetz">The Hybrid Breeding Program Allegation</a></li>
+        <li><a href="#obama">Obama, the Bank of England, and the Mainstreaming of Disclosure</a></li>
+        <li><a href="#hollywood">Disclosure Day: When Spielberg Met the Fringe</a></li>
+        <li><a href="#fringe">Fringe Theories on the Edge</a></li>
+        <li><a href="#skeptic">What the Skeptics Say</a></li>
+        <li><a href="#books">Explore the Literature</a></li>
+    </ol>
+</div>
+
+<p class="lead" id="lead">In the history of human curiosity, few questions have fired the imagination — or invited more ridicule — than: <em>Are we alone?</em> In 2026, that question stopped being a joke. Something shifted. Whether you call it disclosure, declassification, or the slow-motion collapse of an official fiction, the machinery of government secrecy surrounding UFOs and extraterrestrial life experienced its most serious tremor yet.</p>
+
+<h2 id="grusch">The Man Who Broke the Seal: David Grusch</h2>
+
+<p>It started, as many seismic events do, quietly. In November 2023, former Air Force intelligence officer and National Geospatial-Intelligence Agency official <strong>David Grusch</strong> told <em>The Debrief</em> something that should have dominated headlines for weeks: that the United States government had retrieved craft of non-human origin, and had done so for decades.</p>
+
+<p>Grusch wasn't a crackpot. A decorated combat veteran with Top Secret/SCI clearance, he had spent years inside NRO and NGA. His claims were backed by colleagues. Then, in July 2023, he testified under oath before Congress.</p>
+
+<div class="card">
+    <div class="card-title">Grusch's Core Allegations</div>
+    <div class="card-date">Congressional Testimony, July 26, 2023</div>
+    <ul style="padding-left:1.2rem; color: var(--muted);">
+        <li>The U.S. government maintains a highly classified UFO recovery program</li>
+        <li>Non-human craft have been retrieved from crash sites</li>
+        <li>"Non-human biologics" — what some call bodies — were found at those sites</li>
+        <li>Grusch personally interviewed over 40 witnesses with direct knowledge of these programs</li>
+    </ul>
+</div>
+
+<p>The reaction from official Washington was instructive. The Department of Defense pointed to the All-domain Anomaly Resolution Office (AARO), its dedicated UAP investigative body, which insisted it had found <em>no verifiable proof</em> of off-world technology. AARO's director, Sean Kirkpatrick, called Grusch's allegations "insulting to the officers of the Department of Defense." But Kirkpatrick also acknowledged, in a Scientific American op-ed, that the government's handling of these issues involved decades of "inadvertent or unauthorized disclosures of legitimate U.S. programs."</p>
+
+<p>That word — <em>legitimate</em> — did a lot of work in that sentence. The question was never whether the programs existed. It was whether they had anything to do with aliens.</p>
+
+<h2 id="trump">Trump's February Directive: "Release the Files"</h2>
+
+<p>On February 20, 2026, President Donald Trump stood before cameras and announced he would order federal agencies to begin releasing government files related to aliens, UFOs, and unidentified anomalous phenomena (UAP). The Office of the Director of National Intelligence confirmed shortly after that files would be made public "soon."</p>
+
+<div class="quote">
+    "Files related to alien and extraterrestrial life, UAPs, and UFOs will soon be declassified."
+    <cite>— Office of the Director of National Intelligence, social media statement, February 2026</cite>
+</div>
+
+<p>The announcement was historic in form, if not yet in substance. Pentagon leadership, including Defense Secretary Pete Hegseth, was tasked with conducting the review and identifying what could be released. The move echoed Trump's campaign trail rhetoric, where he had teased that "Obama revealed classified information when he said aliens are real" — a reference to former President Obama's own curious comments on the subject in the months prior.</p>
+
+<p>Critics, including journalists at Reuters and CNN, noted the gap between the magnitude of the announcement and the actual content released so far. No photographs of ET. No reverse-engineered warp drives. Just a commitment to review decades of classified material — a process that could take years and whose output could still be heavily redacted.</p>
+
+<h2 id="gaetz">The Hybrid Breeding Program Allegation</h2>
+
+<p>Then came March 2026 — and the allegation that made even veteran UFO researchers pinch themselves.</p>
+
+<p>On March 31, 2026, former Congressman <strong>Matt Gaetz</strong> appeared on the Benny Johnson show and claimed he had been personally briefed by a U.S. Army official on a program that sounds ripped from a science fiction screenplay: a secret <em>alien-human hybrid breeding program</em>, allegedly using captured extraterrestrial beings to crossbreed with humans.</p>
+
+<div class="card">
+    <div class="card-title">What Gaetz Alleged</div>
+    <div class="card-date">Benny Johnson Show / WLTR Report, March 31, 2026</div>
+    <ul style="padding-left:1.2rem; color: var(--muted);">
+        <li>Gaetz was approached by a U.S. Army official who described a program involving "non-human biologics"</li>
+        <li>The program allegedly aims to create alien-human hybrids to enable government officials to communicate with extraterrestrial beings</li>
+        <li>The claims were independently backed — with no additional evidence — by Australian Senator Ralph Babet</li>
+        <li>No physical proof, documentation, or corroborating testimony has been produced</li>
+    </ul>
+</div>
+
+<p>The claims spread across social media at viral velocity. Fringe communities — which had been whispering about hybrid programs since at least the 1990s abduction literature — suddenly found themselves at the center of mainstream political discourse.</p>
+
+<p>The contactee community's version of this theory is, if anything, even stranger. Decades of abductee testimony describe being taken aboard craft and, in some cases, being present for procedures described as hybrid conception or gestation. The <em>Contact Report</em> published an extensive investigation in late 2025 documenting how these claims trace back through multiple waves of ufology — from Budd Hopkins's early work in the 1980s to modern researchers like Dr. Lisa Sprinkle and the late abductee support communities. Some abductees, the report noted, describe being tasked with teaching near-human hybrids how to navigate society: how to speak, shop, and behave in public.</p>
+
+<p>Whether any of this is literal, metaphorical, or something else entirely remains, to put it mildly, unresolved.</p>
+
+<h2 id="obama">Obama, the Bank of England, and the Mainstreaming of Disclosure</h2>
+
+<p>In February 2026, <em>Air Mail</em> ran a cover story with a headline that would have been unthinkable a decade earlier: <strong>"Obama Just Confirmed Aliens Exist."</strong> The former president had made comments in the preceding weeks that disclosure advocates pointed to as confirmation of what they had always believed — that the highest levels of government know more than they have ever publicly admitted.</p>
+
+<p>The mainstreaming of this issue reached an unlikely institutional height in January 2026, when <em>The Times of London</em> reported that the <strong>Bank of England</strong> had been informally warned by former Bank of England expert Helen McCaw to prepare contingency plans in the event that the United States officially disclosed the existence of extraterrestrial life. The reasoning was economic: even a confirmed announcement of non-intelligent microbial extraterrestrial life could move markets. Intelligence of non-human technological superiority? The financial implications were deemed too significant to ignore.</p>
+
+<p>Whether this represents genuine institutional concern or an exercise in reputational risk management is a matter of interpretation. But that the Bank of England was discussing it at all marks a remarkable cultural shift.</p>
+
+<h2 id="hollywood">Disclosure Day: When Spielberg Met the Fringe</h2>
+
+<p>On June 12, 2026, Steven Spielberg's <em>Disclosure Day</em> is set to hit theaters — a fictional exploration of government conspiracies, extraterrestrial contact, and the cultural machinery that has grown up around the question of alien life. The timing was not lost on observers: the film arrives into a culture that has spent three years watching real-world congressional hearings, whistleblower allegations, and presidential directives about the same subject.</p>
+
+<p>The ufology community's relationship with Hollywood has always been complicated. Films like <em>Close Encounters</em> and <em>The X-Files</em> normalized the topic, but also packaged it as entertainment. <em>Disclosure Day</em> threatens to do both simultaneously — serious enough to be culturally relevant, fictional enough to provide official deniability.</p>
+
+<p>As <em>Marca</em> noted in its March 2026 cultural analysis, the real-world fuel for the film — Pentagon UAP reports, Grusch's testimony, Trump's disclosure directive — gives the project an unprecedented documentary quality. The line between the film and the real-world drama has become genuinely blurry.</p>
+
+<h2 id="fringe">Fringe Theories on the Edge</h2>
+
+<div class="fringe-box">
+    <h3>🔮 Beyond the Mainstream: Fringe Disclosure Theories</h3>
+    <p style="color: var(--muted); margin-bottom: 1rem; font-size: 0.9rem;">These theories circulate at the edges of the disclosure community. They are presented here for completeness — not endorsement.</p>
+    <ul class="fringe-list">
+        <li><strong>The Nordic-Alien Alliance:</strong> Certain contactee groups claim benevolent tall, blonde "Nordic" beings have been visiting Earth for decades, guiding human spiritual evolution away from nuclear war and environmental collapse.</li>
+        <li><strong>Underground Base Theories:</strong> Persistent claims from figures like Dan Willis and Phil Schneider describe networks of underground facilities (DUMBs — Deep Underground Military Bases) where recovered craft are reverse-engineered in collaboration with extraterrestrial engineers.</li>
+        <li><strong>The Prison Planet Hypothesis:</strong> A dark spiritual framework suggesting some human "walk-ins" and abductees are actually ETs incarnating into human form to experience physical limitation — essentially serving a karmic sentence in a dense dimension.</li>
+        <li><strong>Reptilian Bloodline Control:</strong> David Icke's enduring (and thoroughly debunked) claim that shape-shifting reptilian beings control world governments through ancient bloodlines — perhaps the most notorious fringe theory attached to the broader disclosure movement.</li>
+        <li><strong>The Breakaway Civilization:</strong> The theory that a technologically advanced faction of humanity has been secretly operating apart from the rest of civilization for centuries, with some claiming this group now possesses ET-level technology and has been in contact with extraterrestrials.</li>
+        <li><strong>Synthetic Biology Programs:</strong> Some researchers claim that recovered "non-human biologics" are not of extraterrestrial origin at all, but rather human-made synthetic organisms — creating a very different kind of classified program, with very different implications.</li>
+        <li><strong>Interdimensional rather than Extraterrestrial:</strong> A growing current within advanced ufology — represented by figures like Luis Elizondo, former director of AATIP — suggests the most defensible explanation for UAPs is not spacecraft from another planet but rather craft accessing our reality from adjacent dimensions or frequencies.</li>
+    </ul>
+</div>
+
+<h2 id="skeptic">What the Skeptics Say</h2>
+
+<div class="skeptics-box">
+    <h3>⚖️ The Case for skepticism</h3>
+    <p style="color: var(--muted);">AARO, the Pentagon's dedicated UAP investigative office, has consistently reported finding <strong>no verifiable proof</strong> of aliens, off-world technology, or non-human biologics. Their three-volume report (2024-2025) found that the majority of UAP sightings were explainable by conventional phenomena: drones, weather balloons, atmospheric effects, and sensor artifacts. On the specific allegations:</p>
+    <ul style="padding-left:1.2rem; color: var(--muted); margin-top: 0.8rem;">
+        <li><strong>Grusch:</strong> Provided no physical evidence, documents, or firsthand proof. His testimony is based on interviewing other people who claim to have seen classified programs — a chain of hearsay that has not been independently verified.</li>
+        <li><strong>Gaetz's hybrid program:</strong> No documentation, no corroborating witnesses, no physical evidence. Gaetz himself was not an eyewitness — he claims to have been briefed.</li>
+        <li><strong>Trump's directive:</strong> A process review, not an announcement. AARO has said a comprehensive declassification could take years and would be subject to national security redactions.</li>
+        <li><strong>The broader pattern:</strong> Each generation of disclosure advocates has pointed to "this year" as the moment of truth. The dynamic has repeating features: credible-seeming whistleblowers, vague but dramatic claims, congressional interest, and media amplification — followed by no smoking gun.</li>
+    </ul>
+</div>
+
+<p>Harvard astrophysicist Avi Loeb, whose Galileo Project is conducting systematic searches for technological artifacts from extraterrestrial civilizations, has been characteristically blunt: he believes we should search scientifically for extraterrestrial life — but that the current disclosure movement is driven by emotion and conspiracy thinking more than evidence. "Disclosure," he has argued, "as promised by the current political process — will not happen by December 31, 2030." His rationale is that the political process cannot deliver scientific proof of something that, if it exists, would require rigorous peer-reviewed confirmation.</p>
+
+<h2 id="books">Explore the Literature</h2>
+
+<div class="books-section">
+    <h2>📚 Go Deeper</h2>
+    <p style="text-align:center; color: var(--muted); margin-top: 0.5rem;">Three essential reads on the disclosure landscape — from the foundational to the fringe.</p>
+    <div class="books-grid">
+        <div class="book-card">
+            <div class="book-icon">🛸</div>
+            <div class="book-title">Disclosure 2026</div>
+            <p style="font-size: 0.8rem; color: var(--muted); margin: 0.5rem 0;">A comprehensive examination of where the disclosure movement stands heading into 2026 — the players, the pressure points, the promises, and the limits of what governments are willing to reveal.</p>
+            <a class="book-link" href="https://amzn.to/47hGhV8" target="_blank" rel="noopener">amzn.to/47hGhV8 →</a>
+        </div>
+        <div class="book-card">
+            <div class="book-icon">🌌</div>
+            <div class="book-title">Beyond the Veil</div>
+            <p style="font-size: 0.8rem; color: var(--muted); margin: 0.5rem 0;">An exploration of the contactee and abduction literature — the witnesses, the experiences, and the philosophical questions that arise when the boundary between human and non-human consciousness becomes porous.</p>
+            <a class="book-link" href="https://amzn.to/480RlWP" target="_blank" rel="noopener">amzn.to/480RlWP →</a>
+        </div>
+        <div class="book-card">
+            <div class="book-icon">👁</div>
+            <div class="book-title">Veiled Presence</div>
+            <p style="font-size: 0.8rem; color: var(--muted); margin: 0.5rem 0;">A more esoteric journey into the fringe theories — interdimensional hypotheses, underground bases, hybrid programs, and the symbolic language that surrounds the disclosure community's most radical claims.</p>
+            <a class="book-link" href="https://amzn.to/4bAAv3z" target="_blank" rel="noopener">amzn.to/4bAAv3z →</a>
+        </div>
+    </div>
+</div>
+
+<div class="timeline">
+    <h2>Key Events: The Road to 2026</h2>
+    <div class="timeline-item">
+        <div class="timeline-date">July 26, 2023</div>
+        <p style="margin:0; color: var(--muted);">David Grusch testifies before Congress, claiming the U.S. has retrieved non-human craft and biologics.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">2024–2025</div>
+        <p style="margin:0; color: var(--muted);">AARO publishes three volumes of UAP findings; no verified proof of ET technology found. Congressional hearings continue intermittently.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">January 2026</div>
+        <p style="margin:0; color: var(--muted);">Bank of England reportedly warned to prepare economic contingencies for alien disclosure. Obama comments spark new media cycle.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">February 2026</div>
+        <p style="margin:0; color: var(--muted);">Trump signs directive ordering Pentagon, CIA, and ODNI to begin releasing UFO/alien files.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">March 2026</div>
+        <p style="margin:0; color: var(--muted);">Matt Gaetz claims he was briefed on a secret alien-human hybrid breeding program. Senator Ralph Babet offers support.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">April 3, 2026</div>
+        <p style="margin:0; color: var(--muted);"><em>This article is being written.</em> The disclosure landscape has never been more active — or more contested.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">June 12, 2026</div>
+        <p style="margin:0; color: var(--muted);">Steven Spielberg's <em>Disclosure Day</em> slated for theatrical release.</p>
+    </div>
+</div>
+
+<footer>
+    <p>This article is a work of speculative nonfiction. It presents documented events, public statements, and named individuals alongside fringe theories and unverified claims. Readers are encouraged to cross-reference primary sources, consult peer-reviewed science, and maintain critical skepticism toward all claims — including those made in this article.</p>
+    <div class="share-bar">
+        <a href="#">Share this Article</a>
+        <a href="articles.html">← Back to Articles</a>
+    </div>
+</footer>
+
+</div>
+</body>
+</html>

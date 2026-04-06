@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Catalog | Bithues Reading Lab</title>
+  <meta name="description" content="Browse our complete catalog of book reviews. Find books in sci-fi, fantasy, self-help, spirituality, and more.">
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-brand">Bithues <span>Reading Lab</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="stories.html">Stories</a>
+      <a href="catalog.html" class="active">Reviews</a>
+      <a href="articles.html">Articles</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="forecast.html">Forecast</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-eyebrow">Bithues Reading Lab</div>
+    <h1>Book <em>Catalog</em></h1>
+    <p class="hero-sub">Browse all 35 curated books. Find your next favorite read.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- ── FILTERS ── -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="catalog-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="Fiction">Fiction</button>
+      <button class="filter-btn" data-filter="Nonfiction">Nonfiction</button>
+      <button class="filter-btn" data-filter="Children">Children</button>
+      <button class="filter-btn" data-filter="Science">Science</button>
+      <button class="filter-btn" data-filter="Self-Help">Self-Help</button>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CATALOG ── -->
+  <section class="section">
+    <div class="cards-grid" id="catalogGrid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/1.html" style="color:var(--navy);text-decoration:none;">The Dawn of Civilization</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by T. Stone</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">When a brutal winter kills his father, sixteen-year-old Koda fights to turn a wandering tribe into a walled village.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Fiction</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/2.html" style="color:var(--navy);text-decoration:none;">The Richmond Cipher</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by E. Maris</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">In Confederate Richmond, Mary carries secrets in her memory as she moves through the Executive Mansion.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Fiction</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/3.html" style="color:var(--navy);text-decoration:none;">Red Horizon: Lunar Launch</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by M. A. Hale</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Sci-Fi</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/4.html" style="color:var(--navy);text-decoration:none;">The Confluence Doctrine</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Alaric Wynn</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">In a world where suffering has been designed out, Orren hears something that doesn't fit.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Sci-Fi / Dystopian</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/5.html" style="color:var(--navy);text-decoration:none;">Living with a Moving Planet</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by J. T. Hartley</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Nonfiction / Science</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/6.html" style="color:var(--navy);text-decoration:none;">Beyond the Veil</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by D. E. Harlan</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">A careful tour of evidence around what happens when we die.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Spiritual / Nonfiction</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/8.html" style="color:var(--navy);text-decoration:none;">The Power of Changing Your Mind</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Evan R. Cole</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">In a culture that rewards confidence, this book shows how intellectual humility is a competitive edge.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Self-Help / Nonfiction</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/9.html" style="color:var(--navy);text-decoration:none;">The Shadow Within</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Elena Maris</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Instead of treating reactions as defects, learn to treat them as information.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Self-Help / Mindset</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/10.html" style="color:var(--navy);text-decoration:none;">Echoes of Aetheris</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Aetheri Codex</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Nine thousand years before history, a wounded alien ship falls onto a frozen steppe.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Fantasy / Sci-Fi</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/12.html" style="color:var(--navy);text-decoration:none;">Resonance Drift</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by R. Zyrion</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Sci-Fi</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/13.html" style="color:var(--navy);text-decoration:none;">Symbiont Bloom</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Elowen Tidebloom</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">On volcanic isles of Lumengrove, dawn arrives through living leaf-glass.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Sci-Fi</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/15.html" style="color:var(--navy);text-decoration:none;">Physics of Insight</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Quantum Chronos</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">What if genius isn't rare—it's hidden inside every mind, waiting for the right switch?</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Science / Nonfiction</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/16.html" style="color:var(--navy);text-decoration:none;">The Physics of Time</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Quantum Chronos</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">A groundbreaking exploration: what if the universe is a block of spacetime?</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Science / Nonfiction</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/21.html" style="color:var(--navy);text-decoration:none;">The Burning Song</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Rowan Ashcroft</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">When a cave lion marks Aken, the leader makes a choice that breaks every rule.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Fantasy / Adventure</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/22.html" style="color:var(--navy);text-decoration:none;">Mindful Memory</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by D. E. Harlan</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Empowering retirees with science-backed exercises like memory palaces.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Self-Help / Nonfiction</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/24.html" style="color:var(--navy);text-decoration:none;">Rules of Survival</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Jorak Veldt</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Roughly one million years ago, a boy learns the band's rules—and pays for them in skin.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Dystopian / Thriller</span></div>
+      </div>
+      <div class="card" data-category="Fiction">
+        <h3><a href="reviews/25.html" style="color:var(--navy);text-decoration:none;">Blood Ember</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Jorak Veldt</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Three parts trace how survival habits harden into protocol, law, and chant.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Thriller / Mystery</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/30.html" style="color:var(--navy);text-decoration:none;">Discovering Washington DC</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by Evelyn Carter</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">Beyond the monuments—a guide to the real DC.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Travel / Nonfiction</span></div>
+      </div>
+      <div class="card" data-category="Nonfiction">
+        <h3><a href="reviews/35.html" style="color:var(--navy);text-decoration:none;">Time Investing</a></h3>
+        <p class="author" style="color:var(--gray-mid);font-size:.85rem;margin-bottom:.5rem;">by H Harvey</p>
+        <p class="tldr" style="color:var(--text-body);font-size:.9rem;">A self-help guide showing how to prioritize yourself and your time.</p>
+        <div class="meta" style="margin-top:.75rem;"><span class="review-tag">Self-Help / Mindset</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all') card.style.display = '';
+          else card.style.display = card.dataset.category === filter ? '' : 'none';
+        });
+      });
+    });
+
+    window.onscroll = function() {
+      const btn = document.querySelector('.back-to-top');
+      if (window.scrollY > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

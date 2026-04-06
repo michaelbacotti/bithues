@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Original meta-fiction short story — The Question. A librarian at the end of her career discovers the story she was always living.">
+    <meta property="og:title" content="The Question - Short Story | Bithues">
+    <meta property="og:description" content="Original meta-fiction short story. Free to read.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://bithues.com/stories/19.html">
+    <title>The Question | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.9; font-size: 1.1rem; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; font-family: -apple-system, sans-serif; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; font-family: -apple-system, sans-serif; }
+        nav a.active { color: var(--accent); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; }
+        
+        .story-header { padding: 3rem 0 2rem; text-align: center; }
+        .story-header h1 { font-size: 2.25rem; margin-bottom: 1rem; line-height: 1.2; font-family: -apple-system, sans-serif; }
+        .story-header .meta { color: var(--text-dim); font-size: 0.95rem; font-family: -apple-system, sans-serif; }
+        .story-header .genre-tag { display: inline-block; background: var(--accent); color: white; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 15px; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        
+        .story-content { padding: 2rem 0; }
+        .story-content p { margin-bottom: 1.5rem; text-indent: 2em; }
+        .story-content p:first-of-type { text-indent: 0; }
+        .story-content p:first-of-type::first-letter { font-size: 3.5rem; float: left; line-height: 1; margin-right: 0.5rem; color: var(--accent); font-weight: 700; }
+        
+        .share-buttons { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .share-buttons p { color: var(--text-dim); margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .share-links { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .share-btn { padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; }
+        .share-btn:hover { opacity: 0.9; }
+        
+        .story-footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
+        .story-footer a { color: var(--accent); text-decoration: none; font-family: -apple-system, sans-serif; }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; font-family: -apple-system, sans-serif; }
+        
+        @media (max-width: 600px) {
+            .story-header h1 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="breadcrumb" style="padding:1rem 0;color:var(--text-dim);font-size:0.85rem;">
+                <a href="../index.html">Home</a> → <a href="../stories.html">Stories</a> → <span>The Question</span>
+            </div>
+            <nav>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="../index.html">Home</a>
+                    <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
+                    <a href="../stories.html" class="active">Stories</a>
+                    <a href="../about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="story-header">
+                <span class="genre-tag">Meta-Fiction</span>
+                <h1 class="header">The Question</h1>
+                <div class="bookmark-btn-container" style="text-align:right;margin-bottom:0.5rem;"><button onclick="toggleBookmark()" style="background:none;border:1px solid var(--border);border-radius:15px;padding:0.3rem 0.8rem;cursor:pointer;font-size:0.8rem;color:var(--text-dim);">+ Bookmark</button></div>
+                <p class="meta">1,800 words · 6 min read</p>
+            </div>
+            
+            <div class="story-content">
+                <p>Vera Mendelson had worked in the Bowen Library's rare books wing for thirty-one years, and she had never once found a bookmark where she hadn't placed one herself. This was the sort of fact that would have interested no one, which was precisely why she found it reassuring. The world, she had decided long ago, was most trustworthy when it failed to surprise her.</p>
+                
+                <p>She was sixty-three. Her knees announced weather changes with the reliability of barometers. Her daughter had stopped asking her to move closer to the family three years ago, and Vera had felt something loosen in her chest that she could not name — not relief exactly, and not grief, but something adjacent to both. She came to work each morning at eight, made tea in the staff room, and sat with papers that other people had written, and she had always believed this was enough.</p>
+                
+                <p>Then the Silvere boxes arrived.</p>
+                
+                <p>Marguerite Silvere had been dead for fourteen months. She had written seven novels, two of which had won prizes Vera could name and three of which Vera had read and set down feeling that something in her own interior architecture had shifted, though she could never say precisely what. Silvere had been a difficult woman — the biographies said so plainly — and she had died in a rented house on the coast with an unfinished manuscript on her desk and no notes explaining what came next.</p>
+                
+                <p>The manuscript went to the university archive. The notes — the fragments, the drafts, the margins dense with Silvere's slanted handwriting — went to Bowen, because Silvere had specified in her will that they should, and because the library had a fellowship named after her that the family could not afford to lose funding from.</p>
+                
+                <p>Vera was given the cataloging. This was her last major project before retirement. A gift, everyone said, from the director, who smiled when she said it and did not meet Vera's eyes.</p>
+                
+                <p>She began in November, when the light through the archive windows came in low and amber and made the dust motes look like something other than a nuisance. The boxes smelled of paper and ink and something faintly floral — lavender, perhaps, or the dried roses she found pressed flat between pages 340 and 341 of what appeared to be a discarded draft.</p>
+                
+                <p>The manuscript was not what she expected. She had assumed — had hoped, in some way she did not examine — for pages that would sing, for language that would justify the ache she carried after reading Silvere's novels. Instead, she found something stranger. The manuscript was about a woman who was cataloging the papers of a dead author. Every few pages, Silvere's protagonist — her name was Clare — would stop cataloging and begin to write about the experience of cataloging, and then she would stop that and begin to write about the experience of not being able to stop, and then she would stop that and find herself back among the boxes, holding a letter she didn't remember picking up.</p>
+                
+                <p>Vera read the same paragraph four times: <em>She lifted the letter and held it to the window. The handwriting was hers and not hers — familiar in its pressures, in the way it slanted left at the ends of sentences, but wrong in some quality she couldn't name. As if someone had learned to write by studying photographs. As if the hand had never held a pen but had memorized the idea of one.</em></p>
+                
+                <p>She set the pages down. Her tea had gone cold. Outside, it was fully dark.</p>
+                
+                <p>In the margins of the third draft, Silvere had written annotations to herself — not notes about plot, but arguments. Arguments with the page. <em>This is wrong</em>, she had written. Then: <em>No, it's right, but it isn't finished, and finishing would make it wrong.</em> Then: <em>She deserves an ending. Everyone deserves an ending. But what ending? What does anyone deserve? Does she deserve to know? Does knowing change anything? Does the question matter more than the answer?</em></p>
+                
+                <p>Vera recognized the handwriting. Not literally — she had never seen Silvere's hand — but in its quality. The way the questions multiplied without resolution. The way the handwriting itself seemed to argue with its own existence.</p>
+                
+                <p>She had been doing this for thirty-one years. Coming to the library. Sitting with the detritus of other people's interior lives. Cataloging grief and love and the specific textures of other people's imaginations, and never once — not once — writing a single page of her own. Not because she had nothing to say. Because she could not decide what ending she deserved.</p>
+                
+                <p>Her daughter had asked her once, at a dinner Vera still thought about too often, why she never wrote anything down. "You know so many stories," her daughter had said, and Vera had said, "That's exactly why," and her daughter had looked at her with the particular confusion that Vera's answers always generated, and the conversation had moved on.</p>
+                
+                <p>What she had meant — what she had never said — was that knowing too many stories made the question of her own unbearable. Because every story she had ever read had an ending, even the ambiguous ones, even the ones that stopped mid-sentence. The ending existed. The author had made a choice, even if the choice was to refuse. But her own story — the one she was living, the one she was inside of — had no ending yet, and she could not decide whether she was waiting for it or building toward it or simply refusing to see it for what it was.</p>
+                
+                <p>Silvere had died without deciding. That was what the notes said. The final pages of the draft ended mid-scene, Clare standing at a window with a letter in her hand, and the last margin note read: <em>I cannot decide if she reads it. The decision is the story. If I decide, the story ends and what I was trying to say dies with it. If I don't decide, the story never ends and neither do I and this is not a life I can lead in good conscience.</em></p>
+                
+                <p>Vera closed the box. She sat in the amber light of the archive and thought about a great many things: her daughter's face at that dinner table, the particular way the library smelled in February when the heating system labored, the fact that she had read Silvere's novels and felt less alone in the world and had never once considered that Silvere herself might have felt exactly the same loneliness — the loneliness of someone surrounded by voices, all of them compelling, none of them hers.</p>
+                
+                <p>She opened the box again. She took out the last page of the draft and held it the way Clare held the letter, up to the window, where the last light was doing exactly what the light had been doing all afternoon: turning the ordinary into something that looked, for a moment, like it had always been worth saving.</p>
+                
+                <p>She did not write in the margins. That was not her job, and Silvere's arguments were not hers to finish. But she took a blank sheet of the library's archival paper — acid-free, designed to outlast everything and everyone — and she placed it on top of the draft. Then she went home, and she made dinner, and she sat at her kitchen table with a pen she had owned for twenty years and had never once used for its intended purpose.</p>
+                
+                <p>She wrote: <em>The woman at the window turned the letter over. She read it. She understood something she had not understood before, which was not the same as knowing what to do. But for the first time in as long as she could remember, she was willing to find out.</em></p>
+                
+                <p>She sat with the page for a long time. Then she folded it carefully and put it in her bag, and the next morning, she placed it in the box with Silvere's notes, at the very top, where it would be the first thing the next person found.</p>
+                
+                <p>She did not know if she had answered Silvere's question. She suspected Silvere would have argued with her about it, and that the argument would have been the point, and that this was — finally, after all these years — exactly the kind of conversation she had been waiting for.</p>
+            </div>
+            
+            <div class="share-buttons">
+                <p>Share this story:</p>
+                <div class="share-links">
+                    <a href="#" onclick="shareTwitter()" class="share-btn" style="background:#1da1f2;color:white;">Twitter</a>
+                    <a href="#" onclick="shareFacebook()" class="share-btn" style="background:#4267b2;color:white;">Facebook</a>
+                    <a href="#" onclick="shareLinkedIn()" class="share-btn" style="background:#0077b5;color:white;">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="story-footer">
+                <p><a href="../stories.html">← Back to all stories</a></p>
+            </div>
+        </article>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+        updateBookmarkBtn();
+    </script>
+    <script>
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
+    }
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+    }
+    function toggleBookmark() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        let bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        const url = window.location.href;
+        const title = document.querySelector(".story-header h1").textContent;
+        
+        if (bookmarks.find(b => b.url === url)) {
+            bookmarks = bookmarks.filter(b => b.url !== url);
+            btn.textContent = "+ Bookmark";
+            btn.style.color = "var(--text-dim)";
+        } else {
+            bookmarks.push({url, title, date: new Date().toISOString()});
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+        localStorage.setItem("bithuesBookmarks", JSON.stringify(bookmarks));
+    }
+    
+    function updateBookmarkBtn() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        if (!btn) return;
+        const bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        if (bookmarks.find(b => b.url === window.location.href)) {
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+    }
+    </script>
+</body>
+</html>

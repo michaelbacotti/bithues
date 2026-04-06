@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Original literary fiction — The Harvest. An orchardist, an apple orchard, and the question of what we choose to save.">
+    <meta property="og:title" content="The Harvest - Short Story | Bithues">
+    <meta property="og:description" content="Original literary fiction short story. Free to read.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://bithues.com/stories/24.html">
+    <title>The Harvest | Bithues Reading Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #0a0a0f; --surface: #12121a; --border: #2a2a3a; --text: #e8e8f0; --text-dim: #7a7a90; --accent: #7c3aed; }
+        [data-theme="light"] { --bg: #f5f5f5; --surface: #ffffff; --border: #e0e0e0; --text: #1a1a1a; --text-dim: #666666; }
+        body { font-family: Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.9; font-size: 1.1rem; }
+        .container { max-width: 700px; margin: 0 auto; padding: 0 1.5rem; }
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-decoration: none; font-family: -apple-system, sans-serif; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; font-family: -apple-system, sans-serif; }
+        nav a.active { color: var(--accent); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 0.8rem; cursor: pointer; color: var(--text-dim); font-size: 1rem; }
+        
+        .story-header { padding: 3rem 0 2rem; text-align: center; }
+        .story-header h1 { font-size: 2.25rem; margin-bottom: 1rem; line-height: 1.2; font-family: -apple-system, sans-serif; }
+        .story-header .meta { color: var(--text-dim); font-size: 0.95rem; font-family: -apple-system, sans-serif; }
+        .story-header .genre-tag { display: inline-block; background: var(--accent); color: white; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 15px; margin-bottom: 1rem; font-family: -apple-system, sans-serif; }
+        
+        .story-content { padding: 2rem 0; }
+        .story-content p { margin-bottom: 1.5rem; text-indent: 2em; }
+        .story-content p:first-of-type { text-indent: 0; }
+        .story-content p:first-of-type::first-letter { font-size: 3.5rem; float: left; line-height: 1; margin-right: 0.5rem; color: var(--accent); font-weight: 700; }
+        
+        .share-buttons { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .share-buttons p { color: var(--text-dim); margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .share-links { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .share-btn { padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; }
+        .share-btn:hover { opacity: 0.9; }
+        
+        .story-footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
+        .story-footer a { color: var(--accent); text-decoration: none; font-family: -apple-system, sans-serif; }
+        
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; font-family: -apple-system, sans-serif; }
+        
+        @media (max-width: 600px) {
+            .story-header h1 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="breadcrumb" style="padding:1rem 0;color:var(--text-dim);font-size:0.85rem;">
+                <a href="../index.html">Home</a> → <a href="../stories.html">Stories</a> → <span>The Harvest</span>
+            </div>
+            <nav>
+                <a href="../index.html" class="logo">Bithues<span> Reading Lab</span></a>
+                <div>
+                    <a href="../index.html">Home</a>
+                    <a href="../catalog.html">Catalog</a>
+                    <a href="../articles.html">Articles</a>
+                    <a href="../stories.html" class="active">Stories</a>
+                    <a href="../about.html">About</a>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </nav>
+        </header>
+
+        <article>
+            <div class="story-header">
+                <span class="genre-tag">Literary Fiction</span>
+                <h1 class="header">The Harvest</h1>
+                <div class="bookmark-btn-container" style="text-align:right;margin-bottom:0.5rem;"><button onclick="toggleBookmark()" style="background:none;border:1px solid var(--border);border-radius:15px;padding:0.3rem 0.8rem;cursor:pointer;font-size:0.8rem;color:var(--text-dim);">+ Bookmark</button></div>
+                <p class="meta">2,700 words · 9 min read</p>
+            </div>
+            
+            <div class="story-content">
+                <p>The Honeycrisp was the first tree Helen Colvin had planted herself, and it was the last tree she would tend before she turned seventy, and these two facts were not unrelated, though she had never said so aloud and would not have known how to say it if anyone had asked. The Honeycrisp stood at the orchard's eastern edge, where the morning light reached it first and the roots ran deep into the clay she had spent thirty years improving with compost and cover crops and the specific kind of patience that is only possible when you believe you will not live to see the results of your work but do the work anyway.</p>
+                
+                <p>The orchard had been her father's. He had planted it in 1962 on land that had been in the family since the homestead acts, in the years when the valley was still a patchwork of small farms and the town at its head had a train station and a grain elevator and three competing general stores. The farms were gone now — rezoned, sold, converted into subdivisions with names like Orchard View Estates and Applewood Commons that contained no orchards and no views of anything but other houses. Only Helen's land remained. Seven acres, held in a trust that her lawyer said was "creative" and her accountant said was "aggressively tax-optimized" and Helen said was hers, meaning: she had fought for it, and she would keep fighting for it, or she would die on it, and the order of those things did not concern her as much as people seemed to think it should.</p>
+                
+                <p>There were forty-seven trees in the orchard, and she knew each one. Not by the fruit — though she knew the fruit, knew the specific moment in September when the Honeycrisp's skin took on the particular yellowish blush that meant it was ready, knew the way the Esopus Spitzenburg's skin would split if you waited three days too long — but by the bark, by the angle of the scaffold branches, by the way the tree held itself in wind. Her father had planted twenty-three varieties that he had sourced from the old nurseries — Wickson and Roxbury Russet and Blue Permain and a Newton Pippin that was so old it had been grown from a cutting of a cutting of a tree that John Chapman himself might have tended. The other twenty-four trees Helen had planted in the years after his death, in the gaps where blight or storm had taken originals, and she had chosen her replacements not for yield or disease resistance but for story. Aszu, a Japanese variety her father had admired in a catalog but never ordered. A送我 a Flemish Beauty from a man in Vermont who had no one to pass it to. A trained cordon of Pitmaston Pineapple, which bore fruit the size of golf balls and tasted like honey and tropical flowers and which no commercial orchard would ever grow because it was too small to package and too unusual to sell.</p>
+                
+                <p>The stories were the point. Helen had understood this since her father's death, when she had stood in the orchard in the cold October rain and realized that the orchard was not a business or even a farm but a library, and the trees were books, and the fruit was the language they spoke, and the readers who came — a handful, each autumn, people who had found her through word of mouth and who drove out to the end of Colvin Road knowing only that there would be apples and that Helen would tell them what each one tasted like and why it mattered — were the only audience she cared about.</p>
+                
+                <p>The blight came in the third week of August, which was wrong — blight came in spring, in the wet cool weeks when fire blight bacteria moved through the vascular systems of trees like a thing with intention. August blight was something else. August blight was the kind that didn't announce itself until the leaves were already blackened and curled, and by then it had been moving through the root system for months, and by then it was everywhere.</p>
+                
+                <p>Helen noticed it on the Esopus Spitzenburg, which was the tree she visited first each morning because it was the tree her father had loved most. The leaves on the upper scaffold branch were wilting. Not the dramatic wilting of drought stress but something slower, something that looked, when she held the leaf in her hand, like the color was draining out of it from the veins inward. She cut a section of bark from the affected limb and looked at the reddish-brown staining beneath and felt, for the first time in thirty years, something she could not tend her way out of.</p>
+                
+                <p>The extension agent confirmed it. Bitter rot, not fire blight — different pathogen, same outcome. The trees that were affected would need to come out. All of them, or the spores would persist in the soil for years. A controlled burn of the affected areas was the recommended protocol, followed by soil remediation and a fallow period of no less than three years before replanting.</p>
+                
+                <p>"Three years," Helen said. She was standing in her kitchen with the extension agent, a young man with a clean-pressed shirt and kind eyes who had the look of someone who genuinely wished he had better news. "And the trees that aren't affected yet?"</p>
+                
+                <p>"Canopy separation. Remove any tree within fifty feet of an infected specimen. It's the only way to stop the spread."</p>
+                
+                <p>"Fifty feet," Helen said. "In an orchard where the trees are planted thirty feet apart."</p>
+                
+                <p>The agent was quiet.</p>
+                
+                <p>"I'm seventy in November," Helen said. "Three years is a long time."</p>
+                
+                <p>"I'm sorry," the agent said, and he meant it, and Helen appreciated the meanness of it, the way it refused to be fixed by kindness.</p>
+                
+                <p>The developer came the following week. His name was Martin Kell, and he represented a regional homebuilding company that Helen's lawyer had described as "aggressively acquisitive." He arrived in a truck that cost more than Helen's tractor and wore a tie that was the color of nothing in nature, and he stood in the orchard and looked at the trees with the particular expression of someone calculating the footprint of a parking lot.</p>
+                
+                <p>"We can make a very generous offer," he said. "The location is exceptional. Residential development in this corridor commands a premium. We'd be talking about a significant return on investment for all parties."</p>
+                
+                <p>"The trees are dying," Helen said.</p>
+                
+                <p>"Which makes the land more attractive, from a development standpoint. Less remediation required on your end."</p>
+                
+                <p>"The trees are dying," Helen said again, "and you want to build houses on their grave."</p>
+                
+                <p>Martin Kell had the grace to look uncomfortable. "I understand this is an emotional situation. I'm here to present an option, not to pressure anyone. The offer stands as-is for thirty days. After that, the conditions of the offer may change, given the progression of the blight."</p>
+                
+                <p>He left his card. Helen put it in the kitchen drawer where she put things she was going to throw away and had not yet thrown away. She went back to the orchard. She walked the rows slowly, the way she always did, but differently — not the walk of a keeper but the walk of a witness, someone cataloging what was present because she understood that presence was temporary. The Esopus Spitzenburg's affected branch had spread overnight. The Wickson on the next row showed the first signs. The Virginia crab in the northwest corner, which was the oldest tree in the orchard and the one that bore the strangest fruit — small, red, so acidic it could strip paint — was, for the moment, untouched, and Helen found herself spending more time with the Virginia crab than any other tree, as if proximity to the healthy could ward off what was coming for the others.</p>
+                
+                <p>The young farmer arrived on a Tuesday, which Helen would also remember. He came on foot, which was the first thing that distinguished him — nobody walked out to the orchard; everyone drove, even the apple customers, who pulled their cars up to the barn and expected Helen to bring the fruit to them. He walked up the dirt drive with the particular gait of someone who was used to walking and did not mind it, and he introduced himself as Ellis Prentiss, and he said he had heard about the orchard from his grandmother, who had been a customer in the 1970s.</p>
+                
+                <p>"She said you had the best Esopus Spitzenburg she'd ever tasted," Ellis said. "She also said your father was the kind of man who could make a tree grow in concrete, and she meant that as a compliment."</p>
+                
+                <p>"What do you want?" Helen said, and she heard the sharpness in her own voice and did not apologize for it.</p>
+                
+                <p>"I want to learn," Ellis said. "I want to learn about heirloom varieties and rootstocks and the difference between a spur and a tip bearer. I want to learn why your Pitmaston Pineapple tastes like something from another world and why nobody grows them commercially and how it is that a tree can be a hundred years old and still produce fruit that makes people cry." He paused. "I know about the blight. I'm not here to offer solutions. I'm here to help, if you'll let me."</p>
+                
+                <p>Helen looked at him. He was maybe twenty-five, with the beginning of a beard and hands that were not soft — hands that had worked, even if not in the specific way that orchard work required. He was wearing boots that had seen real use. He was looking at the Esopus Spitzenburg with an expression she recognized because she had seen it on her father's face, on the faces of the old nurserymen he had corresponded with, on the face of anyone who understood that the thing in front of them was not merely a plant but a relationship.</p>
+                
+                <p>"The Esopus is dying," she said.</p>
+                
+                <p>"I know."</p>
+                
+                <p>"The Wickson next to it is probably next."</p>
+                
+                <p>"I know."</p>
+                
+                <p>"The extension agent says the whole orchard may need to come out."</p>
+                
+                <p>"I know," Ellis said. "But not all of it. Not the varieties that aren't infected yet. And not the varieties that have been saved as cuttings, stored in the right conditions, waiting for someone to plant them again." He took a step closer to the Virginia crab, and Helen watched him look at it the way you look at an old friend you haven't seen in years. "That tree is two hundred years old. It's been grafted three times. Every tree in this orchard that produces the fruit it produces is a child or grandchild of that tree, and if it dies, and if the grafted stock dies with it, there's a version of this fruit that exists nowhere else in the world and that will never exist again."</p>
+                
+                <p>"I know," Helen said.</p>
+                
+                <p>"Then let me help you save it," Ellis said. "Not the orchard as a business. Not the land as development potential. The trees. The varieties. The stories."</p>
+                
+                <p>They worked through September and October. They cut out the infected limbs — eighteen trees cleared of affected wood, four trees removed entirely, the stumps treated and covered. They took cuttings from every healthy tree and Helen showed Ellis how to store them in damp sphagnum moss in the root cellar, labeled with the variety and the date and the row number, each cutting wrapped in newspaper like a letter in an envelope, waiting for the day they might be needed. They harvested the fruit from the uninfected trees — a smaller harvest than any in thirty years, but the fruit was extraordinary, concentrated and bright, as if the trees knew they were being asked to perform one final act of generosity and were rising to meet the request.</p>
+                
+                <p>The Esopus Spitzenburg produced its last fruit in Helen's lifetime on the last day of September. The apples were small and deeply red and slightly misshapen, the way Spitzenburgs always were, and when Helen bit into the first one — standing in the tree's shade, Ellis watching from the next row — the flesh was tart and sweet and complex in the way that no supermarket apple had ever been or could ever be, because the complexity was not just flavor but time, the accumulated result of two hundred years of being this specific thing in this specific place, grown by these specific people who had cared enough to keep it alive.</p>
+                
+                <p>"Good?" Ellis asked.</p>
+                
+                <p>"Good," Helen said, and her voice did something she did not expect, which was to break slightly on the word, and she covered it by taking another bite, and the apple tasted like September, and like her father's hands, and like the specific quality of light through the leaves at this time of day, and like an ending that was also, somehow, a beginning.</p>
+                
+                <p>The developer called again in November. Helen told him the land was not for sale. He asked if she was certain. She said she was. He said the offer would not remain open indefinitely. She said she understood.</p>
+                
+                <p>The root cellar was full of cuttings. The Virginia crab stood untouched. The Honeycrisp, which had been the first tree Helen planted and which she had always thought of as her tree rather than her father's, dropped its last leaves in late October and stood bare in the November cold, ready for winter, ready for the long dormancy that was not death but was something adjacent to it, the rest that made flowering possible, the silence that made the song worth singing.</p>
+                
+                <p>Ellis came back the following spring. He brought a soil test kit and a grafting knife and a notebook that was already half-full with observations from the previous autumn. Helen met him at the gate with two cups of coffee, one of which she had made the way her father had taught her — strong, with just enough sugar to cut the bitterness, drunk while standing in the cold because there was always next season to get warm in.</p>
+                
+                <p>"We'll lose some," she said.</p>
+                
+                <p>"We'll lose some," he agreed.</p>
+                
+                <p>"But not all."</p>
+                
+                <p>"Not all," he said. "That's the whole point, isn't it? Not all. Never all. That's the only win that matters."</p>
+                
+                <p>Helen looked at the orchard — the bare branches, the waiting soil, the root cellar full of moss-wrapped letters addressed to a future she would not live to see but that would exist because she had made the choice, years ago, to tend things that took longer than a human life to come to fruition. She thought about her father. She thought about the man who had planted the Virginia crab two hundred years ago, whose name she did not know, who had made the same choice: to plant something that would outlast them, to trust the future with a gift they would never fully receive.</p>
+                
+                <p>"Yes," she said. "That's the whole point."</p>
+                
+                <p>She handed Ellis his coffee. They walked into the orchard together. The sap was rising in the Virginia crab. The spring was arriving, the way it always did, indifferent to blight and developers and the fact that Helen Colvin was seventy years old and the trees she tended did not know or care about her mortality. The world was very large, and very old, and very full of things that continued without permission, and Helen had chosen, as her father had chosen, as the nameless man who had grafted the Virginia crab had chosen, to be one of the things that continued.</p>
+                
+                <p>She showed Ellis how to read the buds. He showed her a grafting technique he'd learned from a man in Vermont who was even older than she was. The sun came up over the eastern edge of the orchard, where the Honeycrisp stood, waiting, as it had waited for thirty years, for the results of the work.</p>
+            </div>
+            
+            <div class="share-buttons">
+                <p>Share this story:</p>
+                <div class="share-links">
+                    <a href="#" onclick="shareTwitter()" class="share-btn" style="background:#1da1f2;color:white;">Twitter</a>
+                    <a href="#" onclick="shareFacebook()" class="share-btn" style="background:#4267b2;color:white;">Facebook</a>
+                    <a href="#" onclick="shareLinkedIn()" class="share-btn" style="background:#0077b5;color:white;">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="story-footer">
+                <p><a href="../stories.html">← Back to all stories</a></p>
+            </div>
+        </article>
+
+        <footer>
+            <p>© <span id="year"></span> Bithues Reading Lab</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+        updateBookmarkBtn();
+    </script>
+    <script>
+    function shareTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
+    }
+    function shareFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+    }
+    function toggleBookmark() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        let bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        const url = window.location.href;
+        const title = document.querySelector(".story-header h1").textContent;
+        
+        if (bookmarks.find(b => b.url === url)) {
+            bookmarks = bookmarks.filter(b => b.url !== url);
+            btn.textContent = "+ Bookmark";
+            btn.style.color = "var(--text-dim)";
+        } else {
+            bookmarks.push({url, title, date: new Date().toISOString()});
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+        localStorage.setItem("bithuesBookmarks", JSON.stringify(bookmarks));
+    }
+    
+    function updateBookmarkBtn() {
+        const btn = document.querySelector(".bookmark-btn-container button");
+        if (!btn) return;
+        const bookmarks = JSON.parse(localStorage.getItem("bithuesBookmarks") || "[]");
+        if (bookmarks.find(b => b.url === window.location.href)) {
+            btn.textContent = "✓ Bookmarked";
+            btn.style.color = "var(--accent)";
+        }
+    }
+    
+    function shareLinkedIn() {
+        const url = encodeURIComponent(window.location.href);
+        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+    }
+    </script>
+</body>
+</html>
