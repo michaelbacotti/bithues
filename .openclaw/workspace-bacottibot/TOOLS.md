@@ -39,7 +39,7 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ## GitHub
 
-- **Token**: `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` (openclaw-bot, repo scope)
+- **Token**: `[GITHUB_TOKEN_REDACTED]` (openclaw-bot, repo scope)
 - **Owner**: michaelbacotti
 - **Repos**: bithues, dependability-us, succession-holding-llc
 

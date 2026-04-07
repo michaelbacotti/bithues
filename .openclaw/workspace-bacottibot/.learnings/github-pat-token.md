@@ -6,7 +6,7 @@
 
 GitHub Personal Access Token for all API work:
 ```
-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
+[GITHUB_TOKEN_REDACTED]
 ```
 
 ## Details
@@ -17,13 +17,13 @@ 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
 
 ## Where Stored
 
-- TOOLS.md (primary source of truth)
-- DO NOT hardcode in scripts — reference TOOLS.md
+- ~/.openclaw/credentials/github.txt (primary source of truth)
+- DO NOT hardcode in scripts — reference ~/.openclaw/credentials/github.txt
 
 ## Usage
 
 ```bash
-curl -H "Authorization: Bearer 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" \
+curl -H "Authorization: Bearer $(cat ~/.openclaw/credentials/github.txt)" \
   https://api.github.com/repos/michaelbacotti/bithues/contents/articles
 ```
 
