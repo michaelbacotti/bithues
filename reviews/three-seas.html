@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Men of the Three Seas — Bithues Reading Lab</title>
+  <meta name="description" content="Review of Men of the Three Seas by Leander Vassos — an epic historical voyage across the Stone Age, Bronze Age, and Iron Age." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <style>
+    :root {
+      --navy:       #0a1628;
+      --navy-mid:   #132240;
+      --navy-light: #1e3358;
+      --gold:       #c8a96e;
+      --gold-light: #e2c99a;
+      --white:      #ffffff;
+      --off-white:  #f5f6f8;
+      --gray-light: #e8eaed;
+      --gray-mid:   #8a94a6;
+      --text-dark:  #1a1f2e;
+      --text-body:  #3a4157;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--off-white); color: var(--text-body); line-height: 1.6; }
+    nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--gold); }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); letter-spacing: .03em; text-decoration: none; }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--gray-mid); text-decoration: none; font-size: .875rem; font-weight: 500; padding: 0 1rem; height: 64px; display: flex; align-items: center; transition: color .3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    .review-hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a5a 100%); padding: 4rem 2rem; text-align: center; color: var(--white); }
+    .review-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: .5rem; }
+    .review-hero .author { font-size: 1.1rem; color: var(--gold); margin-bottom: 1.5rem; }
+    .review-hero .subtitle { color: rgba(255,255,255,.75); max-width: 600px; margin: 0 auto; font-size: .95rem; }
+
+    .book-cover { width: 180px; height: 270px; margin: 0 auto 2rem; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; box-shadow: 0 8px 32px rgba(10,22,40,.4); border: 1px solid var(--gold); }
+    .book-cover .waves { font-size: 3rem; margin-bottom: .5rem; }
+    .book-cover h2 { font-family: 'Playfair Display', serif; font-size: .9rem; color: var(--gold); text-align: center; line-height: 1.3; }
+    .book-cover .era { font-size: .7rem; color: var(--gray-mid); margin-top: .25rem; }
+
+    .review-body { max-width: 720px; margin: 0 auto; padding: 3rem 2rem; }
+    .review-body h2 { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.5rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--gold); padding-bottom: .5rem; }
+    .review-body p { margin-bottom: 1rem; color: var(--text-body); }
+    .review-body .lead { font-size: 1.1rem; color: var(--text-dark); font-weight: 500; }
+
+    .era-block { margin: 1.5rem 0; padding: 1.25rem; background: var(--white); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; }
+    .era-block h3 { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1rem; margin-bottom: .5rem; }
+    .era-block h3 span { color: var(--gold); font-size: .8rem; margin-left: .5rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.5rem 0; }
+    .tag { background: var(--navy); color: var(--gold); padding: .25rem .75rem; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+    .buy-btn { display: inline-block; background: var(--gold); color: var(--navy); padding: .75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1rem; margin: 1.5rem 0; transition: background .3s; }
+    .buy-btn:hover { background: var(--gold-light); }
+
+    .related { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--gray-light); }
+    .related h3 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 1rem; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .related-card { background: var(--white); padding: 1rem; border-radius: 8px; border-top: 3px solid var(--gold); text-decoration: none; color: var(--text-body); transition: transform .2s, box-shadow .2s; }
+    .related-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(10,22,40,.12); }
+    .related-card h4 { font-size: .9rem; color: var(--navy); margin-bottom: .25rem; }
+    .related-card .rel-author { font-size: .8rem; color: var(--gray-mid); }
+
+    footer { background: var(--navy); color: rgba(255,255,255,.5); padding: 2.5rem 2rem; text-align: center; border-top: 2px solid var(--gold); }
+    footer .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); margin-bottom: .5rem; }
+    footer .footer-brand span { color: var(--gold); }
+    footer p { font-size: .8rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-brand"><span>Bithues</span> Reading Lab</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/catalog.html">Catalog</a>
+      <a href="/reviews/">Reviews</a>
+      <a href="/authors.html">Authors</a>
+    </div>
+  </nav>
+
+  <section class="review-hero">
+    <div class="book-cover">
+      <div class="waves">🌊</div>
+      <h2>Men of the<br>Three Seas</h2>
+      <div class="era">Stone · Bronze · Iron Age</div>
+    </div>
+    <h1>Men of the Three Seas</h1>
+    <p class="author">by Leander Vassos</p>
+    <p class="subtitle">An epic historical voyage across the Stone Age, Bronze Age, and Iron Age — seen through the eyes of the men who staked their lives on open water and the women who kept families alive on the shore.</p>
+  </section>
+
+  <main class="review-body">
+    <p class="lead">Three eras, one hard inland sea, and the ordinary people who chose, again and again, between hunger and risk.</p>
+
+    <h2>The Three Eras</h2>
+
+    <div class="era-block">
+      <h3>Stone Age <span>Tal's Crossing</span></h3>
+      <p>On a hungry Stone Age coast, Tal reads the swell and stars better than any man in his village. When fish vanish and game runs thin, he sights a dark line of land beyond the reef — a crossing that could save his people or drown them all.</p>
+    </div>
+
+    <div class="era-block">
+      <h3>Bronze Age <span>Mattan's Voyage</span></h3>
+      <p>Centuries later, Mattan commands a trading vessel in a collapsing world of palace debts, raiders, and failing harvests. Bronze pays for everything — until one voyage turns into a fight with storms, knives, and a new kind of law that puts children up as collateral.</p>
+    </div>
+
+    <div class="era-block">
+      <h3>Iron Age <span>The Phoenician Captain</span></h3>
+      <p>In the early Iron Age, a hard-bitten Phoenician captain threads his ship through a Mediterranean carved up by rising city-states, mercenary fleets, and counterfeit harbor signals. He must decide how much cargo, blood, and truth he can afford to sacrifice to keep his crew and covenant alive.</p>
+    </div>
+
+    <h2>Verdict</h2>
+    <p>There are no chosen ones here — only fathers, sons, wives, and widows counting grain by firelight, reading weather off the skin of the waves, and choosing, again and again, between hunger and risk. Vassos delivers a vivid, grounded portrait of ordinary people facing extraordinary water.</p>
+    <p>Readers who enjoy deeply researched, low-magic historical fiction with tense sea voyages, immersive daily life, and high-stakes moral choices will feel at home in these pages.</p>
+
+    <div class="tags">
+      <span class="tag">Historical Fiction</span>
+      <span class="tag">Sea Voyages</span>
+      <span class="tag">Ancient History</span>
+      <span class="tag">Bronze Age</span>
+      <span class="tag">Stone Age</span>
+      <span class="tag">Iron Age</span>
+      <span class="tag">Mediterranean</span>
+    </div>
+
+    <a href="https://amzn.to/4ctNX9E" class="buy-btn" target="_blank" rel="noopener">Buy on Amazon</a>
+
+    <div class="related">
+      <h3>More Historical Fiction</h3>
+      <div class="related-grid">
+        <a href="/reviews/otomí.html" class="related-card">
+          <h4>Otomí</h4>
+          <p class="rel-author">E.J. Marín</p>
+        </a>
+        <a href="/reviews/the-richmond-cipher.html" class="related-card">
+          <h4>The Richmond Cipher</h4>
+          <p class="rel-author">E.J. Marín</p>
+        </a>
+        <a href="/catalog.html?category=Historical+Fiction" class="related-card">
+          <h4>Browse All Historical Fiction</h4>
+          <p class="rel-author">34+ titles</p>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><span>Bithues</span> Reading Lab</div>
+    <p>Reviews are independent. As an Amazon Associate, we may earn from qualifying purchases.</p>
+  </footer>
+</body>
+</html>
