@@ -20,6 +20,20 @@ All sites use the same navy/gold professional design:
 - **Cards:** White with gold top accent border
 - **Footer:** Simple navy bar, Playfair brand, copyright
 
+## DNS Status (2026-04-06)
+
+| Record | Type | Value | Status |
+|--------|------|-------|--------|
+| bithues.com | A | 185.199.108-111.153 | ✅ GitHub Pages |
+| www.bithues.com | CNAME | michaelbacotti.github.io | ✅ Resolves correctly (1.1.1.1 confirmed) |
+| www.bithues.com | NS | ns3/ns4.afternic.com | ⚠️ Registry-level delegation overriding CNAME — being resolved |
+
+**www.bithues.com issue:** NS records at registry level delegate `www` to Afternic nameservers, which return old mail server IPs. Cloudflare zone has correct CNAME. GitHub Pages shows DNS warning but DNS itself is working (verified from 1.1.1.1 and 8.8.8.8).
+
+**Cloudflare nameservers:** autumn.ns.cloudflare.com, paul.ns.cloudflare.com
+**Zone ID:** 3d5098c7ed4dbd33b6eb236f0af515b2
+**Cloudflare API token:** cfut_L04oYGXILM74cLnmUo6PkmqqLImKpOIcV4WFNKAEb6a02750 (Zone DNS Edit)
+
 ## Cloudflare Pages Note
 
 - bithues.com was ON Cloudflare Pages but the build kept failing (git submodule error)
