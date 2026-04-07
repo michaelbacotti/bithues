@@ -7,12 +7,13 @@ description: Use when a conversation exceeds ~20 turns or ~30 minutes. Prevents 
 
 ## Purpose
 
-Long conversations cause AI memory degradation. This skill provides structured recovery and prevention.
+Long conversations cause AI memory degradation, context drift, and tool failures. This skill provides structured recovery and prevention.
 
 ## Trigger Conditions
 - Conversation exceeds ~20 turns
 - User says "review", "memory is bad", "something is wrong with you"
 - Assistant notices context confusion or repeated questions
+- Any tool failure that looks like a session issue (not responding, stuck, confused)
 
 ## Recovery Protocol
 
@@ -46,6 +47,34 @@ What was updated, what's still pending, and ask if they want to continue or pivo
 
 ---
 
+## Critical Rule: Do Work via Subagents
+
+**When to spawn a subagent instead of doing the work directly:**
+
+| Task Type | Use Subagent? |
+|-----------|--------------|
+| Web research / fetching | ✅ Yes |
+| GitHub API operations (PUT/GET) | ✅ Yes |
+| File editing / creating | ✅ Yes |
+| Anything requiring multiple tool calls | ✅ Yes |
+| Long-running tasks (>30s) | ✅ Yes |
+| Quick status checks (1 tool call) | ❌ No |
+| One-liner questions | ❌ No |
+
+**Why this matters:** Doing work directly in the main session:
+- Blocks the conversation (Mike can't chat while work is happening)
+- Uses main session tokens for work instead of conversation
+- If main session has issues, the work fails AND conversation stops
+- Subagents fail safely — main session continues
+
+**How to decide:** If Mike asks you to "update the website" or "check something" or "investigate X" → spawn a subagent. If it would take more than 2 tool calls, it should be a subagent.
+
+**Anti-pattern (what we did wrong this morning):**
+- Mike asked for market forecast → did web research directly, then tried to update the page directly
+- Should have been: spawn subagent immediately for ALL of it
+
+---
+
 ## Prevention Rules (for sessions > 10 turns)
 
 1. **Write to memory as things happen** — don't batch at end of session
@@ -53,6 +82,7 @@ What was updated, what's still pending, and ask if they want to continue or pivo
 3. **Summarize every 15 minutes** — brief mental checkpoint, push if possible
 4. **When starting a new topic, read relevant memory first**
 5. **Keep topic files current** — websites.md, entities.md, investing.md
+6. **Spawn subagents for ALL substantive tasks** — never block the main session with work
 
 ---
 
@@ -91,3 +121,9 @@ What was updated, what's still pending, and ask if they want to continue or pivo
 ## When to Escalate
 
 If a sub-task has failed 3+ times, write it to memory as "blocked" and tell Mike. Don't keep retrying the same approach.
+
+If the main session stops responding:
+1. Mike can delete subagents: `subagents list` then kill stuck ones
+2. Mike can delete cron jobs that might be interfering
+3. Restarting the gateway: `openclaw gateway restart`
+4. After any fix, write checkpoint to memory before continuing
