@@ -8,7 +8,8 @@
     <meta property="og:title" content="E. J. Marín | Bithues Reading Lab">
     <meta property="og:description" content="Books by E. J. Marín reviewed on Bithues Reading Lab">
     <meta property="og:type" content="profile">
-    <meta property="og:url" content="https://bithues.com/authors/e-j-marín.html">
+    <meta property="og:url" content="https://bithues.com/authors/e-j-marin.html">
+    <link rel="canonical" href="https://bithues.com/authors/e-j-marin.html">
     <title>E. J. Marín | Bithues Reading Lab</title>
     <script>
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -27,7 +28,7 @@
         nav a { color: var(--text-dim); text-decoration: none; margin-left: 1.5rem; }
         .author-header { padding: 3rem 0; text-align: center; }
         .author-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .author-header p { color: var(--text-dim); font-size: 1.1rem; }
+        .author-header p { color: var(--text-dim); font-size: 1.2rem; }
         .books-section { padding: 2rem 0; }
         .books-section h2 { font-size: 1.5rem; margin-bottom: 2rem; }
         .book-card { padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1.5rem; }
@@ -36,7 +37,9 @@
         .book-card h3 a:hover { color: var(--accent); }
         .book-card .tldr { color: var(--text-dim); margin-bottom: 1rem; }
         .book-card .meta { font-size: 0.9rem; color: var(--text-dim); }
+        .book-card .meta .review-tag { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; background: var(--border); margin-right: 0.5rem; margin-bottom: 0.5rem; }
         footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; }
+        footer p { margin-bottom: 0.5rem; }
     </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
  crossorigin="anonymous"></script>
@@ -56,25 +59,30 @@
             </nav>
         </header>
         <section class="author-header">
-            <h1 class="header">E. J. Marín</h1>
+            <h1>E. J. Marín</h1>
             <span class="genre">Cultural Fiction</span>
-            <p class="bio">Shares stories rooted in diverse cultural traditions, bringing unique perspectives to contemporary fiction.</p>
-            <p>1 books reviewed</p>
+            <p class="bio">E.J. Marín writes in both English and Spanish, focusing on historical fiction rooted in real cultural contexts.</p>
+            <p>2 books reviewed</p>
         </section>
         <section class="books-section">
             <h2>Books by E. J. Marín</h2>
             <div class="book-card">
-                <h3><a href="../reviews/14.html">Otomí</a></h3>
-                <p class="tldr">Through the eyes of a young ritual apprentice, follow one drought-stricken year in an Otomí village.</p>
-                <div class="meta"><a href="../reviews/14.html">Read Review →</a></div>
+                <h3><a href="../reviews/2.html">The Richmond Cipher</a></h3>
+                <p class="tldr">An engineer in 1871 London uncovers a cipher that the city's greatest minds want buried.</p>
+                <div class="meta"><span class="review-tag">Historical Fiction</span><span class="review-tag">English</span></div>
             </div>
+            <div class="book-card">
+                <h3><a href="../reviews/otomi.html">Otomí</a></h3>
+                <p class="tldr">En un lago de las tierras altas del centro de México, el agua se está retirando de la orilla.</p>
+                <div class="meta"><span class="review-tag">Historia</span><span class="review-tag">Español</span></div>
+            </div>
+            <p style="margin-top:1rem;font-size:0.9rem;color:var(--text-dim);">E.J. Marín writes in both English and Spanish, focusing on historical fiction rooted in real cultural contexts.</p>
         </section>
         <footer>
             <p>© <span id="year"></span> Bithues Reading Lab</p>
         </footer>
-    </div>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+        <script>
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
 </body>
 </html>
