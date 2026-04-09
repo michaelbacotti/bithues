@@ -4,55 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Market Forecast | Bithues Reading Lab</title>
+  <meta name="description" content="Bithues Reading Lab — Discover your next favorite book.">
   <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root { --navy: #0a1628; --navy-mid: #132240; --navy-light: #1e3358; --gold: #c8a96e; --gold-light: #e2c99a; --white: #ffffff; --off-white: #f5f6f8; --gray-light: #e8eaed; --gray-mid: #8a94a6; --text-dark: #1a1f2e; --text-body: #3a4157; --shadow: 0 2px 12px rgba(10,22,40,.12); }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--off-white); color: var(--text-body); line-height: 1.6; }
-    nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--gold); }
-    .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); letter-spacing: .03em; text-decoration: none; }
-    .nav-brand span { color: var(--gold); }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a { color: var(--gray-mid); text-decoration: none; font-size: .875rem; font-weight: 500; transition: color .2s; }
-    .nav-links a:hover { color: var(--gold); }
-    .hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6a 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat; pointer-events: none; }
-    .hero-eyebrow { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 600; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.15; margin-bottom: 1.2rem; color: var(--white); }
-    .hero h1 span { color: var(--gold); }
-    .hero p { font-size: 1.1rem; color: rgba(255,255,255,.75); max-width: 640px; margin: 0 auto 2rem; }
-    .section { padding: 4rem 2rem; }
-    .section-inner { max-width: 800px; margin: 0 auto; text-align: center; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin-bottom: 1rem; }
-    .coming-soon-box { background: var(--white); border: 1px solid var(--gray-light); border-top: 3px solid var(--gold); border-radius: 8px; padding: 3rem 2rem; box-shadow: var(--shadow); }
-    .coming-soon-box h2 { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.5rem; margin-bottom: 1rem; }
-    .coming-soon-box p { color: var(--text-body); font-size: 1rem; margin-bottom: 1.5rem; }
-    .coming-soon-box .note { color: var(--gray-mid); font-size: .85rem; }
-    footer { background: var(--navy); color: rgba(255,255,255,.5); padding: 2.5rem 2rem; text-align: center; border-top: 2px solid var(--gold); }
-    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); margin-bottom: .5rem; }
-    .footer-brand span { color: var(--gold); }
-    footer a { color: rgba(200,169,110,.6); text-decoration: none; }
-    footer a:hover { color: var(--gold); }
-    @media (max-width: 768px) { .nav-links { display: none; } .hero { padding: 3rem 1.5rem 2.5rem; } }
-  </style>
-<link rel="canonical" href="https://www.bithues.com/forecast.html"></head>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="canonical" href="https://www.bithues.com/forecast.html"></head>
+
 <body>
+    <!-- ── NAV ── -->
   <nav>
     <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="stories.html">Stories</a>
-      <a href="catalog.html">Reviews</a>
-      <a href="articles.html">Articles</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item">
+        <a href="catalog.html">Reviews ▾</a>
+        <div class="dropdown">
+          <a href="catalog.html">All Reviews</a>
+          <a href="category/self-help.html">Self-Help</a>
+          <a href="category/science-fiction.html">Sci-Fi</a>
+          <a href="category/fantasy.html">Fantasy</a>
+          <a href="category/nonfiction.html">Nonfiction</a>
+          <a href="category/thriller.html">Thriller</a>
+          <a href="category/biography.html">Biography</a>
+          <a href="category/business.html">Business</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="stories.html">Stories ▾</a>
+        <div class="dropdown">
+          <a href="stories.html">All Stories</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="articles.html">Articles ▾</a>
+        <div class="dropdown">
+          <a href="articles.html">All Articles</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="about.html">About</a></div>
+      <div class="nav-item"><a href="contact.html">Contact</a></div>
     </div>
-  </nav>
-  <section class="hero">
+  </nav>  <section class="hero">
     <div class="hero-eyebrow">Coming Soon</div>
     <h1>Market <span>Forecast</span></h1>
     <p>S&P 500 analysis, option strategies, and market research — coming soon to Bithues.</p>
@@ -68,9 +62,21 @@
       </div>
     </div>
   </section>
+  
+  <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© 2026 Bithues Reading Lab · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
   </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
