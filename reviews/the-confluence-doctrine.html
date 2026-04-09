@@ -62,6 +62,7 @@
 </style>\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345"
  crossorigin="anonymous"></script>
 </head>\n<body>\n    <div class=\"container\">\n        <header>\n              <!-- ── NAV ── -->
+    <!-- ── NAV ── -->
   <nav>
     <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
@@ -198,6 +199,22 @@
   "author": {
     "@type": "Person",
     "name": "Affiliate</a></div>\n        </article>\n        \n        <div class=\"share-section\">\n            <h3>Share this article</h3>\n            <div class=\"share-buttons\">\n                <button class=\"share-btn\" onclick=\"shareTwitter()\">\ud835\udd4f Twitter</button>\n                <button class=\"share-btn\" onclick=\"shareFacebook()\">\ud83d\udcd8 Facebook</button>\n                <button class=\"share-btn\" onclick=\"shareLinkedIn()\">\ud83d\udcbc LinkedIn</button>\n            </div>\n        </div>\n        \n<footer><p>\u00a9 2026 Bithues Reading Lab</p></footer>\n    </div>\n<button class=\"back-to-top\" onclick=\"scrollToTop()\">\u2191</button>\n\n    <script>\n    // Theme Toggle\n    function toggleTheme() {\n        const html = document.documentElement;\n        const btn = document.querySelector('.theme-toggle');\n        if (html.getAttribute('data-theme') === 'light') {\n            html.setAttribute('data-theme', 'dark');\n            btn.textContent = '\ud83c\udf19';\n            localStorage.setItem('theme', 'dark');\n        } else {\n            html.setAttribute('data-theme', 'light');\n            btn.textContent = '\u2600\ufe0f';\n            localStorage.setItem('theme', 'light');\n        }\n    }\n    \n    // Load saved theme\n    const savedTheme = localStorage.getItem('theme');\n    if (savedTheme === 'light') {\n        document.documentElement.setAttribute('data-theme', 'light');\n    }\n    \n    // Back to Top\n    window.onscroll = function() {\n        const backToTop = document.querySelector('.back-to-top');\n        if (backToTop) {\n            if (window.scrollY > 300) {\n                backToTop.classList.add('visible');\n            } else {\n                backToTop.classList.remove('visible');\n            }\n        }\n    };\n    \n    function scrollToTop() {\n        window.scrollTo({ top: 0, behavior: 'smooth' });\n    }\n    \n    // Social Share\n    function shareTwitter() {\n        const url = encodeURIComponent(window.location.href);\n        const title = encodeURIComponent(document.title);\n        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');\n    }\n    \n    function shareFacebook() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');\n    }\n    \n    function shareLinkedIn() {\n        const url = encodeURIComponent(window.location.href);\n        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');\n    }\n    \n    document.getElementById('year').textContent = new Date().getFullYear();\n    </script>\n<section class="similar-books"><h2>Books Like This</h2><div class="similar-grid"><div class='similar-card'><h3><a href='reviews/19.html'>Microbiology ABC&#x27;s</a></h3><p class='author'>by Michael Bacotti</p></div><div class='similar-card'><h3><a href='reviews/34.html'>Little Mike: Builds a Robot</a></h3><p class='author'>by Michael Jr</p></div><div class='similar-card'><h3><a href='reviews/27.html'>Little Mike: Fun at the Beach</a></h3><p class='author'>by Michael Jr</p></div></div></section>
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
