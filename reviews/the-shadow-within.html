@@ -87,5 +87,21 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
