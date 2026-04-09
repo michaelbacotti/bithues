@@ -70,13 +70,38 @@
   </style>
 <link rel="canonical" href="https://www.bithues.com/reviews/three-seas.html"></head>
 <body>
+    <!-- ── NAV ── -->
   <nav>
-    <a href="/" class="nav-brand"><span>Bithues</span> Reading Lab</a>
+    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/catalog.html">Catalog</a>
-      <a href="/reviews/">Reviews</a>
-      <a href="/authors.html">Authors</a>
+      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item">
+        <a href="catalog.html" class="active">Reviews ▾</a>
+        <div class="dropdown">
+          <a href="catalog.html">All Reviews</a>
+          <a href="category/self-help.html">Self-Help</a>
+          <a href="category/science-fiction.html">Sci-Fi</a>
+          <a href="category/fantasy.html">Fantasy</a>
+          <a href="category/nonfiction.html">Nonfiction</a>
+          <a href="category/thriller.html">Thriller</a>
+          <a href="category/biography.html">Biography</a>
+          <a href="category/business.html">Business</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="stories.html">Stories ▾</a>
+        <div class="dropdown">
+          <a href="stories.html">All Stories</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="articles.html">Articles ▾</a>
+        <div class="dropdown">
+          <a href="articles.html">All Articles</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="about.html">About</a></div>
+      <div class="nav-item"><a href="contact.html">Contact</a></div>
     </div>
   </nav>
 
@@ -150,5 +175,21 @@
     <div class="footer-brand"><span>Bithues</span> Reading Lab</div>
     <p>Reviews are independent. As an Amazon Associate, we may earn from qualifying purchases.</p>
   </footer>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
