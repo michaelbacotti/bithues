@@ -161,18 +161,14 @@ function handleKeyDown(code) {
     }
     return;
   }
-  // WALKING
-  if (gameState === 'WALKING' && code === 'Escape') { /* can't pause on foot */ }
-  // ARENA PROMPT - player on foot, no weapons
-  if (gameState === 'ARENA_PROMPT') {
-    if (code === 'Enter' || code === 'Space') { startArena(); return; }
-    if (code === 'Escape') { gameState = 'WALKING'; return; }
-    return; // Block all other input (no weapon firing on foot)
-  }
-  // WALKING - player on foot, no weapons
-  if (gameState === 'WALKING') {
-    if (code === 'Escape') { /* can't pause on foot */ }
-    return; // Block weapon firing on foot
+  // WALKING + ARENA_PROMPT
+  if (gameState === 'WALKING' || gameState === 'ARENA_PROMPT') {
+    if (gameState === 'ARENA_PROMPT') {
+      if (code === 'Enter' || code === 'Space') { startArena(); return; }
+      if (code === 'Escape') { gameState = 'WALKING'; return; }
+    }
+    // Movement only - no weapons on foot, no pausing
+    return;
   }
   // GARAGE
   if (gameState === 'GARAGE') {
@@ -234,7 +230,7 @@ function createWalkingPlayer(townIdx) {
   return {
     mode:'walking',
     x: t.x + TWN_W/2,
-    y: t.y + TWN_H + 30,
+    y: t.y + TWN_H + 100,
     speed: 120,
     angle: 0,
     alive: true,
@@ -250,7 +246,7 @@ function createCar(typeName, townIdx) {
   return {
     type: typeName,
     x: t.x + TWN_W/2,
-    y: t.y + TWN_H + 30,
+    y: t.y + TWN_H + 100,
     vx:0, vy:0,
     angle: -PI/2, // facing up (toward road)
     speed:0,
