@@ -5,6 +5,10 @@ description: Use whenever pushing to any GitHub repository. Prevents repo corrup
 
 # github-safe-push
 
+## The Core Rule
+
+**Every push must be verified before claiming success.** Fetch SHA, push, confirm the live URL size matches local. File size mismatch means the push didn't land.
+
 ## The Problem
 
 On 2026-04-06, the `michaelbacotti/bithues` repo was wiped/restored 3 times because sub-agents did unsafe git operations:
@@ -24,7 +28,7 @@ git fetch origin
 # 2. Check status
 git status
 
-# 3. If behind origin/main, merge (not rebase!)  
+# 3. If behind origin/main, merge (not rebase!)
 git merge origin/main
 
 # 4. Only THEN push
@@ -43,7 +47,7 @@ git log --oneline -3
 ## For Sub-agents
 
 If a sub-agent needs to push:
-1. Sub-agent should clone the repo fresh OR do `git fetch origin` at start
+1. Clone the repo fresh OR do `git fetch origin` at start
 2. Make changes in the cloned repo
 3. Commit with clear message
 4. `git push origin main` — simple push, never force
@@ -65,29 +69,23 @@ Body: { "message": "...", "content": "<base64>", "sha": "<commit_sha>" }
 
 **CRITICAL:** Always include the `sha` field from step 1. Without it, the API returns 422.
 
-## Repo-Specific Notes
-
-| Repo | Branch | Push Rules |
-|------|--------|-----------|
-| michaelbacotti/bithues | main | Normal push only, never force |
-| michaelbacotti/dependability-us | main | Normal push only |
-| michaelbacotti/succession-holding-llc | main | Normal push only |
-| michaelbacotti/bithues-lab | main | Normal push |
-
-## If Push Is Rejected
-
-1. `git fetch origin`
-2. `git merge origin/main` — resolve any conflicts
-3. `git push origin main`
-4. If still rejected → check for branch protection rules at github.com/{owner}/{repo}/settings/branches
-
-## After Every Successful Push
+## After Every Successful Push — VERIFY BEFORE CLAIMING SUCCESS
 
 ```bash
-# Verify
+# 1. Confirm live file size matches local
+curl -s "https://www.bithues.com/{path}" | wc -c
+# Compare to local: wc -c /local/file
+
+# 2. Confirm commit landed
 git log --oneline -3
-echo "Pushed to: $(git remote get-url origin)"
+git fetch origin
+git log --oneline -3  # compare with origin/main
+
+# 3. Browser screenshot — verify visual change
+# If a visual change was made, screenshot BEFORE claiming done
 ```
+
+**Never tell Mike "it's pushed" until steps 1 and 2 are confirmed.** File size mismatch = push failed. Refore and repush.
 
 ## Quick Reference
 
@@ -98,4 +96,7 @@ git commit -m "descriptive message"
 git fetch origin
 git merge origin/main  # if behind
 git push origin main
+
+# Verify after push
+curl -s "https://www.bithues.com/{path}" | wc -c
 ```

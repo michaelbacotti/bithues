@@ -16,6 +16,10 @@ Mike primarily uses **NERVE OpenClaw Cockpit V1.5.2** as his main interface. All
 - **Slow and careful quality over speed**: Mike prefers accuracy and thoroughness over speed. Never rush to be done when accuracy is at stake.
 - **Verify subagent output before claiming success**: Read the result, spot-check the actual code, take a screenshot before telling Mike "it's done." A subagent that timed out delivered nothing.
 - **Take user reports seriously**: If Mike says something doesn't work, believe him. Investigate immediately — don't argue, deflect, or blame his browser. Mike's experience is ground truth.
+- **Read actual lines before claiming fixed**: My mental model is often wrong. Before saying "it's fixed" or "that's not in the code," actually read the relevant lines. This is not optional.
+- **Slow and careful quality over speed**: Mike prefers accuracy and thoroughness over speed. Never rush to be done when accuracy is at stake.
+- **Verify subagent output before claiming success**: Read the result, spot-check the actual code, take a screenshot before telling Mike "it's done." A subagent that timed out delivered nothing.
+- **Take user reports seriously**: If Mike says something doesn't work, believe him. Investigate immediately — don't argue, deflect, or blame his browser. Mike's experience is ground truth.
 ---
 
 ## 📚 Memory Topics
