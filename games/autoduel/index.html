@@ -15,10 +15,6 @@ canvas { display: block; }
 <script>
 'use strict';
 
-// ═══════════════════════════════════════════════════════════
-// AUTODUEL — HTML5 Canvas Remake
-// ═══════════════════════════════════════════════════════════
-
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 
@@ -29,909 +25,1118 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-// ═══════════════════════════════════════════════════════════
-// CONSTANTS
-// ═══════════════════════════════════════════════════════════
-
-const WORLD_W = 3000;
-const WORLD_H = 2000;
-const ROAD_W = 80;
 const PI = Math.PI;
 
 // ═══════════════════════════════════════════════════════════
-// COLORS
+// CONSTANTS & COLORS
 // ═══════════════════════════════════════════════════════════
-
 const C = {
-  void: '#0d0d0d',
-  asphalt: '#2d2d2d',
-  roadMark: '#f0c000',
-  roadEdge: '#ffffff',
-  grass: '#1a3d1a',
-  player: '#00aa00',
-  playerDark: '#006600',
-  enemy: '#cc2200',
-  enemyDark: '#881100',
-  enemyRammer: '#aa00cc',
-  enemyRammerDark: '#660088',
-  bullet: '#ffff00',
-  spark: '#ff8800',
-  town: '#4444aa',
-  townGlow: '#6666cc',
-  hudBg: '#111111',
-  hudBorder: '#333333',
-  healthGreen: '#00cc44',
-  healthYellow: '#cccc00',
-  healthRed: '#cc0000',
-  fuelBlue: '#0088ff',
-  text: '#f0f0f0',
-  textDim: '#888888',
-  scrap: '#aa8833',
-  gold: '#ffd700',
+  void:'#0d0d0d', asphalt:'#2d2d2d', roadMark:'#f0c000',
+  roadEdge:'#ffffff', grass:'#1a3d1a', player:'#00aa00',
+  playerDark:'#006600', enemy:'#cc2200', enemyDark:'#881100',
+  bullet:'#ffff00', spark:'#ff8800', town:'#4444aa',
+  townGlow:'#6666cc', hudBg:'#111111', hudBorder:'#333333',
+  healthGreen:'#00cc44', healthYellow:'#cccc00', healthRed:'#cc0000',
+  fuelBlue:'#0088ff', text:'#f0f0f0', textDim:'#888888',
+  scrap:'#aa8833', gold:'#ffd700', garageZone:'#cc2200',
 };
 
 // ═══════════════════════════════════════════════════════════
-// ROAD NETWORK
+// VEHICLE DEFINITIONS
 // ═══════════════════════════════════════════════════════════
+const VEHICLE_TYPES = {
+  Cycle:  { speed:120, armor:10, hull:40,  fuel:30, slots:1, cost:200,  w:24, h:12, salvage:40 },
+  Compact:{ speed:90,  armor:25, hull:80,  fuel:50, slots:2, cost:800,  w:30, h:16, salvage:160 },
+  Sedan:  { speed:75,  armor:40, hull:120, fuel:60, slots:3, cost:2000, w:36, h:20, salvage:400 },
+  Pickup: { speed:70,  armor:35, hull:100, fuel:55, slots:3, cost:1500, w:34, h:18, salvage:300 },
+  Van:    { speed:55,  armor:60, hull:160, fuel:70, slots:4, cost:3500, w:40, h:24, salvage:700 },
+  Semi:   { speed:40,  armor:80, hull:200, fuel:90, slots:6, cost:7000, w:52, h:28, salvage:1400 },
+};
 
-const ROADS = [
-  [[200, 500], [600, 500], [900, 550], [1200, 800]],
-  [[200, 500], [200, 900], [350, 1200], [600, 1600]],
-  [[1200, 800], [900, 1100], [700, 1300], [600, 1600]],
-  [[200, 500], [100, 300], [300, 200], [500, 350], [600, 500], [200, 500]],
-];
+// ═══════════════════════════════════════════════════════════
+// WEAPON DEFINITIONS
+// ═══════════════════════════════════════════════════════════
+const WEAPON_TYPES = {
+  MachineGun:  { damage:8,  range:300, ammo:100, heat:5,  firesPerSec:4,  slot:1, cost:300,  type:'bullet', spread:0.04, bulletSpeed:500 },
+  Flamethrower:{ damage:20, range:100, fuel:2,   heat:30, firesPerSec:1,  slot:1, cost:800,  type:'flame', spread:0.2,  bulletSpeed:200 },
+  Rockets:     { damage:50, range:500, ammo:10,  heat:10, firesPerSec:0.2,slot:2, cost:600,  type:'rocket', spread:0.0,  bulletSpeed:350 },
+  Mines:       { damage:40, range:0,   ammo:5,   heat:0,  firesPerSec:0.1,slot:1, cost:200,  type:'mine',  drop:true },
+  OilSlick:    { damage:0,  range:0,   ammo:10,  heat:0,  firesPerSec:0.1,slot:1, cost:150,  type:'oil',   drop:true },
+  Smoke:       { damage:0,  range:0,   fuel:5,   heat:0,  firesPerSec:0.1,slot:1, cost:250,  type:'smoke', drop:true },
+};
+const WEAPON_LIST = Object.keys(WEAPON_TYPES);
+const WEAPON_DISPLAY = {
+  MachineGun:'M-GUN', Flamethrower:'FLAME', Rockets:'ROCKETS',
+  Mines:'MINES', OilSlick:'OIL', Smoke:'SMOKE', Ram:'RAM'
+};
 
-// Towns (economy balanced: Barren Rock = cheap fuel, Dusty Spur = cheap guns)
+// ═══════════════════════════════════════════════════════════
+// TOWNS
+// ═══════════════════════════════════════════════════════════
+// Town positions in world space (TWN_W x TWN_H world)
+const TWN_W = 220, TWN_H = 180;
 const TOWNS = [
-  {
-    name: 'BARREN ROCK',
-    x: 120, y: 420, w: 180, h: 160,
-    buy: { fuel: 15, repair: 80, armor: 140, gun: 250 },
-    sell: { scrap: 20, cargo: 50 },
-    desc: 'Cheap fuel, pricey arms'
-  },
-  {
-    name: 'DUSTY SPUR',
-    x: 1110, y: 710, w: 180, h: 160,
-    buy: { fuel: 50, repair: 90, armor: 200, gun: 130 },
-    sell: { scrap: 28, cargo: 65 },
-    desc: 'Cheap arms, pricey fuel'
-  },
-  {
-    name: 'NEW DENVER',
-    x: 510, y: 1510, w: 200, h: 160,
-    buy: { fuel: 30, repair: 85, armor: 160, gun: 180 },
-    sell: { scrap: 22, cargo: 55 },
-    desc: 'Balanced market'
-  },
+  { name:'BARREN ROCK',  x:80,   y:200,  w:TWN_W, h:TWN_H, fuelMod:0.8, partsMod:1.0, weaponsMod:1.3 },
+  { name:'DUSTY SPUR',   x:880,  y:200,  w:TWN_W, h:TWN_H, fuelMod:1.3, partsMod:1.0, weaponsMod:0.8 },
+  { name:'NEW DENVER',   x:80,   y:900,  w:TWN_W, h:TWN_H, fuelMod:1.0, partsMod:1.0, weaponsMod:1.0 },
+  { name:'IRON CITY',    x:880,  y:900,  w:TWN_W, h:TWN_H, fuelMod:1.2, partsMod:1.5, weaponsMod:1.2 },
 ];
+const BASE_PRICES = {
+  repair:80, armorPlate:120, fuel:25,
+  machineGun:300, flamethrower:800, rockets:600, mines:200, oilSlick:150, smoke:250
+};
+
+// Roads connect towns (road segments between town centers)
+const ROAD_SEGS = [
+  // Barren Rock -> Dusty Spur (horizontal top)
+  { from:0, to:1, y:290 },
+  // Barren Rock -> New Denver (vertical left)
+  { from:0, to:2, x:190 },
+  // Dusty Spur -> Iron City (vertical right)
+  { from:1, to:3, x:990 },
+  // New Denver -> Iron City (horizontal bottom)
+  { from:2, to:3, y:990 },
+];
+// Road is a horizontal/vertical strip between towns
+const ROAD_WIDTH = 70;
+
+const WORLD_W = 1100;
+const WORLD_H = 1150;
+
+// ═══════════════════════════════════════════════════════════
+// ENEMY TYPES
+// ═══════════════════════════════════════════════════════════
+function makeEnemyDef(type) {
+  const defs = {
+    RoadWarrior:{ speed:60,  armor:20, hull:60, weapon:'MachineGun', behavior:'patrol', cash:75,  w:30, h:16, color:'#cc2200', dark:'#881100' },
+    Raider:     { speed:90,  armor:10, hull:40, weapon:'Ram',        behavior:'charge',  cash:50,  w:22, h:12, color:'#cc6600', dark:'#883300' },
+    Hunter:     { speed:50,  armor:30, hull:80, weapon:'Rockets',     behavior:'sniper',  cash:150, w:34, h:18, color:'#8800cc', dark:'#550088' },
+    Ganger:     { speed:70,  armor:25, hull:50, weapon:'MachineGun', behavior:'pack',    cash:100, w:28, h:15, color:'#cc0044', dark:'#880022' },
+  };
+  return defs[type];
+}
+const ENEMY_TYPES = Object.keys(makeEnemyDef('RoadWarrior').reduce((m,k)=>({...m,[k]:null}),{}));
 
 // ═══════════════════════════════════════════════════════════
 // INPUT
 // ═══════════════════════════════════════════════════════════
-
 const keys = {};
 window.addEventListener('keydown', e => {
   keys[e.code] = true;
-  if (['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) {
-    e.preventDefault();
-  }
-  if (e.code === 'Escape' && gameState === 'TOWN') {
-    gameState = 'PLAYING';
-    townUI = null;
-  }
-  if (e.code === 'Escape' && gameState === 'PLAYING') {
-    gameState = 'PAUSED';
-  } else if (e.code === 'Escape' && gameState === 'PAUSED') {
-    gameState = 'PLAYING';
-  }
-  if (e.code === 'Space' && gameState === 'TITLE') {
-    startGame();
-  }
-  if (e.code === 'Space' && gameState === 'GAMEOVER') {
-    respawnPlayer();
-  }
-  if (gameState === 'TOWN') {
-    if (e.code === 'Digit1') townTab = 0;
-    if (e.code === 'Digit2') townTab = 1;
-    if (e.code === 'Digit3') townTab = 2;
-    if (e.code === 'ArrowUp' || e.code === 'KeyW') {
-      if (townSel > 0) townSel--;
-    }
-    if (e.code === 'ArrowDown' || e.code === 'KeyS') {
-      if (townSel < getTownTabLength(townTab) - 1) townSel++;
-    }
-    if (e.code === 'Enter' || e.code === 'Space') {
-      doTownAction(townTab, townSel);
-    }
-  }
+  if (['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault();
+  handleKeyDown(e.code);
 });
 window.addEventListener('keyup', e => { keys[e.code] = false; });
+
+function handleKeyDown(code) {
+  // TITLE
+  if (gameState === 'TITLE' && code === 'Space') { startGame(); return; }
+  // GAMEOVER
+  if (gameState === 'GAMEOVER' && code === 'Space') { startGame(); return; }
+  // PAUSED
+  if (gameState === 'DRIVING' && code === 'Escape') { gameState = 'PAUSED'; return; }
+  if (gameState === 'PAUSED' && code === 'Escape') { gameState = 'DRIVING'; return; }
+  // WALKING
+  if (gameState === 'WALKING' && code === 'Escape') { /* can't pause on foot */ }
+  // GARAGE
+  if (gameState === 'GARAGE') {
+    handleGarageInput(code);
+    return;
+  }
+  // DRIVING
+  if (gameState === 'DRIVING') {
+    if (code === 'Space') fireWeapon();
+    if (code === 'Tab') { keys['Tab'] = false; cycleWeapon(); }
+  }
+}
 
 // ═══════════════════════════════════════════════════════════
 // GAME STATE
 // ═══════════════════════════════════════════════════════════
-
 let gameState = 'TITLE';
-let lastTime = 0;
-let shakeTimer = 0;
-let shakeIntensity = 0;
-let damageFlashTimer = 0;
-
 let player = {};
 let enemies = [];
 let bullets = [];
-let scraps = [];
-let effects = [];
-let particles = []; // NEW: particle system
+let particles = [];
+let droppedItems = []; // mines, oil, smoke clouds
+let cam = { x:0, y:0 };
+let shakeTimer = 0, shakeIntensity = 0;
+let damageFlashTimer = 0;
+let lastTime = 0;
 
-let townUI = null;
-let townTab = 0;
-let townSel = 0;
-let currentTown = null;
+// Stats
+let stats = { cash:500, odometer:0, enemiesDestroyed:0, totalCashEarned:0 };
 
-let cam = { x: 0, y: 0 };
+// Garage state
+let garageTab = 0; // 0=BUY, 1=SELL, 2=REPAIR, 3=FUEL, 4=STATS
+let garageSel = 0;
+let garageTown = null;
 
-let credits = 500;
-let cargo = 0;
-let scrapCount = 0;
-let gunLevel = 1;
-let armorCount = 0;
+// Current town for walking
+let currentTownIndex = 0;
 
-let respawnTimer = 0;
-let score = 0;
-let enemiesDestroyed = 0;
+// Enemy spawn timer
+let enemySpawnTimer = 0;
+const ENEMY_SPAWN_INTERVAL = 6; // seconds
+
+// ═══════════════════════════════════════════════════════════
+// PLAYER CREATION
+// ═══════════════════════════════════════════════════════════
+function createWalkingPlayer(townIdx) {
+  const t = TOWNS[townIdx];
+  return {
+    mode:'walking',
+    x: t.x + TWN_W/2,
+    y: t.y + TWN_H + 30,
+    speed: 120,
+    angle: 0,
+    alive: true,
+    flashTimer:0,
+    // car fields (null until bought)
+    car: null,
+  };
+}
+
+function createCar(typeName, townIdx) {
+  const def = VEHICLE_TYPES[typeName];
+  const t = TOWNS[townIdx];
+  return {
+    type: typeName,
+    x: t.x + TWN_W/2,
+    y: t.y + TWN_H + 30,
+    vx:0, vy:0,
+    angle: -PI/2, // facing up (toward road)
+    speed:0,
+    maxSpeed: def.speed,
+    accel: def.speed * 0.8,
+    turnRate: 2.8,
+    // Armor per facing
+    frontArmor: def.armor, rearArmor: def.armor,
+    leftArmor: def.armor, rightArmor: def.armor,
+    maxArmor: def.armor,
+    hull: def.hull, maxHull: def.hull,
+    fuel: def.fuel, maxFuel: def.fuel,
+    // Components
+    engineHull: 100, tireHull: 100, fuelTankHull: 100,
+    // Weapons: array of {type, ammo, fuel, heat}
+    weapons: [],
+    currentWeaponIdx: 0,
+    fireTimer: 0,
+    // visual
+    w: def.w, h: def.h,
+    alive: true, flashTimer:0,
+  };
+}
+
+function getPlayerWeapon() {
+  const car = player.car;
+  if (!car || car.weapons.length === 0) return null;
+  return car.weapons[car.currentWeaponIdx];
+}
 
 // ═══════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════
-
 function startGame() {
-  gameState = 'PLAYING';
-  credits = 500;
-  cargo = 0;
-  scrapCount = 0;
-  gunLevel = 1;
-  armorCount = 0;
-  scraps = [];
-  effects = [];
-  particles = [];
-  bullets = [];
-  enemies = [];
-  respawnTimer = 0;
-  score = 0;
-  enemiesDestroyed = 0;
-
-  resetPlayer();
-  spawnInitialEnemies();
-}
-
-function resetPlayer() {
-  player = {
-    x: 220, y: 500,
-    vx: 0, vy: 0,
-    angle: 0,
-    speed: 0,
-    maxSpeed: 200,
-    accel: 120,
-    turnRate: 2.5,
-    armor: 100,
-    maxArmor: 100,
-    hull: 100,
-    maxHull: 100,
-    fuel: 100,
-    maxFuel: 100,
-    fireTimer: 0,
-    fireRate: 0.25,
-    gunDamage: 8,
-    alive: true,
-    flashTimer: 0,
-  };
-}
-
-function respawnPlayer() {
-  let nearest = TOWNS[0];
-  let nearestDist = Infinity;
-  for (const t of TOWNS) {
-    const d = dist(player.x, player.y, t.x + t.w/2, t.y + t.h/2);
-    if (d < nearestDist) { nearestDist = d; nearest = t; }
-  }
-  player.x = nearest.x + nearest.w/2;
-  player.y = nearest.y + nearest.h/2;
-  player.vx = 0; player.vy = 0;
-  player.hull = player.maxHull;
-  player.armor = player.maxArmor;
-  player.fuel = player.maxFuel;
-  player.alive = true;
-  credits = Math.max(0, credits - 50);
-  scraps = [];
-  bullets = [];
-  enemies = [];
-  particles = [];
-  effects = [];
-  spawnInitialEnemies();
-  gameState = 'PLAYING';
-}
-
-function spawnInitialEnemies() {
-  for (let i = 0; i < 3; i++) spawnEnemy();
-}
-
-function spawnEnemy() {
-  const roadIdx = Math.floor(Math.random() * ROADS.length);
-  const road = ROADS[roadIdx];
-  const segIdx = Math.floor(Math.random() * (road.length - 1));
-  const t = Math.random();
-  const sx = road[segIdx][0] + (road[segIdx+1][0] - road[segIdx][0]) * t;
-  const sy = road[segIdx][1] + (road[segIdx+1][1] - road[segIdx][1]) * t;
-
-  if (dist(sx, sy, player.x, player.y) < 400) {
-    return spawnEnemy();
-  }
-
-  // 30% chance of Rammer type
-  const isRammer = Math.random() < 0.3;
-
-  const baseEnemy = {
-    x: sx, y: sy,
-    vx: 0, vy: 0,
-    angle: Math.random() * PI * 2,
-    speed: isRammer ? 200 : 150,
-    accel: isRammer ? 100 : 80,
-    turnRate: isRammer ? 1.2 : 2.0,
-    armor: isRammer ? 80 : 50,
-    hull: isRammer ? 60 : 50,
-    maxHull: isRammer ? 60 : 50,
-    alive: true,
-    fireTimer: Math.random() * 1.5,
-    fireRate: isRammer ? 1.5 : 0.5,
-    gunDamage: isRammer ? 5 : 10,
-    flashTimer: 0,
-    targetAngle: 0,
-    stuckTimer: 0,
-    lastX: sx, lastY: sy,
-    type: isRammer ? 'rammer' : 'shooter',
-    scrapReward: isRammer ? 4 : 3,
-  };
-
-  enemies.push(baseEnemy);
-}
-
-// ═══════════════════════════════════════════════════════════
-// PARTICLE SYSTEM
-// ═══════════════════════════════════════════════════════════
-
-function spawnExplosionParticles(x, y, count, isRammer) {
-  // Fire/sparks
-  for (let i = 0; i < count; i++) {
-    const angle = Math.random() * PI * 2;
-    const speed = 50 + Math.random() * 150;
-    const life = 0.3 + Math.random() * 0.5;
-    const size = 3 + Math.random() * 5;
-    particles.push({
-      type: 'fire',
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      life, maxLife: life,
-      size,
-      color: isRammer ? '#cc44ff' : '#ff6600',
-    });
-  }
-  // Smoke
-  for (let i = 0; i < count / 2; i++) {
-    const angle = Math.random() * PI * 2;
-    const speed = 20 + Math.random() * 60;
-    const life = 0.6 + Math.random() * 0.8;
-    particles.push({
-      type: 'smoke',
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 20,
-      life, maxLife: life,
-      size: 8 + Math.random() * 12,
-      color: '#555555',
-    });
-  }
-  // Debris
-  for (let i = 0; i < count / 3; i++) {
-    const angle = Math.random() * PI * 2;
-    const speed = 80 + Math.random() * 200;
-    const life = 0.5 + Math.random() * 0.6;
-    particles.push({
-      type: 'debris',
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      life, maxLife: life,
-      size: 2 + Math.random() * 4,
-      color: '#aa8833',
-      rot: Math.random() * PI * 2,
-      rotSpd: (Math.random() - 0.5) * 10,
-    });
-  }
-}
-
-function spawnSparkParticles(x, y, count) {
-  for (let i = 0; i < count; i++) {
-    const angle = Math.random() * PI * 2;
-    const speed = 30 + Math.random() * 100;
-    const life = 0.1 + Math.random() * 0.2;
-    particles.push({
-      type: 'spark',
-      x, y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      life, maxLife: life,
-      size: 1 + Math.random() * 2,
-      color: '#ffcc00',
-    });
-  }
-}
-
-function spawnBulletTrail(x, y, angle) {
-  const speed = 20;
-  particles.push({
-    type: 'trail',
-    x: x - Math.cos(angle) * 10,
-    y: y - Math.sin(angle) * 10,
-    vx: -Math.cos(angle) * speed + (Math.random() - 0.5) * 20,
-    vy: -Math.sin(angle) * speed + (Math.random() - 0.5) * 20,
-    life: 0.08 + Math.random() * 0.08,
-    maxLife: 0.15,
-    size: 2 + Math.random() * 2,
-    color: '#ffff88',
-  });
-}
-
-function spawnSmokePuff(x, y) {
-  particles.push({
-    type: 'smoke',
-    x, y,
-    vx: (Math.random() - 0.5) * 20,
-    vy: -10 - Math.random() * 20,
-    life: 0.4 + Math.random() * 0.4,
-    maxLife: 0.8,
-    size: 5 + Math.random() * 8,
-    color: '#444444',
-  });
-}
-
-function updateParticles(dt) {
-  for (let i = particles.length - 1; i >= 0; i--) {
-    const p = particles[i];
-    p.x += p.vx * dt;
-    p.y += p.vy * dt;
-    p.life -= dt;
-    if (p.type === 'debris') {
-      p.vy += 200 * dt; // gravity
-      p.rot += p.rotSpd * dt;
-    }
-    if (p.type === 'smoke') {
-      p.size += 15 * dt;
-      p.vx *= Math.pow(0.95, dt * 60);
-    }
-    if (p.life <= 0) particles.splice(i, 1);
-  }
+  gameState = 'WALKING';
+  currentTownIndex = 0;
+  stats = { cash:500, odometer:0, enemiesDestroyed:0, totalCashEarned:0 };
+  player = createWalkingPlayer(currentTownIndex);
+  enemies = []; bullets = []; particles = []; droppedItems = [];
+  garageTown = null;
 }
 
 // ═══════════════════════════════════════════════════════════
 // UPDATE
 // ═══════════════════════════════════════════════════════════
-
 function update(dt) {
-  if (gameState !== 'PLAYING') return;
+  if (gameState === 'TITLE' || gameState === 'GARAGE' || gameState === 'GAMEOVER') return;
 
   if (shakeTimer > 0) shakeTimer -= dt;
   if (damageFlashTimer > 0) damageFlashTimer -= dt;
 
-  updatePlayer(dt);
-  updateEnemies(dt);
-  updateBullets(dt);
-  updateScraps(dt);
-  updateEffects(dt);
-  updateParticles(dt);
-  checkTownEntry();
-  checkEnemySpawns();
+  if (gameState === 'WALKING') updateWalking(dt);
+  else if (gameState === 'DRIVING') {
+    updateDriving(dt);
+    updateEnemies(dt);
+    updateBullets(dt);
+    updateDroppedItems(dt);
+    updateParticles(dt);
+    checkTownEntry();
+    checkEnemySpawns(dt);
+  }
 }
 
-function updatePlayer(dt) {
-  if (!player.alive) {
-    respawnTimer -= dt;
-    if (respawnTimer <= 0) gameState = 'GAMEOVER';
-    return;
+// ── WALKING ──────────────────────────────────────────────
+function updateWalking(dt) {
+  const spd = player.speed;
+  let dx = 0, dy = 0;
+  if (keys['KeyW']||keys['ArrowUp'])    dy -= 1;
+  if (keys['KeyS']||keys['ArrowDown'])  dy += 1;
+  if (keys['KeyA']||keys['ArrowLeft'])  dx -= 1;
+  if (keys['KeyD']||keys['ArrowRight']) dx += 1;
+  if (dx !== 0 || dy !== 0) {
+    const len = Math.sqrt(dx*dx+dy*dy);
+    dx /= len; dy /= len;
+    player.x += dx * spd * dt;
+    player.y += dy * spd * dt;
+    player.angle = Math.atan2(dy, dx);
   }
 
-  if (player.flashTimer > 0) player.flashTimer -= dt;
+  // Clamp to world
+  player.x = Math.max(20, Math.min(WORLD_W - 20, player.x));
+  player.y = Math.max(20, Math.min(WORLD_H - 20, player.y));
 
-  // Smoke when damaged
-  if (player.hull < player.maxHull * 0.4 && Math.random() < 0.1) {
-    spawnSmokePuff(player.x, player.y);
+  // Check garage zone entry
+  const t = TOWNS[currentTownIndex];
+  const gx = t.x + TWN_W/2 - 40, gy = t.y + TWN_H + 5;
+  const gw = 80, gh = 60;
+  if (player.x > gx && player.x < gx+gw && player.y > gy && player.y < gy+gh) {
+    enterGarage();
   }
+}
 
-  const throttle = (keys['KeyW'] || keys['ArrowUp']) ? 1 : 0;
-  const brake = (keys['KeyS'] || keys['ArrowDown']) ? 1 : 0;
-  const turnL = (keys['KeyA'] || keys['ArrowLeft']) ? 1 : 0;
-  const turnR = (keys['KeyD'] || keys['ArrowRight']) ? 1 : 0;
+// ── DRIVING ──────────────────────────────────────────────
+function updateDriving(dt) {
+  const car = player.car;
+  if (!car || !car.alive) return;
 
-  const speed = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
+  // Smoke if damaged
+  if (car.hull < car.maxHull * 0.4 && Math.random() < 0.1) spawnSmokePuff(car.x, car.y);
 
-  const turnFactor = Math.min(speed / 80, 1);
-  player.angle += (turnR - turnL) * player.turnRate * turnFactor * dt;
+  const throttle = (keys['KeyW']||keys['ArrowUp']) ? 1:0;
+  const brake    = (keys['KeyS']||keys['ArrowDown']) ? 1:0;
+  const turnL    = (keys['KeyA']||keys['ArrowLeft']) ? 1:0;
+  const turnR    = (keys['KeyD']||keys['ArrowRight']) ? 1:0;
 
-  const onRoad = isOnRoad(player.x, player.y);
-  const maxSpd = onRoad ? player.maxSpeed : 60;
-  const accel = onRoad ? player.accel : player.accel * 0.4;
+  // Engine damage reduces speed
+  const engineMult = car.engineHull < 50 ? 0.5 : 1.0;
+  const maxSpd = car.maxSpeed * engineMult;
+  const accel  = car.accel * engineMult;
 
-  if (throttle && player.fuel > 0) {
-    player.vx += Math.cos(player.angle) * accel * dt;
-    player.vy += Math.sin(player.angle) * accel * dt;
-    player.fuel -= 8 * dt;
-    player.fuel = Math.max(0, player.fuel);
+  // Fuel consumption
+  const onRoad = isOnRoad(car.x, car.y);
+  const fuelRate = onRoad ? 1/50 : 1/25; // per pixel
+
+  const speed = Math.sqrt(car.vx*car.vx + car.vy*car.vy);
+
+  // Turning (speed-dependent)
+  const turnFactor = Math.min(speed / 60, 1);
+  car.angle += (turnR - turnL) * car.turnRate * turnFactor * dt;
+
+  if (throttle && car.fuel > 0) {
+    car.vx += Math.cos(car.angle) * accel * dt;
+    car.vy += Math.sin(car.angle) * accel * dt;
+    car.fuel -= fuelRate * Math.sqrt(car.vx*car.vx+car.vy*car.vy) * dt;
+    car.fuel = Math.max(0, car.fuel);
   }
   if (brake) {
-    player.vx *= Math.pow(0.5, dt);
-    player.vy *= Math.pow(0.5, dt);
+    car.vx *= Math.pow(0.3, dt);
+    car.vy *= Math.pow(0.3, dt);
   }
 
-  player.vx *= Math.pow(0.96, dt * 60);
-  player.vy *= Math.pow(0.96, dt * 60);
+  // Drag
+  car.vx *= Math.pow(0.97, dt*60);
+  car.vy *= Math.pow(0.97, dt*60);
 
-  const v = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
-  if (v > maxSpd) {
-    player.vx = (player.vx / v) * maxSpd;
-    player.vy = (player.vy / v) * maxSpd;
+  // Speed cap
+  const v = Math.sqrt(car.vx*car.vx+car.vy*car.vy);
+  if (v > maxSpd) { car.vx = car.vx/v*maxSpd; car.vy = car.vy/v*maxSpd; }
+
+  // Tire blowout = spin
+  if (car.tireHull <= 0 && Math.random() < 0.02) {
+    car.angle += (Math.random()-0.5) * 0.8;
+    car.vx *= 0.7; car.vy *= 0.7;
   }
 
-  player.x += player.vx * dt;
-  player.y += player.vy * dt;
+  car.x += car.vx * dt;
+  car.y += car.vy * dt;
+  car.x = Math.max(10, Math.min(WORLD_W-10, car.x));
+  car.y = Math.max(10, Math.min(WORLD_H-10, car.y));
 
-  player.x = clamp(player.x, 20, WORLD_W - 20);
-  player.y = clamp(player.y, 20, WORLD_H - 20);
+  // Odometer
+  stats.odometer += v * dt * 0.01;
 
-  player.fireTimer -= dt;
-  if ((keys['Space']) && player.fireTimer <= 0 && player.fuel > 0) {
-    fireBullet(player, true);
-    player.fireTimer = player.fireRate;
+  // Fire timer
+  car.fireTimer -= dt;
+  if (car.fireTimer < 0) car.fireTimer = 0;
+
+  car.flashTimer -= dt;
+  if (car.flashTimer < 0) car.flashTimer = 0;
+
+  // Fuel tank explosion
+  if (car.fuelTankHull <= 0 && car.fuel <= 0) {
+    destroyCar(car, true);
   }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ENEMIES
+// ═══════════════════════════════════════════════════════════
+function spawnEnemy() {
+  // Pick a random road segment
+  const seg = ROAD_SEGS[Math.floor(Math.random() * ROAD_SEGS.length)];
+  const t = Math.random();
+  let x, y;
+  if (seg.x !== undefined) {
+    // Vertical road
+    const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
+    const minY = t0.y + TWN_H, maxY = t1.y;
+    y = minY + (maxY-minY) * t;
+    x = seg.x + (Math.random()-0.5) * 20;
+  } else {
+    // Horizontal road
+    const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
+    const minX = t0.x + TWN_W, maxX = t1.x;
+    x = minX + (maxX-minX) * t;
+    y = seg.y + (Math.random()-0.5) * 20;
+  }
+
+  // Don't spawn too close to player
+  if (player.car && dist(x, y, player.car.x, player.car.y) < 300) {
+    return; // skip this spawn
+  }
+
+  const typeNames = ['RoadWarrior','Raider','Hunter','Ganger'];
+  const type = typeNames[Math.floor(Math.random() * typeNames.length)];
+  const def = makeEnemyDef(type);
+
+  enemies.push({
+    type,
+    x, y,
+    vx:0, vy:0,
+    angle: Math.random() * PI * 2,
+    speed: def.speed, accel: def.speed * 0.7,
+    turnRate: 2.0,
+    frontArmor: def.armor, rearArmor: def.armor,
+    leftArmor: def.armor, rightArmor: def.armor,
+    hull: def.hull, maxHull: def.hull,
+    fuel: 999, maxFuel: 999,
+    weapons: [{ type: def.weapon, ammo: def.weapon==='MachineGun' ? 200 : def.weapon==='Rockets' ? 10 : 0, fuel:0, heat:0 }],
+    currentWeaponIdx: 0,
+    fireTimer: Math.random() * 2,
+    alive: true, flashTimer:0,
+    w: def.w, h: def.h,
+    color: def.color, dark: def.dark,
+    cash: def.cash,
+    behavior: def.behavior,
+    stuckTimer:0, lastX:x, lastY:y,
+  });
 }
 
 function updateEnemies(dt) {
-  for (const e of enemies) {
-    if (!e.alive) continue;
+  const car = player.car;
+  if (!car) return;
+
+  for (let i = enemies.length-1; i >= 0; i--) {
+    const e = enemies[i];
+    if (!e.alive) { enemies.splice(i,1); continue; }
+
     if (e.flashTimer > 0) e.flashTimer -= dt;
 
-    // Smoke for damaged rammers
-    if (e.type === 'rammer' && e.hull < e.maxHull * 0.5 && Math.random() < 0.08) {
-      spawnSmokePuff(e.x, e.y);
-    }
+    // Smoke if damaged
+    if (e.hull < e.maxHull * 0.5 && Math.random() < 0.06) spawnSmokePuff(e.x, e.y);
 
-    const dx = player.x - e.x;
-    const dy = player.y - e.y;
-    const d = Math.sqrt(dx*dx + dy*dy);
+    const dx = car.x - e.x, dy = car.y - e.y;
+    const d = Math.sqrt(dx*dx+dy*dy);
     const targetAngle = Math.atan2(dy, dx);
 
-    let angleDiff = normalizeAngle(targetAngle - e.angle);
-    const turnAmount = Math.min(Math.abs(angleDiff), e.turnRate * dt);
-    e.angle += Math.sign(angleDiff) * turnAmount;
+    // AI behavior
+    if (e.behavior === 'patrol') {
+      // Move toward player if close, else wander
+      if (d < 400) {
+        let a = normalizeAngle(targetAngle - e.angle);
+        e.angle += Math.sign(a) * Math.min(Math.abs(a), e.turnRate * dt);
+      } else {
+        // Random wander
+        if (Math.random() < 0.01) e.angle += (Math.random()-0.5)*0.5;
+      }
+    } else if (e.behavior === 'charge') {
+      let a = normalizeAngle(targetAngle - e.angle);
+      e.angle += Math.sign(a) * Math.min(Math.abs(a), e.turnRate*1.5 * dt);
+    } else if (e.behavior === 'sniper') {
+      // Keep distance
+      if (d < 200) {
+        let a = normalizeAngle(targetAngle + PI - e.angle);
+        e.angle += Math.sign(a) * Math.min(Math.abs(a), e.turnRate * dt);
+      } else if (d > 400) {
+        let a = normalizeAngle(targetAngle - e.angle);
+        e.angle += Math.sign(a) * Math.min(Math.abs(a), e.turnRate * dt);
+      }
+    } else if (e.behavior === 'pack') {
+      // Stay near other enemies, chase player
+      if (d < 500) {
+        let a = normalizeAngle(targetAngle - e.angle);
+        e.angle += Math.sign(a) * Math.min(Math.abs(a), e.turnRate * dt);
+      }
+    }
 
     const onRoad = isOnRoad(e.x, e.y);
-    const maxSpd = onRoad ? e.speed : 60;
+    const maxSpd = onRoad ? e.speed : 40;
 
-    if (d > 60) {
-      e.vx += Math.cos(e.angle) * e.accel * dt;
-      e.vy += Math.sin(e.angle) * e.accel * dt;
-    }
+    e.vx += Math.cos(e.angle) * e.accel * dt;
+    e.vy += Math.sin(e.angle) * e.accel * dt;
+    e.vx *= Math.pow(0.96, dt*60);
+    e.vy *= Math.pow(0.96, dt*60);
 
-    e.vx *= Math.pow(0.96, dt * 60);
-    e.vy *= Math.pow(0.96, dt * 60);
-
-    const v = Math.sqrt(e.vx * e.vx + e.vy * e.vy);
-    if (v > maxSpd) {
-      e.vx = (e.vx / v) * maxSpd;
-      e.vy = (e.vy / v) * maxSpd;
-    }
+    const v = Math.sqrt(e.vx*e.vx+e.vy*e.vy);
+    if (v > maxSpd) { e.vx = e.vx/v*maxSpd; e.vy = e.vy/v*maxSpd; }
 
     e.x += e.vx * dt;
     e.y += e.vy * dt;
+    e.x = Math.max(10, Math.min(WORLD_W-10, e.x));
+    e.y = Math.max(10, Math.min(WORLD_H-10, e.y));
 
-    e.x = clamp(e.x, 20, WORLD_W - 20);
-    e.y = clamp(e.y, 20, WORLD_H - 20);
-
-    if (Math.abs(e.x - e.lastX) < 1 && Math.abs(e.y - e.lastY) < 1) {
+    // Unstuck
+    if (Math.abs(e.x-e.lastX)<1 && Math.abs(e.y-e.lastY)<1) {
       e.stuckTimer += dt;
-      if (e.stuckTimer > 2) {
-        e.angle += (Math.random() - 0.5) * PI;
-        e.stuckTimer = 0;
-      }
-    } else {
-      e.stuckTimer = 0;
-    }
+      if (e.stuckTimer > 2) { e.angle += (Math.random()-0.5)*PI; e.stuckTimer=0; }
+    } else e.stuckTimer = 0;
     e.lastX = e.x; e.lastY = e.y;
 
-    // Shooters fire, rammers just ram
+    // Fire
     e.fireTimer -= dt;
-    if (e.type === 'shooter' && e.fireTimer <= 0 && d < 350 && Math.abs(angleDiff) < PI/6) {
-      fireBullet(e, false);
-      e.fireTimer = e.fireRate;
+    const wpn = e.weapons[0];
+    if (e.fireTimer <= 0 && d < 350 && Math.abs(normalizeAngle(targetAngle-e.angle)) < PI/6) {
+      fireEnemyBullet(e, wpn);
+      e.fireTimer = wpn.type === 'Rockets' ? 3.0 : 0.5;
+    }
+
+    // Ram behavior
+    if (e.type === 'Raider' && d < 30) {
+      applyRamDamage(e, car);
     }
   }
 }
 
-function fireBullet(shooter, isPlayer) {
-  const speed = 500;
-  const spread = (Math.random() - 0.5) * 0.05;
-  const angle = shooter.angle + spread;
-  const ox = Math.cos(shooter.angle) * 20;
-  const oy = Math.sin(shooter.angle) * 20;
+function fireEnemyBullet(e, wpn) {
+  const def = WEAPON_TYPES[wpn.type];
+  if (!def) return;
+  if (def.type === 'mine' || def.type === 'oil' || def.type === 'smoke') return; // can't fire these actively
 
+  const angle = e.angle + (Math.random()-0.5)*(def.spread||0.05);
+  const ox = Math.cos(e.angle)*e.w/2, oy = Math.sin(e.angle)*e.w/2;
   bullets.push({
-    x: shooter.x + ox,
-    y: shooter.y + oy,
-    vx: Math.cos(angle) * speed + shooter.vx * 0.3,
-    vy: Math.sin(angle) * speed + shooter.vy * 0.3,
-    isPlayer,
-    damage: isPlayer ? shooter.gunDamage : (shooter.type === 'rammer' ? 5 : 10),
-    life: 0.8,
-    maxLife: 0.8,
-    angle,
+    x: e.x+ox, y: e.y+oy,
+    vx: Math.cos(angle)*(def.bulletSpeed||400)+e.vx*0.3,
+    vy: Math.sin(angle)*(def.bulletSpeed||400)+e.vy*0.3,
+    isPlayer: false, damage: def.damage||5,
+    life: 1.2, maxLife: 1.2, angle,
+    weaponType: wpn.type
   });
+  spawnMuzzleFlash(e.x+ox, e.y+oy, angle);
+}
 
-  effects.push({ type: 'flash', x: shooter.x + ox, y: shooter.y + oy, t: 0.08, maxT: 0.08 });
-  spawnSparkParticles(shooter.x + ox, shooter.y + oy, 3);
-  spawnBulletTrail(shooter.x + ox, shooter.y + oy, angle);
+function applyRamDamage(e, car) {
+  const speed = Math.sqrt(e.vx*e.vx+e.vy*e.vy);
+  const dmg = Math.floor(speed * 0.3 + 10);
+  const angle = Math.atan2(car.y-e.y, car.x-e.x);
+  applyDamageToCar(car, dmg, angle, true);
+  applyDamageToCar(e, dmg*0.5, normalizeAngle(angle+PI), false);
+  shakeTimer = 0.3; shakeIntensity = 8;
+  spawnSparks(car.x, car.y, 8);
+}
+
+// ═══════════════════════════════════════════════════════════
+// BULLETS
+// ═══════════════════════════════════════════════════════════
+function fireWeapon() {
+  const car = player.car;
+  if (!car || !car.alive) return;
+  if (car.fireTimer > 0) return;
+
+  const wpn = getPlayerWeapon();
+  if (!wpn) return;
+
+  const def = WEAPON_TYPES[wpn.type];
+  if (!def) return;
+
+  car.fireTimer = 1 / (def.firesPerSec || 1);
+
+  // Drop-type weapons
+  if (def.drop) {
+    const backX = car.x - Math.cos(car.angle)*car.w/2;
+    const backY = car.y - Math.sin(car.angle)*car.w/2;
+    if (def.type === 'mine') {
+      droppedItems.push({ type:'mine', x:backX, y:backY, owner:'player', damage:def.damage, life:15, maxLife:15 });
+      wpn.ammo--;
+    } else if (def.type === 'oil') {
+      droppedItems.push({ type:'oil', x:backX, y:backY, owner:'player', life:12, maxLife:12 });
+      wpn.ammo--;
+    } else if (def.type === 'smoke') {
+      droppedItems.push({ type:'smoke', x:car.x, y:car.y, owner:'player', radius:60, life:6, maxLife:6 });
+      wpn.fuel -= def.fuel;
+    }
+    return;
+  }
+
+  const ox = Math.cos(car.angle)*car.w/2, oy = Math.sin(car.angle)*car.w/2;
+
+  if (def.type === 'flame') {
+    for (let i = 0; i < 5; i++) {
+      const spread = (Math.random()-0.5)*def.spread;
+      const a = car.angle + spread;
+      bullets.push({
+        x: car.x+ox, y: car.y+oy,
+        vx: Math.cos(a)*def.bulletSpeed + car.vx*0.2,
+        vy: Math.sin(a)*def.bulletSpeed + car.vy*0.2,
+        isPlayer:true, damage:def.damage, life:0.3, maxLife:0.3, angle:a, weaponType:'Flamethrower'
+      });
+    }
+    wpn.fuel -= def.fuel;
+    wpn.heat += def.heat;
+  } else if (def.type === 'rocket') {
+    bullets.push({
+      x: car.x+ox, y: car.y+oy,
+      vx: Math.cos(car.angle)*def.bulletSpeed + car.vx*0.2,
+      vy: Math.sin(car.angle)*def.bulletSpeed + car.vy*0.2,
+      isPlayer:true, damage:def.damage, life:1.5, maxLife:1.5, angle:car.angle, weaponType:'Rockets', isRocket:true
+    });
+    wpn.ammo--;
+    wpn.heat += def.heat;
+  } else {
+    // Machine gun
+    const spread = (Math.random()-0.5)*def.spread;
+    const a = car.angle + spread;
+    bullets.push({
+      x: car.x+ox, y: car.y+oy,
+      vx: Math.cos(a)*def.bulletSpeed + car.vx*0.2,
+      vy: Math.sin(a)*def.bulletSpeed + car.vy*0.2,
+      isPlayer:true, damage:def.damage, life:0.8, maxLife:0.8, angle:a, weaponType:'MachineGun'
+    });
+    wpn.ammo--;
+    wpn.heat += def.heat;
+  }
+
+  // Heat management (overheat)
+  if (wpn.heat > 100) {
+    wpn.heat = 100;
+    car.fireTimer = 1.0; // cooldown
+  }
+  spawnMuzzleFlash(car.x+ox, car.y+oy, car.angle);
+}
+
+function cycleWeapon() {
+  const car = player.car;
+  if (!car || car.weapons.length <= 1) return;
+  car.currentWeaponIdx = (car.currentWeaponIdx + 1) % car.weapons.length;
 }
 
 function updateBullets(dt) {
-  for (let i = bullets.length - 1; i >= 0; i--) {
+  const car = player.car;
+  for (let i = bullets.length-1; i >= 0; i--) {
     const b = bullets[i];
     b.x += b.vx * dt;
     b.y += b.vy * dt;
     b.life -= dt;
 
-    // Trail particle
-    if (Math.random() < 0.5) {
-      spawnBulletTrail(b.x, b.y, b.angle);
+    if (b.life <= 0 || b.x < 0 || b.x > WORLD_W || b.y < 0 || b.y > WORLD_H) {
+      bullets.splice(i,1); continue;
     }
 
-    if (b.life <= 0) { bullets.splice(i, 1); continue; }
-
-    if (!b.isPlayer && player.alive) {
-      if (dist(b.x, b.y, player.x, player.y) < 18) {
-        applyDamageToCar(player, b.damage, true);
-        spawnSparkParticles(b.x, b.y, 5);
-        bullets.splice(i, 1);
-        continue;
-      }
+    // Smoke trail for rockets
+    if (b.isRocket && Math.random() < 0.4) {
+      particles.push({ type:'smoke', x:b.x, y:b.y, vx:(Math.random()-0.5)*20, vy:(Math.random()-0.5)*20-10,
+        life:0.3, maxLife:0.3, size:4+Math.random()*4, color:'#666666' });
     }
 
+    // Hit player
+    if (!b.isPlayer && car && car.alive && dist(b.x,b.y,car.x,car.y) < car.w/2+4) {
+      const angle = Math.atan2(car.y-b.y, car.x-b.x);
+      applyDamageToCar(car, b.damage, angle, true);
+      spawnSparks(b.x, b.y, 5);
+      bullets.splice(i,1); continue;
+    }
+
+    // Hit enemies
     if (b.isPlayer) {
+      let hit = false;
       for (const e of enemies) {
         if (!e.alive) continue;
-        if (dist(b.x, b.y, e.x, e.y) < 16) {
-          applyDamageToCar(e, b.damage, false);
-          spawnSparkParticles(b.x, b.y, 5);
-          bullets.splice(i, 1);
-          break;
+        if (dist(b.x,b.y,e.x,e.y) < e.w/2+4) {
+          const angle = Math.atan2(e.y-b.y, e.x-b.x);
+          applyDamageToCar(e, b.damage, angle, false);
+          spawnSparks(b.x, b.y, 5);
+          hit = true; break;
+        }
+      }
+      if (hit) { bullets.splice(i,1); continue; }
+    }
+
+    // Hit mines
+    for (let j = droppedItems.length-1; j >= 0; j--) {
+      const mine = droppedItems[j];
+      if (mine.type !== 'mine') continue;
+      if (dist(b.x,b.y,mine.x,mine.y) < 18) {
+        // Trigger explosion
+        droppedItems.splice(j,1);
+        spawnExplosion(mine.x, mine.y, 15, false);
+        // Damage nearby
+        if (car && car.alive && dist(mine.x,mine.y,car.x,car.y) < 80) {
+          applyDamageToCar(car, mine.damage, Math.atan2(car.y-mine.y,car.x-mine.x), true);
+        }
+        for (const e of enemies) {
+          if (!e.alive) continue;
+          if (dist(mine.x,mine.y,e.x,e.y) < 80) {
+            applyDamageToCar(e, mine.damage, Math.atan2(e.y-mine.y,e.x-mine.x), false);
+          }
+        }
+        bullets.splice(i,1); break;
+      }
+    }
+  }
+}
+
+function updateDroppedItems(dt) {
+  const car = player.car;
+  for (let i = droppedItems.length-1; i >= 0; i--) {
+    const d = droppedItems[i];
+    d.life -= dt;
+    if (d.life <= 0) { droppedItems.splice(i,1); continue; }
+
+    // Oil slick - damage tires / cause spin
+    if (d.type === 'oil' && car && car.alive) {
+      if (dist(d.x,d.y,car.x,car.y) < 20) {
+        if (Math.random() < 0.1) {
+          car.angle += (Math.random()-0.5)*0.6;
+          car.vx *= 0.8; car.vy *= 0.8;
         }
       }
     }
 
-    if (b.x < 0 || b.x > WORLD_W || b.y < 0 || b.y > WORLD_H) {
-      bullets.splice(i, 1);
+    // Smoke cloud - block enemy targeting
+    if (d.type === 'smoke') {
+      d.radius = Math.min(d.radius, d.radius + 20*dt);
+    }
+
+    // Mines - player/enemy contact
+    if (d.type === 'mine' && d.owner === 'enemy') {
+      if (car && car.alive && dist(d.x,d.y,car.x,car.y) < 18) {
+        droppedItems.splice(i,1);
+        spawnExplosion(d.x, d.y, 15, false);
+        applyDamageToCar(car, d.damage, Math.atan2(car.y-d.y,car.x-d.x), true);
+        continue;
+      }
     }
   }
 }
 
-function applyDamageToCar(car, dmg, isPlayer) {
-  if (car.armor > 0) {
-    const absorbed = Math.min(car.armor, dmg);
-    car.armor -= absorbed;
+// ═══════════════════════════════════════════════════════════
+// DAMAGE SYSTEM
+// ═══════════════════════════════════════════════════════════
+function applyDamageToCar(car, dmg, angle, isPlayer) {
+  // Determine which facing was hit
+  let facing = 'front';
+  const norm = ((angle % (PI*2)) + PI*2) % (PI*2);
+  // car.angle is the direction the front faces
+  const hitRel = normalizeAngle(norm - car.angle);
+  if (hitRel > -PI/4 && hitRel <= PI/4) facing = 'front';
+  else if (hitRel > PI/4 && hitRel <= 3*PI/4) facing = 'right';
+  else if (hitRel > 3*PI/4 || hitRel <= -3*PI/4) facing = 'rear';
+  else facing = 'left';
+
+  let armor = car[facing+'Armor'];
+  if (armor > 0) {
+    const absorbed = Math.min(armor, dmg);
+    car[facing+'Armor'] -= absorbed;
     dmg -= absorbed;
   }
+
   if (dmg > 0) {
     car.hull -= dmg;
+
+    // Component damage (random when hull hit)
+    if (Math.random() < 0.3) {
+      const comps = ['engineHull','tireHull','fuelTankHull'];
+      const comp = comps[Math.floor(Math.random()*comps.length)];
+      car[comp] = Math.max(0, car[comp] - dmg * 5);
+    }
   }
-  car.flashTimer = 0.1;
+
+  car.flashTimer = 0.12;
 
   if (car.hull <= 0) {
-    car.alive = false;
-    car.hull = 0;
-    if (!isPlayer) {
-      const reward = car.scrapReward || 3;
-      const count = reward + Math.floor(Math.random() * 2);
-      for (let i = 0; i < count; i++) {
-        scraps.push({
-          x: car.x + (Math.random() - 0.5) * 40,
-          y: car.y + (Math.random() - 0.5) * 40,
-          angle: Math.random() * PI * 2,
-          rotSpd: (Math.random() - 0.5) * 3,
-          life: 12,
-          value: 1,
-        });
-      }
-      spawnExplosionParticles(car.x, car.y, 20, car.type === 'rammer');
-      effects.push({ type: 'explosion', x: car.x, y: car.y, t: 0.5, maxT: 0.5 });
-      score += car.type === 'rammer' ? 150 : 100;
-      enemiesDestroyed++;
-    } else {
-      spawnExplosionParticles(car.x, car.y, 30, false);
-      effects.push({ type: 'explosion', x: car.x, y: car.y, t: 0.8, maxT: 0.8 });
-      shakeTimer = 0.6; shakeIntensity = 15;
-      damageFlashTimer = 0.3;
-      respawnTimer = 2.0;
-    }
+    destroyCar(car, isPlayer);
   } else if (isPlayer) {
-    shakeTimer = 0.15; shakeIntensity = 5;
+    shakeTimer = 0.15; shakeIntensity = 4;
     damageFlashTimer = 0.1;
   }
 }
 
-function updateScraps(dt) {
-  for (let i = scraps.length - 1; i >= 0; i--) {
-    const s = scraps[i];
-    s.angle += s.rotSpd * dt;
-    s.life -= dt;
-    if (s.life <= 0) { scraps.splice(i, 1); continue; }
+function destroyCar(car, isPlayer) {
+  car.alive = false;
+  car.hull = 0;
+  spawnExplosion(car.x, car.y, car.type==='Semi'?40:25, false);
+  shakeTimer = 0.6; shakeIntensity = 15;
+  damageFlashTimer = 0.4;
 
-    if (player.alive && dist(s.x, s.y, player.x, player.y) < 30) {
-      scrapCount++;
-      effects.push({ type: 'pickup', x: s.x, y: s.y, t: 0.3, maxT: 0.3 });
-      scraps.splice(i, 1);
+  if (!isPlayer) {
+    // Enemy destroyed
+    stats.enemiesDestroyed++;
+    stats.cash += car.cash || 50;
+    stats.totalCashEarned += car.cash || 50;
+    // Drop salvage
+    const salvageVal = Math.floor((VEHICLE_TYPES[car.type]||{salvage:50}).salvage * 0.3);
+    if (salvageVal > 0) {
+      droppedItems.push({ type:'salvage', x:car.x, y:car.y, value:salvageVal, life:20, maxLife:20 });
     }
+  } else {
+    // Player died
+    setTimeout(() => { gameState = 'GAMEOVER'; }, 800);
   }
 }
 
-function updateEffects(dt) {
-  for (let i = effects.length - 1; i >= 0; i--) {
-    effects[i].t -= dt;
-    if (effects[i].t <= 0) effects.splice(i, 1);
+// ═══════════════════════════════════════════════════════════
+// GARAGE SYSTEM
+// ═══════════════════════════════════════════════════════════
+function enterGarage() {
+  gameState = 'GARAGE';
+  garageTown = currentTownIndex;
+  garageTab = 0;
+  garageSel = 0;
+}
+
+function exitGarage(exitToDriving) {
+  gameState = exitToDriving ? 'DRIVING' : 'WALKING';
+  garageTown = null;
+}
+
+function handleGarageInput(code) {
+  if (code === 'Escape') { exitGarage(player.car ? true : false); return; }
+  if (code === 'Digit1') { garageTab=0; garageSel=0; return; }
+  if (code === 'Digit2') { garageTab=1; garageSel=0; return; }
+  if (code === 'Digit3') { garageTab=2; garageSel=0; return; }
+  if (code === 'Digit4') { garageTab=3; garageSel=0; return; }
+  if (code === 'Digit5') { garageTab=4; garageSel=0; return; }
+
+  const tabCounts = [6, 2, 1, 1, 1]; // BUY=6vehicles, SELL=2options, REPAIR=1, FUEL=1, STATS=1
+  const maxSel = tabCounts[garageTab]-1;
+
+  if (code === 'ArrowUp'   || code === 'KeyW') garageSel = Math.max(0, garageSel-1);
+  if (code === 'ArrowDown' || code === 'KeyS') garageSel = Math.min(maxSel, garageSel+1);
+  if (code === 'Enter' || code === 'Space') doGarageAction();
+}
+
+function doGarageAction() {
+  const t = TOWNS[garageTown];
+  const price = (base, mod) => Math.ceil(base * mod);
+
+  if (garageTab === 0) {
+    // BUY / INSTALL
+    const typeNames = ['Cycle','Compact','Sedan','Pickup','Van','Semi'];
+    const typeName = typeNames[garageSel];
+    if (!typeName) return;
+
+    if (!player.car) {
+      // Buy new car
+      const cost = price(VEHICLE_TYPES[typeName].cost, t.weaponsMod);
+      if (stats.cash < cost) return;
+      stats.cash -= cost;
+      player.car = createCar(typeName, garageTown);
+      exitGarage(true);
+    } else {
+      // Buy weapon / upgrade
+      const wpnSel = garageSel; // 0-5 = weapons
+      const wpnNames = ['machineGun','flamethrower','rockets','mines','oilSlick','smoke'];
+      const wpnName = wpnNames[wpnSel];
+      const def = WEAPON_TYPES[wpnName.charAt(0).toUpperCase()+wpnName.slice(1)];
+      const cost = price(BASE_PRICES[wpnName], t.weaponsMod);
+      if (!def || stats.cash < cost) return;
+
+      const slotNeeded = def.slot || 1;
+      const usedSlots = player.car.weapons.reduce((s,w) => s + (WEAPON_TYPES[w.type]?.slot||1), 0);
+      const carSlots = (VEHICLE_TYPES[player.car.type]||{slots:1}).slots;
+      if (usedSlots + slotNeeded > carSlots) return; // no slots
+
+      stats.cash -= cost;
+      player.car.weapons.push({
+        type: def.name||wpnName.charAt(0).toUpperCase()+wpnName.slice(1),
+        ammo: def.ammo||0, fuel: def.type==='flame'||def.type==='smoke' ? (def.fuel||0)*10 : 0,
+        heat:0
+      });
+    }
+  } else if (garageTab === 1) {
+    // SELL
+    if (garageSel === 0 && player.car) {
+      // Sell car for salvage
+      const salvage = Math.floor((VEHICLE_TYPES[player.car.type]||{salvage:0}).salvage * 0.25);
+      stats.cash += salvage;
+      player.car = null;
+    } else if (garageSel === 1) {
+      // Sell salvage
+      let salvageVal = 0;
+      for (let i = droppedItems.length-1; i >= 0; i--) {
+        if (droppedItems[i].type === 'salvage') {
+          salvageVal += droppedItems[i].value;
+          droppedItems.splice(i,1);
+        }
+      }
+      if (salvageVal > 0) {
+        const sellPrice = price(salvageVal * 0.5, t.partsMod);
+        stats.cash += sellPrice;
+      }
+    }
+  } else if (garageTab === 2) {
+    // REPAIR
+    const car = player.car;
+    if (!car) return;
+    const hullDmg = car.maxHull - car.hull;
+    const frontDmg = car.maxArmor - car.frontArmor;
+    const rearDmg  = car.maxArmor - car.rearArmor;
+    const leftDmg  = car.maxArmor - car.leftArmor;
+    const rightDmg = car.maxArmor - car.rightArmor;
+    const engineDmg = 100 - car.engineHull;
+    const tireDmg   = 100 - car.tireHull;
+    const fuelDmg   = 100 - car.fuelTankHull;
+    const totalDmg = hullDmg + frontDmg + rearDmg + leftDmg + rightDmg + engineDmg + tireDmg + fuelDmg;
+    const cost = price(Math.ceil(totalDmg * 0.5), t.partsMod);
+    if (stats.cash < cost) return;
+    stats.cash -= cost;
+    car.hull = car.maxHull;
+    car.frontArmor = car.maxArmor; car.rearArmor = car.maxArmor;
+    car.leftArmor = car.maxArmor; car.rightArmor = car.maxArmor;
+    car.engineHull = 100; car.tireHull = 100; car.fuelTankHull = 100;
+  } else if (garageTab === 3) {
+    // FUEL
+    const car = player.car;
+    if (!car) return;
+    const fuelNeeded = car.maxFuel - car.fuel;
+    if (fuelNeeded <= 0) return;
+    const cost = price(Math.ceil(fuelNeeded * 0.4), t.fuelMod);
+    if (stats.cash < cost) return;
+    stats.cash -= cost;
+    car.fuel = car.maxFuel;
+    car.fuelTankHull = 100; // refueling also patches tank
+  } else if (garageTab === 4) {
+    // STATS — just viewing, no action
   }
 }
 
+// ═══════════════════════════════════════════════════════════
+// TOWN ENTRY (DRIVING)
+// ═══════════════════════════════════════════════════════════
 function checkTownEntry() {
-  for (const t of TOWNS) {
-    const cx = t.x + t.w/2, cy = t.y + t.h/2;
-    if (player.x > t.x && player.x < t.x + t.w &&
-        player.y > t.y && player.y < t.y + t.h) {
-      enterTown(t);
+  if (!player.car) return;
+  for (let i = 0; i < TOWNS.length; i++) {
+    const t = TOWNS[i];
+    if (player.car.x > t.x && player.car.x < t.x+t.w &&
+        player.car.y > t.y && player.car.y < t.y+t.h) {
+      // Enter town → back to walking
+      currentTownIndex = i;
+      player.x = t.x + TWN_W/2;
+      player.y = t.y + TWN_H + 30;
+      player.angle = -PI/2;
+      player.car = null;
+      gameState = 'WALKING';
+      // Clear enemies
+      enemies = [];
       return;
     }
   }
 }
 
-function checkEnemySpawns() {
-  const alive = enemies.filter(e => e.alive).length;
-  if (alive < 3) spawnEnemy();
+function checkEnemySpawns(dt) {
+  enemySpawnTimer -= dt;
+  if (enemySpawnTimer <= 0) {
+    const alive = enemies.filter(e=>e.alive).length;
+    if (alive < 4) spawnEnemy();
+    enemySpawnTimer = ENEMY_SPAWN_INTERVAL + Math.random()*4;
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
-// TOWN SYSTEM
+// PARTICLES
 // ═══════════════════════════════════════════════════════════
-
-function enterTown(town) {
-  gameState = 'TOWN';
-  currentTown = town;
-  townTab = 0;
-  townSel = 0;
-  townUI = town;
-  player.vx = 0; player.vy = 0;
+function spawnExplosion(x, y, count, isRammer) {
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random()*PI*2;
+    const speed = 50+Math.random()*150;
+    particles.push({
+      type:'fire', x, y,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+      life:0.3+Math.random()*0.5, maxLife:0.8, size:3+Math.random()*5,
+      color: isRammer ? '#cc44ff' : '#ff6600'
+    });
+  }
+  for (let i = 0; i < count/2; i++) {
+    const angle = Math.random()*PI*2;
+    const speed = 20+Math.random()*60;
+    particles.push({
+      type:'smoke', x, y,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-20,
+      life:0.6+Math.random()*0.8, maxLife:1.4, size:8+Math.random()*12, color:'#555555'
+    });
+  }
+  for (let i = 0; i < count/3; i++) {
+    const angle = Math.random()*PI*2;
+    const speed = 80+Math.random()*200;
+    particles.push({
+      type:'debris', x, y,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+      life:0.5+Math.random()*0.6, maxLife:1.1, size:2+Math.random()*4, color:'#aa8833',
+      rot:Math.random()*PI*2, rotSpd:(Math.random()-0.5)*10
+    });
+  }
 }
 
-function getTownTabLength(tab) {
-  if (tab === 0) return 4;
-  if (tab === 1) return 2;
-  return 1;
+function spawnSparks(x, y, count) {
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random()*PI*2;
+    const speed = 30+Math.random()*100;
+    particles.push({
+      type:'spark', x, y,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+      life:0.1+Math.random()*0.2, maxLife:0.3, size:1+Math.random()*2, color:'#ffcc00'
+    });
+  }
 }
 
-function doTownAction(tab, sel) {
-  if (!currentTown) return;
-  if (tab === 0) {
-    const items = [
-      { key: 'fuel', name: 'Fuel Can (+20)', price: currentTown.buy.fuel },
-      { key: 'repair', name: 'Repair Kit (Full)', price: currentTown.buy.repair },
-      { key: 'armor', name: 'Armor Plate (+30)', price: currentTown.buy.armor },
-      { key: 'gun', name: 'Machine Gun (+DMG)', price: currentTown.buy.gun },
-    ];
-    const item = items[sel];
-    if (!item) return;
-    if (credits < item.price) return;
-    credits -= item.price;
-    if (item.key === 'fuel') {
-      player.fuel = Math.min(player.maxFuel, player.fuel + 20);
-    } else if (item.key === 'repair') {
-      player.hull = player.maxHull;
-      player.armor = player.maxArmor;
-    } else if (item.key === 'armor') {
-      armorCount++;
-      player.maxArmor = 100 + armorCount * 30;
-      player.armor = player.maxArmor;
-    } else if (item.key === 'gun') {
-      if (gunLevel < 3) gunLevel++;
-      player.gunDamage = 8 + (gunLevel - 1) * 5;
-    }
-  } else if (tab === 1) {
-    if (sel === 0 && scrapCount > 0) {
-      credits += scrapCount * currentTown.sell.scrap;
-      scrapCount = 0;
-    } else if (sel === 1 && cargo > 0) {
-      credits += cargo * currentTown.sell.cargo;
-      cargo = 0;
-    }
-  } else if (tab === 2) {
-    if (credits >= 50) {
-      credits -= 50;
-      player.hull = player.maxHull;
-      player.armor = player.maxArmor;
-      player.fuel = player.maxFuel;
-    }
+function spawnMuzzleFlash(x, y, angle) {
+  for (let i = 0; i < 3; i++) {
+    const a = angle + (Math.random()-0.5)*0.3;
+    const speed = 50+Math.random()*80;
+    particles.push({
+      type:'spark', x, y,
+      vx:Math.cos(a)*speed, vy:Math.sin(a)*speed,
+      life:0.05+Math.random()*0.08, maxLife:0.13, size:2+Math.random()*2, color:'#ffff88'
+    });
+  }
+}
+
+function spawnSmokePuff(x, y) {
+  particles.push({
+    type:'smoke', x, y,
+    vx:(Math.random()-0.5)*20, vy:-10-Math.random()*20,
+    life:0.4+Math.random()*0.4, maxLife:0.8, size:5+Math.random()*8, color:'#444444'
+  });
+}
+
+function updateParticles(dt) {
+  for (let i = particles.length-1; i >= 0; i--) {
+    const p = particles[i];
+    p.x += p.vx*dt; p.y += p.vy*dt;
+    p.life -= dt;
+    if (p.type === 'debris') { p.vy += 200*dt; p.rot += p.rotSpd*dt; }
+    if (p.type === 'smoke') { p.size += 15*dt; p.vx *= Math.pow(0.95, dt*60); }
+    if (p.life <= 0) particles.splice(i,1);
   }
 }
 
 // ═══════════════════════════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════════════════════════
-
 function render() {
   ctx.fillStyle = C.void;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  if (gameState === 'TITLE') {
-    renderTitle();
-    return;
-  }
+  if (gameState === 'TITLE') { renderTitle(); return; }
 
-  cam.x = player.x - canvas.width/2;
-  cam.y = player.y - canvas.height/2;
+  // Camera
+  if (gameState === 'WALKING') {
+    const t = TOWNS[currentTownIndex];
+    cam.x = t.x + TWN_W/2 - canvas.width/2;
+    cam.y = t.y + TWN_H/2 - canvas.height/2;
+  } else if (gameState === 'DRIVING' && player.car) {
+    cam.x = player.car.x - canvas.width/2;
+    cam.y = player.car.y - canvas.height/2;
+  }
 
   let sx = 0, sy = 0;
-  if (shakeTimer > 0) {
-    sx = (Math.random() - 0.5) * shakeIntensity;
-    sy = (Math.random() - 0.5) * shakeIntensity;
-  }
+  if (shakeTimer > 0) { sx = (Math.random()-0.5)*shakeIntensity; sy = (Math.random()-0.5)*shakeIntensity; }
+
   ctx.save();
-  ctx.translate(-cam.x + sx, -cam.y + sy);
+  ctx.translate(-cam.x+sx, -cam.y+sy);
 
   renderWorld();
-  renderScraps();
+  renderDroppedItems();
   renderParticles();
   renderBullets();
   renderEnemies();
+  if (player.car) renderCar(player.car, 'player', player.car.flashTimer>0);
   renderPlayer();
-  renderEffects();
+  if (gameState === 'DRIVING') renderHUD();
 
   ctx.restore();
 
-  // Damage flash overlay
   if (damageFlashTimer > 0) {
-    ctx.fillStyle = `rgba(255,0,0,${damageFlashTimer * 0.3})`;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = `rgba(255,0,0,${damageFlashTimer*0.3})`;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
   }
 
-  renderHUD();
-
-  if (gameState === 'TOWN') renderTownUI();
-  if (gameState === 'PAUSED') renderPaused();
+  if (gameState === 'WALKING') renderWalkingHUD();
+  if (gameState === 'GARAGE')  renderGarageUI();
+  if (gameState === 'PAUSED')  renderPaused();
   if (gameState === 'GAMEOVER') renderGameOver();
 }
 
-function renderTitle() {
-  ctx.fillStyle = '#0a0a0a';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Animated scanlines
-  ctx.fillStyle = 'rgba(0,0,0,0.15)';
-  for (let y = 0; y < canvas.height; y += 4) {
-    ctx.fillRect(0, y, canvas.width, 2);
-  }
-
-  // Animated road lines in background
-  const time = Date.now() / 1000;
-  ctx.strokeStyle = '#1a3d1a';
-  ctx.lineWidth = 80;
-  ctx.globalAlpha = 0.3;
-  ctx.beginPath();
-  ctx.moveTo(0, canvas.height * 0.6);
-  ctx.lineTo(canvas.width, canvas.height * 0.6);
-  ctx.stroke();
-  ctx.globalAlpha = 1;
-
-  ctx.textAlign = 'center';
-
-  // Title glow
-  ctx.shadowColor = '#ff4400';
-  ctx.shadowBlur = 30;
-  ctx.font = 'bold 80px monospace';
-  ctx.fillStyle = '#ff4400';
-  ctx.fillText('AUTODUEL', canvas.width/2, canvas.height/2 - 100);
-  ctx.shadowBlur = 0;
-
-  ctx.font = '18px monospace';
-  ctx.fillStyle = '#888888';
-  ctx.fillText('A Top-Down Vehicular Combat Racing Game', canvas.width/2, canvas.height/2 - 50);
-  ctx.fillStyle = '#555555';
-  ctx.fillText('Original: Origin Systems, 1984 — Web Remake', canvas.width/2, canvas.height/2 - 25);
-
-  // Blinking start
-  if (Math.floor(time * 2) % 2 === 0) {
-    ctx.font = 'bold 26px monospace';
-    ctx.fillStyle = '#f0c000';
-    ctx.fillText('PRESS SPACE TO START', canvas.width/2, canvas.height/2 + 40);
-  }
-
-  ctx.font = '14px monospace';
-  ctx.fillStyle = '#666666';
-  ctx.fillText('WASD / Arrows — Drive   |   SPACE — Fire   |   ESC — Pause', canvas.width/2, canvas.height/2 + 90);
-  ctx.fillStyle = '#444444';
-  ctx.fillText('Drive into blue town zones to trade. Destroy enemies for scrap.', canvas.width/2, canvas.height/2 + 120);
-  ctx.fillText('Purple enemies are Rammers — fast, armored, deadly.', canvas.width/2, canvas.height/2 + 138);
-
-  ctx.textAlign = 'left';
-}
-
+// ── WORLD ─────────────────────────────────────────────────
 function renderWorld() {
+  // Ground
   ctx.fillStyle = C.grass;
   ctx.fillRect(0, 0, WORLD_W, WORLD_H);
 
-  for (const road of ROADS) {
-    drawRoad(road);
-  }
+  // Roads
+  for (const seg of ROAD_SEGS) renderRoadSegment(seg);
 
-  for (const t of TOWNS) {
-    drawTown(t);
-  }
+  // Towns
+  for (const t of TOWNS) renderTown(t);
 }
 
-function drawRoad(waypoints) {
-  for (let i = 0; i < waypoints.length - 1; i++) {
-    const [x1, y1] = waypoints[i];
-    const [x2, y2] = waypoints[i+1];
+function renderRoadSegment(seg) {
+  const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
+  ctx.strokeStyle = C.asphalt;
+  ctx.lineWidth = ROAD_WIDTH;
+  ctx.lineCap = 'butt';
 
-    ctx.strokeStyle = C.asphalt;
-    ctx.lineWidth = ROAD_W;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-
-    ctx.strokeStyle = C.roadMark;
-    ctx.lineWidth = 3;
-    ctx.setLineDash([20, 20]);
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    const angle = Math.atan2(y2 - y1, x2 - x1);
-    const perpX = Math.cos(angle + PI/2);
-    const perpY = Math.sin(angle + PI/2);
-    const edgeOff = ROAD_W/2 - 4;
-
-    ctx.strokeStyle = C.roadEdge;
-    ctx.lineWidth = 2;
-    ctx.globalAlpha = 0.5;
-
-    ctx.beginPath();
-    ctx.moveTo(x1 + perpX * edgeOff, y1 + perpY * edgeOff);
-    ctx.lineTo(x2 + perpX * edgeOff, y2 + perpY * edgeOff);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(x1 - perpX * edgeOff, y1 - perpY * edgeOff);
-    ctx.lineTo(x2 - perpX * edgeOff, y2 - perpY * edgeOff);
-    ctx.stroke();
-
-    ctx.globalAlpha = 1;
+  ctx.beginPath();
+  if (seg.x !== undefined) {
+    // Vertical road
+    const top = Math.min(t0.y+TWN_H, t1.y+TWN_H);
+    const bot = Math.max(t0.y, t1.y);
+    ctx.moveTo(seg.x, top); ctx.lineTo(seg.x, bot);
+  } else {
+    // Horizontal road
+    const left = Math.min(t0.x+TWN_W, t1.x+TWN_W);
+    const right = Math.max(t0.x, t1.x);
+    ctx.moveTo(left, seg.y); ctx.lineTo(right, seg.y);
   }
-}
+  ctx.stroke();
 
-function drawTown(t) {
-  ctx.fillStyle = C.townGlow;
-  ctx.globalAlpha = 0.15 + Math.sin(Date.now() / 500) * 0.05;
-  ctx.fillRect(t.x - 10, t.y - 10, t.w + 20, t.h + 20);
+  // Road markings (dashed center line)
+  ctx.strokeStyle = C.roadMark;
+  ctx.lineWidth = 3;
+  ctx.setLineDash([20,20]);
+  ctx.beginPath();
+  if (seg.x !== undefined) {
+    const top = Math.min(t0.y+TWN_H, t1.y+TWN_H);
+    const bot = Math.max(t0.y, t1.y);
+    ctx.moveTo(seg.x, top); ctx.lineTo(seg.x, bot);
+  } else {
+    const left = Math.min(t0.x+TWN_W, t1.x+TWN_W);
+    const right = Math.max(t0.x, t1.x);
+    ctx.moveTo(left, seg.y); ctx.lineTo(right, seg.y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Edge lines
+  ctx.strokeStyle = C.roadEdge;
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.4;
+  if (seg.x !== undefined) {
+    ctx.beginPath(); ctx.moveTo(seg.x-ROAD_WIDTH/2, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x-ROAD_WIDTH/2, Math.max(t0.y,t1.y)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x+ROAD_WIDTH/2, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x+ROAD_WIDTH/2, Math.max(t0.y,t1.y)); ctx.stroke();
+  } else {
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y-ROAD_WIDTH/2); ctx.lineTo(Math.max(t0.x,t1.x), seg.y-ROAD_WIDTH/2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y+ROAD_WIDTH/2); ctx.lineTo(Math.max(t0.x,t1.x), seg.y+ROAD_WIDTH/2); ctx.stroke();
+  }
   ctx.globalAlpha = 1;
+}
+
+function renderTown(t) {
+  const glow = 0.12 + Math.sin(Date.now()/600)*0.04;
+  ctx.fillStyle = `rgba(100,100,200,${glow})`;
+  ctx.fillRect(t.x-8, t.y-8, t.w+16, t.h+16);
 
   ctx.fillStyle = '#1a1a2a';
   ctx.fillRect(t.x, t.y, t.w, t.h);
@@ -940,92 +1145,100 @@ function drawTown(t) {
   ctx.lineWidth = 3;
   ctx.strokeRect(t.x, t.y, t.w, t.h);
 
-  const cs = 12;
+  // Corner brackets
+  const cs = 14;
   ctx.strokeStyle = '#8888ff';
   ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(t.x, t.y+cs); ctx.lineTo(t.x, t.y); ctx.lineTo(t.x+cs, t.y); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(t.x+t.w-cs, t.y); ctx.lineTo(t.x+t.w, t.y); ctx.lineTo(t.x+t.w, t.y+cs); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(t.x, t.y+t.h-cs); ctx.lineTo(t.x, t.y+t.h); ctx.lineTo(t.x+cs, t.y+t.h); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(t.x+t.w-cs, t.y+t.h); ctx.lineTo(t.x+t.w, t.y+t.h); ctx.lineTo(t.x+t.w, t.y+t.h-cs); ctx.stroke();
+  [[t.x,t.y],[t.x+t.w,t.y],[t.x,t.y+t.h],[t.x+t.w,t.y+t.h]].forEach(([cx,cy],i)=>{
+    const sx=i%2===0?1:-1, sy=i<2?1:-1;
+    ctx.beginPath(); ctx.moveTo(cx+sx*cs,cy); ctx.lineTo(cx,cy); ctx.lineTo(cx,cy+sy*cs); ctx.stroke();
+  });
 
-  ctx.font = 'bold 14px monospace';
+  ctx.font = 'bold 13px monospace';
   ctx.fillStyle = C.text;
   ctx.textAlign = 'center';
-  ctx.fillText(t.name, t.x + t.w/2, t.y + t.h/2 - 10);
-
+  ctx.fillText(t.name, t.x+t.w/2, t.y+t.h/2-8);
   ctx.font = '10px monospace';
   ctx.fillStyle = C.textDim;
-  ctx.fillText(t.desc, t.x + t.w/2, t.y + t.h/2 + 10);
-
+  const mods = `F:${t.fuelMod.toFixed(1)} P:${t.partsMod.toFixed(1)} W:${t.weaponsMod.toFixed(1)}`;
+  ctx.fillText(mods, t.x+t.w/2, t.y+t.h/2+10);
   ctx.textAlign = 'left';
+
+  // Garage zone (red dashed box)
+  if (gameState === 'WALKING' || gameState === 'GARAGE') {
+    const gx = t.x+t.w/2-40, gy = t.y+t.h+5;
+    ctx.strokeStyle = C.garageZone;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6,4]);
+    ctx.strokeRect(gx, gy, 80, 60);
+    ctx.setLineDash([]);
+    ctx.fillStyle = C.garageZone;
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('GARAGE', gx+40, gy+35);
+    ctx.textAlign = 'left';
+  }
+}
+
+// ── CARS ──────────────────────────────────────────────────
+function renderCar(car, type, flash) {
+  ctx.save();
+  ctx.translate(car.x, car.y);
+  ctx.rotate(car.angle);
+
+  const w = car.w, h = car.h;
+  const bodyColor = type==='player' ? C.player : (car.color||C.enemy);
+  const darkColor  = type==='player' ? C.playerDark : (car.dark||C.enemyDark);
+
+  ctx.fillStyle = flash ? '#ffffff' : bodyColor;
+  ctx.fillRect(-w/2, -h/2, w, h);
+  ctx.fillStyle = darkColor;
+  ctx.fillRect(-w/2, -h/2, w*0.3, h);
+
+  // Gun turret / front
+  ctx.fillStyle = '#888888';
+  ctx.fillRect(w/2-2, -2, 8, 4);
+
+  // Headlights / taillights
+  ctx.fillStyle = '#ffff88';
+  ctx.fillRect(w/2-2, -h/2+2, 3, 3);
+  ctx.fillRect(w/2-2, h/2-5, 3, 3);
+  ctx.fillStyle = '#ff2200';
+  ctx.fillRect(-w/2, -h/2+2, 3, 3);
+  ctx.fillRect(-w/2, h/2-5, 3, 3);
+
+  ctx.restore();
 }
 
 function renderPlayer() {
-  if (!player.alive) return;
-  drawCar(player.x, player.y, player.angle, 'player', player.flashTimer > 0);
+  if (gameState !== 'WALKING') return;
+  ctx.save();
+  ctx.translate(player.x, player.y);
+
+  // Body
+  ctx.fillStyle = '#00cc44';
+  ctx.fillRect(-6, -6, 12, 12);
+  // Head
+  ctx.fillStyle = '#ffdd88';
+  ctx.beginPath();
+  ctx.arc(0, -4, 4, 0, PI*2);
+  ctx.fill();
+  // Direction indicator
+  ctx.strokeStyle = '#00ff00';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0,0);
+  ctx.lineTo(Math.cos(player.angle)*10, Math.sin(player.angle)*10);
+  ctx.stroke();
+
+  ctx.restore();
 }
 
 function renderEnemies() {
   for (const e of enemies) {
     if (!e.alive) continue;
-    drawCar(e.x, e.y, e.angle, e.type === 'rammer' ? 'rammer' : 'enemy', e.flashTimer > 0);
+    renderCar(e, 'enemy', e.flashTimer>0);
   }
-}
-
-function drawCar(x, y, angle, type, flash) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(angle);
-
-  const w = 30, h = 18;
-
-  let bodyColor, darkColor;
-  if (type === 'player') { bodyColor = C.player; darkColor = C.playerDark; }
-  else if (type === 'rammer') { bodyColor = C.enemyRammer; darkColor = C.enemyRammerDark; }
-  else { bodyColor = C.enemy; darkColor = C.enemyDark; }
-
-  if (flash) {
-    ctx.fillStyle = '#ffffff';
-  } else {
-    ctx.fillStyle = bodyColor;
-  }
-
-  ctx.fillRect(-w/2, -h/2, w, h);
-
-  // Rammer has a front ram bar
-  if (type === 'rammer') {
-    ctx.fillStyle = '#888888';
-    ctx.fillRect(w/2 - 2, -h/2 - 2, 8, h + 4);
-    ctx.fillStyle = '#aaaaaa';
-    ctx.fillRect(w/2, -h/2, 6, h);
-  }
-
-  ctx.fillStyle = darkColor;
-  ctx.fillRect(w/2 - 8, -h/2 + 3, 6, h - 6);
-
-  ctx.fillStyle = '#888888';
-  if (type !== 'rammer') {
-    ctx.fillRect(w/2, -2, 10, 4);
-  }
-
-  ctx.fillStyle = '#ffff88';
-  ctx.fillRect(w/2 - 2, -h/2 + 2, 3, 3);
-  ctx.fillRect(w/2 - 2, h/2 - 5, 3, 3);
-
-  ctx.fillStyle = '#ff0000';
-  ctx.fillRect(-w/2, -h/2 + 2, 3, 3);
-  ctx.fillRect(-w/2, h/2 - 5, 3, 3);
-
-  // Type label for rammers
-  if (type === 'rammer') {
-    ctx.fillStyle = '#cc44ff';
-    ctx.font = 'bold 6px monospace';
-    ctx.textAlign = 'center';
-    ctx.fillText('R', 0, 3);
-    ctx.textAlign = 'left';
-  }
-
-  ctx.restore();
 }
 
 function renderBullets() {
@@ -1033,534 +1246,691 @@ function renderBullets() {
     ctx.save();
     ctx.translate(b.x, b.y);
     ctx.rotate(Math.atan2(b.vy, b.vx));
-
     const fade = b.life / b.maxLife;
     ctx.globalAlpha = fade;
-    ctx.fillStyle = b.isPlayer ? C.bullet : '#ff4444';
-    ctx.fillRect(-6, -2, 12, 4);
 
-    // Glow
-    ctx.shadowColor = b.isPlayer ? '#ffff00' : '#ff4444';
-    ctx.shadowBlur = 8;
-    ctx.fillRect(-6, -2, 12, 4);
-    ctx.shadowBlur = 0;
-
-    ctx.globalAlpha = 1;
+    if (b.isRocket) {
+      ctx.fillStyle = '#ff4400';
+      ctx.fillRect(-8,-3,16,6);
+      ctx.shadowColor='#ff4400'; ctx.shadowBlur=10;
+    } else if (b.weaponType === 'Flamethrower') {
+      ctx.fillStyle = `rgba(255,${100+Math.random()*100},0,${fade*0.8})`;
+      ctx.beginPath(); ctx.arc(0,0,4+fade*4,0,PI*2); ctx.fill();
+    } else {
+      ctx.fillStyle = b.isPlayer ? C.bullet : '#ff4444';
+      ctx.shadowColor = b.isPlayer ? '#ffff00' : '#ff4444'; ctx.shadowBlur=6;
+      ctx.fillRect(-6,-2,12,4);
+    }
+    ctx.shadowBlur=0; ctx.globalAlpha=1;
     ctx.restore();
   }
 }
 
-function renderScraps() {
-  for (const s of scraps) {
-    ctx.save();
-    ctx.translate(s.x, s.y);
-    ctx.rotate(s.angle);
-
-    const alpha = Math.min(1, s.life / 3);
-    ctx.globalAlpha = alpha;
-
-    ctx.fillStyle = C.scrap;
-    ctx.fillRect(-6, -4, 12, 8);
-    ctx.fillRect(-3, -7, 6, 14);
-
-    // Glow
-    ctx.shadowColor = C.gold;
-    ctx.shadowBlur = 6;
-    ctx.fillStyle = C.gold;
-    ctx.fillRect(-3, -3, 6, 6);
-    ctx.shadowBlur = 0;
-
-    ctx.globalAlpha = 1;
-    ctx.restore();
+function renderDroppedItems() {
+  for (const d of droppedItems) {
+    if (d.type === 'salvage') {
+      const alpha = Math.min(1, d.life/5);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = C.gold;
+      ctx.save();
+      ctx.translate(d.x, d.y);
+      ctx.rotate(Date.now()/200);
+      ctx.fillRect(-6,-4,12,8); ctx.fillRect(-3,-7,6,14);
+      ctx.shadowColor=C.gold; ctx.shadowBlur=8;
+      ctx.fillRect(-3,-3,6,6);
+      ctx.shadowBlur=0;
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    } else if (d.type === 'mine') {
+      ctx.fillStyle = '#ff2200';
+      ctx.beginPath(); ctx.arc(d.x,d.y,8,0,PI*2); ctx.fill();
+      ctx.fillStyle = '#ff8800';
+      ctx.beginPath(); ctx.arc(d.x,d.y,4,0,PI*2); ctx.fill();
+    } else if (d.type === 'oil') {
+      ctx.globalAlpha = 0.6;
+      ctx.fillStyle = '#333333';
+      ctx.beginPath(); ctx.ellipse(d.x,d.y,16,10,Date.now()/500,0,PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    } else if (d.type === 'smoke') {
+      const alpha = (d.life/d.maxLife)*0.4;
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#888888';
+      ctx.beginPath(); ctx.arc(d.x,d.y,d.radius||60,0,PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
   }
 }
 
 function renderParticles() {
   for (const p of particles) {
-    const alpha = p.life / p.maxLife;
-    ctx.globalAlpha = Math.max(0, alpha);
+    const alpha = Math.max(0, p.life/p.maxLife);
+    ctx.globalAlpha = alpha;
     ctx.fillStyle = p.color;
-
     if (p.type === 'debris') {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot);
-      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * 0.6);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
       ctx.restore();
     } else if (p.type === 'smoke') {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * (1 + (1 - alpha) * 0.5), 0, PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.size*(1+(1-alpha)*0.5),0,PI*2); ctx.fill();
     } else if (p.type === 'fire') {
-      ctx.shadowColor = p.color;
-      ctx.shadowBlur = p.size * 2;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * alpha, 0, PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
+      ctx.shadowColor=p.color; ctx.shadowBlur=p.size*2;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.size*alpha,0,PI*2); ctx.fill();
+      ctx.shadowBlur=0;
     } else {
-      // spark / trail
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * alpha, 0, PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.size*alpha,0,PI*2); ctx.fill();
     }
-
     ctx.globalAlpha = 1;
-  }
-}
-
-function renderEffects() {
-  for (const ef of effects) {
-    const p = ef.t / ef.maxT;
-    if (ef.type === 'flash') {
-      ctx.globalAlpha = p;
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.arc(ef.x, ef.y, 12 * (1 - p), 0, PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    } else if (ef.type === 'spark') {
-      ctx.globalAlpha = p;
-      ctx.fillStyle = C.spark;
-      for (let i = 0; i < 5; i++) {
-        const a = (i / 5) * PI * 2;
-        const r = 15 * (1 - p);
-        ctx.fillRect(ef.x + Math.cos(a)*r - 2, ef.y + Math.sin(a)*r - 2, 4, 4);
-      }
-      ctx.globalAlpha = 1;
-    } else if (ef.type === 'explosion') {
-      ctx.globalAlpha = p * 0.8;
-      ctx.strokeStyle = '#ff4400';
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.arc(ef.x, ef.y, 60 * (1 - p), 0, PI * 2);
-      ctx.stroke();
-      ctx.fillStyle = `rgba(255,${Math.floor(100*(1-p))},0,${p * 0.5})`;
-      ctx.beginPath();
-      ctx.arc(ef.x, ef.y, 40 * (1 - p * 0.5), 0, PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    } else if (ef.type === 'pickup') {
-      ctx.globalAlpha = p;
-      ctx.font = 'bold 16px monospace';
-      ctx.fillStyle = C.gold;
-      ctx.textAlign = 'center';
-      ctx.fillText('+SCRAP', ef.x, ef.y - 20 * (1 - p));
-      ctx.textAlign = 'left';
-      ctx.globalAlpha = 1;
-    }
   }
 }
 
 // ═══════════════════════════════════════════════════════════
 // HUD
 // ═══════════════════════════════════════════════════════════
-
 function renderHUD() {
-  const pad = 12;
-  const barW = 110, barH = 14;
+  const car = player.car;
+  if (!car) return;
+  const pad = 10;
+  const bw = 100, bh = 12;
 
-  // Top-left panel — slightly wider for more info
-  ctx.fillStyle = 'rgba(10,10,10,0.85)';
-  ctx.fillRect(pad - 4, pad - 4, 360, 130);
-  ctx.strokeStyle = C.hudBorder;
-  ctx.lineWidth = 2;
-  ctx.strokeRect(pad - 4, pad - 4, 360, 130);
+  // Left panel — speed + odometer
+  ctx.fillStyle='rgba(10,10,10,0.85)'; ctx.fillRect(pad,pad,160,110);
+  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(pad,pad,160,110);
 
-  ctx.font = '11px monospace';
-  ctx.textAlign = 'left';
+  ctx.font='11px monospace'; ctx.textAlign='left'; ctx.fillStyle=C.textDim;
+  ctx.fillText('SPD', pad+8, pad+16);
+  const speed = Math.sqrt(car.vx*car.vx+car.vy*car.vy);
+  ctx.fillStyle=C.text; ctx.font='bold 16px monospace';
+  ctx.fillText(Math.floor(speed*0.6)+' MPH', pad+35, pad+16);
 
-  // Hull bar (most important — top)
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('HULL', pad, pad + 12);
-  const hullPct = player.hull / player.maxHull;
-  const hullCol = hullPct > 0.6 ? C.healthGreen : hullPct > 0.3 ? C.healthYellow : C.healthRed;
-  drawBar(pad + 45, pad + 2, barW, barH, hullPct, hullCol);
-  ctx.fillStyle = C.text;
-  ctx.fillText(Math.ceil(player.hull) + '/' + player.maxHull, pad + barW + 48, pad + 12);
+  ctx.font='11px monospace'; ctx.fillStyle=C.textDim;
+  ctx.fillText('ODOM', pad+8, pad+32);
+  ctx.fillStyle=C.text; ctx.font='bold 13px monospace';
+  ctx.fillText(stats.odometer.toFixed(1)+' mi', pad+55, pad+32);
 
-  // Armor bar
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('ARMOR', pad, pad + 30);
-  const armPct = player.armor / player.maxArmor;
-  drawBar(pad + 45, pad + 20, barW, barH, armPct, '#888899');
-  ctx.fillStyle = C.text;
-  ctx.fillText(Math.ceil(player.armor) + '/' + player.maxArmor, pad + barW + 48, pad + 30);
+  // Armor facings
+  ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
+  ctx.fillText('F', pad+8, pad+48);
+  drawArmorBar(pad+18, pad+41, 30, 8, car.frontArmor, car.maxArmor);
+  ctx.fillText('R', pad+52, pad+48);
+  drawArmorBar(pad+62, pad+41, 30, 8, car.rearArmor, car.maxArmor);
+  ctx.fillText('L', pad+96, pad+48);
+  drawArmorBar(pad+106, pad+41, 24, 8, car.leftArmor, car.maxArmor);
+  ctx.fillText('R', pad+134, pad+48);
+  drawArmorBar(pad+144, pad+41, 24, 8, car.rightArmor, car.maxArmor);
 
-  // Fuel bar with warning
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('FUEL', pad, pad + 48);
-  const fuelPct = player.fuel / player.maxFuel;
-  const fuelColor = fuelPct < 0.2 ? C.healthRed : C.fuelBlue;
-  drawBar(pad + 45, pad + 38, barW, barH, fuelPct, fuelColor);
-  ctx.fillStyle = fuelPct < 0.2 ? C.healthRed : C.text;
-  if (fuelPct < 0.2) {
-    ctx.font = 'bold 11px monospace';
-    ctx.fillText('LOW!', pad + barW + 48, pad + 48);
-    ctx.font = '11px monospace';
-  } else {
-    ctx.fillText(Math.ceil(player.fuel) + '%', pad + barW + 48, pad + 48);
+  // Cash
+  ctx.fillStyle=C.gold; ctx.font='bold 14px monospace';
+  ctx.fillText('$'+stats.cash, pad+8, pad+68);
+
+  // Kills
+  ctx.fillStyle=C.textDim; ctx.font='11px monospace';
+  ctx.fillText('Kills:'+stats.enemiesDestroyed, pad+8, pad+84);
+
+  // Heat bar
+  const wpn = getPlayerWeapon();
+  if (wpn) {
+    ctx.fillStyle=C.textDim; ctx.font='9px monospace';
+    ctx.fillText('HEAT', pad+8, pad+98);
+    const heatPct = (wpn.heat||0)/100;
+    drawBar(pad+38, pad+90, 60, 8, 1-heatPct, heatPct>0.8?'#ff2200':'#888800');
   }
 
-  // Speed
-  const speed = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('SPD', pad, pad + 66);
-  ctx.fillStyle = C.text;
-  ctx.font = 'bold 13px monospace';
-  ctx.fillText(Math.floor(speed * 0.6) + ' MPH', pad + 35, pad + 66);
-  ctx.font = '11px monospace';
+  // Minimap (top-center)
+  renderMinimap(canvas.width/2 - 85, pad, 170, 130);
 
-  // Credits + inventory row
-  ctx.fillStyle = C.gold;
-  ctx.font = 'bold 15px monospace';
-  ctx.fillText('$' + credits, pad, pad + 84);
-  ctx.font = '11px monospace';
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('Scrap:' + scrapCount + '  Cargo:' + cargo, pad + 80, pad + 84);
+  // Right panel — fuel + hull + weapon
+  const rp = canvas.width - 170 - pad;
+  ctx.fillStyle='rgba(10,10,10,0.85)'; ctx.fillRect(rp,pad,170,130);
+  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(rp,pad,170,130);
 
-  // Gun + armor upgrades
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('GUN LV' + gunLevel + '  ARM+' + (armorCount * 30), pad, pad + 100);
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('DMG:' + player.gunDamage, pad + 165, pad + 100);
+  // Hull
+  ctx.font='9px monospace'; ctx.fillStyle=C.textDim; ctx.textAlign='left';
+  ctx.fillText('HULL', rp+8, pad+14);
+  const hullPct = car.hull/car.maxHull;
+  const hullCol = hullPct>0.6?C.healthGreen:hullPct>0.3?C.healthYellow:C.healthRed;
+  drawBar(rp+38, pad+5, bw, bh, hullPct, hullCol);
+  ctx.fillStyle=C.text; ctx.font='10px monospace';
+  ctx.fillText(Math.ceil(car.hull)+'/'+car.maxHull, rp+145, pad+14);
 
-  // Score + kills (NEW)
-  ctx.fillStyle = C.text;
-  ctx.fillText('Score:' + score, pad, pad + 116);
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('Kills:' + enemiesDestroyed, pad + 90, pad + 116);
+  // Fuel
+  ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
+  ctx.fillText('FUEL', rp+8, pad+32);
+  const fuelPct = car.fuel/car.maxFuel;
+  const fuelCol = fuelPct<0.2?C.healthRed:C.fuelBlue;
+  drawBar(rp+38, pad+23, bw, bh, fuelPct, fuelCol);
+  ctx.fillStyle=fuelPct<0.2?C.healthRed:C.text; ctx.font='10px monospace';
+  ctx.fillText(fuelPct<0.2?'LOW!':Math.floor(fuelPct*100)+'%', rp+145, pad+32);
 
-  // Minimap
-  renderMinimap(canvas.width - 170 - pad, pad, 170, 120);
+  // Components
+  ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
+  ctx.fillText('ENG:'+Math.ceil(car.engineHull)+'%', rp+8, pad+50);
+  ctx.fillText('TR:'+Math.ceil(car.tireHull)+'%', rp+70, pad+50);
+  ctx.fillText('FT:'+Math.ceil(car.fuelTankHull)+'%', rp+115, pad+50);
+
+  // Weapon
+  if (wpn) {
+    ctx.font='bold 11px monospace'; ctx.fillStyle=C.text;
+    const wName = WEAPON_DISPLAY[wpn.type] || wpn.type;
+    ctx.fillText(wName, rp+8, pad+66);
+    // Ammo/fuel
+    if (WEAPON_TYPES[wpn.type]?.type === 'flame' || wpn.fuel !== undefined) {
+      ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
+      ctx.fillText('FUEL:'+(wpn.fuel||0), rp+90, pad+66);
+    } else if (wpn.ammo !== undefined) {
+      ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
+      ctx.fillText('AMO:'+(wpn.ammo||0), rp+90, pad+66);
+    }
+    // Heat
+    const heatPct2 = (wpn.heat||0)/100;
+    drawBar(rp+8, pad+74, 155, 6, 1-heatPct2, heatPct2>0.8?'#ff2200':'#ff8800');
+  } else {
+    ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText('NO WEAPON', rp+8, pad+66);
+    ctx.fillText('[TAB] to add', rp+8, pad+82);
+  }
+
+  // Weapons list (small)
+  if (car.weapons.length > 0) {
+    ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText('WEAPONS:', rp+8, pad+96);
+    car.weapons.forEach((w,idx)=>{
+      const col = idx===car.currentWeaponIdx ? C.gold : '#555555';
+      ctx.fillStyle = col;
+      ctx.fillText(WEAPON_DISPATCH[w.type]||w.type.charAt(0), rp+58+idx*18, pad+96);
+    });
+  }
 }
 
-function drawBar(x, y, w, h, pct, color) {
-  pct = Math.max(0, Math.min(1, pct));
-  ctx.fillStyle = '#1a1a1a';
-  ctx.fillRect(x, y, w, h);
-  ctx.fillStyle = color;
-  ctx.fillRect(x + 1, y + 1, (w - 2) * pct, h - 2);
-  ctx.strokeStyle = '#333333';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(x, y, w, h);
+function drawArmorBar(x,y,w,h,pct,max) {
+  pct = Math.max(0,Math.min(1,pct/max));
+  ctx.fillStyle='#1a1a1a'; ctx.fillRect(x,y,w,h);
+  const col = pct>0.6?'#4488ff':pct>0.3?'#ffcc00':'#ff3300';
+  ctx.fillStyle=col; ctx.fillRect(x+1,y+1,(w-2)*pct,h-2);
+  ctx.strokeStyle='#333333'; ctx.lineWidth=1; ctx.strokeRect(x,y,w,h);
 }
 
-function renderMinimap(px, py, mw, mh) {
-  ctx.fillStyle = 'rgba(5,5,5,0.88)';
-  ctx.fillRect(px - 2, py - 2, mw + 4, mh + 4);
-  ctx.strokeStyle = C.hudBorder;
-  ctx.lineWidth = 2;
-  ctx.strokeRect(px - 2, py - 2, mw + 4, mh + 4);
+function drawBar(x,y,w,h,pct,color) {
+  pct = Math.max(0,Math.min(1,pct));
+  ctx.fillStyle='#1a1a1a'; ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=color; ctx.fillRect(x+1,y+1,(w-2)*pct,h-2);
+  ctx.strokeStyle='#333333'; ctx.lineWidth=1; ctx.strokeRect(x,y,w,h);
+}
 
-  ctx.font = '9px monospace';
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('MAP', px + 2, py + 10);
+function renderMinimap(px,py,mw,mh) {
+  ctx.fillStyle='rgba(5,5,5,0.88)'; ctx.fillRect(px-2,py-2,mw+4,mh+4);
+  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(px-2,py-2,mw+4,mh+4);
+  ctx.font='9px monospace'; ctx.fillStyle=C.textDim; ctx.textAlign='left';
+  ctx.fillText('MAP', px+2, py+10);
 
-  const scaleX = mw / WORLD_W;
-  const scaleY = mh / WORLD_H;
+  const sx = mw/WORLD_W, sy = mh/WORLD_H;
 
-  ctx.strokeStyle = '#555555';
-  ctx.lineWidth = 2;
-  for (const road of ROADS) {
+  // Roads
+  ctx.strokeStyle='#555555'; ctx.lineWidth=2;
+  for (const seg of ROAD_SEGS) {
     ctx.beginPath();
-    ctx.moveTo(px + road[0][0] * scaleX, py + road[0][1] * scaleY);
-    for (let i = 1; i < road.length; i++) {
-      ctx.lineTo(px + road[i][0] * scaleX, py + road[i][1] * scaleY);
+    if (seg.x !== undefined) {
+      ctx.moveTo(px+seg.x*sx, py+Math.min(TOWNS[seg.from].y+TWN_H,TOWNS[seg.to].y+TWN_H)*sy);
+      ctx.lineTo(px+seg.x*sx, py+Math.max(TOWNS[seg.from].y,TOWNS[seg.to].y)*sy);
+    } else {
+      ctx.moveTo(px+Math.min(TOWNS[seg.from].x+TWN_W,TOWNS[seg.to].x+TWN_W)*sx, py+seg.y*sy);
+      ctx.lineTo(px+Math.max(TOWNS[seg.from].x,TOWNS[seg.to].x)*sx, py+seg.y*sy);
     }
     ctx.stroke();
   }
 
+  // Towns
   for (const t of TOWNS) {
-    ctx.fillStyle = C.town;
-    const tx = px + (t.x + t.w/2) * scaleX;
-    const ty = py + (t.y + t.h/2) * scaleY;
-    ctx.fillRect(tx - 4, ty - 4, 8, 8);
+    ctx.fillStyle=C.town;
+    ctx.fillRect(px+t.x*sx-3, py+t.y*sy-3, 6, 6);
   }
 
-  // Enemy dots on minimap
+  // Enemies
   for (const e of enemies) {
     if (!e.alive) continue;
-    ctx.fillStyle = e.type === 'rammer' ? C.enemyRammer : C.enemy;
-    ctx.beginPath();
-    ctx.arc(px + e.x * scaleX, py + e.y * scaleY, 2, 0, PI * 2);
-    ctx.fill();
+    ctx.fillStyle=e.color||C.enemy;
+    ctx.beginPath(); ctx.arc(px+e.x*sx, py+e.y*sy, 2, 0, PI*2); ctx.fill();
   }
 
-  if (player.alive) {
-    ctx.fillStyle = C.player;
+  // Player
+  if (player.car) {
+    ctx.fillStyle=C.player;
+    ctx.beginPath(); ctx.arc(px+player.car.x*sx, py+player.car.y*sy, 3, 0, PI*2); ctx.fill();
+    ctx.strokeStyle=C.player; ctx.lineWidth=1;
     ctx.beginPath();
-    ctx.arc(px + player.x * scaleX, py + player.y * scaleY, 3, 0, PI * 2);
-    ctx.fill();
-    // Direction indicator
-    ctx.strokeStyle = C.player;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(px + player.x * scaleX, py + player.y * scaleY);
-    ctx.lineTo(px + player.x * scaleX + Math.cos(player.angle) * 8,
-               py + player.y * scaleY + Math.sin(player.angle) * 8);
+    ctx.moveTo(px+player.car.x*sx, py+player.car.y*sy);
+    ctx.lineTo(px+player.car.x*sx+Math.cos(player.car.angle)*8, py+player.car.y*sy+Math.sin(player.car.angle)*8);
     ctx.stroke();
+  }
+
+  ctx.textAlign='left';
+}
+
+function renderWalkingHUD() {
+  const pad = 10;
+  ctx.fillStyle='rgba(10,10,10,0.85)'; ctx.fillRect(pad,pad,200,80);
+  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(pad,pad,200,80);
+
+  ctx.font='bold 14px monospace'; ctx.fillStyle=C.gold; ctx.textAlign='left';
+  ctx.fillText('$'+stats.cash, pad+10, pad+20);
+
+  ctx.font='11px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('WALKING', pad+10, pad+38);
+
+  const t = TOWNS[currentTownIndex];
+  ctx.fillStyle=C.textDim;
+  ctx.fillText('At: '+t.name, pad+10, pad+54);
+  ctx.fillText('Find the GARAGE', pad+10, pad+70);
+  ctx.textAlign='left';
+}
+
+// ═══════════════════════════════════════════════════════════
+// GARAGE UI
+// ═══════════════════════════════════════════════════════════
+function renderGarageUI() {
+  const pw = 520, ph = 420;
+  const px = (canvas.width-pw)/2, py = (canvas.height-ph)/2;
+
+  ctx.fillStyle='rgba(0,0,0,0.88)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle='#0a0a14'; ctx.fillRect(px,py,pw,ph);
+  ctx.strokeStyle=C.town; ctx.lineWidth=3; ctx.strokeRect(px,py,pw,ph);
+
+  const t = TOWNS[garageTown];
+  ctx.font='bold 20px monospace'; ctx.fillStyle=C.text; ctx.textAlign='center';
+  ctx.fillText(t.name+' GARAGE', px+pw/2, py+30);
+  ctx.font='11px monospace'; ctx.fillStyle=C.textDim;
+  ctx.fillText(`F:${t.fuelMod.toFixed(1)}x  P:${t.partsMod.toFixed(1)}x  W:${t.weaponsMod.toFixed(1)}x`, px+pw/2, py+48);
+
+  // Tabs
+  const tabs=['BUY','SELL','REPAIR','FUEL','STATS'];
+  const tabW=pw/5;
+  tabs.forEach((tab,i)=>{
+    ctx.fillStyle=garageTab===i?'#1a1a3a':'#0f0f22';
+    ctx.fillRect(px+i*tabW, py+56, tabW, 30);
+    ctx.strokeStyle=garageTab===i?C.town:'#333355';
+    ctx.lineWidth=garageTab===i?2:1;
+    ctx.strokeRect(px+i*tabW, py+56, tabW, 30);
+    ctx.fillStyle=garageTab===i?C.text:C.textDim;
+    ctx.font='bold 12px monospace'; ctx.textAlign='center';
+    ctx.fillText('['+(i+1)+'] '+tab, px+i*tabW+tabW/2, py+75);
+  });
+
+  ctx.strokeStyle='#333355'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(px+10, py+92); ctx.lineTo(px+pw-10, py+92); ctx.stroke();
+
+  ctx.textAlign='left';
+
+  if (garageTab===0) renderGarageBuy();
+  else if (garageTab===1) renderGarageSell();
+  else if (garageTab===2) renderGarageRepair();
+  else if (garageTab===3) renderGarageFuel();
+  else if (garageTab===4) renderGarageStats();
+
+  ctx.font='10px monospace'; ctx.fillStyle='#444466'; ctx.textAlign='center';
+  ctx.fillText('WASD/Arrows: Navigate   ENTER/SPACE: Select   1-5: Tabs   ESC: Exit', canvas.width/2, py+ph+18);
+  ctx.textAlign='left';
+}
+
+function renderGarageBuy() {
+  const t = TOWNS[garageTown];
+  const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
+
+  if (!player.car) {
+    // Show vehicle list
+    const types = ['Cycle','Compact','Sedan','Pickup','Van','Semi'];
+    ctx.font='12px monospace'; ctx.fillStyle=C.text; ctx.fillText('SELECT A VEHICLE:', px2+15, py2+112);
+    types.forEach((type,i)=>{
+      const def = VEHICLE_TYPES[type];
+      const cost = Math.ceil(def.cost * t.weaponsMod);
+      const y = py2+130+i*38;
+      const sel = garageSel===i;
+      if (sel) {
+        ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10, y-13, 500, 33);
+        ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10, y-13, 500, 33);
+      }
+      ctx.fillStyle=def.armor>50?'#4488ff':def.armor>25?'#44cc44':'#cccc44';
+      ctx.fillRect(px2+18, y-5, 10, 10);
+      ctx.fillStyle=sel?C.text:C.textDim;
+      ctx.font='bold 12px monospace'; ctx.fillText(type, px2+35, y+4);
+      ctx.font='10px monospace';
+      ctx.fillText(`SPD:${def.speed} ARM:${def.armor} HULL:${def.hull} FUEL:${def.fuel} SLOTS:${def.slots}`, px2+100, y+4);
+      ctx.fillStyle=stats.cash>=cost?C.gold:'#664444';
+      ctx.font='bold 11px monospace'; ctx.fillText('$'+cost, px2+390, y+4);
+      ctx.fillStyle='#555555'; ctx.font='10px monospace'; ctx.fillText('ENTER to buy', px2+430, y+4);
+    });
+  } else {
+    // Show weapons
+    const weapons = ['MachineGun','Flamethrower','Rockets','Mines','OilSlick','Smoke'];
+    ctx.font='12px monospace'; ctx.fillStyle=C.text; ctx.fillText('BUY WEAPONS:', px2+15, py2+112);
+    const slotsUsed = player.car.weapons.reduce((s,w)=>s+(WEAPON_TYPES[w.type]?.slot||1),0);
+    const carSlots = (VEHICLE_TYPES[player.car.type]||{slots:1}).slots;
+    weapons.forEach((wn,i)=>{
+      const def = WEAPON_TYPES[wn];
+      const cost = Math.ceil(BASE_PRICES[wn.toLowerCase()] * t.weaponsMod);
+      const y = py2+130+i*38;
+      const sel = garageSel===i;
+      const canBuy = stats.cash>=cost && slotsUsed+(def.slot||1)<=carSlots;
+      if (sel) {
+        ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10, y-13, 500, 33);
+        ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10, y-13, 500, 33);
+      }
+      ctx.fillStyle=canBuy?def.damage>30?'#ff4400':def.damage>0?'#ff8800':'#44ff44':'#444444';
+      ctx.fillRect(px2+18, y-5, 10, 10);
+      ctx.fillStyle=sel?C.text:C.textDim;
+      ctx.font='bold 12px monospace'; ctx.fillText(WEAPON_DISPLAY[wn], px2+35, y+4);
+      ctx.font='10px monospace';
+      let stats2 = `DMG:${def.damage||0} RNG:${def.range||0}`;
+      if (def.ammo) stats2 += ` AMO:${def.ammo}`;
+      if (def.fuel) stats2 += ` FUEL:${def.fuel}`;
+      if (def.slot) stats2 += ` SLOT:${def.slot}`;
+      ctx.fillText(stats2, px2+110, y+4);
+      ctx.fillStyle=canBuy?C.gold:'#664444';
+      ctx.font='bold 11px monospace'; ctx.fillText('$'+cost, px2+390, y+4);
+      ctx.fillStyle='#555555'; ctx.font='10px monospace'; ctx.fillText(`SLOT:${def.slot||1}`, px2+430, y+4);
+    });
+    ctx.fillStyle=C.textDim; ctx.font='10px monospace';
+    ctx.fillText(`Slots: ${slotsUsed}/${carSlots}`, px2+15, py2+360);
+  }
+
+  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
+}
+
+function renderGarageSell() {
+  const t = TOWNS[garageTown];
+  const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
+  const salvageVal = droppedItems.filter(d=>d.type==='salvage').reduce((s,d)=>s+d.value,0);
+
+  ctx.font='12px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('SELL OPTIONS:', px2+15, py2+112);
+
+  // Sell car
+  const y0 = py2+135;
+  const sel0 = garageSel===0;
+  if (sel0) { ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10,y0-13,500,33); ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10,y0-13,500,33); }
+  ctx.fillStyle='#888888'; ctx.fillRect(px2+18,y0-5,10,10);
+  ctx.fillStyle=sel0?C.text:C.textDim; ctx.font='bold 12px monospace';
+  ctx.fillText('SELL CAR (Salvage Value)', px2+35, y0+4);
+  if (player.car) {
+    const salvage = Math.floor((VEHICLE_TYPES[player.car.type]||{salvage:0}).salvage*0.25);
+    ctx.fillStyle=C.gold; ctx.font='bold 11px monospace';
+    ctx.fillText('+$'+salvage, px2+390, y0+4);
+  } else {
+    ctx.fillStyle='#555555'; ctx.font='10px monospace';
+    ctx.fillText('No car', px2+390, y0+4);
+  }
+
+  // Sell salvage
+  const y1 = py2+180;
+  const sel1 = garageSel===1;
+  if (sel1) { ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10,y1-13,500,33); ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10,y1-13,500,33); }
+  ctx.fillStyle=C.gold; ctx.fillRect(px2+18,y1-5,10,10);
+  ctx.fillStyle=sel1?C.text:C.textDim; ctx.font='bold 12px monospace';
+  ctx.fillText('SELL SALVAGE (From Enemies)', px2+35, y1+4);
+  ctx.fillStyle=salvageVal>0?C.gold:'#555555'; ctx.font='bold 11px monospace';
+  ctx.fillText('+$'+salvageVal+' ('+droppedItems.filter(d=>d.type==='salvage').length+' items)', px2+390, y1+4);
+
+  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
+}
+
+function renderGarageRepair() {
+  const t = TOWNS[garageTown];
+  const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
+  const car = player.car;
+
+  if (!car) {
+    ctx.font='14px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText('Buy a car first!', px2+200, py2+200);
+    return;
+  }
+
+  const hullDmg = car.maxHull - car.hull;
+  const armorDmg = (car.maxArmor-car.frontArmor)+(car.maxArmor-car.rearArmor)+(car.maxArmor-car.leftArmor)+(car.maxArmor-car.rightArmor);
+  const compDmg = (100-car.engineHull)+(100-car.tireHull)+(100-car.fuelTankHull);
+  const totalDmg = hullDmg+armorDmg+compDmg;
+  const cost = Math.ceil(totalDmg * 0.5 * t.partsMod);
+
+  ctx.font='12px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('REPAIR SHOP', px2+15, py2+112);
+
+  ctx.font='11px monospace';
+  ctx.fillStyle=C.textDim; ctx.fillText('Hull Damage:', px2+25, py2+140);
+  ctx.fillStyle=car.hull<car.maxHull?C.healthRed:C.text; ctx.fillText('-'+hullDmg, px2+150, py2+140);
+
+  ctx.fillStyle=C.textDim; ctx.fillText('Armor Damage:', px2+25, py2+160);
+  ctx.fillStyle=armorDmg>0?C.healthYellow:C.text; ctx.fillText('-'+armorDmg, px2+150, py2+160);
+
+  ctx.fillStyle=C.textDim; ctx.fillText('Component Damage:', px2+25, py2+180);
+  ctx.fillStyle=compDmg>0?C.healthYellow:C.text; ctx.fillText('-'+compDmg+'%', px2+150, py2+180);
+
+  ctx.fillStyle=C.textDim; ctx.fillText('TOTAL:', px2+25, py2+200);
+  ctx.fillStyle=C.text; ctx.fillText(totalDmg+' points', px2+150, py2+200);
+
+  // Repair button
+  const ry = py2+220;
+  const canRepair = totalDmg > 0 && stats.cash >= cost;
+  ctx.fillStyle=canRepair?'#1a2a1a':'#1a1a1a';
+  ctx.fillRect(px2+15, ry, 490, 60);
+  ctx.strokeStyle=canRepair?C.healthGreen:'#333333';
+  ctx.lineWidth=2; ctx.strokeRect(px2+15, ry, 490, 60);
+  ctx.fillStyle=canRepair?C.text:'#555555'; ctx.font='bold 14px monospace';
+  ctx.fillText('REPAIR ALL — $'+cost, px2+25, ry+25);
+  ctx.font='11px monospace'; ctx.fillStyle='#888888';
+  ctx.fillText('ENTER to repair', px2+25, ry+48);
+
+  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
+}
+
+function renderGarageFuel() {
+  const t = TOWNS[garageTown];
+  const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
+  const car = player.car;
+
+  if (!car) {
+    ctx.font='14px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText('Buy a car first!', px2+200, py2+200);
+    return;
+  }
+
+  const fuelNeeded = car.maxFuel - car.fuel;
+  const cost = Math.ceil(fuelNeeded * 0.4 * t.fuelMod);
+
+  ctx.font='12px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('FUEL STATION', px2+15, py2+112);
+
+  ctx.font='11px monospace';
+  ctx.fillStyle=C.textDim; ctx.fillText('Current Fuel:', px2+25, py2+145);
+  ctx.fillStyle=C.fuelBlue; ctx.fillText(car.fuel.toFixed(1)+'/'+car.maxFuel, px2+150, py2+145);
+
+  // Fuel bar
+  drawBar(px2+25, py2+155, 460, 16, car.fuel/car.maxFuel, C.fuelBlue);
+
+  ctx.fillStyle=C.textDim; ctx.fillText('Needed:', px2+25, py2+185);
+  ctx.fillStyle=C.text; ctx.fillText(fuelNeeded.toFixed(1)+' units', px2+150, py2+185);
+
+  // Fill button
+  const ry = py2+205;
+  const canFill = fuelNeeded > 0 && stats.cash >= cost;
+  ctx.fillStyle=canFill?'#1a1a2a':'#1a1a1a';
+  ctx.fillRect(px2+15, ry, 490, 60);
+  ctx.strokeStyle=canFill?C.fuelBlue:'#333333';
+  ctx.lineWidth=2; ctx.strokeRect(px2+15, ry, 490, 60);
+  ctx.fillStyle=canFill?C.text:'#555555'; ctx.font='bold 14px monospace';
+  ctx.fillText('REFUEL — $'+cost, px2+25, ry+25);
+  ctx.font='11px monospace'; ctx.fillStyle='#888888';
+  ctx.fillText('ENTER to refuel', px2+25, ry+48);
+
+  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
+}
+
+function renderGarageStats() {
+  const t = TOWNS[garageTown];
+  const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
+  const car = player.car;
+
+  ctx.font='14px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('CURRENT VEHICLE', px2+15, py2+112);
+
+  if (!car) {
+    ctx.font='13px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText('No vehicle — buy one from the BUY tab!', px2+25, py2+145);
+    ctx.font='11px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText('WASD to walk, walk into GARAGE zone to open menu', px2+25, py2+170);
+    ctx.fillText('Buy a vehicle, then you can drive on roads between towns', px2+25, py2+188);
+    return;
+  }
+
+  const def = VEHICLE_TYPES[car.type];
+  const lines = [
+    ['TYPE', car.type],
+    ['SPEED', def.speed+' MPH'],
+    ['ARMOR (each face)', def.armor],
+    ['HULL', car.hull+' / '+car.maxHull],
+    ['FRONT ARMOR', car.frontArmor+' / '+car.maxArmor],
+    ['REAR ARMOR', car.rearArmor+' / '+car.maxArmor],
+    ['LEFT ARMOR', car.leftArmor+' / '+car.maxArmor],
+    ['RIGHT ARMOR', car.rightArmor+' / '+car.maxArmor],
+    ['FUEL', car.fuel.toFixed(1)+' / '+car.maxFuel],
+    ['ENGINE', car.engineHull+'%'],
+    ['TIRES', car.tireHull+'%'],
+    ['FUEL TANK', car.fuelTankHull+'%'],
+    ['WEAPON SLOTS', def.slots],
+    ['ODOMETER', stats.odometer.toFixed(1)+' miles'],
+  ];
+
+  lines.forEach(([label, val], i)=>{
+    const y = py2+130+i*18;
+    ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
+    ctx.fillText(label+':', px2+25, y);
+    ctx.fillStyle=C.text; ctx.fillText(val, px2+180, y);
+  });
+
+  // Weapons
+  ctx.font='11px monospace'; ctx.fillStyle=C.text; ctx.fillText('WEAPONS:', px2+300, py2+130);
+  car.weapons.forEach((w,i)=>{
+    const y = py2+148+i*16;
+    const def2 = WEAPON_TYPES[w.type];
+    ctx.fillStyle=C.gold; ctx.fillText((WEAPON_DISPLAY[w.type]||w.type), px2+300, y);
+    if (def2?.type==='flame'||w.fuel!==undefined) ctx.fillText(' F:'+(w.fuel||0), px2+380, y);
+    else if (w.ammo!==undefined) ctx.fillText(' A:'+(w.ammo||0), px2+380, y);
+  });
+  if (car.weapons.length === 0) {
+    ctx.fillStyle=C.textDim; ctx.fillText('None — buy weapons in BUY tab', px2+300, py2+148);
   }
 }
 
 // ═══════════════════════════════════════════════════════════
-// TOWN UI
+// SCREENS
 // ═══════════════════════════════════════════════════════════
+function renderTitle() {
+  ctx.fillStyle='#0a0a0a'; ctx.fillRect(0,0,canvas.width,canvas.height);
 
-function renderTownUI() {
-  ctx.fillStyle = 'rgba(0,0,0,0.75)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Animated scanlines
+  ctx.fillStyle='rgba(0,0,0,0.12)';
+  for (let y=0; y<canvas.height; y+=4) ctx.fillRect(0,y,canvas.width,2);
 
-  const t = currentTown;
-  const panelW = 480, panelH = 380;
-  const px = (canvas.width - panelW) / 2;
-  const py = (canvas.height - panelH) / 2;
+  const time = Date.now()/1000;
+  ctx.textAlign='center';
 
-  ctx.fillStyle = '#0a0a12';
-  ctx.fillRect(px, py, panelW, panelH);
-  ctx.strokeStyle = C.town;
-  ctx.lineWidth = 3;
-  ctx.strokeRect(px, py, panelW, panelH);
+  // Road lines in background
+  ctx.strokeStyle='#1a3d1a'; ctx.lineWidth=80; ctx.globalAlpha=0.25;
+  ctx.beginPath(); ctx.moveTo(0,canvas.height*0.62); ctx.lineTo(canvas.width,canvas.height*0.62); ctx.stroke();
+  ctx.globalAlpha=1;
 
-  ctx.fillStyle = C.text;
-  ctx.font = 'bold 22px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText(t.name, px + panelW/2, py + 35);
-  ctx.font = '12px monospace';
-  ctx.fillStyle = C.textDim;
-  ctx.fillText(t.desc, px + panelW/2, py + 55);
+  // Title glow
+  ctx.shadowColor='#ff4400'; ctx.shadowBlur=30;
+  ctx.font='bold 80px monospace'; ctx.fillStyle='#ff4400';
+  ctx.fillText('AUTODUEL', canvas.width/2, canvas.height/2-90);
+  ctx.shadowBlur=0;
 
-  const tabs = ['BUY', 'SELL', 'GARAGE'];
-  const tabW = panelW / 3;
-  for (let i = 0; i < 3; i++) {
-    ctx.fillStyle = townTab === i ? '#222244' : '#111122';
-    ctx.fillRect(px + i * tabW, py + 65, tabW, 32);
-    ctx.strokeStyle = townTab === i ? C.town : '#333355';
-    ctx.lineWidth = townTab === i ? 2 : 1;
-    ctx.strokeRect(px + i * tabW, py + 65, tabW, 32);
-    ctx.fillStyle = townTab === i ? C.text : C.textDim;
-    ctx.font = 'bold 13px monospace';
-    ctx.fillText('[' + (i+1) + '] ' + tabs[i], px + i * tabW + tabW/2, py + 86);
+  ctx.font='16px monospace'; ctx.fillStyle='#888888';
+  ctx.fillText('A Top-Down Vehicular Combat Game', canvas.width/2, canvas.height/2-40);
+  ctx.fillStyle='#555555';
+  ctx.fillText('Origin Systems, 1984 — HTML5 Recreation', canvas.width/2, canvas.height/2-15);
+
+  // Blinking start
+  if (Math.floor(time*2)%2===0) {
+    ctx.font='bold 24px monospace'; ctx.fillStyle='#f0c000';
+    ctx.fillText('PRESS SPACE TO START', canvas.width/2, canvas.height/2+35);
   }
 
-  ctx.textAlign = 'left';
-  ctx.strokeStyle = '#333355';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(px + 10, py + 100);
-  ctx.lineTo(px + panelW - 10, py + 100);
-  ctx.stroke();
+  ctx.font='13px monospace'; ctx.fillStyle='#666666';
+  ctx.fillText('WASD / Arrows — Move   |   SPACE — Fire   |   TAB — Switch Weapon   |   ESC — Pause', canvas.width/2, canvas.height/2+85);
+  ctx.fillStyle='#444444';
+  ctx.fillText('Start on FOOT → Walk to GARAGE → Buy a CAR → Drive & Fight!', canvas.width/2, canvas.height/2+110);
 
-  ctx.font = '13px monospace';
-  if (townTab === 0) {
-    const items = [
-      { name: 'Fuel Can (+20 Fuel)', price: t.buy.fuel, color: C.fuelBlue },
-      { name: 'Repair Kit (Full Repair)', price: t.buy.repair, color: C.healthGreen },
-      { name: 'Armor Plate (+30 Armor)', price: t.buy.armor, color: '#888899' },
-      { name: 'Machine Gun (+5 Damage)', price: t.buy.gun, color: '#ff6600' },
-    ];
-    for (let i = 0; i < items.length; i++) {
-      const it = items[i];
-      const y = py + 125 + i * 42;
-      const sel = townSel === i;
-      if (sel) {
-        ctx.fillStyle = '#1a1a33';
-        ctx.fillRect(px + 10, y - 14, panelW - 20, 36);
-        ctx.strokeStyle = C.town;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(px + 10, y - 14, panelW - 20, 36);
-      }
-      ctx.fillStyle = it.color;
-      ctx.fillRect(px + 20, y - 5, 12, 12);
-      ctx.fillStyle = sel ? C.text : C.textDim;
-      ctx.fillText(it.name, px + 40, y + 4);
-      ctx.fillStyle = credits >= it.price ? C.gold : '#664444';
-      ctx.fillText('$' + it.price, px + panelW - 70, y + 4);
-      if (sel) {
-        ctx.fillStyle = C.textDim;
-        ctx.fillText('ENTER to buy', px + panelW - 160, y + 4);
-      }
-    }
-    ctx.font = '11px monospace';
-    ctx.fillStyle = C.textDim;
-    ctx.fillText('Your credits: $' + credits, px + 15, py + panelH - 15);
-
-  } else if (townTab === 1) {
-    const items = [
-      { name: 'Scrap', qty: scrapCount, price: t.sell.scrap, color: C.scrap },
-      { name: 'Cargo', qty: cargo, price: t.sell.cargo, color: '#88aa44' },
-    ];
-    for (let i = 0; i < items.length; i++) {
-      const it = items[i];
-      const y = py + 125 + i * 50;
-      const sel = townSel === i;
-      if (sel) {
-        ctx.fillStyle = '#1a1a33';
-        ctx.fillRect(px + 10, y - 14, panelW - 20, 42);
-        ctx.strokeStyle = C.town;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(px + 10, y - 14, panelW - 20, 42);
-      }
-      ctx.fillStyle = it.color;
-      ctx.fillRect(px + 20, y - 5, 12, 12);
-      ctx.fillStyle = sel ? C.text : C.textDim;
-      ctx.fillText(it.name + ' x' + it.qty, px + 40, y + 4);
-      ctx.fillStyle = C.gold;
-      ctx.fillText('$' + it.price + ' each', px + panelW - 100, y + 4);
-      if (sel && it.qty > 0) {
-        ctx.fillStyle = C.textDim;
-        ctx.fillText('ENTER to sell all', px + panelW - 160, y + 4);
-      } else if (sel) {
-        ctx.fillStyle = '#664444';
-        ctx.fillText('None to sell', px + panelW - 160, y + 4);
-      }
-    }
-    ctx.font = '11px monospace';
-    ctx.fillStyle = C.textDim;
-    ctx.fillText('Scrap from enemies + Cargo runs = profit!', px + 15, py + panelH - 15);
-
-  } else if (townTab === 2) {
-    ctx.fillStyle = C.text;
-    ctx.font = '14px monospace';
-    ctx.fillText('CURRENT CAR STATS', px + 20, py + 120);
-
-    ctx.font = '12px monospace';
-    const stats = [
-      ['Hull', Math.ceil(player.hull) + ' / ' + player.maxHull],
-      ['Armor', Math.ceil(player.armor) + ' / ' + player.maxArmor],
-      ['Fuel', Math.ceil(player.fuel) + ' / ' + player.maxFuel],
-      ['Gun Level', gunLevel + ' (DMG: ' + player.gunDamage + ')'],
-      ['Armor Plates', armorCount],
-    ];
-    for (let i = 0; i < stats.length; i++) {
-      const [label, val] = stats[i];
-      ctx.fillStyle = C.textDim;
-      ctx.fillText(label + ':', px + 30, py + 148 + i * 22);
-      ctx.fillStyle = C.text;
-      ctx.fillText(val, px + 160, py + 148 + i * 22);
-    }
-
-    const ry = py + 270;
-    ctx.fillStyle = credits >= 50 ? '#1a1a2a' : '#0a0a15';
-    ctx.fillRect(px + 15, ry, panelW - 30, 50);
-    ctx.strokeStyle = credits >= 50 ? C.healthGreen : '#334433';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(px + 15, ry, panelW - 30, 50);
-    ctx.fillStyle = credits >= 50 ? C.text : '#555555';
-    ctx.font = 'bold 14px monospace';
-    ctx.fillText('FULL REPAIR — $50', px + panelW/2 - 70, ry + 30);
-    ctx.font = '11px monospace';
-    ctx.fillStyle = C.textDim;
-    ctx.fillText('Restores hull, armor, and fuel. ENTER to confirm.', px + panelW/2 - 110, ry + 44);
-
-    ctx.textAlign = 'left';
-    ctx.font = '11px monospace';
-    ctx.fillStyle = C.textDim;
-    ctx.fillText('Your credits: $' + credits, px + 15, py + panelH - 15);
-  }
-
-  ctx.font = '10px monospace';
-  ctx.fillStyle = '#444466';
-  ctx.textAlign = 'center';
-  ctx.fillText('WASD/Arrows: Navigate   ENTER/SPACE: Select   1/2/3: Switch tabs   ESC: Exit', canvas.width/2, py + panelH + 18);
-  ctx.textAlign = 'left';
+  ctx.textAlign='left';
 }
 
 function renderPaused() {
-  ctx.fillStyle = 'rgba(0,0,0,0.6)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.font = 'bold 36px monospace';
-  ctx.fillStyle = C.text;
-  ctx.textAlign = 'center';
+  ctx.fillStyle='rgba(0,0,0,0.6)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.font='bold 40px monospace'; ctx.fillStyle=C.text; ctx.textAlign='center';
   ctx.fillText('PAUSED', canvas.width/2, canvas.height/2);
-  ctx.font = '16px monospace';
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('Press ESC to resume', canvas.width/2, canvas.height/2 + 35);
-  ctx.textAlign = 'left';
+  ctx.font='16px monospace'; ctx.fillStyle=C.textDim;
+  ctx.fillText('ESC to resume', canvas.width/2, canvas.height/2+35);
+  ctx.textAlign='left';
 }
 
 function renderGameOver() {
-  ctx.fillStyle = 'rgba(0,0,0,0.8)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.font = 'bold 48px monospace';
-  ctx.fillStyle = C.healthRed;
-  ctx.textAlign = 'center';
-  ctx.fillText('WRECKED!', canvas.width/2, canvas.height/2 - 60);
-  ctx.font = '18px monospace';
-  ctx.fillStyle = C.text;
-  ctx.fillText('Your car was destroyed.', canvas.width/2, canvas.height/2 - 20);
-  ctx.fillStyle = C.gold;
-  ctx.fillText('Respawn costs $50', canvas.width/2, canvas.height/2 + 15);
-  ctx.fillStyle = C.textDim;
-  ctx.fillText('Score: ' + score + '   Enemies destroyed: ' + enemiesDestroyed, canvas.width/2, canvas.height/2 + 45);
-  ctx.font = '14px monospace';
-  if (credits >= 50) {
-    ctx.fillStyle = C.text;
-    ctx.fillText('Press SPACE to respawn', canvas.width/2, canvas.height/2 + 80);
-  } else {
-    ctx.fillStyle = '#664444';
-    ctx.fillText('Not enough credits to respawn!', canvas.width/2, canvas.height/2 + 80);
-  }
-  ctx.textAlign = 'left';
+  ctx.fillStyle='rgba(0,0,0,0.8)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.font='bold 48px monospace'; ctx.fillStyle=C.healthRed; ctx.textAlign='center';
+  ctx.fillText('WRECKED!', canvas.width/2, canvas.height/2-70);
+  ctx.font='16px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('Your car was destroyed.', canvas.width/2, canvas.height/2-25);
+  ctx.fillStyle=C.gold;
+  ctx.fillText('Enemies destroyed: '+stats.enemiesDestroyed, canvas.width/2, canvas.height/2+10);
+  ctx.fillText('Cash earned: $'+stats.totalCashEarned, canvas.width/2, canvas.height/2+35);
+  ctx.fillText('Distance traveled: '+stats.odometer.toFixed(1)+' miles', canvas.width/2, canvas.height/2+60);
+  ctx.font='14px monospace'; ctx.fillStyle=C.text;
+  ctx.fillText('Press SPACE to restart', canvas.width/2, canvas.height/2+100);
+  ctx.textAlign='left';
 }
 
 // ═══════════════════════════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════════════════════════
+function dist(x1,y1,x2,y2){ return Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)); }
+function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
+function normalizeAngle(a){ while(a>PI)a-=PI*2; while(a<-PI)a+=PI*2; return a; }
 
-function dist(x1, y1, x2, y2) {
-  return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
-}
-
-function clamp(v, lo, hi) {
-  return Math.max(lo, Math.min(hi, v));
-}
-
-function normalizeAngle(a) {
-  while (a > PI) a -= PI * 2;
-  while (a < -PI) a += PI * 2;
-  return a;
-}
-
-function isOnRoad(x, y) {
-  for (const road of ROADS) {
-    for (let i = 0; i < road.length - 1; i++) {
-      const [x1, y1] = road[i];
-      const [x2, y2] = road[i+1];
-      const d = pointToSegmentDist(x, y, x1, y1, x2, y2);
-      if (d < ROAD_W/2 + 5) return true;
+function isOnRoad(x,y) {
+  for (const seg of ROAD_SEGS) {
+    const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
+    if (seg.x !== undefined) {
+      // Vertical
+      const top = Math.min(t0.y+TWN_H, t1.y+TWN_H);
+      const bot = Math.max(t0.y, t1.y);
+      if (Math.abs(x-seg.x) < ROAD_WIDTH/2+5 && y > top && y < bot) return true;
+    } else {
+      // Horizontal
+      const left = Math.min(t0.x+TWN_W, t1.x+TWN_W);
+      const right = Math.max(t0.x, t1.x);
+      if (Math.abs(y-seg.y) < ROAD_WIDTH/2+5 && x > left && x < right) return true;
     }
   }
   return false;
 }
 
-function pointToSegmentDist(px, py, x1, y1, x2, y2) {
-  const dx = x2 - x1, dy = y2 - y1;
-  const lenSq = dx*dx + dy*dy;
-  if (lenSq === 0) return dist(px, py, x1, y1);
-  let t = ((px - x1)*dx + (py - y1)*dy) / lenSq;
-  t = clamp(t, 0, 1);
-  return dist(px, py, x1 + t*dx, y1 + t*dy);
-}
+// Fix: WEAPON_LIST lookup
+const WEAPON_DISPATCH = {
+  MachineGun:'M', Flamethrower:'F', Rockets:'R', Mines:'M', OilSlick:'O', Smoke:'S', Ram:'R'
+};
 
 // ═══════════════════════════════════════════════════════════
 // GAME LOOP
 // ═══════════════════════════════════════════════════════════
-
-function gameLoop(timestamp) {
-  const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
-  lastTime = timestamp;
-
+function gameLoop(ts) {
+  const dt = Math.min((ts-lastTime)/1000, 0.05);
+  lastTime = ts;
   update(dt);
   render();
-
   requestAnimationFrame(gameLoop);
 }
 
-requestAnimationFrame(ts => {
-  lastTime = ts;
-  gameLoop(ts);
-});
+requestAnimationFrame(ts=>{ lastTime=ts; gameLoop(ts); });
 </script>
 </body>
 </html>
