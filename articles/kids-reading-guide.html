@@ -11,48 +11,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css">
   <link rel="canonical" href="https://www.bithues.com/articles/kids-reading-guide.html" /></head>
-
 <body>
-    <div class="container">
-        <header>
-              <!-- ── NAV ── -->
   <nav class="navbar">
     <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
       <div class="nav-item"><a href="index.html">Home</a></div>
-      <div class="nav-item">
-        <a href="catalog.html">Reviews ▾</a>
-        <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
-        <div class="dropdown">
-          <a href="stories.html">All Stories</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a href="articles.html" class="active">Articles ▾</a>
-        <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-        </div>
-      </div>
+      <div class="nav-item"><a href="catalog.html">Reviews ▾</a><div class="dropdown"><a href="catalog.html">All Reviews</a><a href="category/self-help.html">Self-Help</a><a href="category/science-fiction.html">Sci-Fi</a><a href="category/fantasy.html">Fantasy</a><a href="category/nonfiction.html">Nonfiction</a><a href="category/thriller.html">Thriller</a><a href="category/biography.html">Biography</a><a href="category/business.html">Business</a></div></div>
+      <div class="nav-item"><a href="stories.html">Stories ▾</a><div class="dropdown"><a href="stories.html">All Stories</a></div></div>
+      <div class="nav-item"><a href="articles.html" class="active">Articles ▾</a><div class="dropdown"><a href="articles.html">All Articles</a></div></div>
       <div class="nav-item"><a href="about.html">About</a></div>
       <div class="nav-item"><a href="contact.html">Contact</a></div>
     </div>
-  </nav>        </header>
-        </div>
-        
-        <article>
-            <h1 class="header">How to Get Kids Into Reading</h1>
+  </nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+    <div class="hero-eyebrow">Children's Books</div>
+    <h1>Article</h1>
+    <p class="hero-sub"></p>
+</header>
+
+<div class="divider"></div>
+
+<!-- ── ARTICLE CONTENT ── -->
+<section class="section">
+    <article class="article-body">
+<h1 class="header">How to Get Kids Into Reading</h1>
             <p class="subtitle" data-minutes="5">Practical strategies to inspire a love of reading in children, from toddlers to teens</p>
             
             <p>As parents, we want our children to become readers. Not just because reading correlates with academic success (though it does), but because reading opens worlds. Books teach empathy, spark imagination, and provide refuge. A child who reads has a lifelong companion.</p>
@@ -126,49 +110,8 @@
             <p>Getting children into reading isn't about tricks or hacks. It's about relationships. Reading together. Reading aloud. Making books a source of pleasure rather than performance.</p>
             <p>The children who become lifelong readers rarely had reading forced on them. They had reading modeled for them. They had books made available. They had reading connected to love.</p>
             <p>So read to your children. Let them see you reading. Keep books around. Talk about what you're reading. And remember: the goal isn't to create perfect readers. It's to create people who find joy in books.</p>
-        </article>
-        
-        
-        <div class="share-section">
-            <h3>Share this article</h3>
-            <div class="share-buttons">
-                <button class="share-btn" onclick="shareTwitter()">𝕏 Twitter</button>
-                <button class="share-btn" onclick="shareFacebook()">📘 Facebook</button>
-                <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
-            </div>
-        </div>
-        
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
-  </footer>
-
-  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-  <script>
-    window.onscroll = function() {
-      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
-    };
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
-  </footer>
-
-  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-  <script>
-    window.onscroll = function() {
-      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
-    };
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    </article>
+</section>
 
 </body>
 </html>
