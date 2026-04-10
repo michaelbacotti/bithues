@@ -6,7 +6,7 @@
 <title>AUTODUEL</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 100%; height: 100%; overflow: hidden; background: #0d0d0d; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #000000; }
 canvas { display: block; }
 </style>
 </head>
@@ -36,17 +36,22 @@ const C = {
   asphalt:'#000000',
   roadMark:'#FFCC00',
   roadEdge:'#FFFFFF',
-  grass:'#000000',
-  player:'#00FF00',
-  playerDark:'#00AA00',
+  grass:'#00AA00',
+  player:'#FF0000',
+  playerDark:'#AA0000',
   enemy:'#FF0000',
   enemyDark:'#AA0000',
   bullet:'#FFFFFF',
   spark:'#FFCC00',
-  town:'#888888',
+  town:'#00FF00',
   townGlow:'#AAAAAA',
   hudBg:'#000000',
   hudBorder:'#333333',
+  hudGreen:'#00FF00',
+  hudAmber:'#FFCC00',
+  hudRed:'#FF0000',
+  hudPurple:'#AA00AA',
+  hudBlue:'#0088FF',
   healthGreen:'#00FF00',
   healthYellow:'#FFCC00',
   healthRed:'#FF0000',
@@ -56,6 +61,9 @@ const C = {
   scrap:'#AA8833',
   gold:'#FFCC00',
   garageZone:'#FF0000',
+  buildingGray:'#888888',
+  buildingDark:'#333333',
+  roadLine:'#FFFFFF',
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -149,16 +157,18 @@ function handleKeyDown(code) {
   if (gameState === 'TITLE' && code === 'Space') { startGame(); return; }
   // GAMEOVER
   if (gameState === 'GAMEOVER' && code === 'Space') { startGame(); return; }
-  // PAUSED - save prior state so we can restore correctly (skip during arena)
-  if (gameState === 'DRIVING' && code === 'Escape' && !arenaActive) { prevStateBeforePause = 'DRIVING'; gameState = 'PAUSED'; return; }
-  if (gameState === 'WALKING' && code === 'Escape' && !arenaActive) { prevStateBeforePause = 'WALKING'; gameState = 'PAUSED'; return; }
+  // PAUSED
   if (gameState === 'PAUSED' && code === 'Escape') {
-    // Restore to prior state: DRIVING if player has car, else WALKING
     if (prevStateBeforePause === 'DRIVING' && player.car) {
       gameState = 'DRIVING';
     } else {
       gameState = player.car ? 'DRIVING' : 'WALKING';
     }
+    return;
+  }
+  // GARAGE — check BEFORE WALKING so ESC can exit garage
+  if (gameState === 'GARAGE') {
+    handleGarageInput(code);
     return;
   }
   // WALKING + ARENA_PROMPT
@@ -167,12 +177,6 @@ function handleKeyDown(code) {
       if (code === 'Enter' || code === 'Space') { startArena(); return; }
       if (code === 'Escape') { gameState = 'WALKING'; return; }
     }
-    // Movement only - no weapons on foot, no pausing
-    return;
-  }
-  // GARAGE
-  if (gameState === 'GARAGE') {
-    handleGarageInput(code);
     return;
   }
   // DRIVING
@@ -231,7 +235,7 @@ function createWalkingPlayer(townIdx) {
     mode:'walking',
     x: t.x + TWN_W/2,
     y: t.y + TWN_H + 100,
-    speed: 120,
+    speed: 60,
     angle: 0,
     alive: true,
     flashTimer:0,
@@ -1030,7 +1034,7 @@ function checkTownEntry() {
       // Enter town → back to walking
       currentTownIndex = i;
       player.x = t.x + TWN_W/2;
-      player.y = t.y + TWN_H + 30;
+      player.y = t.y + TWN_H + 100;
       player.angle = -PI/2;
       player.car = null;
       gameState = 'WALKING';
@@ -1125,9 +1129,9 @@ function checkArenaWave() {
 function renderArenaPrompt() {
   // Apple IIe style: simple text overlay
   ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.font='bold 28px monospace'; ctx.fillStyle='#FFCC00'; ctx.textAlign='center';
+  ctx.font='bold 28px "Courier New", monospace'; ctx.fillStyle='#FFCC00'; ctx.textAlign='center';
   ctx.fillText('[ ARENA ]', canvas.width/2, canvas.height/2-50);
-  ctx.font='14px monospace'; ctx.fillStyle='#00FF00';
+  ctx.font='14px "Courier New", monospace'; ctx.fillStyle='#00FF00';
   ctx.fillText('WAVE '+arenaWave+' — ENEMIES: '+enemies.filter(e=>e.alive).length, canvas.width/2, canvas.height/2-15);
   ctx.fillStyle='#888888';
   ctx.fillText('5 WAVES TO WIN', canvas.width/2, canvas.height/2+5);
@@ -1265,62 +1269,105 @@ function render() {
 
 // ── WORLD ─────────────────────────────────────────────────
 function renderWorld() {
-  // Apple IIe: pure black background (no grass texture)
+  if (gameState === 'DRIVING') {
+    // DRIVING mode: black playfield, white double-line roads
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, WORLD_W, WORLD_H);
+    for (const seg of ROAD_SEGS) renderDrivingRoad(seg);
+  } else {
+    // WALKING/CITY mode: green background, black roads with white border lines
+    ctx.fillStyle = '#00AA00';
+    ctx.fillRect(0, 0, WORLD_W, WORLD_H);
+    for (const seg of ROAD_SEGS) renderCityRoad(seg);
+    for (const t of TOWNS) renderTown(t);
+  }
+}
+
+function renderDrivingRoad(seg) {
+  // White double vertical lines as road lane markers (top-to-bottom)
+  ctx.strokeStyle = '#FFFFFF';
+  ctx.lineWidth = 2;
+  const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
+  if (seg.x !== undefined) {
+    // Vertical road — left line pair
+    ctx.beginPath(); ctx.moveTo(seg.x-22, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x-22, Math.max(t0.y,t1.y)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x-16, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x-16, Math.max(t0.y,t1.y)); ctx.stroke();
+    // Vertical road — right line pair
+    ctx.beginPath(); ctx.moveTo(seg.x+16, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x+16, Math.max(t0.y,t1.y)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x+22, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x+22, Math.max(t0.y,t1.y)); ctx.stroke();
+  } else {
+    // Horizontal road — top line pair
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y-22); ctx.lineTo(Math.max(t0.x,t1.x), seg.y-22); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y-16); ctx.lineTo(Math.max(t0.x,t1.x), seg.y-16); ctx.stroke();
+    // Horizontal road — bottom line pair
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y+16); ctx.lineTo(Math.max(t0.x,t1.x), seg.y+16); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y+22); ctx.lineTo(Math.max(t0.x,t1.x), seg.y+22); ctx.stroke();
+  }
+}
+
+function renderCityRoad(seg) {
+  // City roads: black strip with white border lines on edges
+  const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
+  const ROAD_W = 70;
+  
+  // Black road fill
   ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, WORLD_W, WORLD_H);
-
-  // Roads as simple colored lines
-  for (const seg of ROAD_SEGS) renderRoadSegment(seg);
-
-  // Towns as simple outlined boxes
-  for (const t of TOWNS) renderTown(t);
+  if (seg.x !== undefined) {
+    // Vertical road — full black strip
+    ctx.fillRect(seg.x - ROAD_W/2, Math.min(t0.y+TWN_H,t1.y+TWN_H), ROAD_W, Math.max(t0.y,t1.y) - Math.min(t0.y+TWN_H,t1.y+TWN_H));
+  } else {
+    // Horizontal road — full black strip
+    ctx.fillRect(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y - ROAD_W/2, Math.max(t0.x,t1.x) - Math.min(t0.x+TWN_W,t1.x+TWN_W), ROAD_W);
+  }
+  
+  // White edge lines (border of road)
+  ctx.strokeStyle = '#FFFFFF';
+  ctx.lineWidth = 2;
+  if (seg.x !== undefined) {
+    // Vertical road edges
+    ctx.beginPath(); ctx.moveTo(seg.x - ROAD_W/2, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x - ROAD_W/2, Math.max(t0.y,t1.y)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x + ROAD_W/2, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x + ROAD_W/2, Math.max(t0.y,t1.y)); ctx.stroke();
+  } else {
+    // Horizontal road edges
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y - ROAD_W/2); ctx.lineTo(Math.max(t0.x,t1.x), seg.y - ROAD_W/2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y + ROAD_W/2); ctx.lineTo(Math.max(t0.x,t1.x), seg.y + ROAD_W/2); ctx.stroke();
+  }
 }
 
 function renderRoadSegment(seg) {
-  // Apple IIe style: roads as simple thick lines
+  // Apple IIe style: roads as simple white edge lines (no gray fill)
   const t0 = TOWNS[seg.from], t1 = TOWNS[seg.to];
 
-  // Road surface - thick line
-  ctx.strokeStyle = '#333333';
-  ctx.lineWidth = ROAD_WIDTH;
-  ctx.lineCap = 'butt';
-  ctx.beginPath();
-  if (seg.x !== undefined) {
-    const top = Math.min(t0.y+TWN_H, t1.y+TWN_H);
-    const bot = Math.max(t0.y, t1.y);
-    ctx.moveTo(seg.x, top); ctx.lineTo(seg.x, bot);
-  } else {
-    const left = Math.min(t0.x+TWN_W, t1.x+TWN_W);
-    const right = Math.max(t0.x, t1.x);
-    ctx.moveTo(left, seg.y); ctx.lineTo(right, seg.y);
-  }
-  ctx.stroke();
-
-  // Road edge lines - white
+  // Road edge lines - white (double lines like Apple IIe road markings)
   ctx.strokeStyle = '#FFFFFF';
   ctx.lineWidth = 2;
-  ctx.globalAlpha = 0.7;
+  ctx.globalAlpha = 0.9;
   if (seg.x !== undefined) {
-    ctx.beginPath(); ctx.moveTo(seg.x-ROAD_WIDTH/2+4, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x-ROAD_WIDTH/2+4, Math.max(t0.y,t1.y)); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(seg.x+ROAD_WIDTH/2-4, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x+ROAD_WIDTH/2-4, Math.max(t0.y,t1.y)); ctx.stroke();
+    // Vertical road — left pair
+    ctx.beginPath(); ctx.moveTo(seg.x-18, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x-18, Math.max(t0.y,t1.y)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x-12, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x-12, Math.max(t0.y,t1.y)); ctx.stroke();
+    // Vertical road — right pair
+    ctx.beginPath(); ctx.moveTo(seg.x+12, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x+12, Math.max(t0.y,t1.y)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(seg.x+18, Math.min(t0.y+TWN_H,t1.y+TWN_H)); ctx.lineTo(seg.x+18, Math.max(t0.y,t1.y)); ctx.stroke();
   } else {
-    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y-ROAD_WIDTH/2+4); ctx.lineTo(Math.max(t0.x,t1.x), seg.y-ROAD_WIDTH/2+4); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y+ROAD_WIDTH/2-4); ctx.lineTo(Math.max(t0.x,t1.x), seg.y+ROAD_WIDTH/2-4); ctx.stroke();
+    // Horizontal road — top pair
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y-18); ctx.lineTo(Math.max(t0.x,t1.x), seg.y-18); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y-12); ctx.lineTo(Math.max(t0.x,t1.x), seg.y-12); ctx.stroke();
+    // Horizontal road — bottom pair
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y+12); ctx.lineTo(Math.max(t0.x,t1.x), seg.y+12); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(Math.min(t0.x+TWN_W,t1.x+TWN_W), seg.y+18); ctx.lineTo(Math.max(t0.x,t1.x), seg.y+18); ctx.stroke();
   }
   ctx.globalAlpha = 1;
 }
 
 function renderTown(t) {
-  // Apple IIe style: simple outlined box, no gradients/glow
-  ctx.fillStyle = '#001100';
-  ctx.fillRect(t.x, t.y, t.w, t.h);
-
-  ctx.strokeStyle = '#888888';
+  // Apple IIe style: simple outlined box, no fill
+  ctx.strokeStyle = '#00FF00';
   ctx.lineWidth = 2;
   ctx.strokeRect(t.x, t.y, t.w, t.h);
 
   // Town name in green text
-  ctx.font = 'bold 12px monospace';
+  ctx.font = 'bold 11px "Courier New", monospace';
   ctx.fillStyle = '#00FF00';
   ctx.textAlign = 'center';
   ctx.fillText(t.name, t.x+t.w/2, t.y+t.h/2);
@@ -1460,56 +1507,59 @@ function renderHUD() {
   const pad = 10;
   const speed = Math.sqrt(car.vx*car.vx+car.vy*car.vy);
 
-  // Black panel background
+  // Black panel background (Apple IIe style)
   ctx.fillStyle='#000000';
-  ctx.fillRect(0, 0, canvas.width, 60);
+  ctx.fillRect(0, 0, canvas.width, 55);
   ctx.strokeStyle='#333333'; ctx.lineWidth=1;
-  ctx.strokeRect(0, 0, canvas.width, 60);
+  ctx.strokeRect(0, 0, canvas.width, 55);
 
-  ctx.font='11px monospace'; ctx.textAlign='left';
+  ctx.font='bold 11px "Courier New", monospace'; ctx.textAlign='left';
 
-  // Speed
+  // Speed — text only
   ctx.fillStyle='#00FF00';
-  ctx.fillText('SPD: '+Math.floor(speed*0.6)+' MPH', pad, pad+14);
+  ctx.fillText('SPEED: '+Math.floor(speed*0.6)+' MPH', pad, pad+14);
 
   // Odometer
-  ctx.fillText('ODOM: '+stats.odometer.toFixed(1)+' MI', pad+130, pad+14);
+  ctx.fillText('ODOM: '+stats.odometer.toFixed(1)+' MI', pad+160, pad+14);
 
-  // Hull & Fuel as simple text
+  // Hull
   const hullPct = Math.ceil((car.hull/car.maxHull)*100);
-  const fuelPct = Math.floor((car.fuel/car.maxFuel)*100);
-  ctx.fillStyle='#00FF00';
-  ctx.fillText('HULL: '+hullPct+'%', pad, pad+28);
-  ctx.fillText('FUEL: '+fuelPct+'%', pad+130, pad+28);
+  ctx.fillStyle=hullPct>60?'#00FF00':hullPct>30?'#FFCC00':'#FF0000';
+  ctx.fillText('HULL: '+car.hull+'/'+car.maxHull+' ('+hullPct+'%)', pad, pad+28);
 
-  // Armor (all 4 facings as numbers)
+  // Fuel
+  const fuelPct = Math.floor((car.fuel/car.maxFuel)*100);
+  ctx.fillStyle=fuelPct>30?'#00FF00':'#FFCC00';
+  ctx.fillText('FUEL: '+Math.floor(car.fuel)+'/'+car.maxFuel+' ('+fuelPct+'%)', pad+200, pad+28);
+
+  // Armor facings
   ctx.fillStyle='#00AA00';
-  ctx.fillText('F:'+car.frontArmor+' R:'+car.rearArmor+' L:'+car.leftArmor+' R:'+car.rightArmor, pad, pad+42);
+  ctx.fillText('F:'+car.frontArmor+' R:'+car.rearArmor+' L:'+car.leftArmor+' X:'+car.rightArmor, pad, pad+42);
 
   // Cash and kills
   ctx.fillStyle='#FFCC00';
-  ctx.fillText('$'+stats.cash, pad+350, pad+14);
+  ctx.fillText('CASH: $'+stats.cash, pad+400, pad+14);
   ctx.fillStyle='#00AA00';
-  ctx.fillText('KILLS:'+stats.enemiesDestroyed, pad+420, pad+14);
+  ctx.fillText('KILLS:'+stats.enemiesDestroyed, pad+500, pad+14);
 
   // Weapon info
   const wpn = getPlayerWeapon();
   if (wpn) {
     ctx.fillStyle='#00FF00';
     const wName = WEAPON_DISPLAY[wpn.type] || wpn.type;
-    ctx.fillText('WPN:'+wName, pad+350, pad+28);
-    if (wpn.ammo !== undefined) ctx.fillText('AMO:'+(wpn.ammo||0), pad+430, pad+28);
-    else if (wpn.fuel !== undefined) ctx.fillText('FUEL:'+(wpn.fuel||0), pad+430, pad+28);
+    ctx.fillText('WPN:'+wName, pad+400, pad+28);
+    if (wpn.ammo !== undefined) ctx.fillText('AMO:'+(wpn.ammo||0), pad+490, pad+28);
+    else if (wpn.fuel !== undefined) ctx.fillText('FUEL:'+(wpn.fuel||0), pad+490, pad+28);
     const heat = Math.floor((wpn.heat||0));
     ctx.fillStyle=heat>80?'#FF0000':'#00AA00';
-    ctx.fillText('HEAT:'+heat+'%', pad+350, pad+42);
+    ctx.fillText('HEAT:'+heat+'%', pad+400, pad+42);
   } else {
     ctx.fillStyle='#666666';
-    ctx.fillText('NO WEAPON', pad+350, pad+28);
+    ctx.fillText('NO WEAPON', pad+400, pad+28);
   }
 
-  // Minimap (top-right)
-  renderMinimap(canvas.width - 180 - pad, pad, 180, 60);
+  // Minimap (top-right) — simple green-on-black
+  renderMinimap(canvas.width - 160 - pad, pad, 160, 55);
 }
 
 function drawArmorBar(x,y,w,h,pct,max) {
@@ -1528,15 +1578,15 @@ function drawBar(x,y,w,h,pct,color) {
 }
 
 function renderMinimap(px,py,mw,mh) {
-  // Apple IIe style: simple black minimap with green/amber markers
-  ctx.fillStyle='#001100'; ctx.fillRect(px,py,mw,mh);
+  // Apple IIe style: pure black minimap, green/white markers
+  ctx.fillStyle='#000000'; ctx.fillRect(px,py,mw,mh);
   ctx.strokeStyle='#333333'; ctx.lineWidth=1; ctx.strokeRect(px,py,mw,mh);
-  ctx.font='8px monospace'; ctx.fillStyle='#006600'; ctx.textAlign='left';
-  ctx.fillText('MAP', px+3, py+10);
+  ctx.font='bold 8px "Courier New", monospace'; ctx.fillStyle='#006600'; ctx.textAlign='left';
+  ctx.fillText('MAP', px+3, py+9);
 
   const sx = mw/WORLD_W, sy = mh/WORLD_H;
 
-  // Roads - white lines
+  // Roads - white thin lines
   ctx.strokeStyle='#555555'; ctx.lineWidth=1;
   for (const seg of ROAD_SEGS) {
     ctx.beginPath();
@@ -1550,10 +1600,11 @@ function renderMinimap(px,py,mw,mh) {
     ctx.stroke();
   }
 
-  // Towns - gray squares
+  // Towns - green outlined squares
   for (const t of TOWNS) {
-    ctx.fillStyle='#888888';
-    ctx.fillRect(px+t.x*sx-2, py+t.y*sy-2, 4, 4);
+    ctx.strokeStyle='#00AA00';
+    ctx.lineWidth=1;
+    ctx.strokeRect(px+t.x*sx-2, py+t.y*sy-2, 4, 4);
   }
 
   // Enemies - red dots
@@ -1563,7 +1614,7 @@ function renderMinimap(px,py,mw,mh) {
     ctx.fillRect(px+e.x*sx-1, py+e.y*sy-1, 3, 3);
   }
 
-  // Player - green dot
+  // Player - green filled dot
   if (player.car) {
     ctx.fillStyle='#00FF00';
     ctx.fillRect(px+player.car.x*sx-2, py+player.car.y*sy-2, 4, 4);
@@ -1574,36 +1625,34 @@ function renderMinimap(px,py,mw,mh) {
 
 function renderWalkingHUD() {
   const pad = 10;
-  ctx.fillStyle='rgba(10,10,10,0.85)'; ctx.fillRect(pad,pad,220,100);
-  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(pad,pad,220,100);
+  ctx.fillStyle='#000000'; ctx.fillRect(pad,pad,220,90);
+  ctx.strokeStyle='#333333'; ctx.lineWidth=1; ctx.strokeRect(pad,pad,220,90);
 
-  ctx.font='bold 14px monospace'; ctx.fillStyle=C.gold; ctx.textAlign='left';
-  ctx.fillText('$'+stats.cash, pad+10, pad+20);
+  ctx.font='bold 13px "Courier New", monospace'; ctx.fillStyle=C.gold; ctx.textAlign='left';
+  ctx.fillText('$'+stats.cash, pad+10, pad+18);
 
   const t = TOWNS[currentTownIndex];
   if (gameState === 'ARENA_PROMPT') {
-    ctx.font='bold 13px monospace'; ctx.fillStyle='#ff4400';
-    ctx.fillText('ARENA ZONE', pad+10, pad+38);
-    ctx.font='11px monospace'; ctx.fillStyle=C.text;
-    ctx.fillText('ENTER: Fight for glory', pad+10, pad+54);
-    ctx.fillStyle=C.textDim;
-    ctx.font='10px monospace';
-    ctx.fillText('ESC: Leave arena', pad+10, pad+70);
+    ctx.font='bold 12px "Courier New", monospace'; ctx.fillStyle='#FFCC00';
+    ctx.fillText('ARENA ZONE', pad+10, pad+36);
+    ctx.font='11px "Courier New", monospace'; ctx.fillStyle=C.text;
+    ctx.fillText('ENTER: Fight for glory', pad+10, pad+52);
+    ctx.fillStyle=C.textDim; ctx.font='10px "Courier New", monospace';
+    ctx.fillText('ESC: Leave arena', pad+10, pad+68);
   } else if (gameState === 'WALKING' && player.car === null) {
-    ctx.font='bold 13px monospace'; ctx.fillStyle=C.town;
-    ctx.fillText('IN ' + t.name, pad+10, pad+38);
-    ctx.font='11px monospace'; ctx.fillStyle=C.text;
-    ctx.fillText('Walk to GARAGE zone', pad+10, pad+54);
-    ctx.fillStyle=C.textDim;
-    ctx.font='10px monospace';
-    ctx.fillText('WASD to move', pad+10, pad+70);
-    ctx.fillText('Find the garage', pad+10, pad+84);
+    ctx.font='bold 12px "Courier New", monospace'; ctx.fillStyle=C.town;
+    ctx.fillText('IN ' + t.name, pad+10, pad+36);
+    ctx.font='11px "Courier New", monospace'; ctx.fillStyle=C.text;
+    ctx.fillText('Walk to GARAGE zone', pad+10, pad+52);
+    ctx.fillStyle=C.textDim; ctx.font='10px "Courier New", monospace';
+    ctx.fillText('WASD/Arrows: Move', pad+10, pad+68);
+    ctx.fillText('Find the garage', pad+10, pad+82);
   } else {
-    ctx.font='11px monospace'; ctx.fillStyle=C.text;
-    ctx.fillText('WALKING', pad+10, pad+38);
-    ctx.fillStyle=C.textDim;
-    ctx.fillText('At: '+t.name, pad+10, pad+54);
-    ctx.fillText('Find the GARAGE', pad+10, pad+70);
+    ctx.font='11px "Courier New", monospace'; ctx.fillStyle=C.text;
+    ctx.fillText('WALKING', pad+10, pad+36);
+    ctx.fillStyle=C.textDim; ctx.font='10px "Courier New", monospace';
+    ctx.fillText('At: '+t.name, pad+10, pad+52);
+    ctx.fillText('Find the GARAGE', pad+10, pad+66);
   }
   ctx.textAlign='left';
 }
@@ -1615,27 +1664,27 @@ function renderGarageUI() {
   const pw = 520, ph = 420;
   const px = (canvas.width-pw)/2, py = (canvas.height-ph)/2;
 
-  ctx.fillStyle='rgba(0,0,0,0.92)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='#000000'; ctx.fillRect(0,0,canvas.width,canvas.height);
 
   ctx.fillStyle='#000000'; ctx.fillRect(px,py,pw,ph);
   ctx.strokeStyle='#00FF00'; ctx.lineWidth=2; ctx.strokeRect(px,py,pw,ph);
 
   const t = TOWNS[garageTown];
-  ctx.font='bold 18px monospace'; ctx.fillStyle='#00FF00'; ctx.textAlign='center';
+  ctx.font='bold 18px "Courier New", monospace'; ctx.fillStyle='#00FF00'; ctx.textAlign='center';
   ctx.fillText(t.name+' GARAGE', px+pw/2, py+28);
-  ctx.font='11px monospace'; ctx.fillStyle='#888888';
+  ctx.font='11px "Courier New", monospace'; ctx.fillStyle='#888888';
   ctx.fillText(`F:${t.fuelMod.toFixed(1)}x  P:${t.partsMod.toFixed(1)}x  W:${t.weaponsMod.toFixed(1)}x`, px+pw/2, py+46);
 
   // Tabs
   const tabs=['BUY','SELL','REPAIR','FUEL','STATS'];
   const tabW=pw/5;
   tabs.forEach((tab,i)=>{
-    ctx.fillStyle=garageTab===i?'#003300':'#001100';
+    ctx.fillStyle=garageTab===i?'#000000':'#000000';
     ctx.fillRect(px+i*tabW, py+54, tabW, 28);
     ctx.strokeStyle=garageTab===i?'#00FF00':'#333333';
     ctx.lineWidth=1; ctx.strokeRect(px+i*tabW, py+54, tabW, 28);
     ctx.fillStyle=garageTab===i?'#00FF00':'#666666';
-    ctx.font='bold 11px monospace'; ctx.textAlign='center';
+    ctx.font='bold 11px "Courier New", monospace'; ctx.textAlign='center';
     ctx.fillText('['+(i+1)+'] '+tab, px+i*tabW+tabW/2, py+72);
   });
 
@@ -1650,7 +1699,7 @@ function renderGarageUI() {
   else if (garageTab===3) renderGarageFuel();
   else if (garageTab===4) renderGarageStats();
 
-  ctx.font='10px monospace'; ctx.fillStyle='#444444'; ctx.textAlign='center';
+  ctx.font='10px "Courier New", monospace'; ctx.fillStyle='#444444'; ctx.textAlign='center';
   ctx.fillText('WASD/Arrows: Navigate   ENTER/SPACE: Select   1-5: Tabs   ESC: Exit', canvas.width/2, py+ph+18);
   ctx.textAlign='left';
 }
@@ -1662,30 +1711,29 @@ function renderGarageBuy() {
   if (!player.car) {
     // Show vehicle list
     const types = ['Cycle','Compact','Sedan','Pickup','Van','Semi'];
-    ctx.font='12px monospace'; ctx.fillStyle=C.text; ctx.fillText('SELECT A VEHICLE:', px2+15, py2+112);
+    ctx.font='12px "Courier New", monospace'; ctx.fillStyle=C.text; ctx.fillText('SELECT A VEHICLE:', px2+15, py2+112);
     types.forEach((type,i)=>{
       const def = VEHICLE_TYPES[type];
       const cost = Math.ceil(def.cost * t.weaponsMod);
       const y = py2+130+i*38;
       const sel = garageSel===i;
       if (sel) {
-        ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10, y-13, 500, 33);
-        ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10, y-13, 500, 33);
+        ctx.fillStyle='#0a1a0a'; ctx.fillRect(px2+10, y-13, 500, 33);
+        ctx.strokeStyle='#00FF00'; ctx.lineWidth=1; ctx.strokeRect(px2+10, y-13, 500, 33);
       }
-      ctx.fillStyle=def.armor>50?'#4488ff':def.armor>25?'#44cc44':'#cccc44';
-      ctx.fillRect(px2+18, y-5, 10, 10);
+      ctx.fillStyle='#888888'; ctx.fillRect(px2+18, y-5, 10, 10);
       ctx.fillStyle=sel?C.text:C.textDim;
-      ctx.font='bold 12px monospace'; ctx.fillText(type, px2+35, y+4);
-      ctx.font='10px monospace';
-      ctx.fillText(`SPD:${def.speed} ARM:${def.armor} HULL:${def.hull} FUEL:${def.fuel} SLOTS:${def.slots}`, px2+100, y+4);
+      ctx.font='bold 12px "Courier New", monospace'; ctx.fillText(type, px2+35, y+4);
+      ctx.font='10px "Courier New", monospace';
+      ctx.fillText(`SPD:${def.speed} ARM:${def.armor} HULL:${def.hull} FUEL:${def.fuel} SLOT:${def.slots}`, px2+100, y+4);
       ctx.fillStyle=stats.cash>=cost?C.gold:'#664444';
-      ctx.font='bold 11px monospace'; ctx.fillText('$'+cost, px2+390, y+4);
-      ctx.fillStyle='#555555'; ctx.font='10px monospace'; ctx.fillText('ENTER to buy', px2+430, y+4);
+      ctx.font='bold 11px "Courier New", monospace'; ctx.fillText('$'+cost, px2+390, y+4);
+      ctx.fillStyle='#555555'; ctx.font='10px "Courier New", monospace'; ctx.fillText('ENTER to buy', px2+430, y+4);
     });
   } else {
     // Show weapons
     const weapons = ['MachineGun','Flamethrower','Rockets','Mines','OilSlick','Smoke'];
-    ctx.font='12px monospace'; ctx.fillStyle=C.text; ctx.fillText('BUY WEAPONS:', px2+15, py2+112);
+    ctx.font='12px "Courier New", monospace'; ctx.fillStyle=C.text; ctx.fillText('BUY WEAPONS:', px2+15, py2+112);
     const slotsUsed = player.car.weapons.reduce((s,w)=>s+(WEAPON_TYPES[w.type]?.slot||1),0);
     const carSlots = (VEHICLE_TYPES[player.car.type]||{slots:1}).slots;
     weapons.forEach((wn,i)=>{
@@ -1695,28 +1743,28 @@ function renderGarageBuy() {
       const sel = garageSel===i;
       const canBuy = stats.cash>=cost && slotsUsed+(def.slot||1)<=carSlots;
       if (sel) {
-        ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10, y-13, 500, 33);
-        ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10, y-13, 500, 33);
+        ctx.fillStyle='#0a1a0a'; ctx.fillRect(px2+10, y-13, 500, 33);
+        ctx.strokeStyle='#00FF00'; ctx.lineWidth=1; ctx.strokeRect(px2+10, y-13, 500, 33);
       }
-      ctx.fillStyle=canBuy?def.damage>30?'#ff4400':def.damage>0?'#ff8800':'#44ff44':'#444444';
+      ctx.fillStyle=canBuy?C.text:'#444444';
       ctx.fillRect(px2+18, y-5, 10, 10);
       ctx.fillStyle=sel?C.text:C.textDim;
-      ctx.font='bold 12px monospace'; ctx.fillText(WEAPON_DISPLAY[wn], px2+35, y+4);
-      ctx.font='10px monospace';
+      ctx.font='bold 12px "Courier New", monospace'; ctx.fillText(WEAPON_DISPLAY[wn], px2+35, y+4);
+      ctx.font='10px "Courier New", monospace';
       let stats2 = `DMG:${def.damage||0} RNG:${def.range||0}`;
       if (def.ammo) stats2 += ` AMO:${def.ammo}`;
       if (def.fuel) stats2 += ` FUEL:${def.fuel}`;
       if (def.slot) stats2 += ` SLOT:${def.slot}`;
       ctx.fillText(stats2, px2+110, y+4);
       ctx.fillStyle=canBuy?C.gold:'#664444';
-      ctx.font='bold 11px monospace'; ctx.fillText('$'+cost, px2+390, y+4);
-      ctx.fillStyle='#555555'; ctx.font='10px monospace'; ctx.fillText(`SLOT:${def.slot||1}`, px2+430, y+4);
+      ctx.font='bold 11px "Courier New", monospace'; ctx.fillText('$'+cost, px2+390, y+4);
+      ctx.fillStyle='#555555'; ctx.font='10px "Courier New", monospace'; ctx.fillText(`SLOT:${def.slot||1}`, px2+430, y+4);
     });
-    ctx.fillStyle=C.textDim; ctx.font='10px monospace';
+    ctx.fillStyle=C.textDim; ctx.font='10px "Courier New", monospace';
     ctx.fillText(`Slots: ${slotsUsed}/${carSlots}`, px2+15, py2+360);
   }
 
-  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillStyle=C.gold; ctx.font='bold 13px "Courier New", monospace';
   ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
 }
 
@@ -1725,53 +1773,53 @@ function renderGarageSell() {
   const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
   const salvageVal = droppedItems.filter(d=>d.type==='salvage').reduce((s,d)=>s+d.value,0);
 
-  ctx.font='12px monospace'; ctx.fillStyle=C.text;
+  ctx.font='12px "Courier New", monospace'; ctx.fillStyle=C.text;
   ctx.fillText('SELL OPTIONS:', px2+15, py2+112);
 
   // Sell car
   const y0 = py2+135;
   const sel0 = garageSel===0;
-  if (sel0) { ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10,y0-13,500,33); ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10,y0-13,500,33); }
+  if (sel0) { ctx.fillStyle='#0a1a0a'; ctx.fillRect(px2+10,y0-13,500,33); ctx.strokeStyle='#00FF00'; ctx.lineWidth=1; ctx.strokeRect(px2+10,y0-13,500,33); }
   ctx.fillStyle='#888888'; ctx.fillRect(px2+18,y0-5,10,10);
-  ctx.fillStyle=sel0?C.text:C.textDim; ctx.font='bold 12px monospace';
+  ctx.fillStyle=sel0?C.text:C.textDim; ctx.font='bold 12px "Courier New", monospace';
   ctx.fillText('SELL CAR (Salvage Value)', px2+35, y0+4);
   if (player.car) {
     const salvage = Math.floor((VEHICLE_TYPES[player.car.type]||{salvage:0}).salvage*0.25);
-    ctx.fillStyle=C.gold; ctx.font='bold 11px monospace';
+    ctx.fillStyle=C.gold; ctx.font='bold 11px "Courier New", monospace';
     ctx.fillText('+$'+salvage, px2+390, y0+4);
   } else {
-    ctx.fillStyle='#555555'; ctx.font='10px monospace';
+    ctx.fillStyle='#555555'; ctx.font='10px "Courier New", monospace';
     ctx.fillText('No car', px2+390, y0+4);
   }
 
   // Sell salvage
   const y1 = py2+180;
   const sel1 = garageSel===1;
-  if (sel1) { ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10,y1-13,500,33); ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10,y1-13,500,33); }
+  if (sel1) { ctx.fillStyle='#0a1a0a'; ctx.fillRect(px2+10,y1-13,500,33); ctx.strokeStyle='#00FF00'; ctx.lineWidth=1; ctx.strokeRect(px2+10,y1-13,500,33); }
   ctx.fillStyle=C.gold; ctx.fillRect(px2+18,y1-5,10,10);
-  ctx.fillStyle=sel1?C.text:C.textDim; ctx.font='bold 12px monospace';
+  ctx.fillStyle=sel1?C.text:C.textDim; ctx.font='bold 12px "Courier New", monospace';
   ctx.fillText('SELL SALVAGE (From Enemies)', px2+35, y1+4);
-  ctx.fillStyle=salvageVal>0?C.gold:'#555555'; ctx.font='bold 11px monospace';
+  ctx.fillStyle=salvageVal>0?C.gold:'#555555'; ctx.font='bold 11px "Courier New", monospace';
   ctx.fillText('+$'+salvageVal+' ('+droppedItems.filter(d=>d.type==='salvage').length+' items)', px2+390, y1+4);
 
   // Sell cargo
   const y2 = py2+225;
   const sel2 = garageSel===2;
-  if (sel2) { ctx.fillStyle='#1a1a33'; ctx.fillRect(px2+10,y2-13,500,33); ctx.strokeStyle=C.town; ctx.lineWidth=1; ctx.strokeRect(px2+10,y2-13,500,33); }
+  if (sel2) { ctx.fillStyle='#0a1a0a'; ctx.fillRect(px2+10,y2-13,500,33); ctx.strokeStyle='#00FF00'; ctx.lineWidth=1; ctx.strokeRect(px2+10,y2-13,500,33); }
   ctx.fillStyle='#886622'; ctx.fillRect(px2+18,y2-5,10,10);
-  ctx.fillStyle=sel2?C.text:C.textDim; ctx.font='bold 12px monospace';
+  ctx.fillStyle=sel2?C.text:C.textDim; ctx.font='bold 12px "Courier New", monospace';
   ctx.fillText('SELL CARGO (In Vehicle)', px2+35, y2+4);
   const cargoMax = player.car ? (VEHICLE_TYPES[player.car.type]?.cargo || 0) : 0;
   if (playerCargo > 0 && cargoMax > 0) {
     const cargoValue = Math.floor(playerCargo * 20 * t.partsMod);
-    ctx.fillStyle=C.gold; ctx.font='bold 11px monospace';
+    ctx.fillStyle=C.gold; ctx.font='bold 11px "Courier New", monospace';
     ctx.fillText('+$'+cargoValue+' ('+playerCargo+' units)', px2+390, y2+4);
   } else {
-    ctx.fillStyle='#555555'; ctx.font='10px monospace';
+    ctx.fillStyle='#555555'; ctx.font='10px "Courier New", monospace';
     ctx.fillText(playerCargo > 0 ? 'No cargo space!' : 'No cargo', px2+390, y2+4);
   }
 
-  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillStyle=C.gold; ctx.font='bold 13px "Courier New", monospace';
   ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
 }
 
@@ -1781,7 +1829,7 @@ function renderGarageRepair() {
   const car = player.car;
 
   if (!car) {
-    ctx.font='14px monospace'; ctx.fillStyle=C.textDim;
+    ctx.font='14px "Courier New", monospace'; ctx.fillStyle=C.textDim;
     ctx.fillText('Buy a car first!', px2+200, py2+200);
     return;
   }
@@ -1792,10 +1840,10 @@ function renderGarageRepair() {
   const totalDmg = hullDmg+armorDmg+compDmg;
   const cost = Math.ceil(totalDmg * 0.5 * t.partsMod);
 
-  ctx.font='12px monospace'; ctx.fillStyle=C.text;
+  ctx.font='12px "Courier New", monospace'; ctx.fillStyle=C.text;
   ctx.fillText('REPAIR SHOP', px2+15, py2+112);
 
-  ctx.font='11px monospace';
+  ctx.font='11px "Courier New", monospace';
   ctx.fillStyle=C.textDim; ctx.fillText('Hull Damage:', px2+25, py2+140);
   ctx.fillStyle=car.hull<car.maxHull?C.healthRed:C.text; ctx.fillText('-'+hullDmg, px2+150, py2+140);
 
@@ -1811,16 +1859,16 @@ function renderGarageRepair() {
   // Repair button
   const ry = py2+220;
   const canRepair = totalDmg > 0 && stats.cash >= cost;
-  ctx.fillStyle=canRepair?'#1a2a1a':'#1a1a1a';
+  ctx.fillStyle=canRepair?'#0a1a0a':'#000000';
   ctx.fillRect(px2+15, ry, 490, 60);
-  ctx.strokeStyle=canRepair?C.healthGreen:'#333333';
+  ctx.strokeStyle=canRepair?'#00FF00':'#333333';
   ctx.lineWidth=2; ctx.strokeRect(px2+15, ry, 490, 60);
-  ctx.fillStyle=canRepair?C.text:'#555555'; ctx.font='bold 14px monospace';
+  ctx.fillStyle=canRepair?C.text:'#555555'; ctx.font='bold 14px "Courier New", monospace';
   ctx.fillText('REPAIR ALL — $'+cost, px2+25, ry+25);
-  ctx.font='11px monospace'; ctx.fillStyle='#888888';
+  ctx.font='11px "Courier New", monospace'; ctx.fillStyle='#888888';
   ctx.fillText('ENTER to repair', px2+25, ry+48);
 
-  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillStyle=C.gold; ctx.font='bold 13px "Courier New", monospace';
   ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
 }
 
@@ -1830,7 +1878,7 @@ function renderGarageFuel() {
   const car = player.car;
 
   if (!car) {
-    ctx.font='14px monospace'; ctx.fillStyle=C.textDim;
+    ctx.font='14px "Courier New", monospace'; ctx.fillStyle=C.textDim;
     ctx.fillText('Buy a car first!', px2+200, py2+200);
     return;
   }
@@ -1838,14 +1886,14 @@ function renderGarageFuel() {
   const fuelNeeded = car.maxFuel - car.fuel;
   const cost = Math.ceil(fuelNeeded * 0.4 * t.fuelMod);
 
-  ctx.font='12px monospace'; ctx.fillStyle=C.text;
+  ctx.font='12px "Courier New", monospace'; ctx.fillStyle=C.text;
   ctx.fillText('FUEL STATION', px2+15, py2+112);
 
-  ctx.font='11px monospace';
+  ctx.font='11px "Courier New", monospace';
   ctx.fillStyle=C.textDim; ctx.fillText('Current Fuel:', px2+25, py2+145);
   ctx.fillStyle=C.fuelBlue; ctx.fillText(car.fuel.toFixed(1)+'/'+car.maxFuel, px2+150, py2+145);
 
-  // Fuel bar
+  // Fuel bar (simple)
   drawBar(px2+25, py2+155, 460, 16, car.fuel/car.maxFuel, C.fuelBlue);
 
   ctx.fillStyle=C.textDim; ctx.fillText('Needed:', px2+25, py2+185);
@@ -1854,31 +1902,30 @@ function renderGarageFuel() {
   // Fill button
   const ry = py2+205;
   const canFill = fuelNeeded > 0 && stats.cash >= cost;
-  ctx.fillStyle=canFill?'#1a1a2a':'#1a1a1a';
+  ctx.fillStyle=canFill?'#000000':'#000000';
   ctx.fillRect(px2+15, ry, 490, 60);
-  ctx.strokeStyle=canFill?C.fuelBlue:'#333333';
+  ctx.strokeStyle=canFill?'#00AAFF':'#333333';
   ctx.lineWidth=2; ctx.strokeRect(px2+15, ry, 490, 60);
-  ctx.fillStyle=canFill?C.text:'#555555'; ctx.font='bold 14px monospace';
+  ctx.fillStyle=canFill?C.text:'#555555'; ctx.font='bold 14px "Courier New", monospace';
   ctx.fillText('REFUEL — $'+cost, px2+25, ry+25);
-  ctx.font='11px monospace'; ctx.fillStyle='#888888';
+  ctx.font='11px "Courier New", monospace'; ctx.fillStyle='#888888';
   ctx.fillText('ENTER to refuel', px2+25, ry+48);
 
-  ctx.fillStyle=C.gold; ctx.font='bold 13px monospace';
+  ctx.fillStyle=C.gold; ctx.font='bold 13px "Courier New", monospace';
   ctx.fillText('Cash: $'+stats.cash, px2+15, py2+400);
 }
 
 function renderGarageStats() {
-  const t = TOWNS[garageTown];
   const px2 = (canvas.width-520)/2, py2 = (canvas.height-420)/2;
   const car = player.car;
 
-  ctx.font='14px monospace'; ctx.fillStyle=C.text;
+  ctx.font='14px "Courier New", monospace'; ctx.fillStyle=C.text;
   ctx.fillText('CURRENT VEHICLE', px2+15, py2+112);
 
   if (!car) {
-    ctx.font='13px monospace'; ctx.fillStyle=C.textDim;
+    ctx.font='13px "Courier New", monospace'; ctx.fillStyle=C.textDim;
     ctx.fillText('No vehicle — buy one from the BUY tab!', px2+25, py2+145);
-    ctx.font='11px monospace'; ctx.fillStyle=C.textDim;
+    ctx.font='11px "Courier New", monospace'; ctx.fillStyle=C.textDim;
     ctx.fillText('WASD to walk, walk into GARAGE zone to open menu', px2+25, py2+170);
     ctx.fillText('Buy a vehicle, then you can drive on roads between towns', px2+25, py2+188);
     return;
@@ -1904,13 +1951,13 @@ function renderGarageStats() {
 
   lines.forEach(([label, val], i)=>{
     const y = py2+130+i*18;
-    ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
+    ctx.font='10px "Courier New", monospace'; ctx.fillStyle=C.textDim;
     ctx.fillText(label+':', px2+25, y);
     ctx.fillStyle=C.text; ctx.fillText(val, px2+180, y);
   });
 
   // Weapons
-  ctx.font='11px monospace'; ctx.fillStyle=C.text; ctx.fillText('WEAPONS:', px2+300, py2+130);
+  ctx.font='11px "Courier New", monospace'; ctx.fillStyle=C.text; ctx.fillText('WEAPONS:', px2+300, py2+130);
   car.weapons.forEach((w,i)=>{
     const y = py2+148+i*16;
     const def2 = WEAPON_TYPES[w.type];
@@ -1935,29 +1982,29 @@ function renderTitle() {
   ctx.textAlign='center';
 
   // Simple asterisk border
-  ctx.font='10px monospace'; ctx.fillStyle='#00FF00';
+  ctx.font='10px "Courier New", monospace'; ctx.fillStyle='#00FF00';
   const border = '********************************';
   ctx.fillText(border, canvas.width/2, canvas.height/2 - 120);
   ctx.fillText(border, canvas.width/2, canvas.height/2 + 100);
 
   // Title in blocky green text (Apple IIe style)
-  ctx.font='bold 72px monospace'; ctx.fillStyle='#00FF00';
+  ctx.font='bold 72px "Courier New", monospace'; ctx.fillStyle='#00FF00';
   ctx.fillText('AUTODUEL', canvas.width/2, canvas.height/2 - 60);
 
   // Subtitle in amber
-  ctx.font='16px monospace'; ctx.fillStyle='#FFCC00';
+  ctx.font='16px "Courier New", monospace'; ctx.fillStyle='#FFCC00';
   ctx.fillText('A TOP-DOWN VEHICULAR COMBAT GAME', canvas.width/2, canvas.height/2 - 15);
-  ctx.font='13px monospace'; ctx.fillStyle='#888888';
+  ctx.font='13px "Courier New", monospace'; ctx.fillStyle='#888888';
   ctx.fillText('BY ORIGIN SYSTEMS, 1984', canvas.width/2, canvas.height/2 + 10);
 
   // Blinking cursor / start prompt
   if (Math.floor(time*2)%2===0) {
-    ctx.font='bold 20px monospace'; ctx.fillStyle='#FFCC00';
+    ctx.font='bold 20px "Courier New", monospace'; ctx.fillStyle='#FFCC00';
     ctx.fillText('PRESS SPACE TO START', canvas.width/2, canvas.height/2 + 45);
   }
 
   // Controls - simple text
-  ctx.font='12px monospace'; ctx.fillStyle='#00AA00';
+  ctx.font='12px "Courier New", monospace'; ctx.fillStyle='#00AA00';
   ctx.fillText('WASD/ARROWS:MOVE   SPACE:FIRE   TAB:SWITCH WEAPON   ESC:PAUSE', canvas.width/2, canvas.height/2 + 80);
   ctx.fillStyle='#006600';
   ctx.fillText('START ON FOOT, WALK TO GARAGE, BUY A CAR, THEN FIGHT!', canvas.width/2, canvas.height/2 + 100);
@@ -1967,24 +2014,24 @@ function renderTitle() {
 
 function renderPaused() {
   ctx.fillStyle='rgba(0,0,0,0.6)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.font='bold 40px monospace'; ctx.fillStyle=C.text; ctx.textAlign='center';
+  ctx.font='bold 40px "Courier New", monospace'; ctx.fillStyle=C.text; ctx.textAlign='center';
   ctx.fillText('PAUSED', canvas.width/2, canvas.height/2);
-  ctx.font='16px monospace'; ctx.fillStyle=C.textDim;
+  ctx.font='16px "Courier New", monospace'; ctx.fillStyle=C.textDim;
   ctx.fillText('ESC to resume', canvas.width/2, canvas.height/2+35);
   ctx.textAlign='left';
 }
 
 function renderGameOver() {
   ctx.fillStyle='rgba(0,0,0,0.8)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.font='bold 48px monospace'; ctx.fillStyle=C.healthRed; ctx.textAlign='center';
+  ctx.font='bold 48px "Courier New", monospace'; ctx.fillStyle=C.healthRed; ctx.textAlign='center';
   ctx.fillText('WRECKED!', canvas.width/2, canvas.height/2-70);
-  ctx.font='16px monospace'; ctx.fillStyle=C.text;
+  ctx.font='16px "Courier New", monospace'; ctx.fillStyle=C.text;
   ctx.fillText('Your car was destroyed.', canvas.width/2, canvas.height/2-25);
   ctx.fillStyle=C.gold;
   ctx.fillText('Enemies destroyed: '+stats.enemiesDestroyed, canvas.width/2, canvas.height/2+10);
   ctx.fillText('Cash earned: $'+stats.totalCashEarned, canvas.width/2, canvas.height/2+35);
   ctx.fillText('Distance traveled: '+stats.odometer.toFixed(1)+' miles', canvas.width/2, canvas.height/2+60);
-  ctx.font='14px monospace'; ctx.fillStyle=C.text;
+  ctx.font='14px "Courier New", monospace'; ctx.fillStyle=C.text;
   ctx.fillText('Press SPACE to restart', canvas.width/2, canvas.height/2+100);
   ctx.textAlign='left';
 }
