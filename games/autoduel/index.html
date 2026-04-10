@@ -8,888 +8,1067 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #0d0d0d; overflow: hidden; font-family: 'Courier New', monospace; }
   canvas { display: block; }
+
+  /* ── TITLE SCREEN ── */
+  #title-screen {
+    position: fixed; inset: 0; background: #0d0d0d; z-index: 300;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  #title-screen h1 {
+    font-size: 56px; color: #cc2200; letter-spacing: 8px;
+    text-shadow: 0 0 30px #cc220066; margin-bottom: 6px;
+  }
+  #title-screen .tagline {
+    color: #555; font-size: 13px; letter-spacing: 4px; margin-bottom: 50px;
+  }
+  .title-car-wrap {
+    position: relative; width: 500px; height: 60px; overflow: hidden; margin-bottom: 40px;
+  }
+  .title-car {
+    position: absolute; top: 20px;
+    font-size: 40px; line-height: 1;
+    animation: driveCar 8s linear infinite;
+  }
+  @keyframes driveCar {
+    0%   { left: -60px; }
+    100% { left: 560px; }
+  }
+  .title-road-line {
+    position: absolute; top: 38px; left: 0; right: 0; height: 3px;
+    background: repeating-linear-gradient(90deg, #f0c000 0, #f0c000 30px, transparent 30px, transparent 60px);
+    animation: roadScroll 0.6s linear infinite;
+  }
+  @keyframes roadScroll {
+    0%   { background-position: 0 0; }
+    100% { background-position: 60px 0; }
+  }
+  .title-info {
+    color: #444; font-size: 12px; text-align: center; line-height: 1.8; margin-bottom: 30px;
+    max-width: 440px;
+  }
+  #join-btn {
+    padding: 14px 44px; font-size: 15px; background: #111; border: 2px solid #cc2200;
+    color: #cc2200; cursor: pointer; font-family: inherit; letter-spacing: 4px;
+    transition: background 0.2s;
+  }
+  #join-btn:hover { background: #2a0a00; }
+
+  /* ── GAMEOVER ── */
+  #gameover-screen {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 250;
+    display: none; flex-direction: column; align-items: center; justify-content: center; color: #f0f0f0;
+  }
+  #gameover-screen.active { display: flex; }
+  #gameover-screen h2 { font-size: 42px; color: #cc2200; margin-bottom: 16px; }
+  #gameover-screen p { color: #888; font-size: 13px; margin-bottom: 6px; }
+  #restart-btn {
+    margin-top: 24px; padding: 12px 30px; background: #111; border: 2px solid #00aa00;
+    color: #00aa00; cursor: pointer; font-family: inherit; letter-spacing: 2px; font-size: 13px;
+  }
+  #restart-btn:hover { background: #0a2a0a; }
+
+  /* ── TOWN/GARAGE OVERLAY ── */
   #overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); display: none; z-index: 100;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: none; z-index: 200;
     color: #f0f0f0; overflow-y: auto;
   }
   #overlay.active { display: flex; align-items: center; justify-content: center; }
-  .town-panel {
-    background: #111; border: 2px solid #4444aa; border-radius: 4px;
-    padding: 24px; min-width: 480px; max-width: 600px; width: 90%;
+  .garage-panel {
+    background: #111; border: 2px solid #cc2200; border-radius: 4px;
+    padding: 28px; min-width: 520px; max-width: 580px; width: 95%;
+    box-shadow: 0 0 40px #cc220033;
   }
-  .town-panel h2 { color: #4444aa; text-align: center; margin-bottom: 16px; font-size: 20px; letter-spacing: 2px; }
-  .tabs { display: flex; gap: 4px; margin-bottom: 16px; }
-  .tab {
-    flex: 1; padding: 8px; text-align: center; cursor: pointer;
-    background: #222; border: 1px solid #444; color: #888; font-size: 13px;
+  .garage-panel h2 { color: #cc2200; text-align: center; margin-bottom: 4px; font-size: 18px; letter-spacing: 3px; }
+  .garage-panel .sub { color: #555; text-align: center; font-size: 11px; margin-bottom: 18px; letter-spacing: 2px; }
+  .money-row { color: #f0c000; font-size: 16px; text-align: right; margin-bottom: 16px; }
+  .gtabs { display: flex; gap: 4px; margin-bottom: 16px; }
+  .gtab {
+    flex: 1; padding: 9px; text-align: center; cursor: pointer;
+    background: #1a1a1a; border: 1px solid #333; color: #666; font-size: 12px; letter-spacing: 1px;
   }
-  .tab.active { background: #333; color: #f0f0f0; border-color: #4444aa; }
-  .tab:hover:not(.active) { background: #2a2a2a; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { color: #4444aa; border-bottom: 1px solid #333; padding: 6px 4px; text-align: left; }
-  td { padding: 6px 4px; border-bottom: 1px solid #1a1a1a; }
-  tr:hover { background: #1a1a1a; }
+  .gtab.active { background: #222; color: #f0f0f0; border-color: #cc2200; }
+  .gtab:hover:not(.active) { background: #222; color: #aaa; }
+  .gtab-content { display: none; }
+  .gtab-content.active { display: block; }
+
+  /* car list */
+  .car-card {
+    border: 1px solid #2a2a2a; border-radius: 3px; padding: 12px; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .car-card:hover { border-color: #555; }
+  .car-card.owned { border-color: #cc2200; background: #1a0a00; }
+  .car-icon { font-size: 28px; }
+  .car-info { flex: 1; }
+  .car-name { font-size: 13px; color: #ccc; margin-bottom: 3px; }
+  .car-stats { font-size: 10px; color: #555; }
+  .car-price { font-size: 13px; color: #f0c000; white-space: nowrap; }
+  .car-equipped { color: #cc2200; font-size: 10px; margin-top: 2px; }
+
+  /* stats in garage */
+  .stat-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; }
+  .stat-label { color: #666; width: 50px; }
+  .stat-bar-bg { flex: 1; height: 8px; background: #1a1a1a; border: 1px solid #2a2a2a; }
+  .stat-bar-fill { height: 100%; }
+  .stat-val { color: #ccc; width: 60px; text-align: right; font-size: 11px; }
+
+  /* action buttons */
+  .action-row { display: flex; gap: 8px; margin-top: 14px; }
   .btn {
-    padding: 6px 14px; cursor: pointer; background: #222; border: 1px solid #444;
-    color: #f0f0f0; font-family: inherit; font-size: 12px;
+    flex: 1; padding: 9px 8px; cursor: pointer; background: #1a1a1a;
+    border: 1px solid #333; color: #888; font-family: inherit; font-size: 12px; letter-spacing: 1px;
   }
-  .btn:hover { background: #333; border-color: #4444aa; }
-  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn-buy { border-color: #00aa44; color: #00aa44; }
+  .btn:hover:not(:disabled) { background: #222; color: #f0f0f0; border-color: #555; }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-buy  { border-color: #00aa44; color: #00aa44; }
   .btn-buy:hover:not(:disabled) { background: #0a2a10; }
   .btn-sell { border-color: #aa6600; color: #aa6600; }
   .btn-sell:hover:not(:disabled) { background: #2a1a00; }
-  .close-btn { float: right; cursor: pointer; color: #666; font-size: 18px; }
-  .close-btn:hover { color: #f0f0f0; }
-  .stat-bar { height: 8px; background: #222; border: 1px solid #333; margin-top: 3px; }
-  .stat-fill { height: 100%; }
-  .money { color: #f0c000; font-size: 15px; text-align: right; margin-bottom: 12px; }
-  .cargo-row { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; }
-  .cargo-name { flex: 1; font-size: 12px; color: #aaa; }
-  .cargo-qty { font-size: 12px; color: #f0f0f0; width: 40px; text-align: center; }
-  .garage-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1a1a1a; }
-  .garage-name { flex: 1; font-size: 12px; color: #ccc; }
-  .garage-equipped { color: #4444aa; font-size: 11px; }
-  .equipped-tag { color: #00aa44; font-size: 11px; }
-  #start-screen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #0d0d0d; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; z-index: 200;
-  }
-  #start-screen h1 { font-size: 48px; color: #00aa00; letter-spacing: 6px; margin-bottom: 8px; text-shadow: 0 0 20px #00aa0066; }
-  #start-screen .sub { color: #666; font-size: 14px; margin-bottom: 40px; letter-spacing: 3px; }
-  #start-screen .info { color: #444; font-size: 12px; margin-bottom: 8px; max-width: 500px; text-align: center; line-height: 1.6; }
-  #start-btn { padding: 14px 40px; font-size: 16px; background: #111; border: 2px solid #00aa00; color: #00aa00; cursor: pointer; font-family: inherit; letter-spacing: 3px; margin-top: 30px; }
-  #start-btn:hover { background: #0a2a0a; }
-  #gameover-screen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); display: none; flex-direction: column;
-    align-items: center; justify-content: center; z-index: 200; color: #f0f0f0;
-  }
-  #gameover-screen.active { display: flex; }
-  #gameover-screen h2 { font-size: 36px; color: #cc2200; margin-bottom: 20px; }
-  #gameover-screen p { color: #888; margin-bottom: 8px; }
-  #restart-btn { padding: 12px 30px; font-size: 14px; background: #111; border: 2px solid #00aa00; color: #00aa00; cursor: pointer; font-family: inherit; margin-top: 20px; }
-  #restart-btn:hover { background: #0a2a0a; }
+  .btn-action { border-color: #4444aa; color: #4444aa; }
+  .btn-action:hover:not(:disabled) { background: #0a0a2a; }
+  .btn-leave { border-color: #555; color: #666; margin-top: 10px; }
+  .btn-leave:hover { background: #1a1a1a; color: #aaa; }
+
+  /* sell row */
+  .sell-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #1a1a1a; font-size: 12px; }
+  .sell-name { flex: 1; color: #aaa; }
+  .sell-qty  { color: #666; width: 60px; text-align: center; }
+  .sell-val  { color: #f0c000; width: 60px; text-align: right; }
+
+  .close-hint { text-align: center; color: #333; font-size: 10px; margin-top: 14px; letter-spacing: 1px; }
 </style>
 </head>
 <body>
 
-<div id="start-screen">
+<!-- TITLE SCREEN -->
+<div id="title-screen">
   <h1>AUTODUEL</h1>
-  <div class="sub">ORIGIN SYSTEMS 1984 — WEB REMAKE</div>
-  <div class="info">Drive weaponized cars across a wasteland road network. Fight enemies. Salvage scrap. Trade goods. Upgrade your ride. Survive.</div>
-  <div class="info">WASD or Arrow Keys to drive &bull; SPACE to fire<br>Drive into a blue town zone to trade &bull; Destroy enemies for scrap and money</div>
-  <button id="start-btn" onclick="startGame()">J O I N &nbsp; T H E &nbsp; R O A D</button>
+  <div class="tagline">ORIGIN SYSTEMS 1984 — WEB REMAKE</div>
+  <div class="title-car-wrap">
+    <div class="title-road-line"></div>
+    <div class="title-car">🚗</div>
+  </div>
+  <div class="title-info">
+    The wasteland awaits. Walk to the garage, buy a car, and hit the road.<br>
+    Destroy enemy vehicles for cash and scrap. Don't get wrecked.<br><br>
+    <span style="color:#555">WASD / Arrows</span> — Walk or Drive &nbsp;|&nbsp; <span style="color:#555">SPACE</span> — Fire<br>
+    Walk into the <span style="color:#cc2200">GARAGE</span> zone to buy, sell, and repair
+  </div>
+  <button id="join-btn" onclick="beginGame()">JOIN THE ROAD</button>
 </div>
 
+<!-- GAMEOVER -->
 <div id="gameover-screen">
   <h2>WRECKED</h2>
   <p id="go-stats"></p>
   <button id="restart-btn" onclick="restartGame()">TRY AGAIN</button>
 </div>
 
-<canvas id="c"></canvas>
-
+<!-- TOWN/GARAGE OVERLAY -->
 <div id="overlay">
-  <div class="town-panel">
-    <span class="close-btn" onclick="closeTown()">&times;</span>
-    <h2 id="town-name">TOWN</h2>
-    <div class="money">CREDITS: <span id="town-money">0</span></div>
-    <div class="tabs">
-      <div class="tab active" onclick="switchTab('buy')">BUY</div>
-      <div class="tab" onclick="switchTab('sell')">SELL</div>
-      <div class="tab" onclick="switchTab('garage')">GARAGE</div>
+  <div class="garage-panel">
+    <h2 id="garage-town-name">BARREN ROCK</h2>
+    <div class="sub">VEHICLE DEPOT &amp; SUPPLY STORE</div>
+    <div class="money-row">CREDITS: <span id="garage-money">0</span></div>
+    <div class="gtabs">
+      <div class="gtab active" data-tab="cars">BUY CAR</div>
+      <div class="gtab" data-tab="sell">SELL</div>
+      <div class="gtab" data-tab="garage">GARAGE</div>
     </div>
-    <div id="tab-buy" class="tab-content active"></div>
-    <div id="tab-sell" class="tab-content"></div>
-    <div id="tab-garage" class="tab-content"></div>
+    <div id="tab-cars" class="gtab-content active"></div>
+    <div id="tab-sell" class="gtab-content"></div>
+    <div id="tab-garage" class="gtab-content"></div>
+    <div class="close-hint">ESC or EXIT to leave</div>
+    <div class="action-row">
+      <button class="btn btn-leave" onclick="leaveGarage()">EXIT GARAGE</button>
+    </div>
   </div>
 </div>
+
+<canvas id="c"></canvas>
 
 <script>
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
-const WORLD_W = 3000, WORLD_H = 2000;
-const ROAD_W = 80;
-const BASE_PRICES = {
-  machineGun: 500,  armor: 300,  fuel: 20,  repairKit: 80,
-  scrap: 30,       cargo: 100
-};
+const WORLD_W = 3200, WORLD_H = 2200;
+const ROAD_W   = 80;
+const WALK_SPD = 85;   // px/s walking
+const START_MONEY = 600;
 
-// ─── GAME STATE ──────────────────────────────────────────────────────────────
-let gameState = 'start'; // start | playing | town | gameover
-let tick = 0;
-let screenShake = 0;
-let player, enemies, bullets, particles, towns, roads, projectiles;
-let keys = {};
-let currentTown = null;
-let cam = { x: 0, y: 0 };
-
-// ─── TOWNS ────────────────────────────────────────────────────────────────────
-const TOWN_DEFS = [
-  { name: 'BARREN ROCK',  x: 200,  y: 500,  w: 180, h: 160,
-    buyMult:  { machineGun: 1.3, armor: 0.8, fuel: 0.6, repairKit: 1.0 },
-    sellMult: { scrap: 1.2, cargo: 0.7 } },
-  { name: 'DUSTY SPUR',   x: 1200, y: 800,  w: 180, h: 160,
-    buyMult:  { machineGun: 0.7, armor: 1.4, fuel: 1.1, repairKit: 0.9 },
-    sellMult: { scrap: 0.9, cargo: 1.3 } },
-  { name: 'NEW DENVER',   x: 600,  y: 1600, w: 180, h: 160,
-    buyMult:  { machineGun: 1.0, armor: 1.0, fuel: 1.0, repairKit: 1.0 },
-    sellMult: { scrap: 1.0, cargo: 1.0 } },
+// ─── CAR DEFINITIONS ─────────────────────────────────────────────────────────
+const CAR_DEFS = [
+  { id:'rusty',  name:'Rusty Sedan',   price:500,  armor:30, hull:70,  fuel:100, maxFuel:100, speed:190, color:'#8B4513', w:28, h:16 },
+  { id:'coupe',  name:'Road Coupe',   price:900,  armor:50, hull:90,  fuel:100, maxFuel:100, speed:210, color:'#2255aa', w:30, h:17 },
+  { id:'muscle', name:'Muscle Coupe',  price:1600, armor:60, hull:110, fuel:120, maxFuel:120, speed:235, color:'#aa2222', w:32, h:18 },
+  { id:'truck',  name:'Battle Truck', price:2800, armor:100,hull:150, fuel:150, maxFuel:150, speed:170, color:'#2a6a2a', w:36, h:20 },
+  { id:'sports', name:'Sports Car',   price:3500, armor:40, hull:80,  fuel:80,  maxFuel:80,  speed:260, color:'#d4aa00', w:30, h:16 },
 ];
 
-// ─── ROADS (waypoint pairs) ───────────────────────────────────────────────────
+// ─── TOWN DEFINITIONS ────────────────────────────────────────────────────────
+const TOWN_DEFS = [
+  { name:'BARREN ROCK',  x:180,  y:460,  w:200, h:180,
+    gx:230, gy:510, gw:80, gh:60,
+    buyMult:{},  sellMult:{} },
+  { name:'DUSTY SPUR',   x:1160, y:760,  w:200, h:180,
+    gx:1210, gy:810, gw:80, gh:60,
+    buyMult:{},  sellMult:{} },
+  { name:'NEW DENVER',   x:580,  y:1560, w:200, h:180,
+    gx:630,  gy:1610, gw:80, gh:60,
+    buyMult:{},  sellMult:{} },
+  { name:'IRON CITY',    x:2100, y:400,  w:200, h:180,
+    gx:2150, gy:450, gw:80, gh:60,
+    buyMult:{},  sellMult:{} },
+  { name:'SAND FLATS',   x:1800, y:1400, w:200, h:180,
+    gx:1850, gy:1450, gw:80, gh:60,
+    buyMult:{},  sellMult:{} },
+];
+
+// ─── ROAD SEGMENTS ───────────────────────────────────────────────────────────
 const ROAD_SEGS = [
-  // Barren Rock ↔ Dusty Spur
-  [{x:290,y:580},{x:700,y:640},{x:1100,y:720},{x:1200,y:800}],
-  // Dusty Spur ↔ New Denver
-  [{x:1200,y:800},{x:900,y:1100},{x:700,y:1400},{x:660,y:1600}],
-  // Barren Rock ↔ New Denver
-  [{x:290,y:580},{x:350,y:900},{x:420,y:1200},{x:550,y:1480},{x:660,y:1600}],
+  // Barren Rock → Dusty Spur
+  [{x:280,y:550},{x:700,y:620},{x:1000,y:700},{x:1160,y:760}],
+  // Dusty Spur → New Denver
+  [{x:1160,y:760},{x:900,y:1050},{x:720,y:1350},{x:660,y:1560}],
+  // Barren Rock → New Denver
+  [{x:280,y:550},{x:350,y:850},{x:440,y:1150},{x:560,y:1440},{x:660,y:1560}],
+  // Barren Rock → Iron City
+  [{x:280,y:550},{x:600,y:500},{x:1000,y:470},{x:1400,y:440},{x:1800,y:420},{x:2100,y:400}],
+  // Iron City → Dusty Spur
+  [{x:2100,y:400},{x:1800,y:500},{x:1500,y:580},{x:1260,y:680},{x:1160,y:760}],
+  // Dusty Spur → Sand Flats
+  [{x:1160,y:760},{x:1300,y:950},{x:1500,y:1150},{x:1660,y:1300},{x:1800,y:1400}],
+  // Sand Flats → New Denver
+  [{x:1800,y:1400},{x:1500,y:1480},{x:1200,y:1520},{x:960,y:1540},{x:780,y:1560}],
 ];
 
 // ─── UTIL ─────────────────────────────────────────────────────────────────────
-function lerp(a,b,t) { return a+(b-a)*t; }
-function dist(a,b) { return Math.hypot(a.x-b.x,a.y-b.y); }
-function rng(min,max) { return min+Math.random()*(max-min); }
-function clamp(v,min,max) { return Math.max(min,Math.min(max,v)); }
-
-function pointToSegment(p, a, b) {
-  const dx = b.x-a.x, dy = b.y-a.y;
-  const len2 = dx*dx+dy*dy;
-  if (len2 === 0) return { t:0, d:dist(p,a), px:a.x, py:a.y };
-  let t = ((p.x-a.x)*dx+(p.y-a.y)*dy)/len2;
-  t = clamp(t,0,1);
-  return { t, d: dist(p,{x:a.x+t*dx,y:a.y+t*dy}), px:a.x+t*dx, py:a.y+t*dy };
+function lerp(a,b,t){ return a+(b-a)*t; }
+function dist(a,b){ return Math.hypot(a.x-b.x, a.y-b.y); }
+function rng(min,max){ return min+Math.random()*(max-min); }
+function clamp(v,min,max){ return Math.max(min,Math.min(max,v)); }
+function ptSeg(p,a,b){
+  const dx=b.x-a.x, dy=b.y-a.y, len2=dx*dx+dy*dy;
+  if(len2===0) return {t:0,d:dist(p,a),px:a.x,py:a.y};
+  let t=((p.x-a.x)*dx+(p.y-a.y)*dy)/len2;
+  t=clamp(t,0,1);
+  return {t,d:dist(p,{x:a.x+t*dx,y:a.y+t*dy}),px:a.x+t*dx,py:a.y+t*dy};
 }
-
-function distToRoad(p, segs) {
-  let best = Infinity;
-  for (const seg of segs) {
-    for (let i = 0; i < seg.length-1; i++) {
-      const r = pointToSegment(p, seg[i], seg[i+1]);
-      if (r.d < best) best = r.d;
-    }
-  }
+function distToRoad(p){
+  let best=Infinity;
+  for(const seg of ROAD_SEGS)
+    for(let i=0;i<seg.length-1;i++){ const r=ptSeg(p,seg[i],seg[i+1]); if(r.d<best) best=r.d; }
   return best;
 }
+function isOnRoad(p){ return distToRoad(p) < ROAD_W/2+8; }
+function roadNear(p){ return distToRoad(p) < ROAD_W/2+30; }
 
-function isOnRoad(p) { return distToRoad(p, ROAD_SEGS) < ROAD_W/2 + 10; }
+// ─── GAME STATE ───────────────────────────────────────────────────────────────
+let G = {}; // main game state
+let keys = {};
+let tick = 0;
+let screenShake = 0;
+let bullets = [], particles = [], enemyBullets = [];
+let cam = {x:0, y:0};
+let lastTime = 0;
 
-function roadPos(p) {
-  let best = Infinity, bx=p.x, by=p.y;
-  for (const seg of ROAD_SEGS) {
-    for (let i = 0; i < seg.length-1; i++) {
-      const r = pointToSegment(p, seg[i], seg[i+1]);
-      if (r.d < best) { best = r.d; bx = r.px; by = r.py; }
-    }
+// ─── WALKER (player on foot) ─────────────────────────────────────────────────
+class Walker {
+  constructor(x,y){
+    this.x=x; this.y=y; this.vx=0; this.vy=0;
+    this.alive=true; this.w=6; this.h=6;
+    this.inTown=true; // always true for walker
   }
-  return { x:bx, y:by, d:best };
+  update(dt){
+    if(!this.alive) return;
+    let mx=0, my=0;
+    if(keys['ArrowLeft']  || keys['KeyA']) mx=-1;
+    if(keys['ArrowRight'] || keys['KeyD']) mx=1;
+    if(keys['ArrowUp']    || keys['KeyW']) my=-1;
+    if(keys['ArrowDown']  || keys['KeyS']) my=1;
+    if(mx&&my){ mx*=0.707; my*=0.707; }
+    this.vx=lerp(this.vx,mx*WALK_SPD,0.2);
+    this.vy=lerp(this.vy,my*WALK_SPD,0.2);
+    this.x=clamp(this.x+this.vx*dt, this.w, WORLD_W-this.w);
+    this.y=clamp(this.y+this.vy*dt, this.h, WORLD_H-this.h);
+  }
+  draw(cam){
+    const sx=this.x-cam.x+canvas.width/2;
+    const sy=this.y-cam.y+canvas.height/2;
+    // Shadow
+    ctx.fillStyle='rgba(0,0,0,0.25)';
+    ctx.beginPath(); ctx.ellipse(sx+2,sy+2,5,3,0,0,Math.PI*2); ctx.fill();
+    // Body circle
+    ctx.fillStyle='#00cc88';
+    ctx.beginPath(); ctx.arc(sx,sy,this.w,0,Math.PI*2); ctx.fill();
+    // Head
+    ctx.fillStyle='#00eeaa';
+    ctx.beginPath(); ctx.arc(sx,sy-8,4,0,Math.PI*2); ctx.fill();
+    // Direction indicator
+    const angle=Math.atan2(this.vy,this.vx);
+    ctx.strokeStyle='#00eeaa'; ctx.lineWidth=1.5;
+    ctx.beginPath();
+    ctx.moveTo(sx,sy);
+    ctx.lineTo(sx+Math.cos(angle)*8, sy+Math.sin(angle)*8);
+    ctx.stroke();
+  }
 }
 
-// ─── CAR CLASS ────────────────────────────────────────────────────────────────
+// ─── CAR ─────────────────────────────────────────────────────────────────────
 class Car {
-  constructor(x, y, isPlayer) {
-    this.x = x; this.y = y;
-    this.vx = 0; this.vy = 0;
-    this.angle = isPlayer ? 0 : rng(0, Math.PI*2);
-    this.speed = 0;
-    this.isPlayer = isPlayer;
-    this.armor = isPlayer ? 100 : 80;
-    this.maxArmor = this.armor;
-    this.hull = isPlayer ? 100 : 60;
-    this.maxHull = this.hull;
-    this.fuel = 100;
-    this.maxFuel = 100;
-    this.alive = true;
-    this.fireCooldown = 0;
-    this.w = 30; this.h = 18;
-    this.weapons = [{type:'machineGun',qty:1}];
-    this.scrap = 0;
-    this.cargo = { type:null, qty:0 };
-    this.turnDir = 0;
-    this.throttle = 0;
-    this.color = isPlayer ? '#00aa00' : '#cc2200';
+  constructor(def, x, y, isPlayer){
+    Object.assign(this, {
+      x,y, vx:0, vy:0, angle:0, speed:0,
+      isPlayer, alive:true, fireCooldown:0,
+      weapons:[{type:'machineGun',qty:1}],
+      scrap:0, cargo:{type:null,qty:0},
+      turnDir:0, throttle:0, money:0,
+    });
+    const d = def;
+    this.defId      = d.id;
+    this.name       = d.name;
+    this.armor      = d.armor;
+    this.maxArmor   = d.armor;
+    this.hull       = d.hull;
+    this.maxHull    = d.hull;
+    this.fuel       = d.fuel;
+    this.maxFuel    = d.maxFuel;
+    this.maxSpeed   = d.speed;
+    this.color      = d.color;
+    this.cw         = d.w;
+    this.ch         = d.h;
+    this.accel      = 110;
+    this.drag       = 0.97;
   }
 
-  get maxSpeed() {
-    const onRoad = isOnRoad(this);
-    return onRoad ? 200 : 60;
-  }
-  get accel() { return isOnRoad(this) ? 120 : 40; }
+  get maxSpd(){ return isOnRoad(this) ? this.maxSpeed : 55; }
 
-  update(dt) {
-    if (!this.alive) return;
-    if (this.isPlayer) this._control(dt);
+  update(dt){
+    if(!this.alive) return;
+    if(this.isPlayer) this._ctrl(dt);
     else this._ai(dt);
 
-    // Physics
     const drag = 0.97;
-    this.vx *= drag; this.vy *= drag;
-    const ax = Math.cos(this.angle) * this.throttle * this.accel * dt;
-    const ay = Math.sin(this.angle) * this.throttle * this.accel * dt;
-    this.vx += ax; this.vy += ay;
+    this.vx*=drag; this.vy*=drag;
+    const ax=Math.cos(this.angle)*this.throttle*this.accel*dt;
+    const ay=Math.sin(this.angle)*this.throttle*this.accel*dt;
+    this.vx+=ax; this.vy+=ay;
+    if(!isOnRoad(this)){ this.vx*=0.92; this.vy*=0.92; }
 
-    // Off-road drag
-    if (!isOnRoad(this)) { this.vx *= 0.92; this.vy *= 0.92; }
+    const spd=Math.hypot(this.vx,this.vy);
+    if(spd>this.maxSpd){ this.vx=this.vx/spd*this.maxSpd; this.vy=this.vy/spd*this.maxSpd; }
+    this.speed=spd;
 
-    // Clamp speed
-    const spd = Math.hypot(this.vx, this.vy);
-    if (spd > this.maxSpeed) { this.vx = this.vx/spd*this.maxSpeed; this.vy = this.vy/spd*this.maxSpeed; }
-    this.speed = spd;
+    this.x=clamp(this.x+this.vx*dt, this.cw, WORLD_W-this.cw);
+    this.y=clamp(this.y+this.vy*dt, this.ch, WORLD_H-this.ch);
 
-    this.x = clamp(this.x + this.vx*dt, this.w, WORLD_W - this.w);
-    this.y = clamp(this.y + this.vy*dt, this.h, WORLD_H - this.h);
-
-    // Fuel
-    if (this.throttle > 0) this.fuel -= this.throttle * 8 * dt;
-    this.fuel = Math.max(0, this.fuel);
-    if (this.fuel <= 0) { this.throttle = 0; }
-
-    // Cooldown
-    if (this.fireCooldown > 0) this.fireCooldown -= dt;
+    if(this.throttle>0) this.fuel-=this.throttle*6*dt;
+    this.fuel=Math.max(0,this.fuel);
+    if(this.fuel<=0) this.throttle=0;
+    if(this.fireCooldown>0) this.fireCooldown-=dt;
   }
 
-  _control(dt) {
-    const turn = Math.min(1, this.speed / 60);
-    if (keys['ArrowLeft']  || keys['KeyA']) this.angle -= 2.5 * turn * dt;
-    if (keys['ArrowRight'] || keys['KeyD']) this.angle += 2.5 * turn * dt;
-    this.throttle = 0;
-    if (keys['ArrowUp']   || keys['KeyW']) this.throttle = 1;
-    if (keys['ArrowDown'] || keys['KeyS']) this.throttle = -0.5;
-    if ((keys['Space'] || keys['KeyX']) && this.fireCooldown <= 0) this.fire();
+  _ctrl(dt){
+    const turn=Math.min(1,this.speed/55);
+    if(keys['ArrowLeft']  || keys['KeyA']) this.angle-=2.5*turn*dt;
+    if(keys['ArrowRight'] || keys['KeyD']) this.angle+=2.5*turn*dt;
+    this.throttle=0;
+    if(keys['ArrowUp']   || keys['KeyW']) this.throttle=1;
+    if(keys['ArrowDown'] || keys['KeyS']) this.throttle=-0.4;
+    if((keys['Space']||keys['KeyX'])&&this.fireCooldown<=0&&this.fuel>0) this.fire();
   }
 
-  _ai(dt) {
-    // Find nearest player or road target
-    if (!player || !player.alive) return;
-    const dx = player.x - this.x, dy = player.y - this.y;
-    const d = Math.hypot(dx, dy);
-    const tAngle = Math.atan2(dy, dx);
-
-    // Turn toward player
-    let diff = tAngle - this.angle;
-    while (diff > Math.PI) diff -= Math.PI*2;
-    while (diff < -Math.PI) diff += Math.PI*2;
-    this.angle += clamp(diff, -2.0*dt, 2.0*dt);
-
-    // Throttle
-    this.throttle = d > 80 ? 0.9 : d < 40 ? -0.3 : 0.3;
-
-    // Fire when in range and roughly aimed
-    if (d < 250 && Math.abs(diff) < 0.4 && this.fireCooldown <= 0) this.fire();
+  _ai(dt){
+    if(!G.player||!G.player.alive) return;
+    const dx=G.player.x-this.x, dy=G.player.y-this.y;
+    const d=Math.hypot(dx,dy);
+    const ta=Math.atan2(dy,dx);
+    let diff=ta-this.angle;
+    while(diff>Math.PI) diff-=Math.PI*2;
+    while(diff<-Math.PI) diff+=Math.PI*2;
+    this.angle+=clamp(diff,-2.0*dt,2.0*dt);
+    this.throttle=d>80?0.85:d<40?-0.3:0.3;
+    if(d<260&&Math.abs(diff)<0.5&&this.fireCooldown<=0) this.fire();
   }
 
-  fire() {
-    if (this.fireCooldown > 0 || this.fuel <= 0) return;
-    const w = { machineGun: 0.15, cannon: 0.8 }[this.weapons[0]?.type] || 0.15;
-    this.fireCooldown = w;
-    const spread = (Math.random()-0.5)*0.08;
-    const bx = this.x + Math.cos(this.angle)*18;
-    const by = this.y + Math.sin(this.angle)*18;
-    bullets.push(new Bullet(bx, by, this.angle + spread, this.isPlayer));
-
-    // Muzzle flash particle
-    for (let i = 0; i < 3; i++)
-      particles.push({ x:bx, y:by, vx: Math.cos(this.angle)*rng(20,60), vy: Math.sin(this.angle)*rng(20,60), life:0.12, color:'#ffff88', r:4, type:'flash' });
+  fire(){
+    if(this.fireCooldown>0||this.fuel<=0) return;
+    this.fireCooldown=0.14;
+    const sp=(Math.random()-0.5)*0.06;
+    const bx=this.x+Math.cos(this.angle)*this.cw/2;
+    const by=this.y+Math.sin(this.angle)*this.cw/2;
+    const b=new Bullet(bx,by,this.angle+sp,this.isPlayer);
+    if(this.isPlayer) bullets.push(b); else enemyBullets.push(b);
+    // muzzle flash
+    for(let i=0;i<3;i++) particles.push({
+      x:bx,y:by,
+      vx:Math.cos(this.angle)*rng(20,60), vy:Math.sin(this.angle)*rng(20,60),
+      life:0.1, color:'#ffff88', r:4, type:'flash'
+    });
   }
 
-  takeDamage(amount) {
-    if (this.armor > 0) {
-      const a = Math.min(this.armor, amount);
-      this.armor -= a; amount -= a;
+  takeDmg(amt){
+    if(this.armor>0){
+      const a=Math.min(this.armor,amt); this.armor-=a; amt-=a;
     }
-    if (amount > 0) this.hull -= amount;
-    if (this.isPlayer) screenShake = 0.3;
-    if (this.hull <= 0) this.die();
+    if(amt>0) this.hull-=amt;
+    if(this.isPlayer) screenShake=0.3;
+    if(this.hull<=0) this.die();
   }
 
-  die() {
-    this.alive = false;
-    // Explosion
-    for (let i = 0; i < 20; i++) {
-      const a = rng(0, Math.PI*2), sp = rng(30,120);
-      particles.push({ x:this.x, y:this.y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp,
-        life: rng(0.4,1.0), color: ['#ff4400','#ff8800','#ffcc00','#444'][Math.floor(rng(0,4))],
-        r: rng(3,8), type:'spark' });
+  die(){
+    this.alive=false;
+    for(let i=0;i<22;i++){
+      const a=rng(0,Math.PI*2), sp=rng(30,130);
+      particles.push({x:this.x,y:this.y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,
+        life:rng(0.4,1.1), color:['#ff4400','#ff8800','#ffcc00','#666'][Math.floor(rng(0,4))],
+        r:rng(3,9), type:'spark'});
     }
-    // Drop scrap
-    if (!this.isPlayer) {
-      const scrapAmt = Math.floor(rng(2,7));
-      particles.push({ x:this.x, y:this.y, vx:0, vy:0, life:999, scrapAmt,
-        color:'#888', r:10, type:'scrap' });
-      // Money drop
-      const val = Math.floor(rng(50,150));
-      player.money = (player.money||0) + val;
-      particles.push({ x:this.x, y:this.y-20, vx:0, vy:-30, life:1.5,
-        text:'+$'+val, color:'#f0c000', type:'text' });
+    if(!this.isPlayer){
+      const sa=Math.floor(rng(2,6));
+      particles.push({x:this.x,y:this.y,vx:0,vy:0,life:999,scrapAmt:sa,color:'#888',r:10,type:'scrap'});
+      const val=Math.floor(rng(50,160));
+      if(G.player) G.player.money=(G.player.money||0)+val;
+      particles.push({x:this.x,y:this.y-22,vx:0,vy:-28,life:1.6,
+        text:'+$'+val, color:'#f0c000', type:'text'});
     }
   }
 
-  draw() {
-    if (!this.alive) return;
-    const sx = this.x - cam.x + canvas.width/2;
-    const sy = this.y - cam.y + canvas.height/2;
+  draw(cam){
+    if(!this.alive) return;
+    const sx=this.x-cam.x+canvas.width/2;
+    const sy=this.y-cam.y+canvas.height/2;
     ctx.save();
-    ctx.translate(sx, sy);
-    ctx.rotate(this.angle);
-
-    // Shadow
-    ctx.fillStyle = 'rgba(0,0,0,0.3)';
-    ctx.fillRect(-this.w/2+3, -this.h/2+3, this.w, this.h);
-
-    // Body
-    ctx.fillStyle = this.color;
-    ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
-
-    // Front (darker)
-    ctx.fillStyle = 'rgba(0,0,0,0.4)';
-    ctx.fillRect(this.w/2-8, -this.h/2, 8, this.h);
-
-    // Windshield
-    ctx.fillStyle = 'rgba(100,200,255,0.3)';
-    ctx.fillRect(this.w/2-10, -this.h/2+2, 5, this.h-4);
-
-    // Gun barrel
-    ctx.fillStyle = '#555';
-    ctx.fillRect(this.w/2, -2, 8, 4);
-
+    ctx.translate(sx,sy); ctx.rotate(this.angle);
+    // shadow
+    ctx.fillStyle='rgba(0,0,0,0.3)';
+    ctx.fillRect(-this.cw/2+3,-this.ch/2+3,this.cw,this.ch);
+    // body
+    ctx.fillStyle=this.color;
+    ctx.fillRect(-this.cw/2,-this.ch/2,this.cw,this.ch);
+    // front
+    ctx.fillStyle='rgba(0,0,0,0.35)';
+    ctx.fillRect(this.cw/2-7,-this.ch/2,7,this.ch);
+    // windshield
+    ctx.fillStyle='rgba(100,200,255,0.25)';
+    ctx.fillRect(this.cw/2-9,-this.ch/2+2,5,this.ch-4);
+    // gun
+    ctx.fillStyle='#555';
+    ctx.fillRect(this.cw/2,-2,8,4);
     ctx.restore();
   }
 }
 
-// ─── BULLET / PROJECTILE ─────────────────────────────────────────────────────
+// ─── BULLET ──────────────────────────────────────────────────────────────────
 class Bullet {
-  constructor(x, y, angle, fromPlayer) {
-    this.x = x; this.y = y;
-    this.vx = Math.cos(angle)*380;
-    this.vy = Math.sin(angle)*380;
-    this.fromPlayer = fromPlayer;
-    this.alive = true;
-    this.r = 3;
+  constructor(x,y,angle,fromPlayer){
+    this.x=x; this.y=y;
+    this.vx=Math.cos(angle)*400;
+    this.vy=Math.sin(angle)*400;
+    this.fromPlayer; this.alive=true; this.r=3;
   }
-  update(dt) {
-    this.x += this.vx*dt; this.y += this.vy*dt;
-    if (this.x<0||this.x>WORLD_W||this.y<0||this.y>WORLD_H) this.alive=false;
+  update(dt){
+    this.x+=this.vx*dt; this.y+=this.vy*dt;
+    if(this.x<0||this.x>WORLD_W||this.y<0||this.y>WORLD_H) this.alive=false;
   }
-  draw() {
-    const sx = this.x - cam.x + canvas.width/2;
-    const sy = this.y - cam.y + canvas.height/2;
-    ctx.fillStyle = '#ffff00';
+  draw(cam){
+    const sx=this.x-cam.x+canvas.width/2;
+    const sy=this.y-cam.y+canvas.height/2;
+    ctx.fillStyle='#ffff00';
     ctx.beginPath(); ctx.arc(sx,sy,this.r,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,0,0.3)';
-    ctx.beginPath(); ctx.arc(sx,sy,this.r*2,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='rgba(255,255,0,0.25)';
+    ctx.beginPath(); ctx.arc(sx,sy,this.r*2.5,0,Math.PI*2); ctx.fill();
   }
 }
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-function init() {
-  player = new Car(290, 560, true);
-  player.money = 500;
-  enemies = []; bullets = []; particles = [];
-  towns = TOWN_DEFS.map(t => ({...t}));
+// ─── INIT ───────────────────────────────────────────────────────────────────
+function initGame(){
+  G = {
+    mode: 'walking', // 'walking' | 'driving' | 'dead'
+    money: START_MONEY,
+    car: null,        // owned Car instance
+    walker: null,     // Walker instance
+    enemies: [],
+    towns: TOWN_DEFS.map(t=>({...t})),
+    currentTown: null,
+    garageOpen: false,
+    scraps: 0,
+    gameover: false,
+    totalKills: 0,
+    timeAlive: 0,
+  };
+
+  // Walker starts near the garage in Barren Rock
+  G.walker = new Walker(270, 540);
+  bullets=[]; enemyBullets=[]; particles=[];
   spawnEnemies(4);
+  tick=0; screenShake=0;
 }
 
-function spawnEnemies(n) {
-  for (let i = 0; i < n; i++) {
-    const seg = ROAD_SEGS[Math.floor(Math.random()*ROAD_SEGS.length)];
-    const pt = seg[Math.floor(rng(1, seg.length-1))];
-    const e = new Car(pt.x + rng(-60,60), pt.y + rng(-60,60), false);
-    e.money = 0;
-    enemies.push(e);
+// ─── SPAWN ───────────────────────────────────────────────────────────────────
+function spawnEnemies(n){
+  for(let i=0;i<n;i++){
+    const seg=ROAD_SEGS[Math.floor(Math.random()*ROAD_SEGS.length)];
+    const pt=seg[Math.floor(rng(1,seg.length-1))];
+    const def=CAR_DEFS[Math.floor(Math.random()*CAR_DEFS.length)];
+    const e=new Car(def, pt.x+rng(-60,60), pt.y+rng(-60,60), false);
+    e.money=0;
+    G.enemies.push(e);
   }
 }
 
-// ─── COLLISIONS ─────────────────────────────────────────────────────────────
-function checkCollisions() {
-  // Bullets vs cars
-  for (const b of bullets) {
-    if (!b.alive) continue;
-    const targets = b.fromPlayer ? enemies : [player];
-    for (const t of targets) {
-      if (!t || !t.alive) continue;
-      if (dist(b, t) < t.w/2) {
-        t.takeDamage(b.fromPlayer ? 15 : 10);
-        b.alive = false;
-        // Hit spark
-        for (let i=0;i<4;i++) {
+// ─── COLLISIONS ───────────────────────────────────────────────────────────────
+function checkCollisions(){
+  const allCars=[...(G.car&&G.car.alive?[G.car]:[]), ...G.enemies.filter(e=>e.alive)];
+
+  // bullets vs cars
+  for(const b of bullets){
+    if(!b.alive) continue;
+    for(const t of allCars){
+      if(!t||!t.alive) continue;
+      if(dist(b,t)<t.cw/2){
+        t.takeDmg(14);
+        b.alive=false;
+        for(let i=0;i<4;i++){
           const a=rng(0,Math.PI*2), sp=rng(20,60);
-          particles.push({ x:b.x,y:b.y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp,
-            life:0.15, color:'#ffff44', r:2, type:'spark' });
+          particles.push({x:b.x,y:b.y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,
+            life:0.15,color:'#ffff44',r:2,type:'spark'});
         }
         break;
       }
     }
   }
-
-  // Car vs car
-  const allCars = [player, ...enemies].filter(c => c && c.alive);
-  for (let i = 0; i < allCars.length; i++) {
-    for (let j = i+1; j < allCars.length; j++) {
-      const a = allCars[i], b = allCars[j];
-      const d = dist(a,b);
-      const minD = 22;
-      if (d < minD && d > 0) {
-        const push = (minD - d) / 2;
-        const nx = (b.x - a.x)/d, ny = (b.y - a.y)/d;
-        a.x -= nx*push; a.y -= ny*push;
-        b.x += nx*push; b.y += ny*push;
-        const relSpd = Math.hypot(a.vx-a.vy,b.vx-b.vy);
-        const dmg = relSpd * 0.1;
-        if (dmg > 5) { a.takeDamage(dmg); b.takeDamage(dmg); }
+  for(const b of enemyBullets){
+    if(!b.alive||!G.car||!G.car.alive) continue;
+    if(dist(b,G.car)<G.car.cw/2){
+      G.car.takeDmg(10);
+      b.alive=false;
+      for(let i=0;i<4;i++){
+        const a=rng(0,Math.PI*2), sp=rng(20,60);
+        particles.push({x:b.x,y:b.y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,
+          life:0.15,color:'#ff8844',r:2,type:'spark'});
       }
     }
   }
 
-  // Scrap pickup
-  if (!player.alive) return;
-  for (let i = particles.length-1; i >= 0; i--) {
-    const p = particles[i];
-    if (p.type !== 'scrap') continue;
-    if (dist(player, p) < 25) {
-      player.scrap = (player.scrap||0) + p.scrapAmt;
+  // car vs car ram
+  for(let i=0;i<allCars.length;i++){
+    for(let j=i+1;j<allCars.length;j++){
+      const a=allCars[i], b=allCars[j];
+      const d=dist(a,b);
+      const minD=20;
+      if(d<minD&&d>0){
+        const push=(minD-d)/2;
+        const nx=(b.x-a.x)/d, ny=(b.y-a.y)/d;
+        a.x-=nx*push; a.y-=ny*push;
+        b.x+=nx*push; b.y+=ny*push;
+        const relSpd=Math.abs(a.speed-b.speed);
+        const dmg=relSpd*0.12;
+        if(dmg>4){ a.takeDmg(dmg); b.takeDmg(dmg); }
+      }
+    }
+  }
+
+  // scrap pickup
+  if(!G.car||!G.car.alive) return;
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    if(p.type!=='scrap') continue;
+    if(dist(G.car,p)<28){
+      G.scraps=(G.scraps||0)+p.scrapAmt;
       particles.splice(i,1);
     }
   }
 }
 
-// ─── TOWN SYSTEM ─────────────────────────────────────────────────────────────
-function checkTown() {
-  if (!player.alive) return;
-  for (const t of towns) {
-    if (player.x > t.x && player.x < t.x+t.w && player.y > t.y && player.y < t.y+t.h) {
-      openTown(t); return;
+// ─── TOWN / GARAGE ───────────────────────────────────────────────────────────
+function checkTownGarage(){
+  if(G.mode==='walking'&&G.walker){
+    for(const t of G.towns){
+      // Check garage zone first
+      if(G.walker.x>t.gx&&G.walker.x<t.gx+t.gw&&
+         G.walker.y>t.gy&&G.walker.y<t.gy+t.gh){
+        openGarage(t); return;
+      }
     }
   }
 }
 
-function getPrice(town, item, buy) {
-  const base = BASE_PRICES[item] || 0;
-  const mult = buy
-    ? (town.buyMult[item] || 1.0)
-    : (town.sellMult[item] || 1.0);
-  return Math.round(base * mult);
-}
-
-let activeTab = 'buy';
-
-function switchTab(tab) {
-  activeTab = tab;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
-  document.getElementById(`tab-${tab}`).classList.add('active');
-  renderTownUI();
-}
-
-function openTown(town) {
-  currentTown = town;
-  gameState = 'town';
-  player.vx = 0; player.vy = 0; player.throttle = 0;
-  renderTownUI();
+function openGarage(town){
+  G.garageOpen=true;
+  G.currentTown=town;
+  if(G.car){ G.car.vx=0; G.car.vy=0; G.car.throttle=0; }
+  renderGarage();
   document.getElementById('overlay').classList.add('active');
 }
 
-function closeTown() {
-  gameState = 'playing';
-  currentTown = null;
+function leaveGarage(){
+  G.garageOpen=false;
+  G.currentTown=null;
   document.getElementById('overlay').classList.remove('active');
-}
-
-function renderTownUI() {
-  if (!currentTown) return;
-  document.getElementById('town-name').textContent = currentTown.name;
-  document.getElementById('town-money').textContent = player.money||0;
-
-  const bHtml = `
-  <table>
-    <tr><th>ITEM</th><th>PRICE</th><th>&nbsp;</th></tr>
-    ${['machineGun','armor','fuel','repairKit'].map(item => {
-      const price = getPrice(currentTown, item, true);
-      const cantAfford = (player.money||0) < price;
-      const label = {machineGun:'Machine Gun',armor:'Armor Plating',fuel:'Fuel (10u)',repairKit:'Repair Kit'}[item];
-      return `<tr>
-        <td>${label}</td><td style="color:#f0c000">$${price}</td>
-        <td><button class="btn btn-buy" ${cantAfford?'disabled':''} onclick="townBuy('${item}',${price})">BUY</button></td>
-      </tr>`;
-    }).join('')}
-  </table>`;
-
-  const sHtml = `
-  <table>
-    <tr><th>ITEM</th><th>PRICE</th><th>&nbsp;</th></tr>
-    ${(() => {
-      const rows = [];
-      const scrapAmt = player.scrap||0;
-      if (scrapAmt > 0) {
-        const price = getPrice(currentTown, 'scrap', false);
-        rows.push(`<tr><td>Scrap (${scrapAmt})</td><td style="color:#f0c000">$${price} ea</td>
-          <td><button class="btn btn-sell" onclick="townSell('scrap',${price})">SELL ALL</button></td></tr>`);
-      }
-      if (player.cargo.qty > 0) {
-        const price = getPrice(currentTown, 'cargo', false);
-        rows.push(`<tr><td>Cargo (${player.cargo.qty})</td><td style="color:#f0c000">$${price} ea</td>
-          <td><button class="btn btn-sell" onclick="townSell('cargo',${price})">SELL ALL</button></td></tr>`);
-      }
-      if (rows.length === 0) rows.push('<tr><td colspan="3" style="color:#555">Nothing to sell</td></tr>');
-      return rows.join('');
-    })()}
-  </table>`;
-
-  const gHtml = `
-  <div style="font-size:12px;color:#666;margin-bottom:10px;">CREDITS: <span style="color:#f0c000">$${player.money||0}</span> &nbsp;|&nbsp; SCRAP: ${player.scrap||0} &nbsp;|&nbsp; CARGO: ${player.cargo.qty||0}</div>
-  <table>
-    <tr><th>STAT</th><th>VALUE</th><th>REPAIR / RELOAD</th></tr>
-    <tr>
-      <td>Armor</td><td>${player.armor}/${player.maxArmor}</td>
-      <td><button class="btn" onclick="repair('armor')">FIX ($${getPrice(currentTown,'repairKit',true)})</button></td>
-    </tr>
-    <tr>
-      <td>Hull</td><td>${player.hull}/${player.maxHull}</td>
-      <td><button class="btn" onclick="repair('hull')">FIX ($${getPrice(currentTown,'repairKit',true)})</button></td>
-    </tr>
-    <tr>
-      <td>Fuel</td><td>${Math.floor(player.fuel)}/${player.maxFuel}</td>
-      <td><button class="btn" onclick="refuel()">REFUEL ($${getPrice(currentTown,'fuel',true)})</button></td>
-    </tr>
-    <tr><td colspan="3" style="border:none;padding-top:12px;color:#4444aa;font-size:11px;">WEAPONS</td></tr>
-    <tr>
-      <td>Machine Gun</td><td style="color:#00aa44">EQUIPPED</td><td>—</td>
-    </tr>
-    <tr><td colspan="3" style="border:none;padding-top:12px;color:#4444aa;font-size:11px;">INVENTORY</td></tr>
-    <tr><td colspan="3" style="color:#666;font-size:11px;">Scrap: ${player.scrap||0} &nbsp;|&nbsp; Cargo: ${player.cargo.qty||0}</td></tr>
-  </table>`;
-
-  document.getElementById('tab-buy').innerHTML = bHtml;
-  document.getElementById('tab-sell').innerHTML = sHtml;
-  document.getElementById('tab-garage').innerHTML = gHtml;
-}
-
-function townBuy(item, price) {
-  if ((player.money||0) < price) return;
-  player.money -= price;
-  if (item === 'machineGun') { player.weapons = [{type:'machineGun',qty:1}]; }
-  else if (item === 'armor') { player.armor = Math.min(player.maxArmor, player.armor + 40); }
-  else if (item === 'repairKit') { /* consumed on use */ }
-  else if (item === 'fuel') { player.fuel = Math.min(player.maxFuel, player.fuel + 30); }
-  renderTownUI();
-}
-
-function townSell(item, price) {
-  if (item === 'scrap') {
-    const qty = player.scrap||0;
-    if (qty <= 0) return;
-    player.money += qty * price;
-    player.scrap = 0;
-  } else if (item === 'cargo') {
-    const qty = player.cargo.qty||0;
-    if (qty <= 0) return;
-    player.money += qty * price;
-    player.cargo = {type:null, qty:0};
+  // When leaving garage with a car, switch to driving mode
+  if(G.car&&G.car.alive){
+    G.mode='driving';
+    // Place car just outside garage
+    G.car.x=G.currentTown?G.currentTown.gx+G.currentTown.gw/2:G.car.x;
+    G.car.y=G.currentTown?G.currentTown.gy+G.currentTown.gh+G.car.ch:G.car.y;
   }
-  renderTownUI();
 }
 
-function repair(which) {
-  const price = getPrice(currentTown,'repairKit',true);
-  if ((player.money||0) < price) return;
-  if (player[which] >= (which === 'armor' ? player.maxArmor : player.maxHull)) return;
-  player.money -= price;
-  if (which === 'armor') player.armor = player.maxArmor;
-  else player.hull = player.maxHull;
-  renderTownUI();
+// garage tabs
+document.querySelectorAll('.gtab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.gtab-content').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+function renderGarage(){
+  const t=G.currentTown;
+  if(!t) return;
+  document.getElementById('garage-town-name').textContent=t.name;
+  document.getElementById('garage-money').textContent='$'+G.money;
+
+  // BUY CAR tab
+  const ownedId = G.car&&G.car.alive ? G.car.defId : null;
+  let carsHtml='';
+  for(const def of CAR_DEFS){
+    const owned = def.id===ownedId;
+    const cantAfford = G.money < def.price;
+    const stats=`SPD:${def.speed} ARM:${def.armor} Hull:${def.hull}`;
+    carsHtml+=`<div class="car-card${owned?' owned':''}${cantAfford&&!owned?' style="opacity:0.5"':''}">
+      <div class="car-icon" style="color:${def.color}">🚗</div>
+      <div class="car-info">
+        <div class="car-name">${def.name}</div>
+        <div class="car-stats">${stats}</div>
+        ${owned?'<div class="car-equipped">✓ EQUIPPED</div>':''}
+      </div>
+      <div class="car-price">${owned?'OWNED':'$'+def.price}</div>
+    </div>`;
+  }
+  // click handlers
+  setTimeout(()=>{
+    document.querySelectorAll('.car-card').forEach((card,i)=>{
+      card.onclick=()=>buyCar(CAR_DEFS[i]);
+    });
+  },0);
+  document.getElementById('tab-cars').innerHTML=carsHtml;
+
+  // SELL tab
+  const scrapAmt=G.scraps||0;
+  const scrapVal=Math.floor(scrapAmt*28);
+  let sellHtml='';
+  if(scrapAmt>0){
+    sellHtml+=`<div class="sell-row">
+      <div class="sell-name">Scrap (${scrapAmt})</div>
+      <div class="sell-qty">${scrapAmt}x</div>
+      <div class="sell-val">$${scrapVal}</div>
+      <button class="btn btn-sell" style="width:auto;padding:4px 10px;flex:none" onclick="sellScrap(${scrapVal})">SELL</button>
+    </div>`;
+  }
+  if(G.car&&G.car.alive){
+    const sellVal=Math.floor(G.car.defId?CAR_DEFS.find(d=>d.id===G.car.defId).price*0.55:0);
+    sellHtml+=`<div class="sell-row">
+      <div class="sell-name">${G.car.name} (car)</div>
+      <div class="sell-qty">1x</div>
+      <div class="sell-val">$${sellVal}</div>
+      <button class="btn btn-sell" style="width:auto;padding:4px 10px;flex:none" onclick="sellCar(${sellVal})">SELL</button>
+    </div>`;
+  }
+  if(!sellHtml) sellHtml='<div style="color:#444;font-size:12px;padding:20px 0;text-align:center">Nothing to sell</div>';
+  document.getElementById('tab-sell').innerHTML=sellHtml;
+
+  // GARAGE tab (repair/fuel/stats)
+  if(G.car&&G.car.alive){
+    const c=G.car;
+    const repairCost=Math.max(0,Math.floor((c.maxArmor-c.armor)*2+(c.maxHull-c.hull)*3));
+    const fuelNeeded=Math.max(0,c.maxFuel-c.fuel);
+    const fuelCost=Math.floor(fuelNeeded*1.5);
+    document.getElementById('tab-garage').innerHTML=`
+      <div style="font-size:12px;color:#555;margin-bottom:12px">${c.name}</div>
+      <div class="stat-row">
+        <div class="stat-label">Armor</div>
+        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${c.armor/c.maxArmor*100}%;background:${c.armor/c.maxArmor>0.5?'#00cc44':c.armor/c.maxArmor>0.25?'#cccc00':'#cc2200'}"></div></div>
+        <div class="stat-val">${Math.ceil(c.armor)}/${c.maxArmor}</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Hull</div>
+        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${c.hull/c.maxHull*100}%;background:${c.hull/c.maxHull>0.5?'#00cc44':c.hull/c.maxHull>0.25?'#cccc00':'#cc2200'}"></div></div>
+        <div class="stat-val">${Math.ceil(c.hull)}/${c.maxHull}</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Fuel</div>
+        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${c.fuel/c.maxFuel*100}%;background:#0088ff"></div></div>
+        <div class="stat-val">${Math.floor(c.fuel)}/${c.maxFuel}</div>
+      </div>
+      <div style="font-size:10px;color:#333;margin:8px 0 12px">SPD:${c.maxSpeed} | WEAPON:Machine Gun</div>
+      <div class="action-row">
+        <button class="btn btn-action" ${repairCost<=0?'disabled':''} onclick="doRepair()">REPAIR ${repairCost>0?'($'+repairCost+')':'(FULL)'}</button>
+        <button class="btn btn-action" ${fuelNeeded<=0?'disabled':''} onclick="doRefuel()">REFUEL ${fuelCost>0?'($'+fuelCost+')':'(FULL)'}</button>
+      </div>
+    `;
+  } else {
+    document.getElementById('tab-garage').innerHTML=`
+      <div style="color:#555;font-size:13px;text-align:center;padding:30px 0">
+        No car equipped.<br><span style="font-size:11px;color:#333">Buy a car in the BUY CAR tab.</span>
+      </div>
+    `;
+  }
 }
 
-function refuel() {
-  const price = getPrice(currentTown,'fuel',true);
-  if ((player.money||0) < price) return;
-  player.money -= price;
-  player.fuel = player.maxFuel;
-  renderTownUI();
+function buyCar(def){
+  if(G.money < def.price) return;
+  if(G.car&&G.car.alive){
+    // Auto-sell old car
+    const oldVal=Math.floor((CAR_DEFS.find(d=>d.id===G.car.defId)?.price||0)*0.55);
+    G.money+=oldVal;
+  }
+  G.money-=def.price;
+  G.car=new Car(def, G.currentTown.gx+G.currentTown.gw/2, G.currentTown.gy+G.currentTown.gh+30, true);
+  G.car.money=G.money;
+  renderGarage();
+}
+
+function sellScrap(val){
+  G.money+=val; G.scraps=0; renderGarage();
+}
+function sellCar(val){
+  if(!G.car) return;
+  G.money+=val;
+  G.car=null;
+  G.mode='walking';
+  renderGarage();
+}
+function doRepair(){
+  const c=G.car; if(!c||!c.alive) return;
+  const cost=Math.floor((c.maxArmor-c.armor)*2+(c.maxHull-c.hull)*3);
+  if(G.money<cost) return;
+  G.money-=cost; c.armor=c.maxArmor; c.hull=c.maxHull; renderGarage();
+}
+function doRefuel(){
+  const c=G.car; if(!c||!c.alive) return;
+  const needed=Math.max(0,c.maxFuel-c.fuel);
+  const cost=Math.floor(needed*1.5);
+  if(G.money<cost) return;
+  G.money-=cost; c.fuel=c.maxFuel; renderGarage();
 }
 
 // ─── DRAW ─────────────────────────────────────────────────────────────────────
-function drawWorld() {
-  // Background
-  ctx.fillStyle = '#1a3d1a';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+function drawWorld(){
+  const W=canvas.width, H=canvas.height;
+  // background
+  ctx.fillStyle='#1a3d1a';
+  ctx.fillRect(0,0,W,H);
 
-  const ox = cam.x - canvas.width/2;
-  const oy = cam.y - canvas.height/2;
+  const ox=cam.x-W/2, oy=cam.y-H/2;
 
-  // World bounds
-  ctx.fillStyle = '#111';
-  ctx.fillRect(-ox, -oy, WORLD_W, WORLD_H);
+  // world bounds
+  ctx.fillStyle='#0f2f0f';
+  ctx.fillRect(-ox,-oy,WORLD_W,WORLD_H);
 
-  // Roads
-  ctx.strokeStyle = '#5c4033';
-  ctx.lineWidth = ROAD_W;
-  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-  for (const seg of ROAD_SEGS) {
+  // roads
+  ctx.strokeStyle='#5c4033';
+  ctx.lineWidth=ROAD_W; ctx.lineCap='round'; ctx.lineJoin='round';
+  for(const seg of ROAD_SEGS){
     ctx.beginPath();
-    ctx.moveTo(seg[0].x-ox, seg[0].y-oy);
-    for (let i=1;i<seg.length;i++) ctx.lineTo(seg[i].x-ox, seg[i].y-oy);
+    ctx.moveTo(seg[0].x-ox,seg[0].y-oy);
+    for(let i=1;i<seg.length;i++) ctx.lineTo(seg[i].x-ox,seg[i].y-oy);
     ctx.stroke();
   }
-  // Road markings
-  ctx.strokeStyle = '#f0c000';
-  ctx.lineWidth = 3;
+  // markings
+  ctx.strokeStyle='#f0c000'; ctx.lineWidth=3;
   ctx.setLineDash([20,15]);
-  for (const seg of ROAD_SEGS) {
+  for(const seg of ROAD_SEGS){
     ctx.beginPath();
-    ctx.moveTo(seg[0].x-ox, seg[0].y-oy);
-    for (let i=1;i<seg.length;i++) ctx.lineTo(seg[i].x-ox, seg[i].y-oy);
+    ctx.moveTo(seg[0].x-ox,seg[0].y-oy);
+    for(let i=1;i<seg.length;i++) ctx.lineTo(seg[i].x-ox,seg[i].y-oy);
     ctx.stroke();
   }
   ctx.setLineDash([]);
-  // Edge lines
-  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-  ctx.lineWidth = 2;
+  // edge lines
+  ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=2;
 
-  // Towns
-  for (const t of towns) {
-    const tx = t.x-ox, ty = t.y-oy;
-    ctx.fillStyle = 'rgba(68,68,170,0.15)';
-    ctx.fillRect(tx, ty, t.w, t.h);
-    ctx.strokeStyle = '#4444aa';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(tx, ty, t.w, t.h);
-    ctx.fillStyle = '#4444aa';
-    ctx.font = 'bold 11px Courier New';
-    ctx.textAlign = 'center';
-    ctx.fillText(t.name, tx+t.w/2, ty+t.h/2+4);
+  // towns
+  for(const t of G.towns){
+    const tx=t.x-ox, ty=t.y-oy;
+    // town bg
+    ctx.fillStyle='rgba(60,60,120,0.12)';
+    ctx.fillRect(tx,ty,t.w,t.h);
+    ctx.strokeStyle='#4444aa'; ctx.lineWidth=2;
+    ctx.strokeRect(tx,ty,t.w,t.h);
+    // town name
+    ctx.fillStyle='#666'; ctx.font='bold 10px Courier New';
+    ctx.textAlign='center';
+    ctx.fillText(t.name, tx+t.w/2, ty+t.h/2+3);
+
+    // garage zone
+    const gx=t.gx-ox, gy=t.gy-oy;
+    ctx.fillStyle='rgba(204,34,0,0.18)';
+    ctx.fillRect(gx,gy,t.gw,t.gh);
+    ctx.strokeStyle='#cc2200'; ctx.lineWidth=2;
+    ctx.setLineDash([4,4]);
+    ctx.strokeRect(gx,gy,t.gw,t.gh);
+    ctx.setLineDash([]);
+    // garage label
+    ctx.fillStyle='#cc2200'; ctx.font='bold 9px Courier New';
+    ctx.fillText('GARAGE', gx+t.gw/2, gy+t.gh/2+3);
   }
 
-  // Enemies
-  for (const e of enemies) e.draw();
+  // enemies
+  for(const e of G.enemies) e.draw(cam);
 
-  // Player
-  if (player.alive) player.draw();
+  // car
+  if(G.car&&G.car.alive) G.car.draw(cam);
 
-  // Bullets
-  for (const b of bullets) b.draw();
+  // walker
+  if(G.mode==='walking'&&G.walker&&G.walker.alive) G.walker.draw(cam);
 
-  // Particles
-  for (const p of particles) {
-    const px = (p.type === 'text' ? p.x : p.x) - ox;
-    const py = (p.type === 'text' ? p.y : p.y) - oy;
-    if (p.type === 'text') {
-      ctx.font = 'bold 14px Courier New';
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = Math.min(1, p.life * 2);
-      ctx.textAlign = 'center';
-      ctx.fillText(p.text, px, py);
-      ctx.globalAlpha = 1;
+  // bullets
+  for(const b of bullets) b.draw(cam);
+  for(const b of enemyBullets) b.draw(cam);
+
+  // particles
+  for(const p of particles){
+    const px=p.x-ox, py=p.y-oy;
+    if(p.type==='text'){
+      ctx.font='bold 13px Courier New';
+      ctx.fillStyle=p.color;
+      ctx.globalAlpha=Math.min(1,p.life*2);
+      ctx.textAlign='center';
+      ctx.fillText(p.text,px,py);
+      ctx.globalAlpha=1;
     } else {
-      ctx.globalAlpha = Math.min(1, p.life * 3);
-      ctx.fillStyle = p.color;
-      ctx.beginPath(); ctx.arc(px, py, p.r, 0, Math.PI*2); ctx.fill();
-      ctx.globalAlpha = 1;
+      ctx.globalAlpha=Math.min(1,p.life*3);
+      ctx.fillStyle=p.color;
+      ctx.beginPath(); ctx.arc(px,py,p.r,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha=1;
     }
   }
 }
 
-function drawHUD() {
-  const W = canvas.width, H = canvas.height;
-  const pad = 12, barW = 160, barH = 10;
+function drawHUD(){
+  const W=canvas.width, H=canvas.height;
+  const pad=12, bw=150, bh=9;
 
-  // HUD background strip
-  ctx.fillStyle = 'rgba(17,17,17,0.85)';
-  ctx.fillRect(0, 0, W, 52);
-  ctx.strokeStyle = '#333';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(0, 0, W, 52);
+  // top bar
+  ctx.fillStyle='rgba(17,17,17,0.88)';
+  ctx.fillRect(0,0,W,54);
+  ctx.strokeStyle='#2a2a2a'; ctx.lineWidth=1;
+  ctx.strokeRect(0,0,W,54);
 
-  let y = pad;
+  ctx.textAlign='left';
 
-  // Armor bar
-  ctx.fillStyle = '#888'; ctx.font = '11px Courier New'; ctx.textAlign = 'left';
-  ctx.fillText('ARMOR', pad, y+10);
-  ctx.fillStyle = '#222'; ctx.fillRect(pad+50, y+1, barW, barH);
-  const aPct = player.armor/player.maxArmor;
-  ctx.fillStyle = aPct>0.5?'#00cc44':aPct>0.25?'#cccc00':'#cc0000';
-  ctx.fillRect(pad+50, y+1, barW*aPct, barH);
-  ctx.fillStyle = '#fff'; ctx.font = '9px Courier New';
-  ctx.fillText(`${Math.ceil(player.armor)}/${player.maxArmor}`, pad+52, y+10);
+  // mode indicator
+  const modeLabel = G.mode==='walking'?'🚶 ON FOOT':G.mode==='driving'?'🚗 DRIVING':'💀';
+  ctx.fillStyle=G.mode==='walking'?'#00cc88':G.mode==='driving'?'#00aa00':'#cc2200';
+  ctx.font='bold 12px Courier New';
+  ctx.fillText(modeLabel, pad, 18);
 
-  // Hull bar
-  y += 16;
-  ctx.fillStyle = '#888'; ctx.font = '11px Courier New';
-  ctx.fillText('HULL', pad, y+10);
-  ctx.fillStyle = '#222'; ctx.fillRect(pad+50, y+1, barW, barH);
-  const hPct = player.hull/player.maxHull;
-  ctx.fillStyle = hPct>0.5?'#00cc44':hPct>0.25?'#cccc00':'#cc0000';
-  ctx.fillRect(pad+50, y+1, barW*hPct, barH);
-  ctx.fillStyle = '#fff'; ctx.font = '9px Courier New';
-  ctx.fillText(`${Math.ceil(player.hull)}/${player.maxHull}`, pad+52, y+10);
+  if(G.mode==='driving'&&G.car&&G.car.alive){
+    const c=G.car;
+    let y=30;
+    // armor
+    ctx.fillStyle='#666'; ctx.font='10px Courier New'; ctx.fillText('ARM',pad,y+8);
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect(pad+28,y,bw,bh);
+    ctx.fillStyle=c.armor/c.maxArmor>0.5?'#00cc44':c.armor/c.maxArmor>0.25?'#cccc00':'#cc2200';
+    ctx.fillRect(pad+28,y,bw*(c.armor/c.maxArmor),bh);
 
-  // Fuel bar
-  y += 16;
-  ctx.fillStyle = '#888'; ctx.font = '11px Courier New';
-  ctx.fillText('FUEL', pad, y+10);
-  ctx.fillStyle = '#222'; ctx.fillRect(pad+50, y+1, barW, barH);
-  ctx.fillStyle = '#0088ff';
-  ctx.fillRect(pad+50, y+1, barW*(player.fuel/player.maxFuel), barH);
-  ctx.fillStyle = '#fff'; ctx.font = '9px Courier New';
-  ctx.fillText(`${Math.floor(player.fuel)}/${player.maxFuel}`, pad+52, y+10);
+    // hull
+    y+=13;
+    ctx.fillStyle='#666'; ctx.fillText('HULL',pad,y+8);
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect(pad+28,y,bw,bh);
+    ctx.fillStyle=c.hull/c.maxHull>0.5?'#00cc44':c.hull/c.maxHull>0.25?'#cccc00':'#cc2200';
+    ctx.fillRect(pad+28,y,bw*(c.hull/c.maxHull),bh);
 
-  // Money
-  ctx.fillStyle = '#f0c000'; ctx.font = 'bold 13px Courier New'; ctx.textAlign = 'right';
-  ctx.fillText(`$${player.money||0}`, W-pad, 24);
+    // fuel
+    y+=13;
+    ctx.fillStyle='#666'; ctx.fillText('FUEL',pad,y+8);
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect(pad+28,y,bw,bh);
+    ctx.fillStyle='#0088ff';
+    ctx.fillRect(pad+28,y,bw*(c.fuel/c.maxFuel),bh);
 
-  // Speed
-  ctx.fillStyle = '#888'; ctx.font = '11px Courier New';
-  ctx.fillText(`SPD: ${Math.floor(player.speed)}`, W-pad, 40);
+    // money right
+    ctx.textAlign='right';
+    ctx.fillStyle='#f0c000'; ctx.font='bold 14px Courier New';
+    ctx.fillText('$'+G.money, W-pad, 20);
+    ctx.fillStyle='#555'; ctx.font='10px Courier New';
+    ctx.fillText(`SPD:${Math.floor(c.speed)}`, W-pad, 34);
+    ctx.fillText(`SCRAP:${G.scraps||0}`, W-pad, 46);
+  } else if(G.mode==='walking'){
+    ctx.fillStyle='#f0c000'; ctx.font='bold 14px Courier New'; ctx.textAlign='right';
+    ctx.fillText('$'+G.money, W-pad, 20);
+    ctx.fillStyle='#555'; ctx.font='10px Courier New';
+    ctx.fillText('Walk to GARAGE to buy a car', W-pad, 34);
+  }
 
-  // Scrap/cargo
-  ctx.fillStyle = '#666'; ctx.font = '10px Courier New'; ctx.textAlign = 'right';
-  ctx.fillText(`SCRAP:${player.scrap||0}  CARGO:${player.cargo.qty||0}`, W-pad, 52);
-
-  // Controls hint (fade out after 5 seconds)
-  if (tick < 300) {
-    ctx.globalAlpha = tick < 240 ? 1 : (300-tick)/60;
-    ctx.fillStyle = '#444'; ctx.font = '10px Courier New'; ctx.textAlign = 'center';
-    ctx.fillText('WASD/Arrows: Drive  |  SPACE: Fire  |  Enter towns to trade', W/2, H-14);
-    ctx.globalAlpha = 1;
+  // bottom controls hint
+  if(tick<320){
+    ctx.globalAlpha=tick<260?1:(320-tick)/60;
+    ctx.fillStyle='#3a3a3a'; ctx.font='10px Courier New'; ctx.textAlign='center';
+    const hint=G.mode==='walking'
+      ? 'WASD/Arrows: Walk  |  Walk into the GARAGE zone to enter'
+      : 'WASD/Arrows: Drive  |  SPACE: Fire';
+    ctx.fillText(hint, W/2, H-12);
+    ctx.globalAlpha=1;
   }
 }
 
-function drawMinimap() {
-  const W = canvas.width, H = canvas.height;
-  const mx = W-118, my = 62, mw = 108, mh = 72;
-  const sx = mw/WORLD_W, sy = mh/WORLD_H;
+function drawMinimap(){
+  const W=canvas.width, H=canvas.height;
+  const mx=W-115, my=62, mw=105, mh=75;
+  const sx=mw/WORLD_W, sy=mh/WORLD_H;
 
-  ctx.fillStyle = 'rgba(17,17,17,0.85)';
-  ctx.fillRect(mx-2, my-2, mw+4, mh+4);
-  ctx.strokeStyle = '#333'; ctx.lineWidth = 1;
-  ctx.strokeRect(mx-2, my-2, mw+4, mh+4);
+  ctx.fillStyle='rgba(17,17,17,0.88)';
+  ctx.fillRect(mx-2,my-2,mw+4,mh+4);
+  ctx.strokeStyle='#2a2a2a'; ctx.lineWidth=1;
+  ctx.strokeRect(mx-2,my-2,mw+4,mh+4);
 
-  // Roads
-  ctx.strokeStyle = '#5c4033'; ctx.lineWidth = 4;
-  for (const seg of ROAD_SEGS) {
+  // roads
+  ctx.strokeStyle='#4a3525'; ctx.lineWidth=4;
+  for(const seg of ROAD_SEGS){
     ctx.beginPath();
-    ctx.moveTo(mx+seg[0].x*sx, my+seg[0].y*sy);
-    for (let i=1;i<seg.length;i++) ctx.lineTo(mx+seg[i].x*sx, my+seg[i].y*sy);
+    ctx.moveTo(mx+seg[0].x*sx,my+seg[0].y*sy);
+    for(let i=1;i<seg.length;i++) ctx.lineTo(mx+seg[i].x*sx,my+seg[i].y*sy);
     ctx.stroke();
   }
 
-  // Towns
-  ctx.fillStyle = '#4444aa';
-  for (const t of towns) {
-    ctx.fillRect(mx+t.x*sx-1, my+t.y*sy-1, 4, 4);
+  // towns
+  for(const t of G.towns){
+    ctx.fillStyle='#4444aa';
+    ctx.fillRect(mx+t.x*sx-2,my+t.y*sy-2,5,5);
+    // garage marker
+    ctx.fillStyle='#cc2200';
+    ctx.fillRect(mx+t.gx*sx-1,my+t.gy*sy-1,3,3);
   }
 
-  // Enemies
-  ctx.fillStyle = '#cc2200';
-  for (const e of enemies) {
-    if (!e.alive) continue;
-    ctx.fillRect(mx+e.x*sx-1, my+e.y*sy-1, 3, 3);
+  // enemies
+  ctx.fillStyle='#cc2200';
+  for(const e of G.enemies){
+    if(!e.alive) return;
+    ctx.fillRect(mx+e.x*sx-1,my+e.y*sy-1,3,3);
   }
 
-  // Player
-  if (player.alive) {
-    ctx.fillStyle = '#00aa00';
-    ctx.beginPath(); ctx.arc(mx+player.x*sx, my+player.y*sy, 3, 0, Math.PI*2); ctx.fill();
+  // player
+  const px=G.mode==='walking'&&G.walker?G.walker:G.mode==='driving'&&G.car?G.car:null;
+  if(px){
+    ctx.fillStyle=G.mode==='walking'?'#00cc88':'#00aa00';
+    ctx.beginPath(); ctx.arc(mx+px.x*sx,my+px.y*sy,3,0,Math.PI*2); ctx.fill();
   }
 }
 
 // ─── GAME LOOP ────────────────────────────────────────────────────────────────
-let lastTime = 0;
-function loop(ts) {
-  const dt = Math.min((ts - lastTime)/1000, 0.05);
-  lastTime = ts;
-  tick++;
+function loop(ts){
+  const dt=Math.min((ts-lastTime)/1000,0.05);
+  lastTime=ts; tick++;
 
-  if (gameState === 'playing') {
-    // Update
-    if (player.alive) player.update(dt);
-    for (const e of enemies) if (e.alive) e.update(dt);
-    for (const b of bullets) b.update(dt);
-    bullets = bullets.filter(b => b.alive);
-    for (const p of particles) {
-      p.x += (p.vx||0)*dt; p.y += (p.vy||0)*dt;
-      if (p.vx !== undefined) p.vx *= 0.95;
-      if (p.vy !== undefined) p.vy *= 0.95;
-      if (p.type !== 'scrap') p.life -= dt;
-      if (p.type === 'text') p.vy += 40*dt;
-    }
-    particles = particles.filter(p => p.life > 0 || p.type === 'scrap');
+  if(G.gameover){ requestAnimationFrame(loop); return; }
 
+  // Update
+  if(G.mode==='walking'&&G.walker&&G.walker.alive){
+    G.walker.update(dt);
+    cam.x=G.walker.x; cam.y=G.walker.y;
+    checkTownGarage();
+  } else if(G.mode==='driving'&&G.car&&G.car.alive){
+    G.car.update(dt);
+    cam.x=G.car.x; cam.y=G.car.y;
+    for(const e of G.enemies) if(e.alive) e.update(dt);
+    checkTownGarage();
     checkCollisions();
-    checkTown();
 
-    // Respawn enemies
-    const alive = enemies.filter(e => e.alive).length;
-    if (alive < 3 && tick % 600 === 0) spawnEnemies(1);
+    // respawn enemies
+    const alive=G.enemies.filter(e=>e.alive).length;
+    if(alive<3&&tick%600===0) spawnEnemies(1);
 
-    // Camera
-    if (player.alive) { cam.x = player.x; cam.y = player.y; }
-
-    // Screen shake
-    if (screenShake > 0) {
-      ctx.save();
-      ctx.translate(rng(-screenShake*5, screenShake*5), rng(-screenShake*5, screenShake*5));
-      screenShake -= dt*2;
-    }
-
-    // Draw
-    drawWorld();
-    drawHUD();
-    drawMinimap();
-
-    if (screenShake > 0) ctx.restore();
-
-    // Game over check
-    if (!player.alive && gameState !== 'gameover') {
-      setTimeout(() => {
-        gameState = 'gameover';
-        document.getElementById('go-stats').textContent = `Survived ${Math.floor(tick/60)} seconds | $${player.money||0} earned`;
+    // check car death
+    if(!G.car.alive){
+      // walker survives, appears near where car died
+      G.walker=new Walker(G.car.x, G.car.y+30);
+      G.car=null;
+      G.mode='walking';
+      G.gameover=true;
+      G.timeAlive=tick;
+      setTimeout(()=>{
         document.getElementById('gameover-screen').classList.add('active');
-      }, 1200);
+        document.getElementById('go-stats').innerHTML=
+          `Survived ${Math.floor(G.timeAlive/60)} seconds<br>Kills: ${G.totalKills}<br>Final Credits: $${G.money}`;
+      },1500);
     }
   }
+
+  // Update bullets
+  for(const b of bullets) b.update(dt);
+  for(const b of enemyBullets) b.update(dt);
+  bullets=bullets.filter(b=>b.alive);
+  enemyBullets=enemyBullets.filter(b=>b.alive);
+
+  // Particles
+  for(const p of particles){
+    p.x+=(p.vx||0)*dt; p.y+=(p.vy||0)*dt;
+    if(p.vx!==undefined) p.vx*=0.95;
+    if(p.vy!==undefined) p.vy*=0.95;
+    if(p.type!=='scrap') p.life-=dt;
+    if(p.type==='text') p.vy+=35*dt;
+  }
+  particles=particles.filter(p=>p.life>0||p.type==='scrap');
+
+  // Screen shake
+  let shook=false;
+  if(screenShake>0){
+    ctx.save();
+    ctx.translate(rng(-screenShake*5,screenShake*5),rng(-screenShake*5,screenShake*5));
+    shook=true;
+    screenShake-=dt*2;
+  }
+
+  drawWorld();
+  if(!G.garageOpen){
+    drawHUD();
+    drawMinimap();
+  }
+
+  if(shook) ctx.restore();
 
   requestAnimationFrame(loop);
 }
 
 // ─── INPUT ────────────────────────────────────────────────────────────────────
-window.addEventListener('keydown', e => {
-  keys[e.code] = true;
-  if (e.code === 'Escape' && gameState === 'town') closeTown();
-  if (e.code === 'Space') e.preventDefault();
+window.addEventListener('keydown',e=>{
+  keys[e.code]=true;
+  if(e.code==='Escape'&&G.garageOpen) leaveGarage();
+  if(e.code==='Space') e.preventDefault();
 });
-window.addEventListener('keyup', e => { keys[e.code] = false; });
+window.addEventListener('keyup',e=>{ keys[e.code]=false; });
 
-// ─── RESIZE ───────────────────────────────────────────────────────────────────
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+// ─── RESIZE ──────────────────────────────────────────────────────────────────
+function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
 }
-window.addEventListener('resize', resize);
+window.addEventListener('resize',resize);
 
-// ─── START / RESTART ─────────────────────────────────────────────────────────
-function startGame() {
-  document.getElementById('start-screen').style.display = 'none';
-  gameState = 'playing';
-  init();
-  requestAnimationFrame(loop);
+// ─── START ────────────────────────────────────────────────────────────────────
+function beginGame(){
+  document.getElementById('title-screen').style.display='none';
+  initGame();
+  // start loop if not already
+  if(!G._loopStarted){
+    G._loopStarted=true;
+    requestAnimationFrame(loop);
+  }
 }
 
-function restartGame() {
+function restartGame(){
   document.getElementById('gameover-screen').classList.remove('active');
-  gameState = 'playing';
-  tick = 0;
-  init();
+  initGame();
 }
 
 resize();
+// kick off loop immediately (waits for beginGame to set state)
+requestAnimationFrame(loop);
 </script>
 </body>
 </html>
