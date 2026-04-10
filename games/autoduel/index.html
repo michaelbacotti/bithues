@@ -1128,18 +1128,16 @@ function checkArenaWave() {
 }
 
 function renderArenaPrompt() {
-  // Overlay message for arena entry
-  ctx.fillStyle='rgba(0,0,0,0.6)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.font='bold 36px monospace'; ctx.fillStyle='#ff4400'; ctx.textAlign='center';
-  ctx.fillText('ARENA', canvas.width/2, canvas.height/2-60);
-  ctx.shadowColor='#ff4400'; ctx.shadowBlur=20;
-  ctx.font='bold 18px monospace'; ctx.fillStyle='#ffaa00';
-  ctx.fillText('Wave '+arenaWave+' — '+enemies.filter(e=>e.alive).length+' enemies remaining', canvas.width/2, canvas.height/2-20);
-  ctx.shadowBlur=0;
-  ctx.font='14px monospace'; ctx.fillStyle='#cccccc';
-  ctx.fillText('Fight through 5 waves to win!', canvas.width/2, canvas.height/2+15);
+  // Apple IIe style: simple text overlay
+  ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.font='bold 28px monospace'; ctx.fillStyle='#FFCC00'; ctx.textAlign='center';
+  ctx.fillText('[ ARENA ]', canvas.width/2, canvas.height/2-50);
+  ctx.font='14px monospace'; ctx.fillStyle='#00FF00';
+  ctx.fillText('WAVE '+arenaWave+' — ENEMIES: '+enemies.filter(e=>e.alive).length, canvas.width/2, canvas.height/2-15);
   ctx.fillStyle='#888888';
-  ctx.fillText('ENTER/SPACE to start   ESC to forfeit', canvas.width/2, canvas.height/2+50);
+  ctx.fillText('5 WAVES TO WIN', canvas.width/2, canvas.height/2+5);
+  ctx.fillStyle='#FFCC00';
+  ctx.fillText('ENTER: FIGHT   ESC: LEAVE', canvas.width/2, canvas.height/2+35);
   ctx.textAlign='left';
 }
 
@@ -1388,25 +1386,11 @@ function renderCar(car, type, flash) {
 
 function renderPlayer() {
   if (gameState !== 'WALKING') return;
+  // Apple IIe style: simple square player
   ctx.save();
   ctx.translate(player.x, player.y);
-
-  // Body
-  ctx.fillStyle = '#00cc44';
-  ctx.fillRect(-6, -6, 12, 12);
-  // Head
-  ctx.fillStyle = '#ffdd88';
-  ctx.beginPath();
-  ctx.arc(0, -4, 4, 0, PI*2);
-  ctx.fill();
-  // Direction indicator
-  ctx.strokeStyle = '#00ff00';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(0,0);
-  ctx.lineTo(Math.cos(player.angle)*10, Math.sin(player.angle)*10);
-  ctx.stroke();
-
+  ctx.fillStyle = '#00FF00';
+  ctx.fillRect(-5, -5, 10, 10);
   ctx.restore();
 }
 
@@ -1418,224 +1402,119 @@ function renderEnemies() {
 }
 
 function renderBullets() {
+  // Apple IIe style: simple white dots/dashes
   for (const b of bullets) {
-    ctx.save();
-    ctx.translate(b.x, b.y);
-    ctx.rotate(Math.atan2(b.vy, b.vx));
     const fade = b.life / b.maxLife;
     ctx.globalAlpha = fade;
-
+    ctx.fillStyle = '#FFFFFF';
     if (b.isRocket) {
-      ctx.fillStyle = '#ff4400';
-      ctx.fillRect(-8,-3,16,6);
-      ctx.shadowColor='#ff4400'; ctx.shadowBlur=10;
-    } else if (b.weaponType === 'Flamethrower') {
-      ctx.fillStyle = `rgba(255,${100+Math.random()*100},0,${fade*0.8})`;
-      ctx.beginPath(); ctx.arc(0,0,4+fade*4,0,PI*2); ctx.fill();
+      // Rockets as small orange dashes
+      ctx.fillStyle = '#FFCC00';
+      ctx.fillRect(b.x-5, b.y-2, 10, 4);
     } else {
-      ctx.fillStyle = b.isPlayer ? C.bullet : '#ff4444';
-      ctx.shadowColor = b.isPlayer ? '#ffff00' : '#ff4444'; ctx.shadowBlur=6;
-      ctx.fillRect(-6,-2,12,4);
+      // Bullets as small white dots
+      ctx.fillRect(b.x-2, b.y-2, 4, 4);
     }
-    ctx.shadowBlur=0; ctx.globalAlpha=1;
-    ctx.restore();
+    ctx.globalAlpha = 1;
   }
 }
 
 function renderDroppedItems() {
+  // Simplified Apple IIe style: basic shapes, no glow
   for (const d of droppedItems) {
     if (d.type === 'salvage') {
-      const alpha = Math.min(1, d.life/5);
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = C.gold;
-      ctx.save();
-      ctx.translate(d.x, d.y);
-      ctx.rotate(Date.now()/200);
-      ctx.fillRect(-6,-4,12,8); ctx.fillRect(-3,-7,6,14);
-      ctx.shadowColor=C.gold; ctx.shadowBlur=8;
-      ctx.fillRect(-3,-3,6,6);
-      ctx.shadowBlur=0;
-      ctx.restore();
+      ctx.globalAlpha = Math.min(1, d.life/5);
+      ctx.fillStyle = '#FFCC00';
+      ctx.fillRect(d.x-5, d.y-3, 10, 6);
       ctx.globalAlpha = 1;
     } else if (d.type === 'mine') {
-      ctx.fillStyle = '#ff2200';
-      ctx.beginPath(); ctx.arc(d.x,d.y,8,0,PI*2); ctx.fill();
-      ctx.fillStyle = '#ff8800';
-      ctx.beginPath(); ctx.arc(d.x,d.y,4,0,PI*2); ctx.fill();
+      ctx.fillStyle = '#FF0000';
+      ctx.fillRect(d.x-5, d.y-5, 10, 10);
     } else if (d.type === 'oil') {
-      ctx.globalAlpha = 0.6;
+      ctx.globalAlpha = 0.5;
       ctx.fillStyle = '#333333';
-      ctx.beginPath(); ctx.ellipse(d.x,d.y,16,10,Date.now()/500,0,PI*2); ctx.fill();
+      ctx.fillRect(d.x-10, d.y-6, 20, 12);
       ctx.globalAlpha = 1;
     } else if (d.type === 'smoke') {
-      const alpha = (d.life/d.maxLife)*0.4;
-      ctx.globalAlpha = alpha;
+      ctx.globalAlpha = (d.life/d.maxLife)*0.4;
       ctx.fillStyle = '#888888';
-      ctx.beginPath(); ctx.arc(d.x,d.y,d.radius||60,0,PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(d.x,d.y,8,0,PI*2); ctx.fill();
       ctx.globalAlpha = 1;
     }
   }
 }
 
 function renderParticles() {
+  // Apple IIe: simple pixel particles, no glow effects
   for (const p of particles) {
     const alpha = Math.max(0, p.life/p.maxLife);
     ctx.globalAlpha = alpha;
-    ctx.fillStyle = p.color;
-    if (p.type === 'debris') {
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
-      ctx.restore();
-    } else if (p.type === 'smoke') {
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.size*(1+(1-alpha)*0.5),0,PI*2); ctx.fill();
-    } else if (p.type === 'fire') {
-      ctx.shadowColor=p.color; ctx.shadowBlur=p.size*2;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.size*alpha,0,PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-    } else {
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.size*alpha,0,PI*2); ctx.fill();
-    }
+    ctx.fillStyle = p.color || '#FFCC00';
+    const size = Math.max(1, Math.floor(p.size * alpha));
+    ctx.fillRect(p.x - size/2, p.y - size/2, size, size);
     ctx.globalAlpha = 1;
   }
 }
 
 // ═══════════════════════════════════════════════════════════
-// HUD
+// HUD — Apple IIe style: simple text-based readout
 // ═══════════════════════════════════════════════════════════
 function renderHUD() {
   const car = player.car;
   if (!car) return;
   const pad = 10;
-  const bw = 100, bh = 12;
-
-  // Left panel — speed + odometer
-  ctx.fillStyle='rgba(10,10,10,0.85)'; ctx.fillRect(pad,pad,160,110);
-  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(pad,pad,160,110);
-
-  ctx.font='11px monospace'; ctx.textAlign='left'; ctx.fillStyle=C.textDim;
-  ctx.fillText('SPD', pad+8, pad+16);
   const speed = Math.sqrt(car.vx*car.vx+car.vy*car.vy);
-  ctx.fillStyle=C.text; ctx.font='bold 16px monospace';
-  ctx.fillText(Math.floor(speed*0.6)+' MPH', pad+35, pad+16);
 
-  ctx.font='11px monospace'; ctx.fillStyle=C.textDim;
-  ctx.fillText('ODOM', pad+8, pad+32);
-  ctx.fillStyle=C.text; ctx.font='bold 13px monospace';
-  ctx.fillText(stats.odometer.toFixed(1)+' mi', pad+55, pad+32);
+  // Black panel background
+  ctx.fillStyle='#000000';
+  ctx.fillRect(0, 0, canvas.width, 60);
+  ctx.strokeStyle='#333333'; ctx.lineWidth=1;
+  ctx.strokeRect(0, 0, canvas.width, 60);
 
-  // Armor facings
-  ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
-  ctx.fillText('F', pad+8, pad+48);
-  drawArmorBar(pad+18, pad+41, 30, 8, car.frontArmor, car.maxArmor);
-  ctx.fillText('R', pad+52, pad+48);
-  drawArmorBar(pad+62, pad+41, 30, 8, car.rearArmor, car.maxArmor);
-  ctx.fillText('L', pad+96, pad+48);
-  drawArmorBar(pad+106, pad+41, 24, 8, car.leftArmor, car.maxArmor);
-  ctx.fillText('R', pad+134, pad+48);
-  drawArmorBar(pad+144, pad+41, 24, 8, car.rightArmor, car.maxArmor);
+  ctx.font='11px monospace'; ctx.textAlign='left';
 
-  // Cash
-  ctx.fillStyle=C.gold; ctx.font='bold 14px monospace';
-  ctx.fillText('$'+stats.cash, pad+8, pad+68);
+  // Speed
+  ctx.fillStyle='#00FF00';
+  ctx.fillText('SPD: '+Math.floor(speed*0.6)+' MPH', pad, pad+14);
 
-  // Kills
-  ctx.fillStyle=C.textDim; ctx.font='11px monospace';
-  ctx.fillText('Kills:'+stats.enemiesDestroyed, pad+8, pad+84);
+  // Odometer
+  ctx.fillText('ODOM: '+stats.odometer.toFixed(1)+' MI', pad+130, pad+14);
 
-  // Heat bar
+  // Hull & Fuel as simple text
+  const hullPct = Math.ceil((car.hull/car.maxHull)*100);
+  const fuelPct = Math.floor((car.fuel/car.maxFuel)*100);
+  ctx.fillStyle='#00FF00';
+  ctx.fillText('HULL: '+hullPct+'%', pad, pad+28);
+  ctx.fillText('FUEL: '+fuelPct+'%', pad+130, pad+28);
+
+  // Armor (all 4 facings as numbers)
+  ctx.fillStyle='#00AA00';
+  ctx.fillText('F:'+car.frontArmor+' R:'+car.rearArmor+' L:'+car.leftArmor+' R:'+car.rightArmor, pad, pad+42);
+
+  // Cash and kills
+  ctx.fillStyle='#FFCC00';
+  ctx.fillText('$'+stats.cash, pad+350, pad+14);
+  ctx.fillStyle='#00AA00';
+  ctx.fillText('KILLS:'+stats.enemiesDestroyed, pad+420, pad+14);
+
+  // Weapon info
   const wpn = getPlayerWeapon();
   if (wpn) {
-    ctx.fillStyle=C.textDim; ctx.font='9px monospace';
-    ctx.fillText('HEAT', pad+8, pad+98);
-    const heatPct = (wpn.heat||0)/100;
-    drawBar(pad+38, pad+90, 60, 8, 1-heatPct, heatPct>0.8?'#ff2200':'#888800');
-  }
-
-  // Minimap (top-center)
-  renderMinimap(canvas.width/2 - 85, pad, 170, 130);
-
-  // Right panel — fuel + hull + weapon
-  const rp = canvas.width - 170 - pad;
-  ctx.fillStyle='rgba(10,10,10,0.85)'; ctx.fillRect(rp,pad,170,130);
-  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(rp,pad,170,130);
-
-  // Hull
-  ctx.font='9px monospace'; ctx.fillStyle=C.textDim; ctx.textAlign='left';
-  ctx.fillText('HULL', rp+8, pad+14);
-  const hullPct = car.hull/car.maxHull;
-  const hullCol = hullPct>0.6?C.healthGreen:hullPct>0.3?C.healthYellow:C.healthRed;
-  drawBar(rp+38, pad+5, bw, bh, hullPct, hullCol);
-  ctx.fillStyle=C.text; ctx.font='10px monospace';
-  ctx.fillText(Math.ceil(car.hull)+'/'+car.maxHull, rp+145, pad+14);
-
-  // Fuel
-  ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
-  ctx.fillText('FUEL', rp+8, pad+32);
-  const fuelPct = car.fuel/car.maxFuel;
-  const fuelCol = fuelPct<0.2?C.healthRed:C.fuelBlue;
-  drawBar(rp+38, pad+23, bw, bh, fuelPct, fuelCol);
-  ctx.fillStyle=fuelPct<0.2?C.healthRed:C.text; ctx.font='10px monospace';
-  ctx.fillText(fuelPct<0.2?'LOW!':Math.floor(fuelPct*100)+'%', rp+145, pad+32);
-
-  // Components
-  ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
-  ctx.fillText('ENG:'+Math.ceil(car.engineHull)+'%', rp+8, pad+50);
-  ctx.fillText('TR:'+Math.ceil(car.tireHull)+'%', rp+70, pad+50);
-  ctx.fillText('FT:'+Math.ceil(car.fuelTankHull)+'%', rp+115, pad+50);
-
-  // Cargo
-  const cargoMax = VEHICLE_TYPES[car.type]?.cargo || 0;
-  if (cargoMax > 0) {
-    ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
-    ctx.fillText('CARGO', rp+8, pad+68);
-    const cargoPct = playerCargo / cargoMax;
-    ctx.fillStyle='#886622'; ctx.font='10px monospace';
-    ctx.fillText(playerCargo+'/'+cargoMax, rp+60, pad+68);
-  }
-
-  // Weapon
-  if (wpn) {
-    ctx.font='bold 11px monospace'; ctx.fillStyle=C.text;
+    ctx.fillStyle='#00FF00';
     const wName = WEAPON_DISPLAY[wpn.type] || wpn.type;
-    ctx.fillText(wName, rp+8, pad+66);
-    // Ammo/fuel
-    if (WEAPON_TYPES[wpn.type]?.type === 'flame' || wpn.fuel !== undefined) {
-      ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
-      ctx.fillText('FUEL:'+(wpn.fuel||0), rp+90, pad+66);
-    } else if (wpn.ammo !== undefined) {
-      ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
-      ctx.fillText('AMO:'+(wpn.ammo||0), rp+90, pad+66);
-    }
-    // Heat
-    const heatPct2 = (wpn.heat||0)/100;
-    drawBar(rp+8, pad+74, 155, 6, 1-heatPct2, heatPct2>0.8?'#ff2200':'#ff8800');
+    ctx.fillText('WPN:'+wName, pad+350, pad+28);
+    if (wpn.ammo !== undefined) ctx.fillText('AMO:'+(wpn.ammo||0), pad+430, pad+28);
+    else if (wpn.fuel !== undefined) ctx.fillText('FUEL:'+(wpn.fuel||0), pad+430, pad+28);
+    const heat = Math.floor((wpn.heat||0));
+    ctx.fillStyle=heat>80?'#FF0000':'#00AA00';
+    ctx.fillText('HEAT:'+heat+'%', pad+350, pad+42);
   } else {
-    ctx.font='10px monospace'; ctx.fillStyle=C.textDim;
-    ctx.fillText('NO WEAPON', rp+8, pad+66);
-    ctx.fillText('[TAB] to add', rp+8, pad+82);
+    ctx.fillStyle='#666666';
+    ctx.fillText('NO WEAPON', pad+350, pad+28);
   }
 
-  // Weapons list (small)
-  if (car.weapons.length > 0) {
-    ctx.font='9px monospace'; ctx.fillStyle=C.textDim;
-    ctx.fillText('WEAPONS:', rp+8, pad+96);
-    car.weapons.forEach((w,idx)=>{
-      const col = idx===car.currentWeaponIdx ? C.gold : '#555555';
-      ctx.fillStyle = col;
-      ctx.fillText(WEAPON_DISPATCH[w.type]||w.type.charAt(0), rp+58+idx*18, pad+96);
-    });
-  }
-
-  // Arena status
-  if (arenaActive) {
-    ctx.fillStyle='rgba(40,20,0,0.85)'; ctx.fillRect(rp, pad+105, 170, 45);
-    ctx.strokeStyle='#ff4400'; ctx.lineWidth=1; ctx.strokeRect(rp, pad+105, 170, 45);
-    ctx.font='bold 10px monospace'; ctx.fillStyle='#ff4400'; ctx.textAlign='center';
-    ctx.fillText('ARENA WAVE '+arenaWave+'/5', rp+85, pad+118);
-    ctx.font='9px monospace'; ctx.fillStyle='#ffaa00';
-    ctx.fillText('Enemies: '+enemies.filter(e=>e.alive).length, rp+85, pad+132);
-    ctx.textAlign='left';
-  }
+  // Minimap (top-right)
+  renderMinimap(canvas.width - 180 - pad, pad, 180, 60);
 }
 
 function drawArmorBar(x,y,w,h,pct,max) {
@@ -1654,15 +1533,16 @@ function drawBar(x,y,w,h,pct,color) {
 }
 
 function renderMinimap(px,py,mw,mh) {
-  ctx.fillStyle='rgba(5,5,5,0.88)'; ctx.fillRect(px-2,py-2,mw+4,mh+4);
-  ctx.strokeStyle=C.hudBorder; ctx.lineWidth=2; ctx.strokeRect(px-2,py-2,mw+4,mh+4);
-  ctx.font='9px monospace'; ctx.fillStyle=C.textDim; ctx.textAlign='left';
-  ctx.fillText('MAP', px+2, py+10);
+  // Apple IIe style: simple black minimap with green/amber markers
+  ctx.fillStyle='#001100'; ctx.fillRect(px,py,mw,mh);
+  ctx.strokeStyle='#333333'; ctx.lineWidth=1; ctx.strokeRect(px,py,mw,mh);
+  ctx.font='8px monospace'; ctx.fillStyle='#006600'; ctx.textAlign='left';
+  ctx.fillText('MAP', px+3, py+10);
 
   const sx = mw/WORLD_W, sy = mh/WORLD_H;
 
-  // Roads
-  ctx.strokeStyle='#555555'; ctx.lineWidth=2;
+  // Roads - white lines
+  ctx.strokeStyle='#555555'; ctx.lineWidth=1;
   for (const seg of ROAD_SEGS) {
     ctx.beginPath();
     if (seg.x !== undefined) {
@@ -1675,28 +1555,23 @@ function renderMinimap(px,py,mw,mh) {
     ctx.stroke();
   }
 
-  // Towns
+  // Towns - gray squares
   for (const t of TOWNS) {
-    ctx.fillStyle=C.town;
-    ctx.fillRect(px+t.x*sx-3, py+t.y*sy-3, 6, 6);
+    ctx.fillStyle='#888888';
+    ctx.fillRect(px+t.x*sx-2, py+t.y*sy-2, 4, 4);
   }
 
-  // Enemies
+  // Enemies - red dots
   for (const e of enemies) {
     if (!e.alive) continue;
-    ctx.fillStyle=e.color||C.enemy;
-    ctx.beginPath(); ctx.arc(px+e.x*sx, py+e.y*sy, 2, 0, PI*2); ctx.fill();
+    ctx.fillStyle='#FF0000';
+    ctx.fillRect(px+e.x*sx-1, py+e.y*sy-1, 3, 3);
   }
 
-  // Player
+  // Player - green dot
   if (player.car) {
-    ctx.fillStyle=C.player;
-    ctx.beginPath(); ctx.arc(px+player.car.x*sx, py+player.car.y*sy, 3, 0, PI*2); ctx.fill();
-    ctx.strokeStyle=C.player; ctx.lineWidth=1;
-    ctx.beginPath();
-    ctx.moveTo(px+player.car.x*sx, py+player.car.y*sy);
-    ctx.lineTo(px+player.car.x*sx+Math.cos(player.car.angle)*8, py+player.car.y*sy+Math.sin(player.car.angle)*8);
-    ctx.stroke();
+    ctx.fillStyle='#00FF00';
+    ctx.fillRect(px+player.car.x*sx-2, py+player.car.y*sy-2, 4, 4);
   }
 
   ctx.textAlign='left';
@@ -1739,39 +1614,38 @@ function renderWalkingHUD() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// GARAGE UI
+// GARAGE UI — Apple IIe style
 // ═══════════════════════════════════════════════════════════
 function renderGarageUI() {
   const pw = 520, ph = 420;
   const px = (canvas.width-pw)/2, py = (canvas.height-ph)/2;
 
-  ctx.fillStyle='rgba(0,0,0,0.88)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='rgba(0,0,0,0.92)'; ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  ctx.fillStyle='#0a0a14'; ctx.fillRect(px,py,pw,ph);
-  ctx.strokeStyle=C.town; ctx.lineWidth=3; ctx.strokeRect(px,py,pw,ph);
+  ctx.fillStyle='#000000'; ctx.fillRect(px,py,pw,ph);
+  ctx.strokeStyle='#00FF00'; ctx.lineWidth=2; ctx.strokeRect(px,py,pw,ph);
 
   const t = TOWNS[garageTown];
-  ctx.font='bold 20px monospace'; ctx.fillStyle=C.text; ctx.textAlign='center';
-  ctx.fillText(t.name+' GARAGE', px+pw/2, py+30);
-  ctx.font='11px monospace'; ctx.fillStyle=C.textDim;
-  ctx.fillText(`F:${t.fuelMod.toFixed(1)}x  P:${t.partsMod.toFixed(1)}x  W:${t.weaponsMod.toFixed(1)}x`, px+pw/2, py+48);
+  ctx.font='bold 18px monospace'; ctx.fillStyle='#00FF00'; ctx.textAlign='center';
+  ctx.fillText(t.name+' GARAGE', px+pw/2, py+28);
+  ctx.font='11px monospace'; ctx.fillStyle='#888888';
+  ctx.fillText(`F:${t.fuelMod.toFixed(1)}x  P:${t.partsMod.toFixed(1)}x  W:${t.weaponsMod.toFixed(1)}x`, px+pw/2, py+46);
 
   // Tabs
   const tabs=['BUY','SELL','REPAIR','FUEL','STATS'];
   const tabW=pw/5;
   tabs.forEach((tab,i)=>{
-    ctx.fillStyle=garageTab===i?'#1a1a3a':'#0f0f22';
-    ctx.fillRect(px+i*tabW, py+56, tabW, 30);
-    ctx.strokeStyle=garageTab===i?C.town:'#333355';
-    ctx.lineWidth=garageTab===i?2:1;
-    ctx.strokeRect(px+i*tabW, py+56, tabW, 30);
-    ctx.fillStyle=garageTab===i?C.text:C.textDim;
-    ctx.font='bold 12px monospace'; ctx.textAlign='center';
-    ctx.fillText('['+(i+1)+'] '+tab, px+i*tabW+tabW/2, py+75);
+    ctx.fillStyle=garageTab===i?'#003300':'#001100';
+    ctx.fillRect(px+i*tabW, py+54, tabW, 28);
+    ctx.strokeStyle=garageTab===i?'#00FF00':'#333333';
+    ctx.lineWidth=1; ctx.strokeRect(px+i*tabW, py+54, tabW, 28);
+    ctx.fillStyle=garageTab===i?'#00FF00':'#666666';
+    ctx.font='bold 11px monospace'; ctx.textAlign='center';
+    ctx.fillText('['+(i+1)+'] '+tab, px+i*tabW+tabW/2, py+72);
   });
 
-  ctx.strokeStyle='#333355'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(px+10, py+92); ctx.lineTo(px+pw-10, py+92); ctx.stroke();
+  ctx.strokeStyle='#333333'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(px+10, py+88); ctx.lineTo(px+pw-10, py+88); ctx.stroke();
 
   ctx.textAlign='left';
 
@@ -1781,7 +1655,7 @@ function renderGarageUI() {
   else if (garageTab===3) renderGarageFuel();
   else if (garageTab===4) renderGarageStats();
 
-  ctx.font='10px monospace'; ctx.fillStyle='#444466'; ctx.textAlign='center';
+  ctx.font='10px monospace'; ctx.fillStyle='#444444'; ctx.textAlign='center';
   ctx.fillText('WASD/Arrows: Navigate   ENTER/SPACE: Select   1-5: Tabs   ESC: Exit', canvas.width/2, py+ph+18);
   ctx.textAlign='left';
 }
