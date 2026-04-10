@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Test</title></head>
+<body><canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = 400; canvas.height = 300;
+ctx.fillStyle = 'red';
+ctx.fillRect(0,0,400,300);
+ctx.fillStyle = 'white';
+ctx.font = '20px monospace';
+ctx.fillText('JAVASCRIPT WORKS', 50, 50);
+ctx.fillText('gameState would be: TITLE', 50, 80);
+document.body.style.background = '#000';
+ctx.fillStyle = '#0f0';
+ctx.fillText('If you see green text, canvas works', 50, 110);
+</script></body></html>
