@@ -6,25 +6,47 @@ A faithful HTML5 Canvas remake of Origin Systems' 1984 vehicular combat game.
 
 Open `index.html` in any modern browser.
 
-### Controls
-| Key | Action |
-|-----|--------|
-| W / ↑ | Accelerate |
-| S / ↓ | Brake / Reverse |
-| A / ← | Turn left |
-| D / → | Turn right |
-| SPACE | Fire machine gun |
-| ESC | Exit town screen |
+**NEW PLAYERS start as a pedestrian.** Walk to the GARAGE zone (red dashed square) inside the town, buy a car, then hit the road.
 
-### Game Loop
-1. **Drive** — stay on the brown roads (green off-road slows you down)
-2. **Fight** — destroy red enemy cars for cash and scrap
-3. **Trade** — drive into the blue town zones to buy/sell equipment
-4. **Upgrade** — repair armor and hull, refuel, improve your ride
-5. **Survive** — don't let your hull hit zero
+### Game Flow
+1. **Title screen** — Click **JOIN THE ROAD** to start
+2. **Walking** — You spawn on foot in Barren Rock town. Use WASD/Arrows to walk
+3. **Garage** — Walk into the red-dashed **GARAGE** zone to open the shop
+4. **Buy Car** — You start with $600. The Rusty Sedan costs $500
+5. **Drive** — Exit the garage and you're now driving. Use WASD to drive, SPACE to fire
+6. **Combat** — Destroy red enemy cars for cash and scrap
+7. **Wrecked?** — You survive as a pedestrian again. Walk back to a garage and buy a new car.
+
+### Controls
+| Key | Walking | Driving |
+|-----|---------|---------|
+| W/↑ | Walk forward | Accelerate |
+| S/↓ | Walk backward | Brake/Reverse |
+| A/← | Turn/Strafe left | Turn left |
+| D/→ | Turn/Strafe right | Turn right |
+| SPACE | — | Fire machine gun |
+| ESC | Exit garage | — |
+
+### Screens
+- **Title** — Animated car drives across road. Click JOIN THE ROAD
+- **Walking** — Navigate the town on foot. Find the GARAGE zone
+- **Garage** — BUY CAR / SELL / GARAGE (repair, refuel, stats)
+- **Driving** — Open road combat. Minimap shows towns (blue) and garage (red)
+
+### Economy
+- Starting cash: **$600**
+- Rusty Sedan: **$500** (armor:30 hull:70 spd:190)
+- Scrap dropped by enemies: sell at garage
+- Enemy kills also drop **$50–$160** cash
+
+### Minimap (top right)
+- **Blue squares** = Towns
+- **Red dots** = Garage zones inside towns
+- **Green dot** = You (walking) / You (driving)
+- **Red dots** = Enemy vehicles
 
 ### Tips
-- Watch your **fuel gauge** — running out leaves you stranded
-- Enemies respawn periodically; keep your armor up
-- Each town has different prices — buy cheap in one town, sell in another
-- Watch the minimap (top right) for town and enemy positions
+- Each town has different buy/sell prices — trade smart
+- Running out of fuel leaves you stranded
+- When your car is destroyed, you survive as a pedestrian — don't panic
+- Enemies respawn periodically; keep your armor and hull repaired
