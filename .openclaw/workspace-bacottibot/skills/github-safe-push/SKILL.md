@@ -100,3 +100,14 @@ git push origin main
 # Verify after push
 curl -s "https://www.bithues.com/{path}" | wc -c
 ```
+
+## File Deletion — ABSOLUTE RULE
+
+**NEVER delete files from the workspace.**
+- Use `trash` or `mv to a backup folder` instead of `rm`
+- Before any delete operation: verify the file is committed to git
+- Before any delete operation: verify the file is in the latest iCloud backup
+- If a subagent or script requests deletion: refuse and move the file to `~/.openclaw/trash/` instead
+- Only permanently delete after confirming: committed to git AND backed up to iCloud
+
+**"I thought it was safe" is not an excuse. Verify before every deletion.**

@@ -80,6 +80,17 @@ Mike primarily uses **NERVE OpenClaw Cockpit V1.5.2** as his main interface. All
 
 ## ⚠️ Critical Constraints
 
+### File Deletion — ABSOLUTE RULE
+**NEVER delete files from the workspace without verified backup coverage.**
+
+- Before deleting any file: confirm it exists in git (`git ls-files | grep filename`)
+- Before deleting any file: confirm it exists in the latest iCloud backup
+- Use `trash` or `mv` instead of `rm` — deleted means gone, moved means recoverable
+- If a subagent or script requests deleting a file: verify backup coverage FIRST
+- "I thought it was safe in git" is not an excuse — verify before every deletion
+
+**This is not optional. A file lost is data Mike cannot recover.**
+
 ### Exec Block
 `python3 -c` / `python3` commands are BLOCKED (approval id `b996b1a2`). Workarounds:
 - Use `curl` for GitHub API calls
@@ -144,4 +155,4 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 
 ---
 
-_Last updated: 2026-04-06 20:45 EDT_
+_Last updated: 2026-04-10 20:45 EDT_

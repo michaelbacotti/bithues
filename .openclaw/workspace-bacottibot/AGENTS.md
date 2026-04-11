@@ -226,6 +226,8 @@ Mike's rule: **Content and information that is not truthful and accurate is wort
   - All subagent code must be verified locally before pushing to GitHub.
   - Take screenshots BEFORE claiming something works.
 
+- **Never delete files.** Use `trash` or `mv` instead of `rm`. Before any deletion: verify the file is committed to git AND exists in the latest iCloud backup. If uncertain: don't delete. A file lost is data Mike cannot recover.
+
 
 ---
 
