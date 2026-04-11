@@ -1,28 +1,6 @@
-# Ignore everything by default
-*
-
-# But allow these specific file types and folders
-!*.md
-!*.py
-!*.sh
-!*.json
-
-# Allow OpenClaw workspace contents (order matters — .openclaw/ comes after these)
-!skills/
-!memory/
-!References/
-!SOP_Folder/
-!Reports/
-!scripts/
-!.learnings/
+# Ignore .openclaw internals we DON'T want tracked
 !.gitignore
 
-# OS files
-.DS_Store
-.Trashes
-._*
-
-# Ignore .openclaw internals we DON'T want tracked
 .openclaw/*/
 .openclaw/*.log
 .openclaw/*.json
@@ -33,7 +11,7 @@
 .openclaw/media/
 .openclaw/tasks/
 
-# Large binaries (in workspace only — PDFs etc are not in the repo anyway)
+# Large binaries
 *.pdf
 *.jpg
 *.jpeg
@@ -47,3 +25,27 @@
 *.numbers
 *.xlsx
 *.tar.gz
+
+# OS files
+.DS_Store
+.Trashes
+._*
+
+# DEFAULT: ignore everything
+*
+
+# Re-allow workspace directories and files
+# (must come AFTER * to override it)
+!skills/
+!memory/
+!References/
+!SOP_Folder/
+!Reports/
+!scripts/
+!.learnings/
+
+# Re-allow specific file types
+!*.md
+!*.py
+!*.sh
+!*.json
