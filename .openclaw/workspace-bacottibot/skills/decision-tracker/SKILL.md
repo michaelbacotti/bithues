@@ -19,7 +19,7 @@ Logs key decisions with full context (what was decided, alternatives considered,
 - Optional: outcome, tags, who decided
 
 ## Outputs
-- Markdown decision files in `~/.openclaw/workspace-bacottibot/.memory/decisions/`
+- Markdown decision files in `~/.openclaw/workspace-bacottibot/memory/decisions/` (create if missing)
 - Integration events written to memory-of-time
 
 ## Cost / Risk notes

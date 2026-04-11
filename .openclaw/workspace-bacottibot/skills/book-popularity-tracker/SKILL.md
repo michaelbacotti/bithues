@@ -1,12 +1,14 @@
 # book-popularity-tracker Skill
 
-Track daily popularity metrics (ratings, reviews, rank) for all 63 books in `References/book-tracker.md`.
+Track daily popularity metrics (ratings, reviews, rank) for all 64 books in `References/book-tracker.md`.
 
 ---
 
 ## 📋 Book Data Source
 
-Read `References/book-tracker.md` for the full list of 63 books. For each book, extract:
+**⚠️ NEVER invent book ASINs, titles, or author names.** Always read `References/book-tracker.md` first. If a book's ASIN is not in that file, say "I don't have that book in my tracker" rather than guessing.
+
+Read `References/book-tracker.md` for the full list of 64 books. For each book, extract:
 - **Title**
 - **Author / Pen Name**
 - **Amazon ASIN** (from tracker — construct URL as `https://www.amazon.com/dp/{ASIN}`)
@@ -18,7 +20,7 @@ Read `References/book-tracker.md` for the full list of 63 books. For each book, 
 
 ### Step 1: Check Each Book's Popularity
 
-For each of the 63 books, scrape/publicly fetch:
+For each of the 64 books, scrape/publicly fetch:
 1. **Amazon Product Page** — `https://www.amazon.com/dp/{ASIN}`
    - Star rating (e.g., "4.2 out of 5 stars")
    - Number of ratings (e.g., "1,234 ratings")
@@ -104,7 +106,7 @@ Daily cron job — run every morning (e.g., 8:00 AM ET):
 ```
 sessionTarget: "isolated"
 payload.kind: "agentTurn"
-message: "Run the book-popularity-tracker skill. Check all 63 books in References/book-tracker.md. Log to memory/book-popularity-YYYY-MM-DD.md. Compare with yesterday. Alert on notable changes (new reviews, rating delta >0.2, BSR delta >5000). Report summary to main session."
+message: "Run the book-popularity-tracker skill. Check all 64 books in References/book-tracker.md. Log to memory/book-popularity-YYYY-MM-DD.md. Compare with yesterday. Alert on notable changes (new reviews, rating delta >0.2, BSR delta >5000). Report summary to main session."
 ```
 
 ---

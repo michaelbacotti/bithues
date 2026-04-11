@@ -222,7 +222,56 @@ Mike's rule: **Content and information that is not truthful and accurate is wort
 - **Mike's browser > your headless browser.** If he says something doesn't work, believe him and investigate.
 - **When debugging: read the actual lines.** Don't reason around code you haven't actually looked at.
 - **Subagents:** Give them smaller scopes, explicit checkpoints, clearer success criteria.
-
-- **Don't re-spec what Mike has already established.** If he's defined what "correct" means (e.g., "homepage is the standard"), use it directly. Don't re-ask or re-document what was already decided.  - A subagent that times out mid-task delivers nothing. Better: one focused fix per subagent.
+  - A subagent that times out mid-task delivers nothing. Better: one focused fix per subagent.
   - All subagent code must be verified locally before pushing to GitHub.
   - Take screenshots BEFORE claiming something works.
+
+
+---
+
+## 📋 Index of Known Facts — Check Before Guessing
+
+Before answering questions about these topics, read the relevant file first. Don't guess.
+
+| Topic | File | What it contains |
+|-------|------|-----------------|
+| Book list + ASINs | `References/book-tracker.md` | 64 books, pen names, Amazon links, formats |
+| Website DNS/hosting | `References/Domains/DOMAIN_INVENTORY.md` | Domain registrar, DNS records, SSL status |
+| Entities & tax | `memory/entities.md` | EINs, ownership structure, tax preparer |
+| Entities detail | `memory/Bacotti Inc.md` | Bacotti Inc. meeting minutes, management |
+| Entities detail | `memory/Succession Holding LLC.md` | Eagle River Home LLC, real estate |
+| HOUSE Inc. | `memory/HOUSE Inc.md` | Nonprofit board tracker, case files |
+| Investing/trading | `memory/investing.md` | Dependability 2025, options preferences |
+| Websites | `memory/websites.md` | bithues.com, dependability.us, AdSense status |
+| Backup | `memory/backup.md` | iCloud backup path, cron schedule |
+| Personal | `memory/personal.md` | Mike's background, family, Little Mike books |
+| Trading API | `TOOLS.md` | Public.com secret key, account numbers |
+
+**Rule:** If a question is about something in this table, read the file first. Don't answer from memory.
+
+---
+
+## 🎯 Evidence-First Answering Pattern
+
+When answering factual questions:
+
+1. **Search first** — `memory_search` or read the relevant file
+2. **Quote what you found** — "According to `References/book-tracker.md`, the book is..."
+3. **Then answer** — "Based on that, the ASIN is B0BTD9CT35"
+4. **If no source covers it** — Say "I don't have that information in my indexed sources" — do NOT guess
+
+**"I don't know" is always acceptable. Inventing facts is not.**
+
+---
+
+## 🚫 Never Invent These Values
+
+For any skill that retrieves external data, **never guess the return value**. If the skill can't run or returns nothing:
+
+- Book ASINs → Read `References/book-tracker.md`
+- Account numbers → Read `TOOLS.md` or say "I don't have that"
+- File paths → Use `find` or `ls` to verify, don't assert
+- DNS records → Read `References/Domains/DOMAIN_INVENTORY.md`
+- Entity EINs → Read `memory/entities.md`
+
+- **Don't re-spec what Mike has already established.** If he's defined what "correct" means (e.g., "homepage is the standard"), use it directly. Don't re-ask or re-document what was already decided.

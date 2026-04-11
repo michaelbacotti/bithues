@@ -17,7 +17,7 @@ Creates, updates, and manages websites using HTML/CSS/JavaScript, with GitHub Pa
 
 ## Inputs
 - Project name and specifications
-- Local files in `~/openclaw/workspace/Website/` (source of truth, not live URLs)
+- Local files in the workspace (e.g., `~/.openclaw/workspace-bacottibot/` for bithues) — source of truth, not live URLs
 
 ## Outputs
 - HTML, CSS, JavaScript files
