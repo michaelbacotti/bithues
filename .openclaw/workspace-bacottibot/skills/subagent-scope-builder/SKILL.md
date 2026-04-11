@@ -12,7 +12,7 @@ Most subagent failures fall into three buckets:
 2. **No verification step** → reports "done" without actually completing  
 3. **Vague success criteria** → subagent decides it's done when it isn't
 
-This skill forces you to write tighter, more honest subagent prompts.
+This skill forces you to write tighter, more accurate subagent prompts.
 
 ---
 
@@ -51,7 +51,7 @@ FAILURE RECOVERY: [what to do if timeout/error — report partial results, don't
 | Small (1-10 files) | One subagent, all in one prompt |
 | Medium (10-50 files) | One subagent, batch processing with checkpoint reporting |
 | Large (50+ files) | Sequential subagents by directory or batch |
-| Visual rewrite | ONLY as separate subagent after functional bugs are fixed |
+| Visual rewrite | Do NOT run as subagent — token-heavy, OOM risk. Do in main session. Subagent only after functional bugs are fixed.
 | Any task requiring reading PDFs | Limit to 2 PDFs max per subagent |
 
 **Hard rule:** One bug fix per subagent. Do NOT combine "fix ESC key" + "fix walking speed" + "rewrite visuals" into one subagent. If one times out, you lose all three.

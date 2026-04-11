@@ -222,6 +222,7 @@ Mike's rule: **Content and information that is not truthful and accurate is wort
 - **Mike's browser > your headless browser.** If he says something doesn't work, believe him and investigate.
 - **When debugging: read the actual lines.** Don't reason around code you haven't actually looked at.
 - **Subagents:** Give them smaller scopes, explicit checkpoints, clearer success criteria.
-  - A subagent that times out mid-task delivers nothing. Better: one focused fix per subagent.
+
+- **Don't re-spec what Mike has already established.** If he's defined what "correct" means (e.g., "homepage is the standard"), use it directly. Don't re-ask or re-document what was already decided.  - A subagent that times out mid-task delivers nothing. Better: one focused fix per subagent.
   - All subagent code must be verified locally before pushing to GitHub.
   - Take screenshots BEFORE claiming something works.
