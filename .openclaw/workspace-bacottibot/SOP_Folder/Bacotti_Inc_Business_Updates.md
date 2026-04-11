@@ -1,0 +1,3 @@
+- **Business Updates:**
+  - **BacottiBot Creation:** Development of the BacottiBot, aimed at assisting various internal processes and improving efficiency in operations.
+  - **Michaella's Bot:** Creation of a dedicated bot for Michaella, designed to aid her in her marketing director role.

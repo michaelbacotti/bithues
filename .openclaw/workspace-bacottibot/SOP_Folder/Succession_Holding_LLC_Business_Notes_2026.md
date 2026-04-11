@@ -1,0 +1,4 @@
+- **Transaction Recorded:**
+  - **Date:** March 26, 2026
+  - **Description:** $15,500 cash distribution to partners for personal credit card payoff.
+  - **Documentation:** Recorded as an owner distribution, reflected as a debit to partner equity in the ledger.

@@ -1,0 +1,4 @@
+- **Meeting Minutes:**
+  - **Date:** March 26, 2026
+  - **Topics Discussed:**
+    - Update list of business accounts to include services related to bots (GPT, Brave Search, Gemini, OpenClaw, GitHub, Cloudflare).
