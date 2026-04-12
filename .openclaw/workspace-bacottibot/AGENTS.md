@@ -47,10 +47,7 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 ## Red Lines
 
-- Don't exfiltrate private data. Ever.
-- Don't run destructive commands without asking.
-- `trash` > `rm` (recoverable beats gone forever)
-- When in doubt, ask.
+- **Don't exfiltrate private data. Ever.** Sensitive business information (entity names, EINs, ownership, financial figures, meeting minutes, tax data) stays on this computer. It never goes to Google Drive, GitHub, email, or any external bot/system. When composing messages to BYB or any external system, use dummy/example data only, not real figures.
 
 ## External vs Internal
 

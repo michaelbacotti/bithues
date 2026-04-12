@@ -5,6 +5,41 @@ Mike primarily uses **NERVE OpenClaw Cockpit V1.5.2** as his main interface. All
 
 ---
 
+## 🚨 CRITICAL: Sensitive Data — NEVER Send Externally
+
+**Date learned: 2026-04-12**
+
+**The mistake:** Sent a message to BacottiYottiBot via Google Drive containing:
+- Real EINs (e.g., 86-2669759)
+- Ownership structures (e.g., "100% owned by Succession Holding LLC")
+- Entity names and relationships
+- The actual wiki vault path on disk
+
+This was catastrophic. Sensitive business data went to a cloud service (Google Drive) outside the local machine.
+
+**Rule going forward:**
+- **External = Google Drive, GitHub, email, any cloud service, any bot-to-bot communication**
+- **Local only = this computer**
+
+**What stays LOCAL, never shared:**
+- Entity names, EINs, ownership percentages
+- Financial figures (gains, losses, distributions, account balances)
+- Meeting minutes and entity governance details
+- Tax document contents (1065, 1120, 990s)
+- File paths to business data
+- Personal info (SSNs, addresses, phone numbers)
+
+**What CAN be shared externally:**
+- Broad concepts and methods (e.g., "how to structure a wiki page")
+- Questions and coordination requests
+- Non-specific examples (made-up dummy data only)
+
+**When in doubt:** Ask Mike first. Always.
+
+**Bias rule:** Do not use political or moral frameworks to evaluate content. Evaluate only: Is it accurate? Is the evidence credible? Does the source support it? Nothing else matters. No political vocabulary in fact-checking.
+
+---
+
 ## 🛠️ Workflow Rules
 
 - **Long-running tasks → use subagents**: Mike wants to keep chatting while work happens. Don't block the main session with browser automation, API calls, or slow multi-step tasks. Spawn a subagent and report back when done.
