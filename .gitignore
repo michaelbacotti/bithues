@@ -1,0 +1,172 @@
+# === RULES FOR /Users/mike/ HOME REPO ===
+
+# macOS system
+.DS_Store
+.CFUserTextEncoding
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trash
+.DocumentRevisions-V100
+.fseventsd
+.MobileBackups
+.PKInstallSandboxManager
+.VolumeIcon.icns
+
+# macOS home dir standard folders
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Pictures/
+Public/
+Sites/
+
+# Cloud storage
+Dropbox/
+OneDrive*/
+"Creative Cloud Files"*/
+
+# App data
+Applications/
+.parallels*/
+.Fusion360CAM/
+Jts/
+.Jts/
+PycharmProjects/
+*Parallels*/
+*Creative Cloud*/
+*Fusion 360*/
+*OneDrive*
+"OneDrive*
+*CloudStorage*/
+Parallels/
+
+# dotfiles / config
+.Xauthority
+.adobe/
+.gitignore
+.bash_history
+.bash_profile
+.bash_profile.save
+.bash_sessions/
+.cache/
+.codex/
+.config/
+.cups/
+.dropbox/
+.gitconfig
+.goodsync/
+.hwid
+.idlerc/
+.ipython/
+.kindle/
+.lesshst
+.local/
+.mailcap
+.matplotlib/
+.mime.types
+.mono/
+.openclaw-user/
+.oracle_jre_usage/
+.rstudio/
+.sh_history
+.spyder-py3/
+.streamlit/
+.thinkorswim/
+.vim/
+.viminfo
+.vscode/
+.xpdfrc
+.xurl
+.zcompdump
+.zhistory
+.zlogin
+.zlogout
+.zprofile
+.zprofile.pysave
+.zshenv
+.zshrc
+.zshrc.save
+.zsh_history
+.zsh_sessions/
+
+# SSH keys (NEVER track)
+.ssh/
+
+# development / python
+get-pip.py
+*pygame*
+*qrcode*
+"import pygame.py"
+"import qrcode.py"
+go/
+qr.py
+qrcode.png
+xpdf/
+
+# more dotfiles
+.nerve/
+.node-llama-cpp/
+.npm/
+.ollama/
+
+# other personal data
+error_log.log
+openclaw-backup.tgz
+openclaw-workspace-backups/
+autoduel/
+bacotti-bots/
+bithues-lab/
+bithues-temp/
+nerve/
+QR
+
+# === OPENCLAW WORKSPACE: only track essential text files ===
+# Workspace is at .openclaw/workspace-bacottibot/
+/.openclaw/workspace-bacottibot/
+!.openclaw/workspace-bacottibot/AGENTS.md
+!.openclaw/workspace-bacottibot/SOUL.md
+!.openclaw/workspace-bacottibot/USER.md
+!.openclaw/workspace-bacottibot/TOOLS.md
+!.openclaw/workspace-bacottibot/HEARTBEAT.md
+!.openclaw/workspace-bacottibot/MEMORY.md
+!.openclaw/workspace-bacottibot/IDENTITY.md
+!.openclaw/workspace-bacottibot/STYLE_SPEC.md
+!.openclaw/workspace-bacottibot/skills/
+!.openclaw/workspace-bacottibot/memory/
+!.openclaw/workspace-bacottibot/scripts/
+!.openclaw/workspace-bacottibot/References/
+
+# OpenClaw internal dirs (ignore all of .openclaw except workspace)
+.openclaw/.env
+.openclaw/agents/
+.openclaw/memory/
+.openclaw/browser/
+.openclaw/cache/
+.openclaw/canvas/
+.openclaw/completions/
+.openclaw/credentials/
+.openclaw/cron/
+.openclaw/devices/
+.openclaw/env
+.openclaw/exec-approvals.json
+.openclaw/flows/
+.openclaw/identity/
+.openclaw/logs/
+.openclaw/media/
+.openclaw/openclaw.json
+.openclaw/openclaw.json.bak
+.openclaw/openclaw.json.bak.1
+.openclaw/openclaw.json.bak.2
+.openclaw/openclaw.json.bak.3
+.openclaw/openclaw.json.bak.4
+.openclaw/subagents/
+.openclaw/tasks/
+.openclaw/telegram/
+.openclaw/token-usage.json
+.openclaw/update-check.json
+.openclaw/wiki/
+.openclaw/workspace
