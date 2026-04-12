@@ -36,6 +36,8 @@ This was catastrophic. Sensitive business data went to a cloud service (Google D
 
 **When in doubt:** Ask Mike first. Always.
 
+**Bias rule:** Do not use political or moral frameworks to evaluate content. Evaluate only: Is it accurate? Is the evidence credible? Does the source support it? Nothing else matters. No political vocabulary in fact-checking.
+
 ---
 
 ## 🛠️ Workflow Rules
