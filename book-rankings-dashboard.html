@@ -4,54 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bithues Book Rankings Dashboard</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0e1a; color: #f0f0f0; min-height: 100vh; }
-  .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-  header { text-align: center; padding: 2.5rem 0; border-bottom: 2px solid #c8a84b; margin-bottom: 2rem; }
-  header h1 { font-size: 2.4rem; color: #c8a84b; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
-  header .subtitle { color: #8899bb; font-size: 0.95rem; }
-  .stats { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
-  .stat-card { background: linear-gradient(135deg, #111827, #1a2540); border: 1px solid #2a3a5c; border-radius: 10px; padding: 1.2rem 2rem; text-align: center; min-width: 180px; }
-  .stat-card .num { font-size: 2.2rem; font-weight: 700; color: #c8a84b; }
-  .stat-card .label { font-size: 0.85rem; color: #8899bb; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
-  .stat-card.green .num { color: #4ade80; }
-  .stat-card.red .num { color: #f87171; }
-  .stat-card.gray .num { color: #94a3b8; }
-  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin: 0.15rem; }
-  .badge.green { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
-  .badge.yellow { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
-  .badge.red { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
-  .badge.gray { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
-  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #2a3a5c; }
-  table { width: 100%; border-collapse: collapse; min-width: 900px; }
-  thead th { background: #111827; color: #c8a84b; padding: 1rem 0.8rem; text-align: left; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid #c8a84b; position: sticky; top: 0; cursor: pointer; }
-  thead th:hover { background: #1a2540; }
-  tbody tr { border-bottom: 1px solid #1a2540; transition: background 0.15s; }
-  tbody tr:hover { background: #111827; }
-  tbody tr:last-child { border-bottom: none; }
-  td { padding: 0.75rem 0.8rem; vertical-align: top; }
-  .rank-cell { font-weight: 700; white-space: nowrap; }
-  .rank-green { color: #4ade80; }
-  .rank-yellow { color: #fbbf24; }
-  .rank-red { color: #f87171; }
-  .rank-na { color: #475569; font-style: italic; }
-  .title-cell { font-weight: 600; color: #e2e8f0; max-width: 280px; }
-  .title-cell .sub { font-size: 0.78rem; color: #64748b; font-weight: 400; margin-top: 0.15rem; }
-  .asin-cell { font-family: 'Courier New', monospace; font-size: 0.8rem; color: #64748b; }
-  .cat-cell { font-size: 0.78rem; color: #94a3b8; line-height: 1.6; min-width: 200px; }
-  .cat-cell .cat-badge { display: block; }
-  .link-cell a { color: #c8a84b; text-decoration: none; font-size: 0.82rem; padding: 0.3rem 0.7rem; border: 1px solid #c8a84b; border-radius: 4px; transition: all 0.2s; display: inline-block; }
-  .link-cell a:hover { background: #c8a84b; color: #0a0e1a; }
-  .footer { text-align: center; padding: 2rem 0; color: #475569; font-size: 0.82rem; border-top: 1px solid #1a2540; margin-top: 2rem; }
-  @media (max-width: 768px) {
-    .container { padding: 1rem; }
-    header h1 { font-size: 1.6rem; }
-    .stats { gap: 0.8rem; }
-    .stat-card { min-width: 140px; padding: 0.8rem 1rem; }
-    .stat-card .num { font-size: 1.6rem; }
-  }
-</style>
 </head>
 <body>
 <div class="container">
@@ -103,7 +55,7 @@
           <td class="asin-cell">B0D38W5972</td>
           <td class="rank-cell rank-green">Best Sellers Rank: #11,850 Free</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#1 in Prehistory eBooks</span><span class="cat-badge badge gray">#4 in Travel Adventure Fiction</span><span class="cat-badge badge gray">#4 in Ancient Historical Fiction</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0D38W5972" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0D38W5972?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">2</td>
@@ -112,7 +64,7 @@
           <td class="asin-cell">B0GJ1463Y6</td>
           <td class="rank-cell rank-yellow">Best Sellers Rank: #330,194</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#22 in Physics of Time (Kindle Store)</span><span class="cat-badge badge gray">#69 in Physics of Time (Books)</span><span class="cat-badge badge gray">#190 in Neuroscience (Kindle Store)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GJ1463Y6" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GJ1463Y6?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">3</td>
@@ -121,7 +73,7 @@
           <td class="asin-cell">B0GTSXS48K</td>
           <td class="rank-cell rank-yellow">Best Sellers Rank: #458,038</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#569 in Metaphysical Science Fiction eBooks</span><span class="cat-badge badge gray">#1,935 in First Contact Science Fiction (Books)</span><span class="cat-badge badge gray">#2,483 in First Contact Science Fiction eBooks</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GTSXS48K" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GTSXS48K?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">4</td>
@@ -130,7 +82,7 @@
           <td class="asin-cell">B0GRW79ZM7</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #520,895</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#37 in Physics of Time (Kindle Store)</span><span class="cat-badge badge gray">#109 in Physics of Time (Books)</span><span class="cat-badge badge gray">#137 in Two-Hour Science & Math Short Reads</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GRW79ZM7" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GRW79ZM7?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">5</td>
@@ -139,7 +91,7 @@
           <td class="asin-cell">B0GTJN8YGG</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #609,754</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#355 in UFOs (Kindle Store)</span><span class="cat-badge badge gray">#426 in Occult UFOs</span><span class="cat-badge badge gray">#798 in UFOs (Books)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GTJN8YGG" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GTJN8YGG?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">6</td>
@@ -148,7 +100,7 @@
           <td class="asin-cell">B0GPM4DZR1</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #623,180</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#644 in New Age New Thought</span><span class="cat-badge badge gray">#750 in Metaphysical Science Fiction eBooks</span><span class="cat-badge badge gray">#2,525 in First Contact Science Fiction (Books)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPM4DZR1" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPM4DZR1?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">7</td>
@@ -157,7 +109,7 @@
           <td class="asin-cell">B0GHQG9LLS</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #822,402</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#221 in Humanism Philosophy</span><span class="cat-badge badge gray">#698 in Consciousness & Thought (Kindle Store)</span><span class="cat-badge badge gray">#702 in Humanist Philosophy</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHQG9LLS" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHQG9LLS?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">8</td>
@@ -166,7 +118,7 @@
           <td class="asin-cell">B0DC6FTG21</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #857,204</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#6,327 in Children's Beginner Readers</span><span class="cat-badge badge gray">#27,285 in Children's Friendship & Social Skills Books (Books)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0DC6FTG21" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0DC6FTG21?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">9</td>
@@ -175,7 +127,7 @@
           <td class="asin-cell">B0GGVDKZ96</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #1,028,535</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#81 in Physics of Time (Kindle Store)</span><span class="cat-badge badge gray">#194 in Physics of Time (Books)</span><span class="cat-badge badge gray">#209 in Science Essays & Commentary (Kindle Store)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GGVDKZ96" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GGVDKZ96?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">10</td>
@@ -184,7 +136,7 @@
           <td class="asin-cell">B0GS367G2M</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #1,049,630</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#15 in Pre-Columbian History of Latin America</span><span class="cat-badge badge gray">#247 in History of Mexico</span><span class="cat-badge badge gray">#947 in Mexico History</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GS367G2M" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GS367G2M?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">11</td>
@@ -193,7 +145,7 @@
           <td class="asin-cell">B0BTD9CT35</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #1,194,629</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#28 in Teen & Young Adult Prehistory Historical Fiction</span><span class="cat-badge badge gray">#110 in Teen & Young Adult Ancient Civilization Fiction eBooks</span><span class="cat-badge badge gray">#195 in Teen & Young Adult Ancient Historical Fiction</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0BTD9CT35" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0BTD9CT35?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">12</td>
@@ -202,7 +154,7 @@
           <td class="asin-cell">B0GP91NKC7</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #1,197,392</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#456 in Journaling</span><span class="cat-badge badge gray">#3,870 in Two-Hour Self-Help Short Reads</span><span class="cat-badge badge gray">#7,113 in Journal Writing Self-Help</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GP91NKC7" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GP91NKC7?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">13</td>
@@ -211,7 +163,7 @@
           <td class="asin-cell">B0GKRKP1Q4</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #1,488,195</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#1,772 in Religious Mysteries (Books)</span><span class="cat-badge badge gray">#2,981 in 45-Minute Literature & Fiction Short Reads</span><span class="cat-badge badge gray">#7,372 in Mystery, Thriller & Suspense Literary Fiction</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GKRKP1Q4" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GKRKP1Q4?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">14</td>
@@ -220,7 +172,7 @@
           <td class="asin-cell">B0GSC6SBQ9</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #2,059,567</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#3,961 in Hard Science Fiction (Kindle Store)</span><span class="cat-badge badge gray">#10,612 in Mystery Action Fiction (Kindle Store)</span><span class="cat-badge badge gray">#19,681 in Science Fiction Adventure</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GSC6SBQ9" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GSC6SBQ9?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">15</td>
@@ -229,7 +181,7 @@
           <td class="asin-cell">B0GNFBWN6S</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #2,771,725</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#2,043 in Ancient Historical Fiction</span><span class="cat-badge badge gray">#3,316 in Ancient History Fiction (Books)</span><span class="cat-badge badge gray">#7,057 in Two-Hour History Short Reads</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GNFBWN6S" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GNFBWN6S?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">16</td>
@@ -238,7 +190,7 @@
           <td class="asin-cell">B0GPH597LL</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #3,005,950</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#1,242 in Memory Improvement (Kindle Store)</span><span class="cat-badge badge gray">#3,280 in Memory Improvement Self-Help</span><span class="cat-badge badge gray">#3,304 in Aging Self-Help eBooks</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPH597LL" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPH597LL?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">17</td>
@@ -247,7 +199,7 @@
           <td class="asin-cell">B0GPNWJ314</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #3,344,741</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#570 in Quantum Theory (Books)</span><span class="cat-badge badge gray">#618 in Reincarnation (Books)</span><span class="cat-badge badge gray">#1,759 in Quantum Theory (Kindle Store)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPNWJ314" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPNWJ314?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">18</td>
@@ -256,7 +208,7 @@
           <td class="asin-cell">B0FPBBTHLT</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #4,025,680</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#2,003 in Children's Aeronautics & Space Books (Books)</span><span class="cat-badge badge gray">#50,427 in Children's Action & Adventure Books (Books)</span><span class="cat-badge badge gray">#88,571 in Children's Literature (Books)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FPBBTHLT" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FPBBTHLT?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">19</td>
@@ -265,7 +217,7 @@
           <td class="asin-cell">B0F9HHYVBY</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #4,933,596</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#12 in Washington, D.C. Travel Guides (Books)</span><span class="cat-badge badge gray">#54 in Washington, D.C. Travel Guides (Kindle Store)</span><span class="cat-badge badge gray">#452 in South Atlantic United States Travel Books</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0F9HHYVBY" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0F9HHYVBY?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">20</td>
@@ -274,7 +226,7 @@
           <td class="asin-cell">B0CFHT4WDX</td>
           <td class="rank-cell rank-red">Best Sellers Rank: #5,582,030</td>
           <td class="cat-cell"><span class="cat-badge badge gray">#5,087 in Children's Inspirational & Personal Growth</span><span class="cat-badge badge gray">#7,017 in Children's Imagination & Play Fiction</span><span class="cat-badge badge gray">#8,883 in Children's Sports & Outdoors Books (Kindle Store)</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CFHT4WDX" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CFHT4WDX?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">21</td>
@@ -283,7 +235,7 @@
           <td class="asin-cell">B0GQCZKRGB</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQCZKRGB" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQCZKRGB?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">22</td>
@@ -292,7 +244,7 @@
           <td class="asin-cell">B0GQVLB9N2</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQVLB9N2" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQVLB9N2?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">23</td>
@@ -301,7 +253,7 @@
           <td class="asin-cell">B0GSP9S473</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GSP9S473" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GSP9S473?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">24</td>
@@ -310,7 +262,7 @@
           <td class="asin-cell">B0GQ2YCLD4</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQ2YCLD4" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQ2YCLD4?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">25</td>
@@ -319,7 +271,7 @@
           <td class="asin-cell">B0GPLX1NJD</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPLX1NJD" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPLX1NJD?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">26</td>
@@ -328,7 +280,7 @@
           <td class="asin-cell">B0GPT6QRDW</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPT6QRDW" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPT6QRDW?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">27</td>
@@ -337,7 +289,7 @@
           <td class="asin-cell">B0GPPBCKYF</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPPBCKYF" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPPBCKYF?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">28</td>
@@ -346,7 +298,7 @@
           <td class="asin-cell">B0GS6KMYXV</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GS6KMYXV" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GS6KMYXV?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">29</td>
@@ -355,7 +307,7 @@
           <td class="asin-cell">B0F2ZHBK46</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0F2ZHBK46" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0F2ZHBK46?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">30</td>
@@ -364,7 +316,7 @@
           <td class="asin-cell">B0GHM237Z9</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHM237Z9" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHM237Z9?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">31</td>
@@ -373,7 +325,7 @@
           <td class="asin-cell">B0GR7R6HT1</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GR7R6HT1" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GR7R6HT1?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">32</td>
@@ -382,7 +334,7 @@
           <td class="asin-cell">B0GQSJX1MP</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQSJX1MP" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQSJX1MP?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">33</td>
@@ -391,7 +343,7 @@
           <td class="asin-cell">B0GLDRQZXH</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GLDRQZXH" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GLDRQZXH?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">34</td>
@@ -400,7 +352,7 @@
           <td class="asin-cell">B0GN41C6KG</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GN41C6KG" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GN41C6KG?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">35</td>
@@ -409,7 +361,7 @@
           <td class="asin-cell">B0FH33TF12</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FH33TF12" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FH33TF12?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">36</td>
@@ -418,7 +370,7 @@
           <td class="asin-cell">B0C8RQB9BP</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0C8RQB9BP" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0C8RQB9BP?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">37</td>
@@ -427,7 +379,7 @@
           <td class="asin-cell">B0CD9JC1HY</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CD9JC1HY" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CD9JC1HY?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">38</td>
@@ -436,7 +388,7 @@
           <td class="asin-cell">B0CDFFW3LD</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CDFFW3LD" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CDFFW3LD?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">39</td>
@@ -445,7 +397,7 @@
           <td class="asin-cell">B0BRDJ9PW8</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0BRDJ9PW8" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0BRDJ9PW8?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">40</td>
@@ -454,7 +406,7 @@
           <td class="asin-cell">B0863V3CW9</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0863V3CW9" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0863V3CW9?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">41</td>
@@ -463,7 +415,7 @@
           <td class="asin-cell">B0GQK61R5H</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQK61R5H" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQK61R5H?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">42</td>
@@ -472,7 +424,7 @@
           <td class="asin-cell">B0GR1199SJ</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GR1199SJ" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GR1199SJ?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">43</td>
@@ -481,7 +433,7 @@
           <td class="asin-cell">B0FL517JXK</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FL517JXK" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FL517JXK?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
         <tr>
           <td style="color:#475569;font-size:0.82rem;">44</td>
@@ -490,7 +442,7 @@
           <td class="asin-cell">B0GHNFJ88K</td>
           <td class="rank-cell rank-na">N/A</td>
           <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
-          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHNFJ88K" target="_blank">View →</a></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHNFJ88K?tag=bithues-20" target="_blank">View →</a></td>
         </tr>
       </tbody>
     </table>

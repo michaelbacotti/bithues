@@ -9,277 +9,70 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="canonical" href="https://www.bithues.com/reviews/probability-of-light.html" /><style>
-
-    /* ── NAV ── */
-    nav {
-      background: var(--navy);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 2px solid var(--gold);
-    }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--white);
-      letter-spacing: .03em;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .nav-brand span { color: var(--gold); }
-    .nav-links { display: flex; align-items: center; gap: 0; }
-    .nav-item { position: relative; }
-    .nav-item > a {
-      color: var(--gray-mid);
-      text-decoration: none;
-      font-size: .875rem;
-      font-weight: 500;
-      padding: 0 1.25rem;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      transition: color .2s;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-    }
-    .nav-item > a:hover,
-    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .nav-item .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--navy-mid);
-      border: 1px solid rgba(200,169,110,.25);
-      border-top: 2px solid var(--gold);
-      border-radius: 0 0 8px 8px;
-      min-width: 180px;
-      padding: .5rem 0;
-      box-shadow: 0 8px 24px rgba(10,22,40,.3);
-      z-index: 200;
-    }
-    .nav-item:hover .dropdown { display: block; }
-    .dropdown a {
-      display: block;
-      padding: .6rem 1rem;
-      color: var(--gray-mid);
-      text-decoration: none;
-      font-size: .825rem;
-      font-weight: 400;
-      transition: all .15s;
-      white-space: nowrap;
-    }
-    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
-    .dropdown-divider { border-top: 1px solid rgba(200,169,110,.15); margin: .25rem 0; }
-
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6a 100%);
-      color: var(--white);
-      padding: 5rem 2rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-      pointer-events: none;
-    }
-    .hero-eyebrow { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 600; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.15; margin-bottom: 1.2rem; color: var(--white); }
-    .hero h1 em { font-style: normal; color: var(--gold); }
-    .hero p { font-size: 1.1rem; color: rgba(255,255,255,.75); max-width: 640px; margin: 0 auto; }
-
-    /* ── CATEGORY CHIPS ── */
-    .chips { padding: 2rem 2rem 0; text-align: center; }
-    .chips a {
-      display: inline-block;
-      padding: .4rem 1rem;
-      border: 1.5px solid var(--gold);
-      border-radius: 20px;
-      color: var(--gold);
-      text-decoration: none;
-      font-size: .8rem;
-      font-weight: 500;
-      margin: .25rem;
-      transition: all .2s;
-    }
-    .chips a:hover { background: var(--gold); color: var(--navy); }
-
-    /* ── REVIEW BODY ── */
-    .review-body {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-    .review { color: var(--text-body); }
-    .review h1.header {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--navy);
-      margin-bottom: .5rem;
-      display: none; /* Shown in hero instead */
-    }
-    .review p.author {
-      color: var(--gray-mid);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .review p.tldr {
-      color: var(--text-body);
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-      font-style: italic;
-    }
-    .review h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin: 2rem 0 1rem; }
-    .review .takeaways ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 2rem;
-    }
-    .review .takeaways li {
-      padding: .5rem 0;
-      border-bottom: 1px solid var(--gray-light);
-      color: var(--text-body);
-      font-size: .95rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-    .review .takeaways li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-    }
-    .review .who, .review .verdict {
-      background: var(--white);
-      border-left: 3px solid var(--gold);
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      font-size: .95rem;
-      color: var(--text-body);
-      border-radius: 0 4px 4px 0;
-    }
-    .review .who strong, .review .verdict strong { color: var(--navy); }
-    .review .affiliate {
-      text-align: center;
-      padding: 2rem;
-      background: var(--off-white);
-      border-radius: 8px;
-      margin-top: 2rem;
-    }
-    .review .affiliate p { font-size: .8rem; color: var(--gray-mid); margin-bottom: .75rem; }
-    .review .affiliate a {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--navy);
-      padding: .75rem 2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: .95rem;
-    }
-    .review .affiliate a:hover { background: #d4b87a; }
-
-    /* ── FOOTER ── */
-    footer { background: var(--navy); color: rgba(255,255,255,.5); padding: 2.5rem 2rem; text-align: center; border-top: 2px solid var(--gold); }
-    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); margin-bottom: .5rem; }
-    .footer-brand span { color: var(--gold); }
-    footer p { font-size: .8rem; }
-    footer a { color: rgba(200,169,110,.6); text-decoration: none; }
-    footer a:hover { color: var(--gold); }
-
-    /* ── BACK TO TOP ── */
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 44px;
-      height: 44px;
-      background: var(--gold);
-      color: var(--navy);
-      border: none;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: opacity .3s;
-      z-index: 50;
-    }
-    .back-to-top.visible { display: flex; }
-    .back-to-top:hover { background: var(--gold-light); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero { padding: 3rem 1.5rem 2.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="canonical" href="https://www.bithues.com/reviews/probability-of-light.html" />
 </head>
 <body>
   <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
   </nav>
-
-  <header class="hero">
+<section class="hero">
     <div class="hero-eyebrow">Review</div>
-    <h1>The Probability of Light</h1>
-    <p>by Maris K. Vector</p>
-  </header>
-
-  <div class="chips">
-    <a href="category/science-fiction.html">Sci-Fi</a> <a href="category/science-fiction.html">Sci-Fi</a>
-  </div>
-
-  <div class="review-body">
-    <article class="review">
-      <a href="../index.html" style="color:var(--text-dim); font-size: 0.85rem; text-decoration: none;">Home</a> › <a href="index.html" style="color:var(--text-dim); font-size: 0.85rem; text-decoration: none;">Reviews</a> › <span style="color: var(--gold); font-size: 0.85rem;">This Book</span>
+    <h1>The Probability of Light – Maris K. Vector</h1>
+    <p class="hero-sub">by Maris K. Vector</p>
+</section>
+<!-- ── CATEGORIES ── -->
+<div class="chips">
+    <a href="../category/self-help.html">Self-Help</a>
+    <a href="../category/science-fiction.html">Sci-Fi</a>
+    <a href="../category/fantasy.html">Fantasy</a>
+    <a href="../category/nonfiction.html">Nonfiction</a>
+    <a href="../category/thriller.html">Thriller</a>
+    <a href="../category/biography.html">Biography</a>
+    <a href="../category/business.html">Business</a>
+</div>
+<section class="section">
+<article class="review">
+      <a href="../index.html" class="back-link">Home</a> › <a href="../index.html" class="back-link">Reviews</a> › <span style="color: var(--gold); font-size: 0.85rem;">This Book</span>
       <p class="author">by Maris K. Vector</p>
       <p class="tldr">"A novel about a physicist who discovers that quantum uncertainty may be the mechanism behind free will — and the consequences of that discovery."</p>
+      <div class="review-body">
+        <p>The Probability of Light by Maris K. Vector is a speculative fiction novel that takes a genuinely interesting premise—quantum uncertainty as the mechanism behind free will—and follows it to its logical narrative and philosophical consequences. This is exactly the kind of science fiction that the genre does well when it is working properly: real scientific ideas, taken seriously, with genuine human stakes attached.</p>
+        <p>The protagonist is a physicist working at the edge of quantum mechanics who makes a discovery that changes how she understands her own choices. Vector does not soft-pedal the science. The quantum mechanical framework is real and is integrated into the novel&#x27;s structure rather than simply mentioned in passing. This is not a book where physics provides window dressing for a conventional plot; the physics is load-bearing for the narrative.</p>
+        <p>What distinguishes the book from similar quantum-consciousness novels is the emotional honesty of the aftermath. Knowing something about free will does not make decisions easier—it potentially makes them harder. Vector tracks this consequence carefully, without melodrama, and without the cheap relief of a plot resolution that lets the protagonist feel certainty she should not have. The novel earns its ending by not simplifying what cannot be simplified.</p>
+        <p>If you are drawn to speculative fiction that engages seriously with physics and philosophy—Ted Chiang&#x27;s work, Blake Crouch&#x27;s better novels, Greg Egan&#x27;s harder-edged work—The Probability of Light is worth your time. It is one of the more thoughtful quantum-consciousness novels to appear recently, and it does not condescend to its reader about the science it is working with.</p>
+      </div>
       <div class="takeaways">
         <h2>Key Takeaways</h2>
         <ul>
@@ -294,14 +87,21 @@
       </div>
       <div class="affiliate">
         <p>As an Amazon Associate, we earn from qualifying purchases.</p>
-        <a href="https://amzn.to/4iKpLmZ" target="_blank" rel="noopener">Buy on Amazon</a>
+        <a href="https://www.amazon.com/dp/B0GHNFJ88K?tag=bithues-20" target="_blank" rel="noopener">Buy on Amazon</a>
       </div>
     </article>
-  </div>
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
+  </section>
+<!-- ── FOOTER ── -->
+          <section class="share-section">
+            <h3>Share this article</h3>
+            <div class="share-buttons">
+                <button class="share-btn" onclick="shareTwitter()">𝕏 Twitter</button>
+                <button class="share-btn" onclick="shareFacebook()">📘 Facebook</button>
+                <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+            </div>
+        </section>
+<footer>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
     <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
   </footer>
 
