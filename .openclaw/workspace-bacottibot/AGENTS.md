@@ -274,3 +274,20 @@ For any skill that retrieves external data, **never guess the return value**. If
 - Entity EINs → Read `memory/entities.md`
 
 - **Don't re-spec what Mike has already established.** If he's defined what "correct" means (e.g., "homepage is the standard"), use it directly. Don't re-ask or re-document what was already decided.
+
+## ⚠️ Bulk HTML Fixes — Critical Rule
+**Greedy sed patterns like `<style>.*</style>` will destroy HTML structure.** The `.*` in sed matches across newlines incorrectly.
+
+**Safe approach:**
+- Use `perl -i -pe 's/<style>.*?<\/style>//gs'` for non-greedy style removal (non-greedy `.*?`)
+- Or better: very targeted single-line substitutions for specific classes/attributes
+- Always check 3 sample files AFTER running a bulk fix script
+- Bulk subagents on the same directory: run sequentially, not in parallel
+- Push to GitHub after each bulk fix, don't batch multiple subagent outputs
+
+**Workflow for bulk site fixes:**
+1. First: `curl` the live page → `grep` the structure → confirm what's actually wrong
+2. Then: spawn ONE fixer subagent with exact paths to fix
+3. After: verify 3 random files look right
+4. Then: push to GitHub
+5. Only then: spawn the next fixer
