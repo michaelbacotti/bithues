@@ -111,6 +111,21 @@ This was catastrophic. Sensitive business data went to a cloud service (Google D
 | **novel-drafter** | Full-length novel writing |
 | **business-writing** | Industry research and business analysis |
 
+## 🧠 Memory Systems (PLUR + QMD/Active Memory)
+
+We run two complementary memory systems:
+
+| System | What it does | Installed |
+|--------|-------------|-----------|
+| **QMD + Active Memory** | Search/retrieve — finds what's already written in files | `plugins.entries.active-memory` enabled; QMD skill pending |
+| **PLUR (plur.ai)** | Proactive learning — extracts patterns from corrections ("actually, use X not Y"), learns them, injects them proactively | `plur-claw` plugin enabled |
+
+**Key tradeoff:** PLUR's proactive learning = longer response times. Mike accepted this — side effect is OK.
+
+**Why both:** QMD/Active Memory = remembering what's in files. PLUR = actually changing behavior from corrections without manual file updates.
+
+**PLUR plugin:** `plur-claw` — config correct, needs gateway restart to activate after config changes.
+
 ---
 
 ## ⚠️ Critical Constraints

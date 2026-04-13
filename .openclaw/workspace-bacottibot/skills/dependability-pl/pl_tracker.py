@@ -17,7 +17,7 @@ import sys
 import subprocess
 
 # Use absolute path to the CSV
-CSV_FILE = '/Users/mike/.openclaw/workspace/dependability-holding-llc/dependability_pl_tracker.csv'
+CSV_FILE = '/Users/mike/.openclaw/workspace-bacottibot/dependability-holding-llc/dependability_pl_tracker.csv'
 
 def load_csv():
     rows = []
