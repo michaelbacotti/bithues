@@ -4,54 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bithues Book Rankings Dashboard</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0e1a; color: #f0f0f0; min-height: 100vh; }
-  .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-  header { text-align: center; padding: 2.5rem 0; border-bottom: 2px solid #c8a84b; margin-bottom: 2rem; }
-  header h1 { font-size: 2.4rem; color: #c8a84b; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
-  header .subtitle { color: #8899bb; font-size: 0.95rem; }
-  .stats { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
-  .stat-card { background: linear-gradient(135deg, #111827, #1a2540); border: 1px solid #2a3a5c; border-radius: 10px; padding: 1.2rem 2rem; text-align: center; min-width: 180px; }
-  .stat-card .num { font-size: 2.2rem; font-weight: 700; color: #c8a84b; }
-  .stat-card .label { font-size: 0.85rem; color: #8899bb; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; }
-  .stat-card.green .num { color: #4ade80; }
-  .stat-card.red .num { color: #f87171; }
-  .stat-card.gray .num { color: #94a3b8; }
-  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin: 0.15rem; }
-  .badge.green { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
-  .badge.yellow { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
-  .badge.red { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
-  .badge.gray { background: rgba(148,163,184,0.1); color: #94a3b8; border: 1px solid rgba(148,163,184,0.2); }
-  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #2a3a5c; }
-  table { width: 100%; border-collapse: collapse; min-width: 900px; }
-  thead th { background: #111827; color: #c8a84b; padding: 1rem 0.8rem; text-align: left; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 2px solid #c8a84b; position: sticky; top: 0; cursor: pointer; }
-  thead th:hover { background: #1a2540; }
-  tbody tr { border-bottom: 1px solid #1a2540; transition: background 0.15s; }
-  tbody tr:hover { background: #111827; }
-  tbody tr:last-child { border-bottom: none; }
-  td { padding: 0.75rem 0.8rem; vertical-align: top; }
-  .rank-cell { font-weight: 700; white-space: nowrap; }
-  .rank-green { color: #4ade80; }
-  .rank-yellow { color: #fbbf24; }
-  .rank-red { color: #f87171; }
-  .rank-na { color: #475569; font-style: italic; }
-  .title-cell { font-weight: 600; color: #e2e8f0; max-width: 280px; }
-  .title-cell .sub { font-size: 0.78rem; color: #64748b; font-weight: 400; margin-top: 0.15rem; }
-  .asin-cell { font-family: 'Courier New', monospace; font-size: 0.8rem; color: #64748b; }
-  .cat-cell { font-size: 0.78rem; color: #94a3b8; line-height: 1.6; min-width: 200px; }
-  .cat-cell .cat-badge { display: block; }
-  .link-cell a { color: #c8a84b; text-decoration: none; font-size: 0.82rem; padding: 0.3rem 0.7rem; border: 1px solid #c8a84b; border-radius: 4px; transition: all 0.2s; display: inline-block; }
-  .link-cell a:hover { background: #c8a84b; color: #0a0e1a; }
-  .footer { text-align: center; padding: 2rem 0; color: #475569; font-size: 0.82rem; border-top: 1px solid #1a2540; margin-top: 2rem; }
-  @media (max-width: 768px) {
-    .container { padding: 1rem; }
-    header h1 { font-size: 1.6rem; }
-    .stats { gap: 0.8rem; }
-    .stat-card { min-width: 140px; padding: 0.8rem 1rem; }
-    .stat-card .num { font-size: 1.6rem; }
-  }
-</style>
 </head>
 <body>
 <div class="container">
