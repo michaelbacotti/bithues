@@ -671,3 +671,11 @@ footer a:hover { color: var(--gold); }
 /* ── CONTENT WRAPPER ── */
 .content-wrapper { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6a 100%); }
 
+
+
+/* Review page utility classes */
+.back-link { color: var(--text-dim); font-size: 0.85rem; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.author-link { color: var(--accent); }
+.author-link:hover { text-decoration: underline; }
+.current-book { color: #7c3aed; font-size: 0.85rem; }
