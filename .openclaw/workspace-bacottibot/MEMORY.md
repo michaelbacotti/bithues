@@ -154,6 +154,10 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 
 **www.bithues.com DNS fix:** Delete NS records for `www` pointing to `ns3/ns4.afternic.com` — these are set at the domain registry level (not in Cloudflare zone) and are overriding the CNAME. Mike says GoDaddy has zero DNS records. The NS delegation may be at the registrar or at the registry level. **DNS resolves correctly from 1.1.1.1 and 8.8.8.8 — the issue is GitHub seeing stale data.**
 
+**Bithues canonical URLs fixed (2026-04-12):** All canonical hrefs changed from `https://bithues.com/...` → `https://www.bithues.com/...`. Also: created `category/fiction.html`, fixed 199 broken `fiction.html` links → `catalog.html`, fixed 42 breadcrumb path errors, fixed `e-j-marin` vs `e-j-marín` accent mismatch, deleted orphan `categories/` directory.
+
+**successionholdingllc.com fixes (2026-04-12):** Canonical URLs fixed from non-www → www across all 17 pages. sitemap.xml updated to list all 17 pages (was listing only 7). robots.txt sitemap URL fixed to www.
+
 ---
 
 ## 📧 Email / Platform Status (2026-04-06)
@@ -180,13 +184,14 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 
 ---
 
-## Pending Tasks (from 2026-04-06)
+## Pending Tasks (from 2026-04-12)
 
-1. **www.bithues.com GitHub Pages** — GitHub still showing warning; DNS is correct, just needs GitHub to re-verify
-2. **Goodreads books** — claim all 35 books for Threshold Publishing author profile (need pseudonyms approved first)
-3. **Push browser-workarounds skill** to GitHub (exec blocked)
-4. **Enable Google Calendar API** at console.developers.google.com (for gog)
-5. **Comet browser CDP test** — run with `--remote-debugging-port=9222` to see if it supports Chrome DevTools Protocol
+1. **Media.net application** — not yet applied
+2. **Wiki entity pages** — need to build from tax docs / Master Organizer (see memory/entities.md)
+3. **Find full Bacotti Enterprises Master Organizer PDF** — only page 1 found in tmp/
+4. **Find 2023/2024 tax returns** — 1065, 1120, 990s
+5. **www.bithues.com GitHub Pages** — GitHub still showing DNS warning; DNS is correct, just needs GitHub to re-verify
+6. **Goodreads books** — claim all books for Threshold Publishing author profile (need pseudonyms approved first)
 
 ---
 
