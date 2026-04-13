@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Virus: A Children's Story – Michael Bacotti | Bithues Reading Lab</title>
+  <meta name="description" content="Book review: The Virus: A Children's Story by Michael Bacotti on Bithues Reading Lab">
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="canonical" href="https://www.bithues.com/reviews/virus-childrens-story.html" />
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <div class="nav-links">
+      <div class="nav-item"><a href="../index.html">Home</a></div>
+      <div class="nav-item">
+        <a href="../catalog.html">Reviews ▾</a>
+        <div class="dropdown">
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="../stories.html">Stories ▾</a>
+        <div class="dropdown">
+          <a href="../stories.html">All Stories</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="../articles.html">Articles ▾</a>
+        <div class="dropdown">
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="hero-eyebrow">Bithues Reading Lab — Reviews</div>
+    <h1>reviews — Bithues Reading Lab</h1>
+    <p>Explore our curated insights and guides on this topic.</p>
+  </section>
+
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="hero-eyebrow">Review</div>
+    <h1>The Virus: A Children's Story – Michael Bacotti</h1>
+    <p class="hero-sub">by Michael Bacotti</p>
+</section>
+<!-- ── CATEGORIES ── -->
+<div class="chips">
+    <a href="../category/self-help.html">Self-Help</a>
+    <a href="../category/science-fiction.html">Sci-Fi</a>
+    <a href="../category/fantasy.html">Fantasy</a>
+    <a href="../category/nonfiction.html">Nonfiction</a>
+    <a href="../category/thriller.html">Thriller</a>
+    <a href="../category/biography.html">Biography</a>
+    <a href="../category/business.html">Business</a>
+</div>
+<header class="hero">
+    <div class="hero-eyebrow">Review</div>
+    <h1>The Virus: A Children's Story</h1>
+    <p>by Michael Bacotti</p>
+  </header>
+
+  <div class="chips">
+    <a href="category/children.html">Children</a> <a href="category/fiction.html">Fiction</a>
+  </div>
+
+    <section class="section">
+<article class="review">
+      <a href="../index.html" style="color:var(--text-dim); font-size: 0.85rem; text-decoration: none;">Home</a> › <a href="../index.html" style="color:var(--text-dim); font-size: 0.85rem; text-decoration: none;">Reviews</a> › <span style="color: var(--gold); font-size: 0.85rem;">This Book</span>
+      <p class="author">by <a href="../authors/michael-bacotti.html" style="color:var(--accent);">Michael Bacotti</a></p>
+      <p class="tldr">"A heartwarming children's story about a young person navigating illness and finding strength through family and community support."</p>
+      <div class="takeaways">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li>Resilience can be learned — even the youngest minds can develop coping skills</li><li>Community support matters more than individual strength</li><li>Hope is a choice that can be made even in difficult circumstances</li>
+        </ul>
+      </div>
+      <div class="who">
+        <strong>Who would enjoy this:</strong><br>Parents and children reading together, fans of heartwarming children's fiction, anyone dealing with health challenges.
+      </div>
+      <div class="verdict">
+        <strong>Verdict:</strong> A gentle, affirming children's story that tackles a scary topic with warmth and optimism.
+      </div>
+      <div class="affiliate">
+        <p>As an Amazon Associate, we earn from qualifying purchases.</p>
+        <a href="https://www.amazon.com/dp/B0863V3CW9?tag=bithues-20" target="_blank" rel="noopener">Buy on Amazon</a>
+      </div>
+    </article>
+  </section>
+<!-- ── FOOTER ── -->
+          <section class="share-section">
+            <h3>Share this article</h3>
+            <div class="share-buttons">
+                <button class="share-btn" onclick="shareTwitter()">𝕏 Twitter</button>
+                <button class="share-btn" onclick="shareFacebook()">📘 Facebook</button>
+                <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+            </div>
+        </section>
+<footer>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
