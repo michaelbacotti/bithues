@@ -4,18 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | Bithues Reading Lab</title>
-  <meta name="description" content="About Bithues Reading Lab — our mission to help readers discover great books.">
+  <meta name="description" content="About Bithues Reading Lab — our mission, review process, and commitment to honest, independent book reviews.">
   <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css">
-<link rel="canonical" href="https://www.bithues.com/about.html" />
+  <style>
+    body { background: var(--off-white); }
+    .page-wrap { max-width: 840px; margin: 0 auto; padding: 3rem 2rem; }
+    .page-eyebrow { font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: .75rem; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--navy); margin-bottom: 1rem; line-height: 1.2; }
+    .page-hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6a 100%); color: var(--white); padding: 4rem 2rem 3rem; text-align: center; border-bottom: 2px solid var(--gold); }
+    .page-hero p { color: rgba(255,255,255,.75); max-width: 580px; margin: 0 auto; font-size: 1.05rem; }
+    .page-section { margin-bottom: 3rem; }
+    .page-section h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 1rem; }
+    .page-section p { color: var(--text-body); line-height: 1.8; margin-bottom: .9rem; }
+    .page-section ul { margin: .75rem 0 1rem 1.5rem; }
+    .page-section li { color: var(--text-body); line-height: 1.7; margin-bottom: .4rem; }
+    .page-section a { color: var(--gold); text-decoration: none; }
+    .page-section a:hover { text-decoration: underline; }
+    .divider { border: none; border-top: 1px solid var(--gray-light); margin: 2.5rem 0; }
+    .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+    .pillar { background: var(--white); border: 1px solid var(--gray-light); border-top: 3px solid var(--gold); border-radius: 8px; padding: 1.25rem; }
+    .pillar h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: .5rem; }
+    .pillar p { font-size: .875rem; color: var(--text-body); margin: 0; }
+    .genre-list { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+    .genre-tag { background: var(--navy); color: var(--gold); padding: .3rem .85rem; border-radius: 20px; font-size: .8rem; font-weight: 500; }
+    .cta-box { background: var(--navy); border-radius: 10px; padding: 2rem; text-align: center; margin-top: 2rem; }
+    .cta-box h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.3rem; margin-bottom: .75rem; }
+    .cta-box p { color: rgba(255,255,255,.7); margin-bottom: 1.25rem; font-size: .9rem; }
+    .cta-btn { display: inline-block; background: var(--gold); color: var(--navy); padding: .7rem 1.75rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: .9rem; }
+    .cta-btn:hover { background: var(--gold-light); color: var(--navy); text-decoration: none; }
+    .policy-links { background: var(--off-white); border: 1px solid var(--gray-light); border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 2rem; }
+    .policy-links p { margin-bottom: .5rem; font-size: .9rem; }
+    .policy-links a { color: var(--gold); font-weight: 600; margin-right: 1rem; }
+  </style>
+  <link rel="canonical" href="https://www.bithues.com/about.html" />
 </head>
 <body>
 
-    <!-- ── NAV ── -->
-  <nav class="navbar">
+  <!-- ── NAV ── -->
+  <nav>
     <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
       <div class="nav-item"><a href="index.html">Home</a></div>
@@ -23,8 +53,6 @@
         <a href="catalog.html">Reviews ▾</a>
         <div class="dropdown">
           <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="series/otomi.html">Otomí Series</a>
           <a href="book-tracker.html">Book Tracker</a>
           <a href="series/otomi.html">Otomí Series</a>
           <a href="category/self-help.html">Self-Help</a>
@@ -55,123 +83,122 @@
   </nav>
 
   <!-- ── HERO ── -->
-  <header class="hero">
-    <div class="hero-eyebrow">Bithues Reading Lab</div>
-    <h1>About <em>Us</em></h1>
-    <p class="hero-sub">Our mission to help readers discover great books — honestly and independently.</p>
-  </header>
+  <div class="page-hero">
+    <p class="page-eyebrow">Bithues Reading Lab</p>
+    <h1 class="page-title" style="color:var(--white);">About <em style="color:var(--gold);">Us</em></h1>
+    <p>Independent book reviews written by readers, for readers — helping you find your next favorite book since 2024.</p>
+  </div>
 
-  <div class="divider"></div>
+  <div class="page-wrap">
 
-  <!-- ── MISSION ── -->
-  <section class="section">
-    <div class="section-title">What We Do</div>
-    <div class="mission">
-      <p><strong>Our Mission:</strong> To cut through the noise of thousands of new books released each year and help readers find the ones actually worth their time.</p>
+    <!-- ── WHO WE ARE ── -->
+    <div class="page-section">
+      <h2>Who We Are</h2>
+      <p><strong>Bithues Reading Lab</strong> is an independent book review publication. We are not owned by a publisher, not affiliated with a bookstore chain, and not funded by advertising from the book industry. Our only agenda is helping readers discover books worth reading.</p>
+      <p>We started with a straightforward belief: most book reviews aren't useful. They're either uncritical blurbs that tell you nothing, or plot summaries that give away the ending. We do something different — we read every book cover to cover and tell you what you'll actually get from it, who it's for, and whether it's worth your time.</p>
     </div>
-    <p style="margin-top:1.5rem;">Every book on Bithues is personally reviewed. We don't do star ratings or plot summaries — we focus on what you'll actually get from reading it. Our reviews answer the questions that matter:</p>
-    <ul style="margin:1rem 0 2rem 1.5rem;color:var(--text-body);">
-      <li>What will you learn?</li>
-      <li>Who is this book for?</li>
-      <li>Is it worth your time?</li>
-    </ul>
-  </section>
 
-  <div class="divider"></div>
+    <hr class="divider">
 
-  <!-- ── VALUES ── -->
-  <section class="section">
-    <div class="section-title">What We Believe</div>
-    <div class="cards-grid">
-      <div class="card">
-        <h3>Quality Over Quantity</h3>
-        <p>We'd rather have 35 excellent reviews than 350 mediocre ones. Every book on our site has been read cover to cover and thoughtfully evaluated.</p>
-      </div>
-      <div class="card">
-        <h3>Indie Authors Matter</h3>
-        <p>Big publishers have marketing budgets. Indie authors have passion and creativity. We give indie authors a fair shot because great stories come from everywhere.</p>
-      </div>
-      <div class="card">
-        <h3>Honesty Over Kindness</h3>
-        <p>We'd rather tell you a book isn't worth your time than pad a review. Our readers trust us to be honest, and we take that seriously.</p>
-      </div>
-      <div class="card">
-        <h3>Reading Should Change You</h3>
-        <p>The best books don't just entertain — they shift how you see the world. We seek out books that challenge assumptions and expand horizons.</p>
-      </div>
+    <!-- ── MISSION ── -->
+    <div class="page-section">
+      <h2>Our Mission</h2>
+      <p>Thousands of new books are published every week. Most of them aren't worth your time. Our mission is to cut through the noise and help you find the small number that genuinely are.</p>
+      <p>We focus on books that challenge how you think, introduce ideas worth carrying with you, or tell stories that stay with you long after the last page. We care about depth over breadth — 35 thoughtful reviews are more valuable to us than 350 shallow ones.</p>
     </div>
-  </section>
 
-  <div class="divider"></div>
+    <hr class="divider">
 
-  <!-- ── WHAT YOU'LL FIND ── -->
-  <section class="section">
-    <div class="section-title">What You'll Find Here</div>
-    <div class="cards-grid">
-      <div class="card">
-        <h3>📚 Book Reviews</h3>
-        <p>Detailed, honest reviews of fiction and non-fiction. No plot spoilers — just what you'll actually learn and who each book is for.</p>
-      </div>
-      <div class="card">
-        <h3>✍️ Articles</h3>
-        <p>Deep dives on genres, reading lists, and book recommendations. Curated guides to help you find your next favorite read.</p>
-      </div>
-      <div class="card">
-        <h3>📂 Curated Catalogs</h3>
-        <p>Books organized by genre and category. From sci-fi to self-help, find exactly what you're looking for.</p>
+    <!-- ── REVIEW PROCESS ── -->
+    <div class="page-section">
+      <h2>Our Review Process</h2>
+      <p>Every book on Bithues is <strong>read completely</strong> before a review is published. We don't review from press releases, publisher summaries, or partial reads. Here's how it works:</p>
+      <ul>
+        <li>We select books based on reader interest and a quality threshold — the book has to earn its place on the site</li>
+        <li>Each review is written by an experienced reader and checked for factual accuracy before publication</li>
+        <li>Our reviews don't use star ratings — instead, every review ends with a clear <strong>Verdict</strong>, <strong>Who Would Enjoy This</strong>, and <strong>Key Takeaways</strong></li>
+        <li>We update reviews when significant new editions are released or when factual corrections are needed</li>
+      </ul>
+      <p>For the full details of how we operate, see our <a href="editorial-policy.html">Editorial Policy</a>.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── OUR COMMITMENT ── -->
+    <div class="page-section">
+      <h2>Our Commitment to Independence</h2>
+      <p>Honest, independent reviews — that's the only way to be worth your trust. We have <strong>no financial relationship</strong> with any author or publisher whose work appears on this site. We don't accept payment for reviews. Authors may submit titles for consideration, but inclusion is based entirely on whether our reviewers find the work genuinely worthwhile. This is our no pay-to-play guarantee.</p>
+      <p>You can read our full editorial standards in the <a href="editorial-policy.html">Editorial Policy</a>, and learn how we sustain the site without compromising editorial integrity in the <a href="affiliate-disclosure.html">Affiliate Disclosure</a>.</p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <h3>Honest Reviews</h3>
+          <p>We recommend books we genuinely believe in and are straightforward about books that aren't worth your time.</p>
+        </div>
+        <div class="pillar">
+          <h3>No Pay-to-Play</h3>
+          <p>We never accept payment for reviews or coverage. Our selections are editorially determined only.</p>
+        </div>
+        <div class="pillar">
+          <h3>Reader First</h3>
+          <p>Everything we do is oriented around helping real readers find books they'll actually enjoy and benefit from.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <div class="divider"></div>
+    <hr class="divider">
 
-  <!-- ── WHO WE ARE ── -->
-  <section class="section">
-    <div class="section-title">Who We Are</div>
-    <p>Bithues was created by readers, for readers. We started with a simple idea: book reviews should help people find books they'll actually love, not just list plot points.</p>
-    <p style="margin-top:1rem;">We're not here to please publishers or chase trends. We're here to help you find books that matter.</p>
-    <p style="margin-top:1rem;">Have a book recommendation? Want to suggest a title for review? Just want to say hello? <a href="contact.html" style="color:var(--gold);">We'd love to hear from you.</a></p>
-    <p style="margin-top:2rem;font-size:1.1rem;color:var(--navy);font-weight:600;">Happy reading!</p>
-
-    <div style="margin-top:2rem;">
-      <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:.75rem;">Share this page</h3>
-      <div class="share-buttons">
-        <button class="share-btn" onclick="shareTwitter()">𝕏 Twitter</button>
-        <button class="share-btn" onclick="shareFacebook()">📘 Facebook</button>
-        <button class="share-btn" onclick="shareLinkedIn()">💼 LinkedIn</button>
+    <!-- ── GENRES WE COVER ── -->
+    <div class="page-section">
+      <h2>Genres We Cover</h2>
+      <p>We review books across a wide range of genres. Here's where you'll find us most active:</p>
+      <div class="genre-list">
+        <span class="genre-tag">Self-Help</span>
+        <span class="genre-tag">Sci-Fi</span>
+        <span class="genre-tag">Fantasy</span>
+        <span class="genre-tag">Nonfiction</span>
+        <span class="genre-tag">Thriller</span>
+        <span class="genre-tag">Biography</span>
+        <span class="genre-tag">Business</span>
+        <span class="genre-tag">Historical Fiction</span>
+        <span class="genre-tag">Science</span>
+        <span class="genre-tag">Adventure</span>
       </div>
     </div>
-  </section>
+
+    <hr class="divider">
+
+    <!-- ── CTA ── -->
+    <div class="cta-box">
+      <h3>Get in Touch</h3>
+      <p>Have a book to pitch, a question, or just want to say hello? We'd love to hear from you.</p>
+      <a href="contact.html" class="cta-btn">Contact Us →</a>
+    </div>
+
+    <!-- ── POLICY LINKS ── -->
+    <div class="policy-links">
+      <p><strong>Transparency:</strong></p>
+      <a href="editorial-policy.html">Editorial Policy</a>
+      <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+
+  </div>
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="editorial-policy.html">Editorial Policy</a> · <a href="affiliate-disclosure.html">Affiliate Disclosure</a> · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <script>
-    function shareTwitter() {
-      const url = encodeURIComponent(window.location.href);
-      const title = encodeURIComponent(document.title);
-      window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + title, '_blank');
-    }
-    function shareFacebook() {
-      const url = encodeURIComponent(window.location.href);
-      window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
-    }
-    function shareLinkedIn() {
-      const url = encodeURIComponent(window.location.href);
-      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
-    }
     window.onscroll = function() {
-      const btn = document.querySelector('.back-to-top');
-      if (window.scrollY > 300) btn.classList.add('visible');
-      else btn.classList.remove('visible');
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
     };
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
-  </body>
+</body>
 </html>
