@@ -225,6 +225,21 @@ Mike's rule: **Content and information that is not truthful and accurate is wort
 
 - **Never delete files.** Use `trash` or `mv` instead of `rm`. Before any deletion: verify the file is committed to git AND exists in the latest iCloud backup. If uncertain: don't delete. A file lost is data Mike cannot recover.
 
+### 🚫 Production File Safety Rules (Hard Constraints)
+
+**When working with manuscripts, SOPs, scripts, or website files:**
+
+- **Never write directly to production.** Write to a staging folder (`archive/`, `_staging/`, or `dead-weight/`), then move to production only after manual review or explicit approval.
+- **Never use absolute paths** unless Mike has explicitly approved that path.
+- **Never run recursive delete commands** (`rm -rf`, `rm -r`, `find -delete`, etc.).
+- **Rename instead of delete** — use `mv filename _archive/filename` or `mv filename _deprecated.filename`.
+- **Require confirmation before** any overwrite, move, or bulk edit operation on production files.
+- **Never use helper scripts that prune old files** — audit any script before running it for patterns like `fs.rm`, `unlink`, `rm -rf`, `rmdir`, `mv into cleanup folders`, or "refresh/sync" routines with deletion behavior.
+
+**For subagents:**
+- Subagents must mv old files to `archive/` before writing new ones — never leave loose `.bak` or `~` files in working directories.
+- All subagent file operations must be verifiable: subagent must confirm what it moved and where, before claiming done.
+
 
 ---
 
