@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bithues.com/sitemap.xml
+Sitemap: https://www.bithues.com/sitemap.xml
