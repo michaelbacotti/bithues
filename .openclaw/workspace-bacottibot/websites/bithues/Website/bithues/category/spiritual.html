@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spiritual Books | Bithues Reading Lab</title>
+  <meta name="description" content="Spiritual books reviewed on Bithues Reading Lab">
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="canonical" href="https://www.bithues.com/category/spiritual.html">
+
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
+</head>
+
+<body>
+    
+    <header class="hero">
+        <div class="hero-eyebrow">Category</div>
+        <h1>Spiritual <em>Books</em></h1>
+        <p class="hero-sub">2 books in this genre</p>
+    </header>
+    <div class="divider"></div>
+    <section class="section">
+        <div class="cards-grid">
+<div class="book-card">
+<h3><a href="../reviews/beyond-the-veil.html">Beyond the Veil</a></h3>
+<p class="author">by D. E. Harlan</p>
+<p class="tldr">Quantum speculations on consciousness, death, and the universe.</p>
+<a href="../reviews/beyond-the-veil.html" class="read-more">Read Review →</a>
+</div>
+<div class="book-card">
+<h3><a href="../reviews/quantum-soul-echoes.html">Quantum Soul Echoes</a></h3>
+<p class="author">by Quantum Chronos</p>
+<p class="tldr">Consciousness as particle and spacetime imprint.</p>
+<a href="../reviews/quantum-soul-echoes.html" class="read-more">Read Review →</a>
+</div>
+<div class="book-card">
+<h3><a href="../reviews/the-physics-of-time.html">The Physics of Time</a></h3>
+<p class="author">by Quantum Chronos</p>
+<p class="tldr">Consciousness, spacetime, and the nature of temporal experience.</p>
+<a href="../reviews/the-physics-of-time.html" class="read-more">Read Review →</a>
+</div>
+        </div>
+    </section>
+
+
+        <section class="genre-tags">
+            <a href="category/science-fiction.html" class="genre-tag">Science Fiction</a>
+            <a href="category/fantasy.html" class="genre-tag">Fantasy</a>
+            <a href="category/mystery.html" class="genre-tag">Mystery</a>
+            <a href="category/thriller.html" class="genre-tag">Thriller</a>
+            <a href="category/nonfiction.html" class="genre-tag">Nonfiction</a>
+            <a href="category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
+            <a href="category/self-help.html" class="genre-tag">Self-Help</a>
+            <a href="category/children.html" class="genre-tag">Children's Fiction</a>
+            <a href="category/romance.html" class="genre-tag">Romance</a>
+            <a href="category/dystopian.html" class="genre-tag">Dystopian</a>
+        </section><!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+    };
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
