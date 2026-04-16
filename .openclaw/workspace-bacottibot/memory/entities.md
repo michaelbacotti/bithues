@@ -9,8 +9,10 @@ Bacotti Family Trust
 └── Succession Holding LLC (Michael 50%, Michaella 50%)
     ├── 100% of Bacotti Inc. (formerly Ventureprise Corp, EIN 86-2669759)
     │   └── 20% of Dependability Holding LLC
-    └── Partial owner of MNC Housing LLC
-    └── Michael Bacotti Sr. (80% of Dependability Holding LLC — confirmed by K-1s 2021–2024)
+    └── Michael Bacotti Sr. (80% of Dependability Holding LLC)
+
+Dependability Holding LLC (Michael 80%, Bacotti Inc. 20%)
+└── 50% of MNC Housing LLC (original issue, held since formation)
 ```
 
 ## Tax-Verified Entities
@@ -19,7 +21,7 @@ Bacotti Family Trust
 |--------|-----|-----------|----------|
 | **Dependability Holding, LLC** | 86-2606053 | Michael Bacotti 80%, Bacotti Inc. 20% | 1065 |
 | **Succession Holding, LLC** | 86-2556181 | Michael Bacotti 50%, Michaella Bacotti 50% | 1065 |
-| **MNC Housing, LLC** | 87-2708822 | Dissolving July 2025 (final return) | 1120 |
+| **MNC Housing, LLC** | 87-2708822 | Succession Holding LLC 50%, Dependability Holding LLC 50%. Dissolved July 2025. | 1120 |
 | **HOUSE Inc.** | 87-1948148 | 501c3 Nonprofit | 990 |
 | **Bacotti Inc.** | 86-2669759 | 100% owned by Succession Holding LLC | — |
 
@@ -42,6 +44,15 @@ Bacotti Family Trust
 - **Succession:** Real estate holding, formed 02/28/2021; owns Bacotti Inc. 100%
 - **MNC Housing:** Final return filed, dissolution July 2025
 - **HOUSE:** 2023 receipts $3,111 | Expenses $5,002 | Assets $16,742 cash
+
+## Dependability Holding LLC — Formation History
+
+- **Formation:** March 1, 2021 (Wyoming LLC)
+- **Initial ownership (Mar 12, 2021):** Michael 50%, Michaella 50% (unit certificates)
+- **Assignment (Mar 24, 2021):** Michaella assigned 30% to Michael + 20% to Ventureprise Corp for $10 each
+- **Result:** Michael 80%, Ventureprise 20% — consistent through all K-1s 2021–2024
+- **Michaella's role:** Remains as Manager (no ownership interest after assignment)
+- **Tax rationale for Ventureprise as partner:** Per meeting minutes, tax adviser (Cody Dinda) recommended adding Ventureprise Corp so capital gains could be distributed to its return for tax savings
 
 ## Tax Preparer
 
