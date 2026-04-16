@@ -10,7 +10,7 @@ Bacotti Family Trust
     ├── 100% of Bacotti Inc. (formerly Ventureprise Corp, EIN 86-2669759)
     │   └── 20% of Dependability Holding LLC
     └── Partial owner of MNC Housing LLC
-└── Other entity (80% of Dependability Holding LLC — identity TBD)
+    └── Michael Bacotti Sr. (80% of Dependability Holding LLC — confirmed by K-1s 2021–2024)
 ```
 
 ## Tax-Verified Entities
