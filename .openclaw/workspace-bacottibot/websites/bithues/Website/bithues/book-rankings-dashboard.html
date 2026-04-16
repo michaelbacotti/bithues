@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bithues Book Rankings Dashboard</title>
+<style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+    .dropdown-divider { border-top: 1px solid rgba(200,169,110,.15); margin: .25rem 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📊 Bithues Book Rankings Dashboard</h1>
+    <p class="subtitle">Generated: April 10, 2026 &nbsp;|&nbsp; Source: Amazon KDP / bithues.com</p>
+  </header>
+  
+  <div class="stats">
+    <div class="stat-card">
+      <div class="num">44</div>
+      <div class="label">Total Books Tracked</div>
+    </div>
+    <div class="stat-card green">
+      <div class="num">20</div>
+      <div class="label">Books with BSR</div>
+    </div>
+    <div class="stat-card gray">
+      <div class="num">24</div>
+      <div class="label">No BSR (0 Reviews)</div>
+    </div>
+  </div>
+  
+  <p style="text-align:center; color:#64748b; margin-bottom:1rem; font-size:0.85rem;">
+    Sorted by Best Sellers Rank (lower = better) &nbsp;|&nbsp; 
+    <span class="badge green">■ Green &lt;100K</span>
+    <span class="badge yellow">■ Yellow 100K–500K</span>
+    <span class="badge red">■ Red &gt;500K</span>
+  </p>
+  
+  <div class="table-wrap">
+    <table id="rankTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">#</th>
+          <th onclick="sortTable(1)">Title</th>
+          <th onclick="sortTable(2)">Author</th>
+          <th onclick="sortTable(3)">ASIN</th>
+          <th onclick="sortTable(4)">Best Sellers Rank</th>
+          <th>Category Rankings</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">1</td>
+          <td class="title-cell">Men of the Three Seas</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Leander Vassos</td>
+          <td class="asin-cell">B0D38W5972</td>
+          <td class="rank-cell rank-green">Best Sellers Rank: #11,850 Free</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#1 in Prehistory eBooks</span><span class="cat-badge badge gray">#4 in Travel Adventure Fiction</span><span class="cat-badge badge gray">#4 in Ancient Historical Fiction</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0D38W5972?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">2</td>
+          <td class="title-cell">The Physics of Time</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Quantum Chronos</td>
+          <td class="asin-cell">B0GJ1463Y6</td>
+          <td class="rank-cell rank-yellow">Best Sellers Rank: #330,194</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#22 in Physics of Time (Kindle Store)</span><span class="cat-badge badge gray">#69 in Physics of Time (Books)</span><span class="cat-badge badge gray">#190 in Neuroscience (Kindle Store)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GJ1463Y6?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">3</td>
+          <td class="title-cell">First Contact Diary</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Mira Ellison</td>
+          <td class="asin-cell">B0GTSXS48K</td>
+          <td class="rank-cell rank-yellow">Best Sellers Rank: #458,038</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#569 in Metaphysical Science Fiction eBooks</span><span class="cat-badge badge gray">#1,935 in First Contact Science Fiction (Books)</span><span class="cat-badge badge gray">#2,483 in First Contact Science Fiction eBooks</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GTSXS48K?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">4</td>
+          <td class="title-cell">Physics of Insight</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Quantum Chronos</td>
+          <td class="asin-cell">B0GRW79ZM7</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #520,895</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#37 in Physics of Time (Kindle Store)</span><span class="cat-badge badge gray">#109 in Physics of Time (Books)</span><span class="cat-badge badge gray">#137 in Two-Hour Science & Math Short Reads</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GRW79ZM7?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">5</td>
+          <td class="title-cell">Veiled Presence</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">E. C. Stroud</td>
+          <td class="asin-cell">B0GTJN8YGG</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #609,754</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#355 in UFOs (Kindle Store)</span><span class="cat-badge badge gray">#426 in Occult UFOs</span><span class="cat-badge badge gray">#798 in UFOs (Books)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GTJN8YGG?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">6</td>
+          <td class="title-cell">Disclosure 2026</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Marcus Reeve</td>
+          <td class="asin-cell">B0GPM4DZR1</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #623,180</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#644 in New Age New Thought</span><span class="cat-badge badge gray">#750 in Metaphysical Science Fiction eBooks</span><span class="cat-badge badge gray">#2,525 in First Contact Science Fiction (Books)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPM4DZR1?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">7</td>
+          <td class="title-cell">The Power of Changing Your Mind</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Evan R. Cole</td>
+          <td class="asin-cell">B0GHQG9LLS</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #822,402</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#221 in Humanism Philosophy</span><span class="cat-badge badge gray">#698 in Consciousness & Thought (Kindle Store)</span><span class="cat-badge badge gray">#702 in Humanist Philosophy</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHQG9LLS?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">8</td>
+          <td class="title-cell">Little Mike: Builds a Robot</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Michael Jr</td>
+          <td class="asin-cell">B0DC6FTG21</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #857,204</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#6,327 in Children's Beginner Readers</span><span class="cat-badge badge gray">#27,285 in Children's Friendship & Social Skills Books (Books)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0DC6FTG21?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">9</td>
+          <td class="title-cell">Consciousness in Higher Dimensional Spacetime</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Quantum Chronos</td>
+          <td class="asin-cell">B0GGVDKZ96</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #1,028,535</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#81 in Physics of Time (Kindle Store)</span><span class="cat-badge badge gray">#194 in Physics of Time (Books)</span><span class="cat-badge badge gray">#209 in Science Essays & Commentary (Kindle Store)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GGVDKZ96?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">10</td>
+          <td class="title-cell">Otomí</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">E. J. Marín</td>
+          <td class="asin-cell">B0GS367G2M</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #1,049,630</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#15 in Pre-Columbian History of Latin America</span><span class="cat-badge badge gray">#247 in History of Mexico</span><span class="cat-badge badge gray">#947 in Mexico History</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GS367G2M?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">11</td>
+          <td class="title-cell">The Dawn of Civilization</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">T. Stone</td>
+          <td class="asin-cell">B0BTD9CT35</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #1,194,629</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#28 in Teen & Young Adult Prehistory Historical Fiction</span><span class="cat-badge badge gray">#110 in Teen & Young Adult Ancient Civilization Fiction eBooks</span><span class="cat-badge badge gray">#195 in Teen & Young Adult Ancient Historical Fiction</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0BTD9CT35?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">12</td>
+          <td class="title-cell">Shadow Work Journal for Women</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Luna Sage</td>
+          <td class="asin-cell">B0GP91NKC7</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #1,197,392</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#456 in Journaling</span><span class="cat-badge badge gray">#3,870 in Two-Hour Self-Help Short Reads</span><span class="cat-badge badge gray">#7,113 in Journal Writing Self-Help</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GP91NKC7?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">13</td>
+          <td class="title-cell">The Orchardist: Harvest</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Kate E Brennan</td>
+          <td class="asin-cell">B0GKRKP1Q4</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #1,488,195</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#1,772 in Religious Mysteries (Books)</span><span class="cat-badge badge gray">#2,981 in 45-Minute Literature & Fiction Short Reads</span><span class="cat-badge badge gray">#7,372 in Mystery, Thriller & Suspense Literary Fiction</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GKRKP1Q4?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">14</td>
+          <td class="title-cell">Resonance Drift</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">R. Zyrion</td>
+          <td class="asin-cell">B0GSC6SBQ9</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #2,059,567</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#3,961 in Hard Science Fiction (Kindle Store)</span><span class="cat-badge badge gray">#10,612 in Mystery Action Fiction (Kindle Store)</span><span class="cat-badge badge gray">#19,681 in Science Fiction Adventure</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GSC6SBQ9?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">15</td>
+          <td class="title-cell">Rules of Survival</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Jorak Veldt</td>
+          <td class="asin-cell">B0GNFBWN6S</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #2,771,725</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#2,043 in Ancient Historical Fiction</span><span class="cat-badge badge gray">#3,316 in Ancient History Fiction (Books)</span><span class="cat-badge badge gray">#7,057 in Two-Hour History Short Reads</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GNFBWN6S?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">16</td>
+          <td class="title-cell">Mindful Memory</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">D. E. Harlan</td>
+          <td class="asin-cell">B0GPH597LL</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #3,005,950</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#1,242 in Memory Improvement (Kindle Store)</span><span class="cat-badge badge gray">#3,280 in Memory Improvement Self-Help</span><span class="cat-badge badge gray">#3,304 in Aging Self-Help eBooks</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPH597LL?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">17</td>
+          <td class="title-cell">Quantum Soul Echoes</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Quantum Chronos</td>
+          <td class="asin-cell">B0GPNWJ314</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #3,344,741</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#570 in Quantum Theory (Books)</span><span class="cat-badge badge gray">#618 in Reincarnation (Books)</span><span class="cat-badge badge gray">#1,759 in Quantum Theory (Kindle Store)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPNWJ314?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">18</td>
+          <td class="title-cell">Little Mike: Learns to Fly</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Michael Jr</td>
+          <td class="asin-cell">B0FPBBTHLT</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #4,025,680</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#2,003 in Children's Aeronautics & Space Books (Books)</span><span class="cat-badge badge gray">#50,427 in Children's Action & Adventure Books (Books)</span><span class="cat-badge badge gray">#88,571 in Children's Literature (Books)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FPBBTHLT?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">19</td>
+          <td class="title-cell">Discovering Washington DC</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Evelyn Carter</td>
+          <td class="asin-cell">B0F9HHYVBY</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #4,933,596</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#12 in Washington, D.C. Travel Guides (Books)</span><span class="cat-badge badge gray">#54 in Washington, D.C. Travel Guides (Kindle Store)</span><span class="cat-badge badge gray">#452 in South Atlantic United States Travel Books</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0F9HHYVBY?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">20</td>
+          <td class="title-cell">Little Mike: Fun at the Beach</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Michael Jr</td>
+          <td class="asin-cell">B0CFHT4WDX</td>
+          <td class="rank-cell rank-red">Best Sellers Rank: #5,582,030</td>
+          <td class="cat-cell"><span class="cat-badge badge gray">#5,087 in Children's Inspirational & Personal Growth</span><span class="cat-badge badge gray">#7,017 in Children's Imagination & Play Fiction</span><span class="cat-badge badge gray">#8,883 in Children's Sports & Outdoors Books (Kindle Store)</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CFHT4WDX?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">21</td>
+          <td class="title-cell">The Richmond Cipher</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">E. Maris</td>
+          <td class="asin-cell">B0GQCZKRGB</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQCZKRGB?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">22</td>
+          <td class="title-cell">Red Horizon: Lunar Launch</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">M. A. Hale</td>
+          <td class="asin-cell">B0GQVLB9N2</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQVLB9N2?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">23</td>
+          <td class="title-cell">The Confluence Doctrine</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Alaric Wynn</td>
+          <td class="asin-cell">B0GSP9S473</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GSP9S473?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">24</td>
+          <td class="title-cell">Living with a Moving Planet</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">J. T. Hartley</td>
+          <td class="asin-cell">B0GQ2YCLD4</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQ2YCLD4?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">25</td>
+          <td class="title-cell">Beyond the Veil</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">D. E. Harlan</td>
+          <td class="asin-cell">B0GPLX1NJD</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPLX1NJD?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">26</td>
+          <td class="title-cell">The Shadow Within</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Elena Maris</td>
+          <td class="asin-cell">B0GPT6QRDW</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPT6QRDW?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">27</td>
+          <td class="title-cell">Echoes of Aetheris</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Aetheri Codex</td>
+          <td class="asin-cell">B0GPPBCKYF</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GPPBCKYF?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">28</td>
+          <td class="title-cell">Symbiont Bloom</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Elowen Tidebloom</td>
+          <td class="asin-cell">B0GS6KMYXV</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GS6KMYXV?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">29</td>
+          <td class="title-cell">Xaltocan</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">E. J. Marín</td>
+          <td class="asin-cell">B0F2ZHBK46</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0F2ZHBK46?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">30</td>
+          <td class="title-cell">Xaltocan (Spanish Edition)</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">E. J. Marín</td>
+          <td class="asin-cell">B0GHM237Z9</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHM237Z9?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">31</td>
+          <td class="title-cell">Microbiology ABC's</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Michael Bacotti</td>
+          <td class="asin-cell">B0GR7R6HT1</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GR7R6HT1?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">32</td>
+          <td class="title-cell">You Tell the Story</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Ellie Sunwood</td>
+          <td class="asin-cell">B0GQSJX1MP</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQSJX1MP?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">33</td>
+          <td class="title-cell">The Burning Song</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Rowan Ashcroft</td>
+          <td class="asin-cell">B0GLDRQZXH</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GLDRQZXH?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">34</td>
+          <td class="title-cell">Blood Ember</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Jorak Veldt</td>
+          <td class="asin-cell">B0GN41C6KG</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GN41C6KG?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">35</td>
+          <td class="title-cell">The Quiet Hours</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Elara Moss</td>
+          <td class="asin-cell">B0FH33TF12</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FH33TF12?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">36</td>
+          <td class="title-cell">Echoes of Transcendence</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">L Everwood</td>
+          <td class="asin-cell">B0C8RQB9BP</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0C8RQB9BP?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">37</td>
+          <td class="title-cell">American Journeys</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">C. Everett</td>
+          <td class="asin-cell">B0CD9JC1HY</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CD9JC1HY?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">38</td>
+          <td class="title-cell">Mythical Menagerie</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">E. Marlowe</td>
+          <td class="asin-cell">B0CDFFW3LD</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0CDFFW3LD?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">39</td>
+          <td class="title-cell">Time Investing</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">H Harvey</td>
+          <td class="asin-cell">B0BRDJ9PW8</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0BRDJ9PW8?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">40</td>
+          <td class="title-cell">The Virus: A Children's Story</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Michael Bacotti</td>
+          <td class="asin-cell">B0863V3CW9</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0863V3CW9?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">41</td>
+          <td class="title-cell">A Home for Anya</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Lena Ashfield</td>
+          <td class="asin-cell">B0GQK61R5H</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GQK61R5H?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">42</td>
+          <td class="title-cell">Horizonte Rojo: Lanzamiento Lunar</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">M. A. Hale</td>
+          <td class="asin-cell">B0GR1199SJ</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GR1199SJ?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">43</td>
+          <td class="title-cell">The Perfection Cycle</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">J. E. Mercer</td>
+          <td class="asin-cell">B0FL517JXK</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0FL517JXK?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+        <tr>
+          <td style="color:#475569;font-size:0.82rem;">44</td>
+          <td class="title-cell">The Probability of Light</td>
+          <td style="color:#94a3b8;font-size:0.85rem;">Maris K. Vector</td>
+          <td class="asin-cell">B0GHNFJ88K</td>
+          <td class="rank-cell rank-na">N/A</td>
+          <td class="cat-cell"><span style="color:#475569;font-size:0.78rem;">—</span></td>
+          <td class="link-cell"><a href="https://www.amazon.com/dp/B0GHNFJ88K?tag=bithues-20" target="_blank">View →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="footer">
+    <p>📚 Bithues Reading Lab — Book Rankings Dashboard &nbsp;|&nbsp; Data scraped April 10, 2026</p>
+    <p style="margin-top:0.4rem;">Books without BSR have 0 reviews or insufficient sales data on Amazon.</p>
+  </div>
+</div>
+
+<script>
+function sortTable(col) {
+  const table = document.getElementById('rankTable');
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const ths = table.querySelectorAll('thead th');
+  
+  const currentDir = ths[col].getAttribute('data-dir') || 'asc';
+  const dir = currentDir === 'asc' ? 'desc' : 'asc';
+  ths.forEach(t => t.setAttribute('data-dir', ''));
+  ths[col].setAttribute('data-dir', dir);
+  
+  rows.sort((a, b) => {
+    let aVal = a.cells[col].innerText.trim();
+    let bVal = b.cells[col].innerText.trim();
+    
+    // Handle N/A
+    if (aVal === 'N/A' && bVal === 'N/A') return 0;
+    if (aVal === 'N/A') return 1;
+    if (bVal === 'N/A') return -1;
+    
+    // Numeric sort for rank column
+    if (col === 4) {
+      const aNum = parseInt(aVal.replace(/[^0-9]/g, '')) || 0;
+      const bNum = parseInt(bVal.replace(/[^0-9]/g, '')) || 0;
+      return dir === 'asc' ? aNum - bNum : bNum - aNum;
+    }
+    
+    // Numeric for # column
+    if (col === 0) {
+      return dir === 'asc' ? parseInt(aVal) - parseInt(bVal) : parseInt(bVal) - parseInt(aVal);
+    }
+    
+    return dir === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+  });
+  
+  rows.forEach(row => tbody.appendChild(row));
+}
+</script>
+</body>
+</html>

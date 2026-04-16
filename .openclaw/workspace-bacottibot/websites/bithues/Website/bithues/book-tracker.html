@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Tracker | Bithues Reading Lab</title>
+  <meta name="description" content="Track all books in the Bithues Reading Lab catalog. See star ratings, bestseller ranks, and prices on Amazon.">
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="canonical" href="https://www.bithues.com/book-tracker.html" />
+  <style>
+    .tracker-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+    .tstat { background: var(--navy-mid); border: 1px solid var(--navy-light); border-radius: 10px; padding: 16px 12px; text-align: center; }
+    .tstat .v { font-size: 26px; font-weight: 700; color: var(--gold); }
+    .tstat .l { font-size: 10px; color: #8899aa; text-transform: uppercase; letter-spacing: .5px; margin-top: 2px; }
+
+    .note { font-size: 12px; color: #778; background: var(--off-white); border: 1px solid var(--gray-light); border-radius: 6px; padding: 10px 14px; margin-bottom: 1.5rem; }
+
+    .tracker-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--gray-light); margin-bottom: 2rem; }
+    .tracker-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .tracker-table th { background: var(--navy-mid); color: var(--gold); padding: 10px 12px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .5px; white-space: nowrap; cursor: pointer; user-select: none; }
+    .tracker-table th:hover { background: var(--navy-light); }
+    .tracker-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-light); vertical-align: middle; }
+    .tracker-table tr:last-child td { border-bottom: none; }
+    .tracker-table tr:nth-child(even) td { background: rgba(255,255,255,.3); }
+    .tracker-table tr:hover td { background: rgba(200,169,110,.08); }
+
+    .asin { font-family: 'Courier New', monospace; font-size: 11px; color: #667; white-space: nowrap; }
+    .title-wrap { max-width: 340px; }
+    .title { font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 340px; }
+    .title a { color: var(--navy); text-decoration: none; }
+    .title a:hover { color: var(--gold); }
+    .author { font-size: 11px; color: #778; margin-top: 1px; }
+
+    .stars { display: flex; align-items: center; gap: 5px; font-weight: 600; color: var(--navy); }
+    .reviews-count { font-size: 10px; color: #889; margin-top: 1px; }
+
+    .bsr { font-family: 'Courier New', monospace; font-size: 12px; color: #556; white-space: nowrap; }
+    .bsr.bsr-good { color: #2ecc71; font-weight: 600; }
+    .bsr.bsr-ok { color: #f39c12; }
+    .bsr.bsr-weak { color: #999; }
+
+    .cat { font-size: 11px; color: #667; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .price { white-space: nowrap; font-weight: 600; }
+    .price a { text-decoration: none; }
+    .price.price-paid a { color: var(--gold); }
+    .price.price-free a { color: #2ecc71; }
+    .price:not(.price-paid):not(.price-free) a { color: #556; }
+  </style>
+<style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+    .dropdown-divider { border-top: 1px solid rgba(200,169,110,.15); margin: .25rem 0; }
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <div class="nav-links">
+      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item">
+        <a href="catalog.html" class="active">Reviews ▾</a>
+        <div class="dropdown">
+          <a href="catalog.html">All Reviews</a>
+          <a href="book-tracker.html">Book Tracker</a>
+          <a href="category/self-help.html">Self-Help</a>
+          <a href="category/science-fiction.html">Sci-Fi</a>
+          <a href="category/fantasy.html">Fantasy</a>
+          <a href="category/nonfiction.html">Nonfiction</a>
+          <a href="category/thriller.html">Thriller</a>
+          <a href="category/biography.html">Biography</a>
+          <a href="category/business.html">Business</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="stories.html">Stories ▾</a>
+        <div class="dropdown"><a href="stories.html">All Stories</a></div>
+      </div>
+      <div class="nav-item"><a href="articles.html">Articles ▾</a>
+        <div class="dropdown"><a href="articles.html">All Articles</a></div>
+      </div>
+      <div class="nav-item"><a href="about.html">About</a></div>
+      <div class="nav-item"><a href="contact.html">Contact</a></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-eyebrow">Bithues Reading Lab</div>
+    <h1>Book <em>Tracker</em></h1>
+    <p class="hero-sub">Live snapshot of all books — star ratings, bestseller ranks, and prices from Amazon.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <p class="note">Prices and BSR updated daily. Amazon affiliate links (bithues-20). Review counts may be blocked by Amazon in automated scraping — where reviews show 0 or ?, check directly on Amazon.</p>
+
+    <div class="tracker-table-wrap">
+      <table class="tracker-table" id="bookTable">
+        <thead>
+          <tr>
+            <th data-col="asin">ASIN</th>
+            <th data-col="title">Title</th>
+            <th data-col="stars">Stars</th>
+            <th data-col="bsr">BSR</th>
+            <th data-col="cat">Category</th>
+            <th data-col="price">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+    <td class="asin">B0GQCZKRGB</td>
+    <td class="title-wrap"><div class="title" title="The Richmond Cipher">The Richmond Cipher</div><div class="author">by E. Maris (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GQCZKRGB?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GQVLB9N2</td>
+    <td class="title-wrap"><div class="title" title="Red Horizon: Lunar Launch">Red Horizon: Lunar Launch</div><div class="author">by M. A. Hale (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GQVLB9N2?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GSP9S473</td>
+    <td class="title-wrap"><div class="title" title="The Confluence Doctrine">The Confluence Doctrine</div><div class="author">by Alaric Wynn (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GSP9S473?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GQ2YCLD4</td>
+    <td class="title-wrap"><div class="title" title="Living with a Moving Planet: Deep Time, Human Adaptation, and a Positive Climate Future">Living with a Moving Planet: Deep Time, Human Adaptation, and a Positive Climate Future</div><div class="author">by J. T. Hartley (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GQ2YCLD4?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPLX1NJD</td>
+    <td class="title-wrap"><div class="title" title="Beyond the Veil: Quantum Speculations on Consciousness, Death, and the Universe">Beyond the Veil: Quantum Speculations on Consciousness, Death, and the Universe</div><div class="author">by D. E. Harlan (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GPLX1NJD?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GTJN8YGG</td>
+    <td class="title-wrap"><div class="title" title="Veiled Presence : Questions on Earth’s Silent Neighbors">Veiled Presence : Questions on Earth’s Silent Neighbors</div><div class="author">by E. C. Stroud (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr bsr-ok">#935,968</td>
+    <td class="cat">Occult UFOs</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GTJN8YGG?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GHQG9LLS</td>
+    <td class="title-wrap"><div class="title" title="The Power of Changing Your Mind: How Intellectual Humility Improves Decisions, Relationships, and Everyday Life">The Power of Changing Your Mind: How Intellectual Humility Improves Decisions, Relationships, and Everyday Life</div><div class="author">by Evan R. Cole (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-ok">#1,116,358</td>
+    <td class="cat">Humanism Philosophy</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GHQG9LLS?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPT6QRDW</td>
+    <td class="title-wrap"><div class="title" title="The Shadow Within : A Practical Guide to Safe, Realistic Shadow Work in Everyday Life">The Shadow Within : A Practical Guide to Safe, Realistic Shadow Work in Everyday Life</div><div class="author">by Elena Maris (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GPT6QRDW?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPPBCKYF</td>
+    <td class="title-wrap"><div class="title" title="Echoes of Aetheris">Echoes of Aetheris</div><div class="author">by Aetheri Codex (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GPPBCKYF?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPM4DZR1</td>
+    <td class="title-wrap"><div class="title" title="Disclosure 2026: 18 Rated Scenarios for Alien First Contact">Disclosure 2026: 18 Rated Scenarios for Alien First Contact</div><div class="author">by Marcus Reeve (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-ok">#962,552</td>
+    <td class="cat">New Age New Thought</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GPM4DZR1?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GSC6SBQ9</td>
+    <td class="title-wrap"><div class="title" title="Resonance Drift : A Hopepunk Signal">Resonance Drift : A Hopepunk Signal</div><div class="author">by R. Zyrion (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-weak">#2,213,655</td>
+    <td class="cat">Science Fiction Adventure</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GSC6SBQ9?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GS6KMYXV</td>
+    <td class="title-wrap"><div class="title" title="Symbiont Bloom: Verdant Nexus #1">Symbiont Bloom: Verdant Nexus #1</div><div class="author">by Elowen Tidebloom (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GS6KMYXV?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GS367G2M</td>
+    <td class="title-wrap"><div class="title" title="Otomí : A Historical Narrative of Land, Ritual, and Continuity (The Otomí Series Book 1)">Otomí : A Historical Narrative of Land, Ritual, and Continuity (The Otomí Series Book 1)</div><div class="author">by E. J. Marín (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-ok">#1,295,924</td>
+    <td class="cat">Pre-Columbian History of Latin America</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GS367G2M?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GRW79ZM7</td>
+    <td class="title-wrap"><div class="title" title="Physics of Insight: Awakening the Savant Within (Chronos Codex)">Physics of Insight: Awakening the Savant Within (Chronos Codex)</div><div class="author">by Quantum Chronos (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr bsr-ok">#870,545</td>
+    <td class="cat">Physics of Time (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GRW79ZM7?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GJ1463Y6</td>
+    <td class="title-wrap"><div class="title" title="The Physics of Time: A Creative Exploration of Consciousness, Spacetime, and the Nature of Temporal Experience (Chronos Codex)">The Physics of Time: A Creative Exploration of Consciousness, Spacetime, and the Nature of Temporal Experience (Chronos Codex)</div><div class="author">by Quantum Chronos (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr bsr-ok">#698,874</td>
+    <td class="cat">Physics of Time (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GJ1463Y6?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GGVDKZ96</td>
+    <td class="title-wrap"><div class="title" title="Consciousness in Higher Dimensional Spacetime: A Dual-Dimensional Theory of Mind and Body (Chronos Codex)">Consciousness in Higher Dimensional Spacetime: A Dual-Dimensional Theory of Mind and Body (Chronos Codex)</div><div class="author">by Quantum Chronos (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">2 reviews</div></td>
+    <td class="bsr bsr-ok">#1,139,680</td>
+    <td class="cat">Physics of Time (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GGVDKZ96?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPNWJ314</td>
+    <td class="title-wrap"><div class="title" title="Quantum Soul Echoes: Consciousness as Particle and Spacetime Imprint (Chronos Codex)">Quantum Soul Echoes: Consciousness as Particle and Spacetime Imprint (Chronos Codex)</div><div class="author">by Quantum Chronos (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-weak">#3,498,591</td>
+    <td class="cat">Quantum Theory (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GPNWJ314?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPH597LL</td>
+    <td class="title-wrap"><div class="title" title="Mindful Memory: Thought Experiments and Memory Mapping to Strengthen Your Brain">Mindful Memory: Thought Experiments and Memory Mapping to Strengthen Your Brain</div><div class="author">by D. E. Harlan (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-weak">#3,180,746</td>
+    <td class="cat">Memory Improvement Self-Help</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GPH597LL?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GP91NKC7</td>
+    <td class="title-wrap"><div class="title" title="Shadow Work Journal for Women: 90-Day Guided Prompts to Heal Your Inner Child and Embrace Emotional Freedom as a Beginner">Shadow Work Journal for Women: 90-Day Guided Prompts to Heal Your Inner Child and Embrace Emotional Freedom as a Beginner</div><div class="author">by Luna Sage (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-good">#361,968</td>
+    <td class="cat">Journaling</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GP91NKC7?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GNFBWN6S</td>
+    <td class="title-wrap"><div class="title" title="Rules of Survival: Fire, Hunger, and the First Name">Rules of Survival: Fire, Hunger, and the First Name</div><div class="author">by Jorak Veldt (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr bsr-weak">#2,950,326</td>
+    <td class="cat">Ancient Historical Fiction</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GNFBWN6S?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GN41C6KG</td>
+    <td class="title-wrap"><div class="title" title="Blood Ember: Chants of the First">Blood Ember: Chants of the First</div><div class="author">by Jorak Veldt (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GN41C6KG?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0CFHT4WDX</td>
+    <td class="title-wrap"><div class="title" title="Little Mike: Fun at the Beach">Little Mike: Fun at the Beach</div><div class="author">by Michael Jr (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">7 reviews</div></td>
+    <td class="bsr bsr-weak">#5,594,110</td>
+    <td class="cat">Children's Inspirational &amp; Personal Growth</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0CFHT4WDX?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0FH33TF12</td>
+    <td class="title-wrap"><div class="title" title="The Quiet Hours">The Quiet Hours</div><div class="author">by Elara Moss (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0FH33TF12?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0FPBBTHLT</td>
+    <td class="title-wrap"><div class="title" title="Little Mike: Learns to Fly">Little Mike: Learns to Fly</div><div class="author">by Michael Jr (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">2 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">Children's Aeronautics &amp; Space Books (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0FPBBTHLT?tag=bithues-20" target="_blank" rel="noopener">Paperback
+
+
+$9.99</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0F9HHYVBY</td>
+    <td class="title-wrap"><div class="title" title="Discovering Washington DC: A Comprehensive Guide for All Ages">Discovering Washington DC: A Comprehensive Guide for All Ages</div><div class="author">by Evelyn Carter (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">2 reviews</div></td>
+    <td class="bsr bsr-weak">#4,946,987</td>
+    <td class="cat">Washington, D.C. Travel Guides (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0F9HHYVBY?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0C8RQB9BP</td>
+    <td class="title-wrap"><div class="title" title="Echoes of Transcendence">Echoes of Transcendence</div><div class="author">by L Everwood (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0C8RQB9BP?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0CD9JC1HY</td>
+    <td class="title-wrap"><div class="title" title="American Journeys: Exploring Language and American Culture">American Journeys: Exploring Language and American Culture</div><div class="author">by C. Everett (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">2 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0CD9JC1HY?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0CDFFW3LD</td>
+    <td class="title-wrap"><div class="title" title="Mythical Menagerie : A Journey Across Cultures and Creatures">Mythical Menagerie : A Journey Across Cultures and Creatures</div><div class="author">by E. Marlowe (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0CDFFW3LD?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0DC6FTG21</td>
+    <td class="title-wrap"><div class="title" title="Little Mike: Builds a Robot">Little Mike: Builds a Robot</div><div class="author">by Michael Jr (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">3 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">Children's Beginner Readers</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0DC6FTG21?tag=bithues-20" target="_blank" rel="noopener">Paperback
+
+
+$10.00</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GTSXS48K</td>
+    <td class="title-wrap"><div class="title" title="First Contact Diary">First Contact Diary</div><div class="author">by Mira Ellison (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr bsr-ok">#809,166</td>
+    <td class="cat">Metaphysical Science Fiction eBooks</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GTSXS48K?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GQK61R5H</td>
+    <td class="title-wrap"><div class="title" title="A Home for Anya: A Home for Anya A Small-Town Romance (Ashford Falls Book 1)">A Home for Anya: A Home for Anya A Small-Town Romance (Ashford Falls Book 1)</div><div class="author">by Lena Ashfield (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>5.0</span></div><div class="reviews-count">1 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GQK61R5H?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0863V3CW9</td>
+    <td class="title-wrap"><div class="title" title="The Virus: A Children's Story">The Virus: A Children's Story</div><div class="author">by Michael Bacotti (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2ecc71;flex-shrink:0"></span> <span>4.8</span></div><div class="reviews-count">6 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0863V3CW9?tag=bithues-20" target="_blank" rel="noopener">$11.99</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GQSJX1MP</td>
+    <td class="title-wrap"><div class="title" title="You Tell the Story: You Tell the Story Everyday Adventures">You Tell the Story: You Tell the Story Everyday Adventures</div><div class="author">by Ellie Sunwood (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#27ae60;flex-shrink:0"></span> <span>4.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GQSJX1MP?tag=bithues-20" target="_blank" rel="noopener">Paperback
+
+
+$8.50</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GLDRQZXH</td>
+    <td class="title-wrap"><div class="title" title="The Burning Song">The Burning Song</div><div class="author">by Rowan Ashcroft (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f39c12;flex-shrink:0"></span> <span>3.5</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GLDRQZXH?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GKRKP1Q4</td>
+    <td class="title-wrap"><div class="title" title="The Orchardist: Harvest">The Orchardist: Harvest</div><div class="author">by Kate E Brennan (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#e67e22;flex-shrink:0"></span> <span>3.0</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr bsr-ok">#520,662</td>
+    <td class="cat">Religious Mysteries (Books)</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GKRKP1Q4?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0BTD9CT35</td>
+    <td class="title-wrap"><div class="title" title="The Dawn of Civilization : A Story of a Prehistoric Tribe's Struggle for Survival">The Dawn of Civilization : A Story of a Prehistoric Tribe's Struggle for Survival</div><div class="author">by T. Stone (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#e74c3c;flex-shrink:0"></span> <span>2.8</span></div><div class="reviews-count">11 reviews</div></td>
+    <td class="bsr bsr-ok">#1,433,199</td>
+    <td class="cat">Teen &amp; Young Adult Prehistory Historical Fict</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0BTD9CT35?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0F2PZWSYG</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Unknown</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">? reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price "><a href="https://www.amazon.com/dp/B0F2PZWSYG?tag=bithues-20" target="_blank" rel="noopener">—</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GR7R6HT1</td>
+    <td class="title-wrap"><div class="title" title="Microbiology ABC's: Tiny Cells and Microbes from A to Z">Microbiology ABC's: Tiny Cells and Microbes from A to Z</div><div class="author">by Michael Bacotti (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GR7R6HT1?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $5.00 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPZZ4VSK</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Rowan Ashcroft (Author),</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-free"><a href="https://www.amazon.com/dp/B0GPZZ4VSK?tag=bithues-20" target="_blank" rel="noopener">$0.00</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPZ6YX68</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Unknown</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">? reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price "><a href="https://www.amazon.com/dp/B0GPZ6YX68?tag=bithues-20" target="_blank" rel="noopener">—</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0BRDJ9PW8</td>
+    <td class="title-wrap"><div class="title" title="Time Investing: A Self-Help Guide to Valuing Your Own Time">Time Investing: A Self-Help Guide to Valuing Your Own Time</div><div class="author">by H Harvey (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0BRDJ9PW8?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GR1199SJ</td>
+    <td class="title-wrap"><div class="title" title="Horizonte Rojo: Lanzamiento Lunar (Spanish Edition)">Horizonte Rojo: Lanzamiento Lunar (Spanish Edition)</div><div class="author">by M. A. Hale (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GR1199SJ?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0FL517JXK</td>
+    <td class="title-wrap"><div class="title" title="The Perfection Cycle: Life, Consciousness, and the Universe’s Journey Toward Meaning">The Perfection Cycle: Life, Consciousness, and the Universe’s Journey Toward Meaning</div><div class="author">by J. E. Mercer (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0FL517JXK?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GHNFJ88K</td>
+    <td class="title-wrap"><div class="title" title="The Probability of Light">The Probability of Light</div><div class="author">by Maris K. Vector (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0GHNFJ88K?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $0.99 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0FXF3DY9V</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Maris K. Vector (Author),</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-free"><a href="https://www.amazon.com/dp/B0FXF3DY9V?tag=bithues-20" target="_blank" rel="noopener">$0.00</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0D38W5972</td>
+    <td class="title-wrap"><div class="title" title="Men of the Three Seas">Men of the Three Seas</div><div class="author">by Leander Vassos (Author)</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0D38W5972?tag=bithues-20" target="_blank" rel="noopener">Kindle
+
+
+$0.00 
+or $2.99 to buy</a></td>
+  </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 Bithues Reading Lab &bull; <a href="index.html">Home</a> &bull; <a href="catalog.html">Reviews</a> &bull; <a href="book-tracker.html">Book Tracker</a></p>
+    </div>
+  </footer>
+</body>
+</html>
