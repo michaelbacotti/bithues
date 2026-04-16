@@ -44,6 +44,10 @@
 
 _Last updated: 2026-04-15_
 
+## Tax Extension Status
+- **Confirmed Apr 15, 2026:** All returns for all entities AND personal return are on extension
+- Source: Camelia at Anderson Advisors (taxcoordinators@andersonadvisors.com)
+
 ## NH Trade Name Renewal — ACTION NEEDED (by September 29, 2026)
 - **Mail from:** NH Department of State, Corporation Division
 - **What:** Renewal of Trade Name Registration for "HOUSE" (Business ID# 882120)
