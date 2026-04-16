@@ -63,3 +63,34 @@ See: `References/website-sop.md`
 ---
 
 _Last updated: 2026-04-03_
+
+## Website Setup Stack — Standard Template (2026-04-15)
+
+**For new websites (Mike's sons' sites, etc.) — use this exact stack:**
+
+| Layer | Service |
+|-------|---------|
+| Domain + DNS + Registrar | Cloudflare Registrar |
+| Hosting + CDN + SSL | Cloudflare Pages |
+| Source control | GitHub |
+
+**Automation loop:**
+Bot writes files locally → commits & pushes to GitHub → Cloudflare Pages auto-deploys to CDN edge
+
+**Why this stack:**
+- Cloudflare = registrar + DNS in one place (simple)
+- Cloudflare Pages = built-in CDN at 300+ edge locations (faster than GitHub Pages alone)
+- GitHub = better control layer for bot-driven workflows
+- Cloudflare Email Routing = email forwarding (same as existing 35 @bithues.com addresses)
+
+**DNS setup (critical):**
+- `www` subdomain → CNAME to Cloudflare Pages project endpoint
+- Apex/root domain (e.g. `example.com`) → A records (pointing to Cloudflare Pages IPs) OR ALIAS/ANAME records — **NOT CNAME** (CNAME on apex is invalid DNS and breaks everything)
+
+**Setup steps:**
+1. Buy domain at cloudflare.com → Register
+2. Create GitHub repo for the site
+3. Connect GitHub repo to Cloudflare Pages (Cloudflare dashboard → Pages → Create project → Import GitHub repo)
+4. In Cloudflare DNS → add records pointing to Cloudflare Pages project
+
+**Key constraint:** Once a Cloudflare Pages project is connected to GitHub via the Git integration, it **cannot** later be switched to Direct Upload mode. Choose Git integration at setup and stick with it.

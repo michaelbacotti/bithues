@@ -37,6 +37,12 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+## Hardware
+
+- **MacBook Pro 16"** — M4 Max (Nov 2024), 48 GB RAM, macOS Tahoe (Sequoia)
+  - Serial: M0Y49CX7PP
+  - This machine runs OpenClaw locally
+
 ## GitHub
 
 - **Token**: `[GITHUB_TOKEN_REDACTED]` (openclaw-bot, repo scope)

@@ -242,23 +242,50 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 
 ---
 
-## Pending Tasks (updated 2026-04-15)
+## Pending Tasks (updated 2026-04-16)
 
-1. **Media.net application** — still pending
-2. **Wiki entity pages** — need to build from tax docs / Master Organizer (see memory/entities.md)
-3. **Find full Bacotti Enterprises Master Organizer PDF** — only page 1 found in tmp/
-4. **Book Tracker link** — missing from site-wide nav Reviews dropdown on bithues.com (Mike noted he can't find it)
-5. **Cords of Empire** (Book 3 Otomí series) — "soon to be published" but no release date set
-6. **First active trade for forecast page** — Mike needs to provide active trade details for `dependability-forecast.html`
-7. **OpenClaw doctor** — `openclaw doctor --non-interactive` still needs to be run
-8. **AdSense for successionholdingllc.com** — ready to apply (now has 27+ articles)
-9. **Goodreads pseudonyms** — E.J. Marín and Quantum Chronos still pending approval
+### Compliance & Tax (URGENT — requires Anderson Advisors)
+1. **HOUSE Inc EIN discrepancy** — IRS has 81-4848148 on file, we use 87-1948148. Must clarify.
+2. **HOUSE Inc 990-N revocation risk** — 2023 filing unconfirmed. 3 missed years = automatic tax-exempt revocation.
+3. **HOUSE Inc NH trade name** — $50 renewal due by Sep 29, 2026 or "HOUSE" name becomes available to others.
+4. **Ventureprise $1,601 tax (CP161)** — Aug 2023. Confirm this was paid.
+5. **Form 2848 rejection** — Oct 2023 IRS rejection for missing signature on POA. Confirm resubmitted.
+6. **8 unreadable IRS notices** — image-scan PDFs need manual review.
+7. **38 Alexander Road LLC** — appears in IRS correspondence, unknown entity. Investigate.
+
+### Business Development
+8. **Dependability 2025 active trades** — need current trade details for forecast page
+9. **OpenClaw doctor** — `openclaw doctor --non-interactive` still needs to be run
+10. **Media.net application** — still pending
+11. **AdSense for successionholdingllc.com** — ready to apply (27+ articles)
+12. **Goodreads pseudonyms** — E.J. Marín and Quantum Chronos still pending approval
+13. **Wiki entity pages** — built tonight from meeting minutes + tax docs; verify in `memory/entities.md`
+
+### Lower Priority
+14. **Book Tracker link** — missing from site-wide nav Reviews dropdown on bithues.com
+15. **Cords of Empire** (Book 3 Otomí series) — "soon to be published" but no release date set
+16. **Property acquisition dates/prices** — not in available documents; may need title company records
+17. **Property insurance** — most insurance documents were unreadable; confirm coverage current
+18. **LOC agreements** — 8 files are 0-byte iCloud stubs; LOC terms unavailable
 
 ---
 
-_Last updated: 2026-04-10 20:45 EDT_
+_Last updated: 2026-04-16 07:15 EDT_
 
 ## Key Lessons Learned
+
+### Subagent Hallucination — Dependability Ownership (2026-04-16)
+**What happened:** A subagent reported MNC Housing LLC held 50% of Dependability Holding in 2024. I relayed this as fact without verification. K-1s showed this was completely false — Dependability has always been Michael 80% / Ventureprise 20%.
+
+**Why it happened:** Subagent had no checkpoint requirement. It "felt" right based on vague pattern-matching and didn't verify against actual documents.
+
+**What works:** The pattern used on 2026-04-16 night sweep:
+- STEP 1: Write checkpoint to output file BEFORE reading anything
+- STEP 2: Read actual documents and append to output file
+- STEP 3: STEP 4 VERIFY — confirm output file exists and has real content
+- Small, focused scope per subagent (one topic, not everything)
+- Always use local copies of files when available (avoids iCloud stub deadlocks)
+- Mike's rule: Only filed returns ("Completed Copy", "Review Copy") are authoritative — draft organizers are not truth
 
 ### GitHub/DNS Factual Errors (2026-04-15, Telegram)
 **What happened:** In a Telegram session, the bot confidently stated two technically incorrect facts about website infrastructure, and Mike had to correct both:

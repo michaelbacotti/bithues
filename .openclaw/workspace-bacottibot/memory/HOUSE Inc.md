@@ -1,10 +1,18 @@
 # HOUSE Inc. — 501c3 Nonprofit
 
+## ⚠️ EIN DISCREPANCY — IMMEDIATE ACTION NEEDED
+| EIN | Source | Status |
+|-----|--------|--------|
+| **87-1948148** | Prior memory, prior filings | What we believed |
+| **81-4848148** | IRS notices (CP299, CP148) | What IRS has on file |
+
+**The IRS is sending notices to 81-4848148.** These are two different EINs. This needs immediate clarification with Anderson Advisors — using the wrong EIN with the IRS is a serious compliance problem.
+
 ## Overview
-- **EIN:** 87-1948148
+- **EIN:** 87-1948148 (official filings) — BUT IRS has 81-4848148 on record
 - **Tax Form:** 990
 - **2023 Receipts:** $3,111 | **Expenses:** $5,002 | **Assets:** $16,742 cash
-- **Purpose:** Nonprofit charity — helps people in need
+- **Purpose:** Nonprofit charity — homelessness prevention, women's recovery residences
 
 ---
 
@@ -35,4 +43,21 @@
 
 ---
 
-_Last updated: 2026-04-03_
+### New Mail — April 14, 2026
+- **File:** `business/HOUSE Inc/Mail/2026.04.14 (16:46:06) - Housing Opportunities to Ultimately Shelter Everyone, Inc. - Mail.pdf`
+- **Status:** UNREAD — PDF is scanned/image format, text extraction returned blank
+- **Action needed:** Mike to open and review → then decide: acknowledge, run due diligence, or add to board agenda
+- **Reminder set:** 1:00 PM ET April 15, 2026
+
+_Last updated: 2026-04-15_
+
+## NH Trade Name Renewal — ACTION NEEDED (by September 29, 2026)
+- **Mail from:** NH Department of State, Corporation Division
+- **What:** Renewal of Trade Name Registration for "HOUSE" (Business ID# 882120)
+- **Filed to:** Housing Opportunities to Ultimately Shelter Everyone, Inc. (NV corp, ID# 881550)
+- **NAICS:** Health Care and Social Assistance / Other Community Housing Services
+- **Fee:** $50 — payable to State of New Hampshire
+- **Deadline:** September 29, 2026
+- **Filed online:** https://quickstart.sos.nh.gov/online
+- **Mail address:** 28 School Street, Concord, NH 03301 | corporate@sos.nh.gov | (603) 271-3244
+- **File:** `business/HOUSE Inc/Mail/2026.04.14 (16:46:06) - Housing Opportunities to Ultimately Shelter Everyone, Inc. - Mail.pdf`
