@@ -1,15 +1,8 @@
 # HOUSE Inc. — 501c3 Nonprofit
 
-## ⚠️ EIN DISCREPANCY — IMMEDIATE ACTION NEEDED
-| EIN | Source | Status |
-|-----|--------|--------|
-| **87-1948148** | Prior memory, prior filings | What we believed |
-| **81-4848148** | IRS notices (CP299, CP148) | What IRS has on file |
-
-**The IRS is sending notices to 81-4848148.** These are two different EINs. This needs immediate clarification with Anderson Advisors — using the wrong EIN with the IRS is a serious compliance problem.
-
 ## Overview
-- **EIN:** 87-1948148 (official filings) — BUT IRS has 81-4848148 on record
+- **EIN:** 87-1948148
+- **IRS does NOT have 81-4848148** — that appeared on some IRS notices as a processing/formatting error, not the actual EIN. Confirmed with Mike 2026-04-16.
 - **Tax Form:** 990
 - **2023 Receipts:** $3,111 | **Expenses:** $5,002 | **Assets:** $16,742 cash
 - **Purpose:** Nonprofit charity — homelessness prevention, women's recovery residences

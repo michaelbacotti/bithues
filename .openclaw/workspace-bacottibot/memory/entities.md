@@ -34,13 +34,8 @@ Michael Bacotti Sr. (80% of Dependability Holding LLC — confirmed by K-1s 2021
 | **HOUSE Inc.** | ⚠️ SEE BELOW | 501c3 Nonprofit | 990 |
 | **Bacotti Inc.** | 86-2669759 | 100% owned by Succession Holding LLC | 1120 |
 
-### ⚠️ HOUSE Inc EIN Discrepancy — ACTION NEEDED
-| EIN | Source | Status |
-|-----|--------|--------|
-| **87-1948148** | Prior memory, prior filings | What we believed |
-| **81-4848148** | IRS notices (CP299, CP148) | What IRS has on file |
-
-IRS is sending notices to 81-4848148. These are different EINs. Must clarify with Anderson Advisors which is correct and whether a correction needs to be filed.
+### ⚠️ HOUSE Inc EIN Note
+IRS notices (CP299, CP148) showed 81-4848148 on some formatting — this was a processing artifact, NOT a different EIN. The actual EIN is 87-1948148. Confirmed with Mike 2026-04-16.
 
 ---
 

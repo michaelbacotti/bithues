@@ -245,7 +245,7 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 ## Pending Tasks (updated 2026-04-16)
 
 ### Compliance & Tax (URGENT — requires Anderson Advisors)
-1. **HOUSE Inc EIN discrepancy** — IRS has 81-4848148 on file, we use 87-1948148. Must clarify.
+1. ~~HOUSE Inc EIN discrepancy~~ — resolved: EIN is 87-1948148, not a different number
 2. **HOUSE Inc 990-N revocation risk** — 2023 filing unconfirmed. 3 missed years = automatic tax-exempt revocation.
 3. **HOUSE Inc NH trade name** — $50 renewal due by Sep 29, 2026 or "HOUSE" name becomes available to others.
 4. **Ventureprise $1,601 tax (CP161)** — Aug 2023. Confirm this was paid.
