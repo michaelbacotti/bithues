@@ -4,84 +4,743 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thriller Books | Bithues Reading Lab</title>
-  <meta name="description" content="Thriller books reviewed on Bithues Reading Lab">
+  <meta name="description" content="The best thrillers are novels of moral logic — you understand why the villain is wrong even when you see the world through their eyes. These do it best.">
   <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
   <link rel="canonical" href="https://www.bithues.com/category/thriller.html">
-
   <style>
-    /* ── NAV ── */
-    nav {
-      background: var(--navy);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 2px solid var(--gold);
-    }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--white);
-      letter-spacing: .03em;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .nav-brand span { color: var(--gold); }
-    .nav-links { display: flex; align-items: center; gap: 0; }
-    .nav-item { position: relative; }
-    .nav-item > a {
-      color: var(--gray-mid);
-      text-decoration: none;
-      font-size: .875rem;
-      font-weight: 500;
-      padding: 0 1.25rem;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      transition: color .2s;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-    }
-    .nav-item > a:hover,
-    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .nav-item .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--navy-mid);
-      border: 1px solid rgba(200,169,110,.25);
-      border-top: 2px solid var(--gold);
-      border-radius: 0 0 8px 8px;
-      min-width: 180px;
-      padding: .5rem 0;
-      box-shadow: 0 8px 24px rgba(10,22,40,.3);
-      z-index: 200;
-    }
-    .nav-item:hover .dropdown { display: block; }
-    .dropdown a {
-      display: block;
-      padding: .6rem 1rem;
-      color: var(--gray-mid);
-      text-decoration: none;
-      font-size: .825rem;
-      font-weight: 400;
-      transition: all .15s;
-      white-space: nowrap;
-    }
-    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+/* ============================================
+   Bithues Reading Lab - Redesign
+   Matching Dependability Holdings layout
+   ============================================ */
+
+/* Google Fonts */
+
+/* Variables */
+:root {
+    --navy:       #0a1628;
+    --navy-mid:   #132240;
+    --navy-light: #1e3358;
+    --gold:       #c8a96e;
+    --gold-light: #e2c99a;
+    --white:      #ffffff;
+    --off-white:  #f5f6f8;
+    --gray-light: #e8eaed;
+    --gray-mid:   #8a94a6;
+    --green:      #2e9e6b;
+    --red:        #c94b4b;
+    --text-dark:  #1a1f2e;
+    --text-body:  #3a4157;
+    --shadow:     0 2px 12px rgba(10,22,40,.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--off-white);
+    color: var(--text-body);
+    line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+    background: var(--navy);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--gold);
+}
+.nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--white);
+    letter-spacing: .03em;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+.nav-brand span { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 0; }
+.nav-item { position: relative; }
+.nav-item > a {
+    color: var(--gray-mid);
+    text-decoration: none;
+    font-size: .875rem;
+    font-weight: 500;
+    padding: 0 1.25rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    transition: color .2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+.nav-item > a:hover,
+.nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+.nav-item .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--navy-mid);
+    border: 1px solid rgba(200,169,110,.25);
+    border-top: 2px solid var(--gold);
+    border-radius: 0 0 8px 8px;
+    min-width: 180px;
+    padding: .5rem 0;
+    box-shadow: 0 8px 24px rgba(10,22,40,.3);
+    z-index: 200;
+}
+.nav-item:hover .dropdown { display: block; }
+.dropdown a {
+    display: block;
+    padding: .6rem 1rem;
+    color: var(--gray-mid);
+    text-decoration: none;
+    font-size: .825rem;
+    font-weight: 400;
+    transition: all .15s;
+    white-space: nowrap;
+}
+.dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+.dropdown-divider { border-top: 1px solid rgba(200,169,110,.15); margin: .25rem 0; }
+
+/* ── HERO ── */
+.hero {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6a 100%);
+    color: var(--white);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+}
+.hero-eyebrow {
+    font-size: .8rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+    color: var(--white);
+}
+.hero h1 em {
+    font-style: normal;
+    color: var(--gold-light);
+}
+.hero-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,.65);
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(200,169,110,.15);
+    border: 1px solid rgba(200,169,110,.35);
+    color: var(--gold);
+    font-size: .8rem;
+    padding: .35rem .9rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    letter-spacing: .04em;
+}
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+.hero-stat {
+    text-align: center;
+}
+.hero-stat-value {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+}
+.hero-stat-label {
+    font-size: .78rem;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-top: .4rem;
+}
+
+/* ── SECTION SHARED ── */
+.section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--navy);
+    margin-bottom: .4rem;
+}
+.section-sub {
+    color: var(--gray-mid);
+    font-size: .95rem;
+    margin-bottom: 2.5rem;
+}
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ── CARDS GRID ── */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,22,40,.15); }
+.card-icon {
+    font-size: 1.8rem;
+    margin-bottom: .75rem;
+}
+.card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: .5rem;
+}
+.card h3 a { color: var(--navy); text-decoration: none; }
+.card h3 a:hover { color: var(--gold); }
+.card .author { color: var(--gray-mid); font-size: .8rem; margin-bottom: .5rem; }
+.card .tldr { color: var(--text-body); font-size: .875rem; line-height: 1.5; }
+.card .review-tag { background: var(--navy); color: var(--gold); padding: .15rem .5rem; border-radius: 4px; font-size: .7rem; font-weight: 600; }
+.card h3 a { color: var(--navy); text-decoration: none; }
+.card h3 a:hover { color: var(--gold); }
+.card .author { color: var(--gray-mid); font-size: .8rem; margin-bottom: .5rem; }
+.card .tldr { color: var(--text-body); font-size: .875rem; line-height: 1.5; }
+.card .review-tag { background: var(--navy); color: var(--gold); padding: .15rem .5rem; border-radius: 4px; font-size: .7rem; font-weight: 600; }
+.card p {
+    font-size: .9rem;
+    color: var(--text-body);
+    line-height: 1.65;
+}
+
+/* ── REVIEW CARD (catalog) ── */
+.review-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    margin-bottom: 1.25rem;
+    transition: transform .2s, box-shadow .2s;
+}
+.review-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,22,40,.15); }
+.review-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: .5rem;
+}
+.review-card h3 a { color: var(--navy); text-decoration: none; }
+.review-card h3 a:hover { color: var(--gold); }
+.review-card .author { color: var(--gray-mid); font-size: .9rem; margin-bottom: .75rem; }
+.review-card .tldr { color: var(--text-body); font-size: .95rem; line-height: 1.65; }
+.review-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+.review-tag {
+    padding: 0.2rem 0.5rem;
+    background: var(--navy);
+    color: var(--gold);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+.review-time { color: var(--gray-mid); font-size: 0.8rem; }
+
+/* ── STORY CARD ── */
+.story-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    margin-bottom: 1.25rem;
+    transition: transform .2s, box-shadow .2s;
+}
+.story-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,22,40,.15); }
+.story-card .genre-tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.story-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: .5rem;
+}
+.story-card h3 a { color: var(--navy); text-decoration: none; }
+.story-card h3 a:hover { color: var(--gold); }
+.story-card .excerpt { color: var(--text-body); font-size: .95rem; line-height: 1.65; margin-bottom: .5rem; }
+.story-card .meta { color: var(--gray-mid); font-size: 0.8rem; }
+
+/* ── ARTICLE CARD ── */
+.article-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    margin-bottom: 1.25rem;
+    transition: transform .2s, box-shadow .2s;
+}
+.article-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,22,40,.15); }
+.article-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: .5rem;
+}
+.article-card h3 a { color: var(--navy); text-decoration: none; }
+.article-card h3 a:hover { color: var(--gold); }
+.article-card .article-meta { color: var(--gray-mid); font-size: 0.8rem; margin-bottom: .5rem; }
+.article-card p { color: var(--text-body); font-size: .95rem; line-height: 1.65; }
+
+/* ── FILTERS ── */
+.catalog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+.filter-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 20px;
+    color: var(--text-body);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
+
+/* ── NEWSLETTER ── */
+.newsletter-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+.newsletter-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin-bottom: .5rem;
+}
+.newsletter-section > p { color: var(--text-body); font-size: .95rem; margin-bottom: 1.5rem; }
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 440px;
+    margin: 0 auto;
+}
+.newsletter-form input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.65rem 1rem;
+    background: var(--off-white);
+    border: 1px solid var(--gray-light);
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+}
+.newsletter-form input:focus { outline: none; border-color: var(--gold); }
+.newsletter-section .form-note { color: var(--gray-mid); font-size: 0.75rem; margin-top: 0.75rem; }
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: var(--gold);
+    color: var(--navy);
+    box-shadow: 0 4px 16px rgba(200, 169, 110, 0.25);
+    font-family: 'Inter', sans-serif;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200, 169, 110, 0.35); }
+
+/* ── AUTHOR CTA ── */
+.author-cta {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+.author-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: .5rem; }
+.author-cta p { color: var(--text-body); font-size: 0.9rem; margin-bottom: 1rem; }
+.author-cta a { color: var(--gold); text-decoration: none; font-weight: 600; }
+.author-cta a:hover { text-decoration: underline; }
+
+/* ── ABOUT PAGE ── */
+.mission {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    margin: 2rem 0;
+}
+.mission p { color: var(--text-body); font-size: .95rem; line-height: 1.7; }
+.values { display: grid; gap: 1rem; margin: 2rem 0; }
+.value-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+}
+.value-card h3 { color: var(--gold); margin-bottom: .5rem; font-family: 'Playfair Display', serif; }
+.value-card p { color: var(--text-body); font-size: .9rem; line-height: 1.65; }
+
+/* ── CONTACT PAGE ── */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+.contact-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+}
+.contact-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+}
+.contact-card p { color: var(--text-body); font-size: 0.95rem; margin-bottom: 0.5rem; }
+.contact-card a { color: var(--gold); text-decoration: none; }
+.contact-card a:hover { text-decoration: underline; }
+.contact-card ul { list-style: none; margin-top: 0.75rem; }
+.contact-card li { color: var(--text-body); font-size: 0.9rem; margin-bottom: 0.4rem; padding-left: 1.25rem; position: relative; }
+.contact-card li::before { content: "→"; position: absolute; left: 0; color: var(--gold); }
+
+/* ── FORM ── */
+.form-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+}
+.form-section h2 { font-size: 1.25rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; color: var(--navy); }
+.form-section > p { color: var(--text-body); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--text-dark); }
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: var(--off-white);
+    border: 1px solid var(--gray-light);
+    border-radius: 8px;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--gold); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-submit {
+    padding: 0.75rem 1.5rem;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+.form-submit:hover { background: var(--gold-light); }
+.response-time {
+    background: rgba(200, 169, 110, 0.1);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-top: 2rem;
+}
+.response-time p { color: var(--text-body); font-size: 0.9rem; margin: 0; }
+.response-time strong { color: var(--navy); }
+
+/* ── FOOTER ── */
+footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,169,110,.2);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+footer .brand,
+footer .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--white);
+}
+footer .brand span,
+footer .footer-brand span { color: var(--gold); }
+footer p { font-size: .78rem; color: rgba(255,255,255,.3); }
+footer a { color: rgba(200,169,110,.6); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+/* ── BACK TO TOP ── */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.2s;
+    z-index: 1000;
+}
+.back-to-top.visible { opacity: 1; }
+.back-to-top:hover { background: var(--gold-light); }
+
+/* ── SCROLL ANCHOR OFFSET ── */
+[id] { scroll-margin-top: 72px; }
+
+/* ── CTA BANNER ── */
+.cta-banner {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--gold);
+    text-align: center;
+    margin: 2rem 0;
+}
+.cta-banner h3 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: .5rem; }
+.cta-banner p { color: var(--text-body); font-size: .95rem; }
+
+/* ── SHARE BUTTONS ── */
+.share-buttons { display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
+.share-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--gray-light);
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--text-body);
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.share-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── ALL REVIEWS LINK ── */
+.all-reviews { text-align: center; padding: 2rem 0; }
+.all-reviews a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.all-reviews a:hover { background: var(--gold-light); color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; width: 100%; padding: 0.5rem 0; gap: 0; position: absolute; top: 64px; left: 0; background: var(--navy); border-bottom: 2px solid var(--gold); }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 0.75rem 2rem; border-bottom: 1px solid var(--navy-light); }
+    .hero { padding: 3rem 2rem 3rem; }
+    .hero h1 { font-size: 2rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+}
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.65rem; }
+    .section { padding: 3rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { min-width: 100%; }
+}
+
+/* ── ARTICLE STYLES (injected) ── */
+
+/* ── ARTICLE WRAPPER ── */
+.article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: var(--white);
+}
+/* ── ARTICLE HEADER ── */
+.article .header {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--navy);
+    margin-bottom: .75rem;
+    line-height: 1.2;
+}
+.article .subtitle {
+    color: var(--gray-mid);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 1.5rem;
+}
+/* ── ARTICLE BODY TYPOGRAPHY ── */
+.article-body { font-size: 1rem; line-height: 1.75; color: var(--text-body); }
+.article-body h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); margin: 2.5rem 0 1rem; }
+.article-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--navy); margin: 1.5rem 0 .5rem; }
+.article-body p { margin-bottom: 1.2rem; }
+.article-body ul, .article-body ol { margin: 0 0 1.2rem 1.5rem; }
+.article-body li { margin-bottom: .4rem; }
+.article-body strong { color: var(--text-dark); }
+.article-body .lead { font-size: 1.15rem; color: var(--text-dark); margin-bottom: 2rem; font-weight: 400; }
+/* ── SEASON GRID ── */
+.season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin: 1.5rem 0 2rem; }
+.season-card { background: var(--off-white); border: 1px solid var(--gray-light); border-radius: 8px; padding: 1.25rem; border-top: 3px solid var(--gold); }
+.season-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: .4rem; }
+.season-card .author { color: var(--gray-mid); font-size: .8rem; margin-bottom: .5rem; }
+.season-card .tldr { color: var(--text-body); font-size: .875rem; margin-bottom: .75rem; }
+.season-card a { color: var(--gold); font-weight: 600; text-decoration: none; font-size: .875rem; }
+.season-card a:hover { color: var(--navy); }
+/* ── CONCEPT / BOOK-REF / WARNING BOXES ── */
+.concept, .book-ref { background: var(--off-white); border-left: 4px solid var(--gold); padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+.concept h3, .book-ref h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: .5rem; }
+.warning { background: #fdf3cd; border-left: 4px solid #d4a017; padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+.warning strong { color: #7a6000; }
+/* ── FRINGE / SKEPTICS BOXES ── */
+.fringe-box { background: var(--off-white); border: 1px solid var(--gray-light); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; }
+.fringe-box h3 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: .5rem; }
+.fringe-list { list-style: none; margin: 0; padding: 0; }
+.fringe-list li { margin-bottom: 1rem; padding-left: 0; }
+.skeptics-box { background: #f0f4f8; border: 1px solid #c8d3e0; border-radius: 8px; padding: 1.5rem; margin: 2rem 0; }
+.skeptics-box h3 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: .5rem; }
+/* ── QUOTE ── */
+.quote { background: var(--navy); color: var(--white); padding: 1.5rem 2rem; border-radius: 8px; margin: 2rem 0; font-style: italic; font-size: 1.1rem; text-align: center; }
+.quote cite { display: block; margin-top: .75rem; font-size: .85rem; color: rgba(255,255,255,.6); font-style: normal; }
+/* ── CARD ── */
+.card { background: var(--off-white); border: 1px solid var(--gray-light); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: .25rem; font-weight: 700; }
+.card-date { color: var(--gray-mid); font-size: .8rem; margin-bottom: 1rem; }
+/* ── BOOKS SECTION ── */
+.books-section { background: var(--navy); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+.books-section h2 { color: var(--white); font-family: 'Playfair Display', serif; margin-bottom: 1.5rem; }
+.books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+.book-card { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: 1.25rem; text-align: center; }
+.book-icon { font-size: 2rem; margin-bottom: .75rem; }
+.book-title { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1rem; }
+.book-link { color: var(--gold); font-size: .875rem; text-decoration: none; display: inline-block; margin-top: .5rem; }
+/* ── TIMELINE ── */
+.timeline { margin: 2rem 0; }
+.timeline h2 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 1.5rem; }
+.timeline-item { display: flex; gap: 1.5rem; margin-bottom: 1.25rem; padding-left: 1rem; border-left: 3px solid var(--gold); }
+.timeline-date { font-weight: 700; color: var(--navy); min-width: 100px; font-size: .875rem; }
+/* ── CTA ── */
+.cta { background: linear-gradient(135deg, var(--navy-mid), var(--navy)); border-radius: 12px; padding: 2rem; text-align: center; margin: 2.5rem 0; }
+.cta h3 { font-family: 'Playfair Display', serif; color: var(--white); margin-bottom: .75rem; font-size: 1.3rem; }
+.cta p { color: rgba(255,255,255,.7); margin-bottom: 1rem; }
+.cta a { display: inline-block; background: var(--gold); color: var(--navy); padding: .75rem 1.5rem; border-radius: 6px; font-weight: 600; text-decoration: none; }
+/* ── INTRO ── */
+.intro { margin-bottom: 2rem; }
+/* ── CONTENT WRAPPER ── */
+.content-wrapper { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6a 100%); }
+
+
+
+/* Review page utility classes */
+.back-link { color: var(--text-dim); font-size: 0.85rem; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.author-link { color: var(--accent); }
+.author-link:hover { text-decoration: underline; }
+.current-book { color: #7c3aed; font-size: 0.85rem; }
+
   </style>
-
 </head>
-
 <body>
 
   <nav>
@@ -112,7 +771,7 @@
         <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
           <a href="../articles.html">All Articles</a>
-          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
         </div>
       </div>
       <div class="nav-item"><a href="../about.html">About</a></div>
@@ -120,56 +779,93 @@
     </div>
   </nav>
 
-    
-    <header class="hero">
-        <div class="hero-eyebrow">Category</div>
-        <h1>Thriller <em>Books</em></h1>
-        <p class="hero-sub">1 books in this genre</p>
-    </header>
-    <div class="divider"></div>
+  <!-- ── HERO ── -->
+  <section class="hero" style="padding:4rem 2rem 3.5rem;">
+    <div class="hero-eyebrow">Category</div>
+    <h1>Thriller</h1>
+    <p class="hero-sub">The best thrillers are novels of moral logic — you understand why the villain is wrong even when you see the world through their eyes. These do it best.</p>
+    <span class="hero-badge">2 books in this genre</span>
+  </section>
+
+  <!-- ── DIVIDER ── -->
+  <div style="height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,.3),transparent);max-width:1100px;margin:0 auto;"></div>
+
+  <main>
+    <!-- EDITOR'S PICKS -->
     <section class="section">
-        <div class="cards-grid">
-<div class="book-card">
-<h3><a href="../reviews/the-confluence-doctrine.html">The Confluence Doctrine</a></h3>
-<p class="author">by Alaric Wynn</p>
-<p class="tldr">A framework for understanding how trends converge to create opportunities.</p>
-<a href="../reviews/the-confluence-doctrine.html" class="read-more">Read Review →</a>
+      <h2 class="section-title">Editor's Picks</h2>
+      <div class="cards-grid">
+<div class="card">
+  <div style="margin-bottom:.5rem;"><span class="review-tag">Fiction</span></div>
+  <h3><a href="../reviews/4.html">The Confluence Doctrine</a></h3>
+  <p class="author">by Alaric Wynn</p>
+  <p class="tldr">A framework for understanding how trends converge to create opportunities.</p>
+  <a href="../reviews/4.html" class="btn-primary" style="margin-top:1rem;display:inline-flex;font-size:.8rem;padding:.5rem 1rem;">Read Review →</a>
 </div>
-<div class="book-card">
-<h3><a href="../reviews/disclosure-2026.html">Disclosure 2026</a></h3>
-<p class="author">by Marcus Reeve</p>
-<p class="tldr">Eighteen rated scenarios for alien first contact.</p>
-<a href="../reviews/disclosure-2026.html" class="read-more">Read Review →</a>
+<div class="card">
+  <div style="margin-bottom:.5rem;"><span class="review-tag">Fiction</span></div>
+  <h3><a href="../reviews/11.html">Disclosure 2026</a></h3>
+  <p class="author">by Marcus Reeve</p>
+  <p class="tldr">Eighteen rated scenarios for alien first contact.</p>
+  <a href="../reviews/11.html" class="btn-primary" style="margin-top:1rem;display:inline-flex;font-size:.8rem;padding:.5rem 1rem;">Read Review →</a>
 </div>
-        </div>
+      </div>
     </section>
 
+    <!-- ALL REVIEWS -->
+    <section class="section section-alt">
+      <h2 class="section-title">All Thriller Reviews</h2>
+      <div class="cards-grid">
+<div class="card">
+  <div style="margin-bottom:.5rem;"><span class="review-tag">Fiction</span></div>
+  <h3><a href="../reviews/4.html">The Confluence Doctrine</a></h3>
+  <p class="author">by Alaric Wynn</p>
+  <p class="tldr">A framework for understanding how trends converge to create opportunities.</p>
+  <a href="../reviews/4.html" class="btn-primary" style="margin-top:1rem;display:inline-flex;font-size:.8rem;padding:.5rem 1rem;">Read Review →</a>
+</div>
+<div class="card">
+  <div style="margin-bottom:.5rem;"><span class="review-tag">Fiction</span></div>
+  <h3><a href="../reviews/11.html">Disclosure 2026</a></h3>
+  <p class="author">by Marcus Reeve</p>
+  <p class="tldr">Eighteen rated scenarios for alien first contact.</p>
+  <a href="../reviews/11.html" class="btn-primary" style="margin-top:1rem;display:inline-flex;font-size:.8rem;padding:.5rem 1rem;">Read Review →</a>
+</div>
+      </div>
+    </section>
 
-        <section class="genre-tags">
-            <a href="../category/science-fiction.html" class="genre-tag">Science Fiction</a>
-            <a href="../category/fantasy.html" class="genre-tag">Fantasy</a>
-            <a href="../category/mystery.html" class="genre-tag">Mystery</a>
-            <a href="../category/thriller.html" class="genre-tag">Thriller</a>
-            <a href="../category/nonfiction.html" class="genre-tag">Nonfiction</a>
-            <a href="../category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
-            <a href="../category/self-help.html" class="genre-tag">Self-Help</a>
-            <a href="../category/children.html" class="genre-tag">Children's Fiction</a>
-            <a href="../category/romance.html" class="genre-tag">Romance</a>
-            <a href="../category/dystopian.html" class="genre-tag">Dystopian</a>
-        </section><!-- ── FOOTER ── -->
+    <!-- RELATED GENRES -->
+    <section class="section">
+      <h2 class="section-title">Explore More Genres</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
+<a href="../category/mystery.html" style="padding:.5rem 1rem;background:var(--white);border:1px solid var(--gray-light);border-radius:20px;color:var(--text-body);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .2s;">Mystery</a> <a href="../category/dystopian.html" style="padding:.5rem 1rem;background:var(--white);border:1px solid var(--gray-light);border-radius:20px;color:var(--text-body);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .2s;">Dystopian</a> <a href="../category/fiction.html" style="padding:.5rem 1rem;background:var(--white);border:1px solid var(--gray-light);border-radius:20px;color:var(--text-body);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .2s;">Fiction</a>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="section section-alt">
+      <div class="newsletter-section" style="text-align:center;max-width:600px;margin:0 auto;">
+        <h3>📬 Get the weekly shortlist</h3>
+        <p>One email, Friday mornings. The 2–3 best new books we reviewed that week, plus one curated reading list. No fluff.</p>
+        <form class="newsletter-form" action="#" method="post">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="form-note">Join 1,200+ readers. Unsubscribe anytime.</p>
+      </div>
+    </section>
+  </main>
+
   <footer>
-    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
+    <div class="brand">Bithues <span>Reading Lab</span></div>
     <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
   <script>
     window.onscroll = function() {
       document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
     };
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
