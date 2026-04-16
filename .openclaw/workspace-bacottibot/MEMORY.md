@@ -5,6 +5,17 @@ Mike primarily uses **NERVE OpenClaw Cockpit V1.5.2** as his main interface. All
 
 ---
 
+## 📁 Source File Workflow (established 2026-04-15)
+
+**Mike keeps authoritative originals outside the workspace.** He tells me the path when he wants me to act on a file. I copy it into the workspace myself. I never move or write back to external locations.
+
+This means:
+- Source PDFs, documents, tax files → wherever Mike keeps them (Dropbox, Documents, iCloud, etc.)
+- I work from my workspace copy
+- I can never corrupt or delete the original
+
+---
+
 ## 🚨 CRITICAL: Sensitive Data — NEVER Send Externally
 
 **Date learned: 2026-04-12**
@@ -68,7 +79,39 @@ This was catastrophic. Sensitive business data went to a cloud service (Google D
 | **Investing** | `memory/investing.md` | Dependability 2025 performance, options preferences, market events |
 | **Websites** | `memory/websites.md` | Portfolio, hosting, AdSense, DNS, SEO status |
 | **Backup** | `memory/backup.md` | iCloud workspace backup, cron job, restore instructions |
+| **Mail workflow** | `skills/mail-processor/SKILL.md` | Incoming mail → extract → identify entity → organize → route → remind |
 | **Personal** | `memory/personal.md` | Mike's background, family, Little Mike books, X/social |
+
+---
+
+## Git Repo Size Incident (2026-04-12)
+- Git repo at `/Users/mike/.git` appeared to be 99GB due to embedded website git repos inside the workspace
+- **Actual size after cleanup: 7.5GB** — measurement error in initial report
+- Embedded website git repos (`websites/bithues/Website/.git`, etc.) were being tracked by the home repo, causing triple-counting
+- Cleanup removed the embedded .git directories from tracking; git now only tracks essential text files
+- Git is now scoped to: AGENTS.md, MEMORY.md, skills/, memory/, scripts/, References/ — NOT business PDFs or website content
+
+## Trade Archive System (2026-04-14)
+- Scripts in `scripts/trade-archive/` auto-update dependability.us/dependability-forecast.html and trade-archive.html
+- Workflow: Mike sends new trade → bot updates trades.json + forecast.json → cron at 4:15 PM ET auto-regenerates and pushes
+- Cron job ID: `747eaa63-02b4-41a2-b26c-c7b9216bbc82` (4:15 PM ET weekdays)
+- Data files: `scripts/trade-archive/data/trades.json`, `data/forecast.json`
+- Generator scripts: `generate-trade-archive.py`, `generate-forecast.py`
+
+## Cloudflare Pages — Approved for New Sites (2026-04-15)
+- Mike confirmed: Cloudflare Pages + GitHub integration is the approved stack for his sons' future websites
+- Bot writes files locally → commits to GitHub → Cloudflare Pages auto-deploys
+- Confirmed via Telegram session after bot incorrectly stated GitHub was a registrar (corrected by Mike)
+
+## Cron Jobs — Active (updated 2026-04-14)
+
+| Job | Schedule | What it does | Status | ID |
+|-----|----------|-------------|--------|-----|
+| **Workspace Backup** | 2 AM daily | Backup workspace to iCloud, keep 2 most recent | ✅ | `da9af2a7-e46d-41e6-8964-75a8fcb24149` |
+| **Auto Update** | 1 AM daily | Run `auto-update.sh` | ✅ | — |
+| **Trade Archive Update** | 4:15 PM ET weekdays | Regenerate and push trade pages to GitHub | ✅ | `747eaa63-02b4-41a2-b26c-c7b9216bbc82` |
+| **Check BYB Messages** | Various | Check Google Drive outbox for BacottiYottiBot replies | ✅ | `942d60b2-e6b6-4f82-8507-f6d901db29f4` |
+| **Dependability Forecast Update** | 4 PM ET weekdays | Update dependability-forecast.html | ✅ | `ec4307ea-6c24-4472-a0c7-4d3923f8a8f2` |
 
 ---
 
@@ -199,15 +242,39 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 
 ---
 
-## Pending Tasks (from 2026-04-12)
+## Pending Tasks (updated 2026-04-15)
 
-1. **Media.net application** — not yet applied
+1. **Media.net application** — still pending
 2. **Wiki entity pages** — need to build from tax docs / Master Organizer (see memory/entities.md)
 3. **Find full Bacotti Enterprises Master Organizer PDF** — only page 1 found in tmp/
-4. **Find 2023/2024 tax returns** — 1065, 1120, 990s
-5. **www.bithues.com GitHub Pages** — GitHub still showing DNS warning; DNS is correct, just needs GitHub to re-verify
-6. **Goodreads books** — claim all books for Threshold Publishing author profile (need pseudonyms approved first)
+4. **Book Tracker link** — missing from site-wide nav Reviews dropdown on bithues.com (Mike noted he can't find it)
+5. **Cords of Empire** (Book 3 Otomí series) — "soon to be published" but no release date set
+6. **First active trade for forecast page** — Mike needs to provide active trade details for `dependability-forecast.html`
+7. **OpenClaw doctor** — `openclaw doctor --non-interactive` still needs to be run
+8. **AdSense for successionholdingllc.com** — ready to apply (now has 27+ articles)
+9. **Goodreads pseudonyms** — E.J. Marín and Quantum Chronos still pending approval
 
 ---
 
 _Last updated: 2026-04-10 20:45 EDT_
+
+## Key Lessons Learned
+
+### GitHub/DNS Factual Errors (2026-04-15, Telegram)
+**What happened:** In a Telegram session, the bot confidently stated two technically incorrect facts about website infrastructure, and Mike had to correct both:
+
+1. **"GitHub offers domain registration"** — FALSE. GitHub has domain *configuration* settings in Pages settings but is NOT a domain registrar. Conflated GitHub's domain config with Cloudflare Registrar.
+
+2. **"Just add a CNAME for the apex domain"** — FALSE. A CNAME on an apex/root domain (e.g. `example.com`) is invalid DNS and breaks things. Must use A records (pointing to hosting IPs) or ALIAS/ANAME records.
+
+**Lesson:** When explaining technical infrastructure (DNS, web hosting, domain registration), verify facts before stating them. Don't conflate different services. When unsure, say "I need to verify this" rather than risk giving wrong technical information.
+
+### Tax Documents = Source of Truth (2026-04-12)
+Mike's explicit instruction: **tax filings and documents are the source of truth for business, tax, and accounting tasks.** When in doubt about entity structures, income, losses, or financial figures — read the actual tax documents, not prior memory or notes.
+
+---
+
+## Promoted From Short-Term Memory (2026-04-15)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-04-12.md:114:142 -->
+- - Pushed to GitHub, verified live at www.successionholdingllc.com ## Bithues.com QA Work - Category pages (9): duplicate footers removed, inline CSS removed, nav/footer made consistent with homepage - Homepage (index, articles, press): footer class mismatch fixed, stray navbar class removed, merge conflict markers cleaned - Author pages: subagent timed out — manual check needed - Review pages (56): subagent spawned to add proper nav/hero/footer - Story pages (36): subagent spawned to add proper nav/hero/footer ## Amazon Associates — bithues-20 - Tracking ID: `bithues-20` (StoreID: ventureprise-20) - Applied `?tag=bithues-20` to all bare `amazon.com/dp/` links on bithues - Files updated: reviews/35.html, reviews/, stories/, authors/, articles/ - amzn.to short links already carry affiliate tags — left as-is - Verified live: amazon.com/dp/B0D38W5972?tag=bithues-20 ## Ad Networks - **InfoLinks**: Applied and pending approval (PID 3444842). Will notify by email when activated. - **Media.net**: Not yet applied - **Ezoic**: Not yet applied - **AdSense**: Already set up on all 3 sites (bithues, dependability, succession) ## Open Items - [ ] Bithues review pages — 56 pages need proper nav/hero/footer (agent running) - [ ] Bithues story pages — 36 pages need proper nav/hero/footer (agent running) - [ ] Bithues author pages — manual QA needed (agent timed out) - [ ] Media.net and Ezoic applications still needed - [ ] Wiki entity pages — need to build from tax docs / Master Organizer - [ ] Find full Bacotti Enterprises Master Organizer PDF (only page 1 found in tmp/) [score=0.843 recalls=9 avg=0.383 source=memory/2026-04-12.md:114-142]
