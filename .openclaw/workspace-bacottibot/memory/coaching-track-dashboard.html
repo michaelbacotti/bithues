@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track & Field — Long Distance Practice Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e8e8f0; min-height: 100vh; padding: 24px; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; color: #f0f4ff; }
+  .header .subtitle { color: #8888aa; margin-top: 4px; font-size: 0.9rem; }
+  .header .coach { color: #6366f1; font-weight: 600; margin-top: 8px; }
+
+  .badge-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .badge { background: #1e2030; border: 1px solid #2e3055; border-radius: 8px; padding: 6px 14px; font-size: 0.78rem; color: #8888cc; }
+  .badge.meet { background: #2d1a0e; border-color: #f97316; color: #fb923c; }
+
+  .weeks-container { display: grid; gap: 28px; max-width: 960px; margin: 0 auto; }
+
+  .week-block {}
+  .week-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6366f1; margin-bottom: 10px; }
+  .week-label.meet-week { color: #f97316; }
+
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .day-col { background: #16181f; border: 1px solid #1e2030; border-radius: 10px; overflow: hidden; min-height: 200px; }
+  .day-col.rest { background: #13131a; border-color: #1a1a28; }
+  .day-col.meet { background: #1c1008; border-color: #78350f; }
+
+  .day-header { padding: 8px 10px; border-bottom: 1px solid #1e2030; }
+  .day-name { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #555570; }
+  .day-name.highlight { color: #6366f1; }
+  .day-name.meet-day { color: #f97316; }
+  .day-date { font-size: 0.72rem; color: #8888aa; margin-top: 2px; }
+  .day-type { font-size: 0.6rem; margin-top: 4px; padding: 2px 6px; border-radius: 4px; display: inline-block; font-weight: 600; }
+  .type-practice { background: #1e2040; color: #818cf8; }
+  .type-home { background: #0f2020; color: #34d399; }
+  .type-stretch { background: #201810; color: #fbbf24; }
+  .type-rest { background: #18181f; color: #555570; }
+  .type-meet { background: #2d1a0e; color: #fb923c; }
+
+  .day-content { padding: 10px; }
+  .workout-title { font-size: 0.75rem; font-weight: 700; color: #c8c8e0; margin-bottom: 6px; }
+  .workout-detail { font-size: 0.68rem; color: #7777aa; line-height: 1.5; margin-bottom: 3px; }
+  .workout-detail strong { color: #9999bb; }
+
+  .divider { border: none; border-top: 1px solid #1e2030; margin: 24px 0; }
+
+  .countdown { text-align: center; background: linear-gradient(135deg, #1c0a2e 0%, #0f1a2e 100%); border: 1px solid #2d1a5e; border-radius: 14px; padding: 20px; max-width: 960px; margin: 0 auto 28px; }
+  .countdown p { font-size: 0.75rem; color: #8888cc; text-transform: uppercase; letter-spacing: 0.1em; }
+  .countdown .date { font-size: 1.5rem; font-weight: 800; color: #fb923c; margin-top: 4px; }
+  .countdown .days { font-size: 0.85rem; color: #9999dd; margin-top: 4px; }
+
+  .legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #8888aa; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  .meet-schedule { max-width: 960px; margin: 0 auto 28px; }
+  .meet-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #f97316; margin-bottom: 10px; }
+  .meet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .meet-card { background: #1c1008; border: 1px solid #78350f; border-radius: 10px; padding: 14px; text-align: center; }
+  .meet-card .date { font-size: 0.7rem; color: #8888aa; text-transform: uppercase; letter-spacing: 0.06em; }
+  .meet-card .day { font-size: 1.1rem; font-weight: 800; color: #fb923c; margin-top: 4px; }
+  .meet-card .type { font-size: 0.72rem; color: #5555770; margin-top: 4px; }
+
+  .notes { max-width: 960px; margin: 0 auto; background: #16181f; border: 1px solid #1e2030; border-radius: 12px; padding: 20px; }
+  .notes h3 { font-size: 0.8rem; font-weight: 700; color: #6366f1; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+  .notes ul { list-style: none; display: grid; gap: 8px; }
+  .notes li { font-size: 0.78rem; color: #8888cc; padding-left: 16px; position: relative; }
+  .notes li::before { content: '→'; position: absolute; left: 0; color: #6366f1; }
+
+  @media (max-width: 700px) {
+    .week-grid { grid-template-columns: repeat(4, 1fr); }
+    .meet-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .week-grid { grid-template-columns: repeat(2, 1fr); }
+    .meet-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏃 Middle School Track & Field</h1>
+  <div class="subtitle">Long Distance Running Practice Dashboard</div>
+  <div class="coach">Coach Bacotti</div>
+  <div class="badge-row">
+    <span class="badge">Practice: Mondays & Thursdays</span>
+    <span class="badge">No track — park, trails, hill, baseball fields</span>
+    <span class="badge">Events: Hurdles · Shot Put · Discus · Long Jump</span>
+    <span class="badge meet">🏁 Meets: May 5 · May 8 · May 12</span>
+  </div>
+</div>
+
+<div class="countdown">
+  <p>Next Meet — Coventry Middle School Invitational</p>
+  <div class="date">Tuesday, May 5, 2026</div>
+  <div class="days">19 days away</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div> Practice (Coach-led)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> Home Run (Easy)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fbbf24"></div> Stretch & Strength</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#555570"></div> Rest</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div> Meet Day</div>
+</div>
+
+<!-- MEET SCHEDULE -->
+<div class="meet-schedule">
+  <div class="meet-title">🏁 Spring Meet Schedule</div>
+  <div class="meet-grid">
+    <div class="meet-card">
+      <div class="date">Tuesday</div>
+      <div class="day">May 5</div>
+      <div class="type">Coventry Middle School Invitational</div>
+    </div>
+    <div class="meet-card">
+      <div class="date">Friday</div>
+      <div class="day">May 8</div>
+      <div class="type">Conference Meet</div>
+    </div>
+    <div class="meet-card">
+      <div class="date">Tuesday</div>
+      <div class="day">May 12</div>
+      <div class="type">Final Meet</div>
+    </div>
+  </div>
+</div>
+
+<!-- STANDARD WEEK -->
+<div class="weeks-container">
+  <div class="week-block">
+    <div class="week-label">Standard Training Week — No Meet</div>
+    <div class="week-grid">
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name highlight">Monday</div>
+          <div class="day-type type-practice">⚡ Practice</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Trail Run + Strides</div>
+          <div class="workout-detail"><strong>20–25 min</strong> easy trail run</div>
+          <div class="workout-detail">4 × 30-sec strides during run</div>
+          <div class="workout-detail">Full stretch after</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Tuesday</div>
+          <div class="day-type type-home">🏃 Home Run</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Easy Recovery Run</div>
+          <div class="workout-detail"><strong>20–30 min</strong> very light effort</div>
+          <div class="workout-detail"> conversational pace</div>
+          <div class="workout-detail">Trail, road, or neighborhood</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Wednesday</div>
+          <div class="day-type type-stretch">🧘 Stretch</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Stretch & Strength</div>
+          <div class="workout-detail">5 min dynamic warm-up</div>
+          <div class="workout-detail">15 squats · 10 lunges/leg</div>
+          <div class="workout-detail">20 calf raises · 15 bridges</div>
+          <div class="workout-detail">10 push-ups · 5 min stretching</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name highlight">Thursday</div>
+          <div class="day-type type-practice">⚡ Practice</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Hill Repeats</div>
+          <div class="workout-detail">5 min easy jog warm-up</div>
+          <div class="workout-detail"><strong>6 × hill climb</strong></div>
+          <div class="workout-detail">40 sec hard · 60 sec walk down</div>
+          <div class="workout-detail">5 min cool-down + stretch</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Friday</div>
+          <div class="day-type type-home">🏃 Home Run</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Easy Run</div>
+          <div class="workout-detail"><strong>20 min</strong> easy effort</div>
+          <div class="workout-detail">Keep it light — no hard efforts</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Saturday</div>
+          <div class="day-type type-rest">😴 Rest</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Rest or Walk</div>
+          <div class="workout-detail">No running required</div>
+          <div class="workout-detail">Light walk or stretch if you want</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Sunday</div>
+          <div class="day-type type-rest">😴 Rest</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Rest Day</div>
+          <div class="workout-detail">Full recovery day</div>
+          <div class="workout-detail">Stay active gently if you want</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- MEET WEEK -->
+<div class="weeks-container">
+  <div class="week-block">
+    <div class="week-label meet-week">Meet Week — Race Saturday (lighter load Mon–Thu)</div>
+    <div class="week-grid">
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name highlight">Monday</div>
+          <div class="day-type type-practice">⚡ Practice</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Light Speed Prep</div>
+          <div class="workout-detail"><strong>15 min</strong> easy trail run</div>
+          <div class="workout-detail">4 × 100m at ~70% (good form)</div>
+          <div class="workout-detail">No hard efforts</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Tuesday</div>
+          <div class="day-type type-home">🏃 Home Run</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Very Easy</div>
+          <div class="workout-detail"><strong>20 min</strong> very light</div>
+          <div class="workout-detail">Just circulation</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Wednesday</div>
+          <div class="day-type type-stretch">🧘 Stretch</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Stretch & Strength</div>
+          <div class="workout-detail">Easy — don't overdo it</div>
+          <div class="workout-detail">Focus: hips, calves, hamstrings</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name highlight">Thursday</div>
+          <div class="day-type type-practice">⚡ Practice</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Pre-Meet Shakeout</div>
+          <div class="workout-detail"><strong>10–15 min</strong> easy jog</div>
+          <div class="workout-detail">4 × 50m gentle strides at 60%</div>
+          <div class="workout-detail">Full stretch — extra time here</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Friday</div>
+          <div class="day-type type-home">🏃 Home Run</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Race Prep Run</div>
+          <div class="workout-detail"><strong>15 min</strong> loose & easy</div>
+          <div class="workout-detail">3 × 50m very gentle pick-ups</div>
+          <div class="workout-detail">Stay loose head to toe</div>
+        </div>
+      </div>
+
+      <div class="day-col meet">
+        <div class="day-header">
+          <div class="day-name meet-day">Saturday</div>
+          <div class="day-type type-meet">🏁 Meet Day</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">🏁 Race Day!</div>
+          <div class="workout-detail">Jog 10 min warm before call</div>
+          <div class="workout-detail">Team stretch together</div>
+          <div class="workout-detail">Cool-down jog after your race</div>
+        </div>
+      </div>
+
+      <div class="day-col">
+        <div class="day-header">
+          <div class="day-name">Sunday</div>
+          <div class="day-type type-rest">😴 Rest</div>
+        </div>
+        <div class="day-content">
+          <div class="workout-title">Recovery Day</div>
+          <div class="workout-detail">Rest or light walk only</div>
+          <div class="workout-detail">Great job today — you're done!</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="notes">
+  <h3>Coach's Rules</h3>
+  <ul>
+    <li><strong>Easy days = EASY.</strong> You should be able to hold a full conversation. If you're gasping, slow down.</li>
+    <li><strong>Hard days = structured.</strong> We go harder on Mon/Thu but never to 100%. 80–85% max.</li>
+    <li><strong>Something hurts? Tell me immediately.</strong> No pushing through pain — that leads to more time off.</li>
+    <li><strong>What to bring every practice:</strong> running shoes, water bottle, weather layers</li>
+    <li><strong>Rest days are NOT zero.</strong> Walk, stretch, move gently — but don't train.</li>
+    <li><strong>Thursday practice before a meet = shortest practice of the week.</strong> Fresh legs win races.</li>
+  </ul>
+</div>
+
+</body>
+</html>
