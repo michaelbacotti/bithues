@@ -272,9 +272,32 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 
 _Last updated: 2026-04-16 07:15 EDT_
 
+## Coaching Projects (2026-04-16)
+- **Track dashboard:** `memory/track-dashboard.html` — World Academy, white bg, print-ready, actual meet dates (May 5/8/12)
+- **Robotics dashboard:** `memory/robotics-dashboard.html` — Exabytes season record, white bg, print-ready, championship quality
+Both built with subagent team. Track dashboard has 4 week types: standard, double-meet (May 4-10), single-meet (May 11-17), championship TBA.
+
 ## Key Lessons Learned
 
 ### Subagent Hallucination — Dependability Ownership (2026-04-16)
+**What happened:** A subagent reported MNC Housing LLC held 50% of Dependability Holding in 2024. I relayed this as fact without verification. K-1s showed this was completely false — Dependability has always been Michael 80% / Ventureprise 20%.
+
+**Why it happened:** Subagent had no checkpoint requirement. It "felt" right based on vague pattern-matching and didn't verify against actual documents.
+
+**What works:** The pattern used on 2026-04-16 night sweep:
+- STEP 1: Write checkpoint to output file BEFORE reading anything
+- STEP 2: Read actual documents and append to output file
+- STEP 3: STEP 4 VERIFY — confirm output file exists and has real content
+- Small, focused scope per subagent (one topic, not everything)
+- Always use local copies of files when available (avoids iCloud stub deadlocks)
+- Mike's rule: Only filed returns ("Completed Copy", "Review Copy") are authoritative — draft organizers are not truth
+
+### Dashboard Building (2026-04-16)
+- Mike prefers white/light background for printability — dark dashboards only work on screen
+- When building dashboards, ask about color scheme upfront and ask "print-ready?"
+- Two dashboards built in parallel: track (print white) + robotics (print white)
+- Coach name = "World Academy" per Mike's preference
+- Actual meet schedule (times, locations) beats placeholder data
 **What happened:** A subagent reported MNC Housing LLC held 50% of Dependability Holding in 2024. I relayed this as fact without verification. K-1s showed this was completely false — Dependability has always been Michael 80% / Ventureprise 20%.
 
 **Why it happened:** Subagent had no checkpoint requirement. It "felt" right based on vague pattern-matching and didn't verify against actual documents.

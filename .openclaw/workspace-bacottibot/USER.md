@@ -5,7 +5,16 @@
 - **Timezone:** America/New_York (EST/EDT)
 - **Lived:** NY, TX, AK, TN, and other places — mobile background
 
-## Background
+## Coaching
+- **Track & Field Coach** — World Academy, middle school, long distance runners (practice Mon/Thu)
+  - Meets: May 5 (Fairgrounds, 3:45 PM), May 8 (Merrimack, 3:30 PM), May 12 (Fairgrounds, 3:45 PM)
+  - No track — uses park, trails, hill, baseball fields
+  - Dashboard: `memory/track-dashboard.html`
+- **VEX IQ Robotics Coach** — Team: Exabytes (603E), final season 2025-2026
+  - Members: Mason, Evangeline, Arjun, Michael Jr. (consulting)
+  - Won awards in every competition (9 awards, 3 competitions)
+  - Dashboard: `memory/robotics-dashboard.html`
+  - Speech draft: `memory/Exabytes-farewell-speech.md`
 - **Bacotti Inc.** — family office, C-Corp
   - Formerly Ventureprise Corporation
   - Management entity for all family business dealings
