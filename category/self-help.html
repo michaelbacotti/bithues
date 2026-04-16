@@ -9,44 +9,113 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="canonical" href="https://www.bithues.com/category/self-help.html"></head>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="canonical" href="https://www.bithues.com/category/self-help.html">
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
+</head>
 <body>
 
   <!-- ── NAV ── -->
-  <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <nav>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
   </nav>
 
@@ -59,44 +128,21 @@
 
   <!-- ── CATEGORY CHIPS ── -->
   <div class="chips">
-    <a href="category/self-help.html">Self-Help</a>
-    <a href="category/science-fiction.html">Sci-Fi</a>
-    <a href="category/fantasy.html">Fantasy</a>
-    <a href="category/nonfiction.html">Nonfiction</a>
-    <a href="category/thriller.html">Thriller</a>
-    <a href="category/biography.html">Biography</a>
-    <a href="category/business.html">Business</a>
+    <a href="../category/self-help.html">Self-Help</a>
+    <a href="../category/science-fiction.html">Sci-Fi</a>
+    <a href="../category/fantasy.html">Fantasy</a>
+    <a href="../category/nonfiction.html">Nonfiction</a>
+    <a href="../category/thriller.html">Thriller</a>
+    <a href="../category/biography.html">Biography</a>
+    <a href="../category/business.html">Business</a>
   </div>
 
-  <!-- ── BOOK<div class="seo-intro">
-<p>Self-help books have a reputation problem — and it's mostly deserved. Too many promise transformation in 21 days, offer vague platitudes wrapped in motivational jargon, and leave you feeling worse than before you started. But the genre's bad apples don't represent the whole harvest. The best self-help books don't just motivate — they give you <strong>frameworks that actually work</strong>. They isolate a specific problem — productivity, anxiety, money mindset, habit formation — and attack it with evidence-backed strategies you can implement today.</p>
-<p>What separates a genuinely useful self-help book from a forgettable one often comes down to the author's credibility and the specificity of their advice. James Clear draws on atomic physics metaphors and behavioral science to explain habit loops. Cal Newport dismantled the myth of multitasking and rebuilt productivity around deep work sessions. Morgan Housel made finance feel like psychology rather than accounting. These authors earn your attention because they've done the hard work of translating research into readable, actionable insight.</p>
-<p>Whether you're trying to build better routines, manage your money more intelligently, or simply understand yourself a little better, the self-help shelf has something real to offer — if you know where to look. Browse our curated reviews below, or jump to our <a href="best-self-help-books.html">best self-help books guide</a> for deeper analysis.</p>
-</div>
-
-<div class="best-of">
-<h2>🌟 Best Self-Help Books Worth Reading</h2>
-<p>These are the self-help titles that have stood the test of time and reader scrutiny. Not every book will resonate with every person — that's the nature of a genre built on personal transformation — but each of these has enough substance to justify the investment.</p>
-<ul>
-<li><strong>Atomic Habits</strong> — James Clear · <a href="https://www.amazon.com/dp/B07D7W41B1/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The 7 Habits of Highly Effective People</strong> — Stephen R. Covey · <a href="https://www.amazon.com/dp/1982137274/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Thinking, Fast and Slow</strong> — Daniel Kahneman · <a href="https://www.amazon.com/dp/0374533555/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Deep Work</strong> — Cal Newport · <a href="https://www.amazon.com/dp/B00X4W8T76/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Psychology of Money</strong> — Morgan Housel · <a href="https://www.amazon.com/dp/0857197681/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Mindset: The New Psychology of Success</strong> — Carol S. Dweck · <a href="https://www.amazon.com/dp/0345472322/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Power of Habit</strong> — Charles Duhigg · <a href="https://www.amazon.com/dp/081298160X/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Essentialism: The Disciplined Pursuit of Less</strong> — Greg McKeown · <a href="https://www.amazon.com/dp/0804179405/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>How to Win Friends and Influence People</strong> — Dale Carnegie · <a href="https://www.amazon.com/dp/0671027034/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Start with Why</strong> — Simon Sinek · <a href="https://www.amazon.com/dp/0241958229/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-</ul>
-</div>
-
-GRID ── -->
+  <!-- ── BOOK GRID ── -->
   <section class="section section-alt">
     <h2 class="section-title">💡 Self-Help</h2>
     <div class="cards-grid">
       <div class="card">
-        <h3><a href="reviews/30.html">Discovering Washington DC</a></h3>
+        <h3><a href="../reviews/30.html">Discovering Washington DC</a></h3>
         <p class="author">by Evelyn Carter</p>
         <p class="tldr">Beyond the monuments—a guide to the real DC. Stroll Georgetown's cobblestones, tap your feet to jazz, taste a half-smoke...</p>
       </div>
@@ -105,13 +151,13 @@ GRID ── -->
 
   <!-- ── ALL REVIEWS ── -->
   <div class="all-reviews">
-    <a href="reviews/index.html">View all 35 reviews →</a>
+    <a href="../reviews/index.html">View all 35 reviews →</a>
   </div>
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

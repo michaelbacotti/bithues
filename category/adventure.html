@@ -9,44 +9,113 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="canonical" href="https://www.bithues.com/category/adventure.html"></head>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="canonical" href="https://www.bithues.com/category/adventure.html">
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
+</head>
 <body>
 
   <!-- ── NAV ── -->
-  <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <nav>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
   </nav>
 
@@ -59,38 +128,18 @@
 
   <!-- ── CATEGORY CHIPS ── -->
   <div class="chips">
-    <a href="category/self-help.html">Self-Help</a>
-    <a href="category/science-fiction.html">Sci-Fi</a>
-    <a href="category/fantasy.html">Fantasy</a>
-    <a href="category/nonfiction.html">Nonfiction</a>
-    <a href="category/thriller.html">Thriller</a>
-    <a href="category/biography.html">Biography</a>
-    <a href="category/business.html">Business</a>
+    <a href="../category/self-help.html">Self-Help</a>
+    <a href="../category/science-fiction.html">Sci-Fi</a>
+    <a href="../category/fantasy.html">Fantasy</a>
+    <a href="../category/nonfiction.html">Nonfiction</a>
+    <a href="../category/thriller.html">Thriller</a>
+    <a href="../category/biography.html">Biography</a>
+    <a href="../category/business.html">Business</a>
   </div>
 
   
 <div class="genre-intro">
 <p class="genre-intro">Adventure fiction is as old as storytelling itself — the call into the unknown, the hero who answers despite every reason not to. These are stories of movement and risk: crossing trackless wilderness, navigating hostile territory, making it out alive against the odds. The geography and the stakes are extreme, but the underlying story is deeply human: what we endure for the people we protect, and what we discover about ourselves when ordinary limits no longer apply.</p>
-</div>
-
-<div class="seo-intro">
-<p>Adventure fiction is the genre of going — into the unknown, against odds, toward something worth reaching. Whether it's a mountaineer climbing K2, a crew of misfits crossing an ocean in a leaking boat, or a teenager surviving the wilderness after a plane crash, adventure stories are really about what a person is made of when everything familiar falls away. The landscape becomes a mirror.</p>
-<p>Great adventure writing has a dual purpose: it delivers visceral, propulsive storytelling while also teaching readers something real about the world — about geography, survival, human endurance, the history of exploration. Jack London wasn't just writing action; he was examining the interplay between civilization and instinct. Ernest Hemingway's characters carried the weight of their own psychological terrain, not just the physical mountains they climbed.</p>
-<p>The adventure genre rewards readers who want to feel the fear and triumph vicariously while learning something true about human limits. Explore our full collection below.</p>
-</div>
-
-<div class="best-of">
-<h2>🌟 Best Adventure Books Worth Reading</h2>
-<p>Adventure fiction tests people against the world's most unforgiving conditions — mountains, oceans, deserts, ice — and the best adventure stories reveal character in the process. These books have defined the genre for generations of readers.</p>
-<ul>
-<li><strong>The Call of the Wild</strong> — Jack London · <a href="https://www.amazon.com/dp/0451527314/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Into the Wild</strong> — Jon Krakauer · <a href="https://www.amazon.com/dp/0447483881/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Touching the Void</strong> — Joe Simpson · <a href="https://www.amazon.com/dp/0385721876/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Old Man and the Sea</strong> — Ernest Hemingway · <a href="https://www.amazon.com/dp/0684801223/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Moby Dick</strong> — Herman Melville · <a href="https://www.amazon.com/dp/0142437247/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Life of Pi</strong> — Yann Martel · <a href="https://www.amazon.com/dp/0770437365/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Shackleton's Way</strong> — Margot Morrell · <a href="https://www.amazon.com/dp/0140264438/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-</ul>
 </div>
 
 <section class="book-grid">
@@ -118,12 +167,12 @@
     <h2 class="section-title">⚔️ Adventure</h2>
     <div class="cards-grid">
       <div class="card">
-        <h3><a href="reviews/25.html">Blood Ember</a></h3>
+        <h3><a href="../reviews/25.html">Blood Ember</a></h3>
         <p class="author">by Jorak Veldt</p>
         <p class="tldr">Three parts trace how survival habits harden into protocol, law, and chant. From fire to spear to echo...</p>
       </div>
       <div class="card">
-        <h3><a href="reviews/24.html">Rules of Survival</a></h3>
+        <h3><a href="../reviews/24.html">Rules of Survival</a></h3>
         <p class="author">by Jorak Veldt</p>
         <p class="tldr">Roughly one million years ago, a boy learns the band's rules—water order, ember law, watch—and pays for them in skin...</p>
       </div>
@@ -132,13 +181,13 @@
 
   <!-- ── ALL REVIEWS ── -->
   <div class="all-reviews">
-    <a href="reviews/index.html">View all 35 reviews →</a>
+    <a href="../reviews/index.html">View all 35 reviews →</a>
   </div>
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

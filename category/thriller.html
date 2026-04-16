@@ -9,77 +9,126 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
   <link rel="canonical" href="https://www.bithues.com/category/thriller.html">
+
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <header>
-              <!-- ── NAV ── -->
+
   <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html" class="active">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
-  </nav>        </header>
+  </nav>
 
-        <section class="page-header">
-            <h1 class="header">Thriller Books</h1>
-            <p>1 books in this genre</p>
-        </section>
-
-        <div class="seo-intro">
-<p>Thriller fiction is the genre that refuses to let you look away. Whether it's a serial killer stalking the Pacific Northwest, a corporate conspiracy reaching into the highest levels of government, or a family secrets埋在地下 thirty years, the thriller's job is to create dread and then deliver on it. The best thrillers do this with craft — tight plotting, unreliable narrators, and the kind of prose that makes you read one more chapter before bed, even though you have to be up in five hours.</p>
-<p>The genre has fragmented into rich subgenres. Psychological thrillers focus on the inner life — obsession, manipulation, memory — more than blood. Legal and political thrillers pull you into boardrooms and courtrooms where every sentence is a chess move. Cozy mysteries offer puzzle-solving in a low-stakes village setting. Literary thrillers like Tana French's work treat the genre as a vehicle for examining identity, trauma, and community. Each has its own contract with the reader.</p>
-<p>The test of a good thriller isn't just whether it scares you — it's whether, when you finish, you want to go back and re-read knowing what you know now. That rarest of thrillers reveals new layers on re-reading. Find the best thrillers for your next late-night read in our <a href="best-thriller-books.html">best thriller books guide</a>.</p>
-</div>
-
-<div class="best-of">
-<h2>🌟 Best Thriller Books Worth Reading</h2>
-<p>Thriller fiction demands that you keep turning pages. These titles deliver — with plotting that's tight enough to strangle, characters complex enough to haunt you, and endings you genuinely won't see coming. Some are disturbing. All are compelling.</p>
-<ul>
-<li><strong>Gone Girl</strong> — Gillian Flynn · <a href="https://www.amazon.com/dp/0307588378/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Silent Patient</strong> — Alex Michaelides · <a href="https://www.amazon.com/dp/1250303046/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Girl with the Dragon Tattoo</strong> — Stieg Larsson · <a href="https://www.amazon.com/dp/0307455166/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Behind Closed Doors</strong> — B.A. Paris · <a href="https://www.amazon.com/dp/1250122734/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Woman in the Window</strong> — A.J. Finn · <a href="https://www.amazon.com/dp/0062678118/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Sharp Objects</strong> — Gillian Flynn · <a href="https://www.amazon.com/dp/0307345770/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>In the Woods</strong> — Tana French · <a href="https://www.amazon.com/dp/0143035985/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Hunt</strong> — Ragnar Jónasson · <a href="https://www.amazon.com/dp/1912374167/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-</ul>
-</div>
-
-<section class="book-grid">
+    
+    <header class="hero">
+        <div class="hero-eyebrow">Category</div>
+        <h1>Thriller <em>Books</em></h1>
+        <p class="hero-sub">1 books in this genre</p>
+    </header>
+    <div class="divider"></div>
+    <section class="section">
+        <div class="cards-grid">
 <div class="book-card">
 <h3><a href="../reviews/the-confluence-doctrine.html">The Confluence Doctrine</a></h3>
 <p class="author">by Alaric Wynn</p>
@@ -92,43 +141,25 @@
 <p class="tldr">Eighteen rated scenarios for alien first contact.</p>
 <a href="../reviews/disclosure-2026.html" class="read-more">Read Review →</a>
 </div>
-</section>
+        </div>
+    </section>
 
 
         <section class="genre-tags">
-            <a href="category/science-fiction.html" class="genre-tag">Science Fiction</a>
-            <a href="category/fantasy.html" class="genre-tag">Fantasy</a>
-            <a href="category/mystery.html" class="genre-tag">Mystery</a>
-            <a href="category/thriller.html" class="genre-tag">Thriller</a>
-            <a href="category/nonfiction.html" class="genre-tag">Nonfiction</a>
-            <a href="category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
-            <a href="category/self-help.html" class="genre-tag">Self-Help</a>
-            <a href="category/children.html" class="genre-tag">Children's Fiction</a>
-            <a href="category/romance.html" class="genre-tag">Romance</a>
-            <a href="category/dystopian.html" class="genre-tag">Dystopian</a>
-        </section>
-
-        
-  <!-- ── FOOTER ── -->
+            <a href="../category/science-fiction.html" class="genre-tag">Science Fiction</a>
+            <a href="../category/fantasy.html" class="genre-tag">Fantasy</a>
+            <a href="../category/mystery.html" class="genre-tag">Mystery</a>
+            <a href="../category/thriller.html" class="genre-tag">Thriller</a>
+            <a href="../category/nonfiction.html" class="genre-tag">Nonfiction</a>
+            <a href="../category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
+            <a href="../category/self-help.html" class="genre-tag">Self-Help</a>
+            <a href="../category/children.html" class="genre-tag">Children's Fiction</a>
+            <a href="../category/romance.html" class="genre-tag">Romance</a>
+            <a href="../category/dystopian.html" class="genre-tag">Dystopian</a>
+        </section><!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
-  </footer>
-
-  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-  <script>
-    window.onscroll = function() {
-      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
-    };
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

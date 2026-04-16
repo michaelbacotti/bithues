@@ -9,78 +9,126 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
   <link rel="canonical" href="https://www.bithues.com/category/biography.html">
+
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <header>
-          <!-- ── NAV ── -->
+
   <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html" class="active">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
   </nav>
-        </header>
 
-        <section class="page-header">
-            <h1 class="header">Biography Books</h1>
-            <p>Lives worth reading</p>
-        </section>
-
-        <div class="seo-intro">
-<p>A biography's job is deceptively simple: tell someone else's life as if it were your own story. But the best biographies make you feel like you're living inside the person you're reading about — feeling their doubts, tasting their victories, understanding why they made the choices that defined them. A great biography is an exercise in empathy that also happens to be educational.</p>
-<p>The best biography subjects aren't necessarily the most famous — they're the ones whose lives illuminate something universal. Walter Isaacson's <em>Steve Jobs</em> works not because everyone loves Apple but because Jobs's obsession with perfection and his tortured relationships reveal something true about creativity and power. Tara Westover's <em>Educated</em> isn't just about a girl who escaped a survivalist family — it's about identity, family, and what we owe our past selves.</p>
-<p>Good biography reading requires a willingness to be changed. These aren't passive experiences. Browse our full biography reviews below, or see our <a href="best-biography-books.html">best biography books guide</a> for curated recommendations.</p>
-</div>
-
-<div class="best-of">
-<h2>🌟 Best Biography Books Worth Reading</h2>
-<p>A great biography makes you understand not just what someone did, but why it mattered — and what it cost them. These are the memoirs and biographies that have earned their place on the shelf, written by authors who did the difficult work of earning their subjects' trust.</p>
-<ul>
-<li><strong>Steve Jobs</strong> — Walter Isaacson · <a href="https://www.amazon.com/dp/1451648537/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Elon Musk</strong> — Walter Isaacson · <a href="https://www.amazon.com/dp/0063282195/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Becoming</strong> — Michelle Obama · <a href="https://www.amazon.com/dp/1524763138/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Educated</strong> — Tara Westover · <a href="https://www.amazon.com/dp/0399590501/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Born a Crime</strong> — Trevor Noah · <a href="https://www.amazon.com/dp/0399588175/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Bad Blood: Secrets and Lies in a Silicon Valley Startup</strong> — John Carreyrou · <a href="https://www.amazon.com/dp/0527766634/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Shoe Dog</strong> — Phil Knight · <a://www.amazon.com/dp/1476716216/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Open</strong> — Andre Agassi · <a href="https://www.amazon.com/dp/0300759478/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-</ul>
-</div>
-
-<section class="book-grid">
+    
+    <header class="hero">
+        <div class="hero-eyebrow">Category</div>
+        <h1>Biography <em>Books</em></h1>
+        <p class="hero-sub">Lives worth reading</p>
+    </header>
+    <div class="divider"></div>
+    <section class="section">
+        <div class="cards-grid">
 <div class="book-card">
 <h3><a href="../reviews/mythical-menagerie.html">Mythical Menagerie</a></h3>
 <p class="author">by E. Marlowe</p>
@@ -93,27 +141,28 @@
 <p class="tldr">Small-town roots, complicated harvests.</p>
 <a href="../reviews/the-orchardist-harvest.html" class="read-more">Read Review →</a>
 </div>
-</section>
+        </div>
+    </section>
 
 
         <section class="genre-tags">
-            <a href="category/science-fiction.html" class="genre-tag">Science Fiction</a>
-            <a href="category/fantasy.html" class="genre-tag">Fantasy</a>
-            <a href="category/mystery.html" class="genre-tag">Mystery</a>
-            <a href="category/thriller.html" class="genre-tag">Thriller</a>
-            <a href="category/nonfiction.html" class="genre-tag">Nonfiction</a>
-            <a href="category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
-            <a href="category/self-help.html" class="genre-tag">Self-Help</a>
-            <a href="category/children.html" class="genre-tag">Children's Fiction</a>
-            <a href="category/romance.html" class="genre-tag">Romance</a>
-            <a href="category/dystopian.html" class="genre-tag">Dystopian</a>
+            <a href="../category/science-fiction.html" class="genre-tag">Science Fiction</a>
+            <a href="../category/fantasy.html" class="genre-tag">Fantasy</a>
+            <a href="../category/mystery.html" class="genre-tag">Mystery</a>
+            <a href="../category/thriller.html" class="genre-tag">Thriller</a>
+            <a href="../category/nonfiction.html" class="genre-tag">Nonfiction</a>
+            <a href="../category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
+            <a href="../category/self-help.html" class="genre-tag">Self-Help</a>
+            <a href="../category/children.html" class="genre-tag">Children's Fiction</a>
+            <a href="../category/romance.html" class="genre-tag">Romance</a>
+            <a href="../category/dystopian.html" class="genre-tag">Dystopian</a>
         </section>
 
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>&copy; <span id="year"></span> Bithues Reading Lab &middot; <a href="press.html">Press</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="privacy.html">Privacy</a></p>
+    <p>&copy; <span id="year"></span> Bithues Reading Lab &middot; <a href="../press.html">Press</a> &middot; <a href="../contact.html">Contact</a> &middot; <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>

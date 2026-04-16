@@ -9,44 +9,113 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="canonical" href="https://www.bithues.com/category/science.html"></head>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="canonical" href="https://www.bithues.com/category/science.html">
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
+</head>
 <body>
 
   <!-- ── NAV ── -->
-  <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <nav>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
   </nav>
 
@@ -59,13 +128,13 @@
 
   <!-- ── CATEGORY CHIPS ── -->
   <div class="chips">
-    <a href="category/self-help.html">Self-Help</a>
-    <a href="category/science-fiction.html">Sci-Fi</a>
-    <a href="category/fantasy.html">Fantasy</a>
-    <a href="category/nonfiction.html">Nonfiction</a>
-    <a href="category/thriller.html">Thriller</a>
-    <a href="category/biography.html">Biography</a>
-    <a href="category/business.html">Business</a>
+    <a href="../category/self-help.html">Self-Help</a>
+    <a href="../category/science-fiction.html">Sci-Fi</a>
+    <a href="../category/fantasy.html">Fantasy</a>
+    <a href="../category/nonfiction.html">Nonfiction</a>
+    <a href="../category/thriller.html">Thriller</a>
+    <a href="../category/biography.html">Biography</a>
+    <a href="../category/business.html">Business</a>
   </div>
 
   
@@ -104,22 +173,22 @@
     <h2 class="section-title">📚 Science & Physics</h2>
     <div class="cards-grid">
       <div class="card">
-        <h3><a href="reviews/15.html">Physics of Insight</a></h3>
+        <h3><a href="../reviews/15.html">Physics of Insight</a></h3>
         <p class="author">by Quantum Chronos</p>
         <p class="tldr">What if genius isn't rare—it's hidden inside every mind, waiting for the right switch?...</p>
       </div>
       <div class="card">
-        <h3><a href="reviews/18.html">Quantum Soul Echoes</a></h3>
+        <h3><a href="../reviews/18.html">Quantum Soul Echoes</a></h3>
         <p class="author">by Quantum Chronos</p>
         <p class="tldr">What if consciousness is what spacetime remembers? Two models synthesized in this rigorous exploration....</p>
       </div>
       <div class="card">
-        <h3><a href="reviews/17.html">Consciousness in Higher Dimensional Spacetime</a></h3>
+        <h3><a href="../reviews/17.html">Consciousness in Higher Dimensional Spacetime</a></h3>
         <p class="author">by Quantum Chronos</p>
         <p class="tldr">What if consciousness doesn't exist in the same spacetime as the body? A radical extension of Einstein's relativity into the domain of mind....</p>
       </div>
       <div class="card">
-        <h3><a href="reviews/16.html">The Physics of Time</a></h3>
+        <h3><a href="../reviews/16.html">The Physics of Time</a></h3>
         <p class="author">by Quantum Chronos</p>
         <p class="tldr">A groundbreaking exploration: what if the universe is a block of spacetime containing all moments, yet consciousness navigates through it?...</p>
       </div>
@@ -128,13 +197,13 @@
 
   <!-- ── ALL REVIEWS ── -->
   <div class="all-reviews">
-    <a href="reviews/index.html">View all 35 reviews →</a>
+    <a href="../reviews/index.html">View all 35 reviews →</a>
   </div>
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

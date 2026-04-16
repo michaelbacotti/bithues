@@ -9,79 +9,126 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
   <link rel="canonical" href="https://www.bithues.com/category/fantasy.html">
+
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <header>
-              <!-- ── NAV ── -->
+
   <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html" class="active">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
-  </nav>        </header>
+  </nav>
 
-        <section class="page-header">
-            <h1 class="header">Fantasy Books</h1>
-            <p>4 books in this genre</p>
-        </section>
-
-        <div class="seo-intro">
-<p>Great fantasy does more than worldbuild — it uses impossible settings to illuminate real human struggles. A wizard in a crumbling tower is really a story about grief. A magic school is really about belonging and finding your people. A chosen-one prophecy is really about whether destiny is real or whether we make our own meaning. The best fantasy has always known this. It's never really been about the dragons.</p>
-<p>The fantasy genre has exploded in range and ambition over the past two decades. Where once Tolkien imitators dominated the shelf, now readers can choose from literary fantasy that reads like poetry, grimdark fantasy that makes Game of Thrones look quaint, cozy fantasy focused on baking and community, and epic multi-volume series that span millennia of invented history. The genre has something for every emotional register.</p>
-<p>For readers who want fantasy that respects their intelligence, look no further than authors who use their invented worlds to examine real questions — power, justice, loyalty, identity, what we owe each other. Start with our <a href="best-fantasy-books.html">best fantasy books guide</a>, then dive into our full review collection.</p>
-</div>
-
-<div class="best-of">
-<h2>🌟 Best Fantasy Books Worth Reading</h2>
-<p>Fantasy has never been more diverse or more ambitious. These titles represent the genre's best — books that worldbuild with purpose, characters that feel like they could walk off the page, and stories that ask what magic would actually cost us.</p>
-<ul>
-<li><strong>The Name of the Wind</strong> — Patrick Rothfuss · <a href="https://www.amazon.com/dp/0756404746/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Way of Kings</strong> — Brandon Sanderson · <a href="https://www.amazon.com/dp/0765365278/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Lies of Locke Lamora</strong> — Scott Lynch · <a href="https://www.amazon.com/dp/0553419021/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The First Law Trilogy</strong> — Joe Abercrombie · <a href="https://www.amazon.com/dp/0316387343/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Lord of the Rings</strong> — J.R.R. Tolkien · <a href="https://www.amazon.com/dp/0544003411/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>A Game of Thrones</strong> — George R.R. Martin · <a href="https://www.amazon.com/dp/0553593543/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Poppy War</strong> — R.F. Kuang · <a href="https://www.amazon.com/dp/0062662577/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Fifth Season</strong> — N.K. Jemisin · <a href="https://www.amazon.com/dp/0316229296/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Hobbit</strong> — J.R.R. Tolkien · <a href="https://www.amazon.com/dp/054792822X/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Circe</strong> — Madeline Miller · <a href="https://www.amazon.com/dp/0062561022/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-</ul>
-</div>
-
-<section class="book-grid">
+    
+    <header class="hero">
+        <div class="hero-eyebrow">Category</div>
+        <h1>Fantasy <em>Books</em></h1>
+        <p class="hero-sub">4 books in this genre</p>
+    </header>
+    <div class="divider"></div>
+    <section class="section">
+        <div class="cards-grid">
 <div class="book-card">
 <h3><a href="../reviews/the-quiet-hours.html">The Quiet Hours</a></h3>
 <p class="author">by Elara Moss</p>
@@ -112,43 +159,25 @@
 <p class="tldr">The first fire brings the first cost.</p>
 <a href="../reviews/blood-ember.html" class="read-more">Read Review →</a>
 </div>
-</section>
+        </div>
+    </section>
 
 
         <section class="genre-tags">
-            <a href="category/science-fiction.html" class="genre-tag">Science Fiction</a>
-            <a href="category/fantasy.html" class="genre-tag">Fantasy</a>
-            <a href="category/mystery.html" class="genre-tag">Mystery</a>
-            <a href="category/thriller.html" class="genre-tag">Thriller</a>
-            <a href="category/nonfiction.html" class="genre-tag">Nonfiction</a>
-            <a href="category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
-            <a href="category/self-help.html" class="genre-tag">Self-Help</a>
-            <a href="category/children.html" class="genre-tag">Children's Fiction</a>
-            <a href="category/romance.html" class="genre-tag">Romance</a>
-            <a href="category/dystopian.html" class="genre-tag">Dystopian</a>
-        </section>
-
-        
-  <!-- ── FOOTER ── -->
+            <a href="../category/science-fiction.html" class="genre-tag">Science Fiction</a>
+            <a href="../category/fantasy.html" class="genre-tag">Fantasy</a>
+            <a href="../category/mystery.html" class="genre-tag">Mystery</a>
+            <a href="../category/thriller.html" class="genre-tag">Thriller</a>
+            <a href="../category/nonfiction.html" class="genre-tag">Nonfiction</a>
+            <a href="../category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
+            <a href="../category/self-help.html" class="genre-tag">Self-Help</a>
+            <a href="../category/children.html" class="genre-tag">Children's Fiction</a>
+            <a href="../category/romance.html" class="genre-tag">Romance</a>
+            <a href="../category/dystopian.html" class="genre-tag">Dystopian</a>
+        </section><!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
-  </footer>
-
-  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-  <script>
-    window.onscroll = function() {
-      document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
-    };
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>© <span id="year"></span> Bithues Reading Lab · <a href="press.html">Press</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a></p>
+    <p>© <span id="year"></span> Bithues Reading Lab · <a href="../press.html">Press</a> · <a href="../contact.html">Contact</a> · <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

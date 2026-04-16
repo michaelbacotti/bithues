@@ -51,9 +51,77 @@
     .price.price-free a { color: #2ecc71; }
     .price:not(.price-paid):not(.price-free) a { color: #556; }
   </style>
+<style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+    .dropdown-divider { border-top: 1px solid rgba(200,169,110,.15); margin: .25rem 0; }
+</style>
 </head>
 <body>
-  <nav class="navbar">
+  <nav>
     <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
       <div class="nav-item"><a href="index.html">Home</a></div>
@@ -532,6 +600,14 @@ $0.00
 or $0.99 to buy</a></td>
   </tr>
 <tr>
+    <td class="asin">B0F2PZWSYG</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Unknown</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">? reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price "><a href="https://www.amazon.com/dp/B0F2PZWSYG?tag=bithues-20" target="_blank" rel="noopener">—</a></td>
+  </tr>
+<tr>
     <td class="asin">B0GR7R6HT1</td>
     <td class="title-wrap"><div class="title" title="Microbiology ABC's: Tiny Cells and Microbes from A to Z">Microbiology ABC's: Tiny Cells and Microbes from A to Z</div><div class="author">by Michael Bacotti (Author)</div></td>
     <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
@@ -542,6 +618,22 @@ or $0.99 to buy</a></td>
 
 $0.00 
 or $5.00 to buy</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPZZ4VSK</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Rowan Ashcroft (Author),</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-free"><a href="https://www.amazon.com/dp/B0GPZZ4VSK?tag=bithues-20" target="_blank" rel="noopener">$0.00</a></td>
+  </tr>
+<tr>
+    <td class="asin">B0GPZ6YX68</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Unknown</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">? reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price "><a href="https://www.amazon.com/dp/B0GPZ6YX68?tag=bithues-20" target="_blank" rel="noopener">—</a></td>
   </tr>
 <tr>
     <td class="asin">B0BRDJ9PW8</td>
@@ -592,6 +684,14 @@ $0.00
 or $0.99 to buy</a></td>
   </tr>
 <tr>
+    <td class="asin">B0FXF3DY9V</td>
+    <td class="title-wrap"><div class="title" title="???">???</div><div class="author">by Maris K. Vector (Author),</div></td>
+    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
+    <td class="bsr ">—</td>
+    <td class="cat">—</td>
+    <td class="price price-free"><a href="https://www.amazon.com/dp/B0FXF3DY9V?tag=bithues-20" target="_blank" rel="noopener">$0.00</a></td>
+  </tr>
+<tr>
     <td class="asin">B0D38W5972</td>
     <td class="title-wrap"><div class="title" title="Men of the Three Seas">Men of the Three Seas</div><div class="author">by Leander Vassos (Author)</div></td>
     <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">0 reviews</div></td>
@@ -602,14 +702,6 @@ or $0.99 to buy</a></td>
 
 $0.00 
 or $2.99 to buy</a></td>
-  </tr>
-<tr>
-    <td class="asin">B0F2ZHBK46</td>
-    <td class="title-wrap"><div class="title" title="Xaltocan: A Historical Narrative of Tribute, War, and Survival (The Otomí Series Book 2)">Xaltocan: A Historical Narrative of Tribute, War, and Survival (The Otomí Series Book 2)</div><div class="author">by E. J. Marin</div></td>
-    <td><div class="stars"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#556677;flex-shrink:0"></span> <span>—</span></div><div class="reviews-count">? reviews</div></td>
-    <td class="bsr ">—</td>
-    <td class="cat">—</td>
-    <td class="price price-paid"><a href="https://www.amazon.com/dp/B0F2ZHBK46?tag=bithues-20" target="_blank" rel="noopener">Check Amazon</a></td>
   </tr>
         </tbody>
       </table>

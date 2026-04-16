@@ -9,78 +9,126 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
   <link rel="canonical" href="https://www.bithues.com/category/business.html">
+
+  <style>
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: .03em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 0; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-item .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200,169,110,.25);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 8px 8px;
+      min-width: 180px;
+      padding: .5rem 0;
+      box-shadow: 0 8px 24px rgba(10,22,40,.3);
+      z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block;
+      padding: .6rem 1rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: .825rem;
+      font-weight: 400;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .dropdown a:hover { background: var(--navy-light); color: var(--gold); }
+  </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <header>
-          <!-- ── NAV ── -->
+
   <nav>
-    <a href="index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
+    <a href="../index.html" class="nav-brand">Bithues <span>Reading Lab</span></a>
     <div class="nav-links">
-      <div class="nav-item"><a href="index.html">Home</a></div>
+      <div class="nav-item"><a href="../index.html">Home</a></div>
       <div class="nav-item">
-        <a href="catalog.html" class="active">Reviews ▾</a>
+        <a href="../catalog.html">Reviews ▾</a>
         <div class="dropdown">
-          <a href="catalog.html">All Reviews</a>
-          <a href="book-tracker.html">Book Tracker</a>
-          <a href="category/self-help.html">Self-Help</a>
-          <a href="category/science-fiction.html">Sci-Fi</a>
-          <a href="category/fantasy.html">Fantasy</a>
-          <a href="category/nonfiction.html">Nonfiction</a>
-          <a href="category/thriller.html">Thriller</a>
-          <a href="category/biography.html">Biography</a>
-          <a href="category/business.html">Business</a>
+          <a href="../catalog.html">All Reviews</a>
+          <a href="../book-tracker.html">Book Tracker</a>
+          <a href="../category/self-help.html">Self-Help</a>
+          <a href="../category/science-fiction.html">Sci-Fi</a>
+          <a href="../category/fantasy.html">Fantasy</a>
+          <a href="../category/nonfiction.html">Nonfiction</a>
+          <a href="../category/thriller.html">Thriller</a>
+          <a href="../category/biography.html">Biography</a>
+          <a href="../category/business.html">Business</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="stories.html">Stories ▾</a>
+        <a href="../stories.html">Stories ▾</a>
         <div class="dropdown">
-          <a href="stories.html">All Stories</a>
+          <a href="../stories.html">All Stories</a>
         </div>
       </div>
       <div class="nav-item">
-        <a href="articles.html">Articles ▾</a>
+        <a href="../articles.html">Articles ▾</a>
         <div class="dropdown">
-          <a href="articles.html">All Articles</a>
-          <a href="../articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
+          <a href="../articles.html">All Articles</a>
+          <a href="../articles/dna-ancestry-historical-fiction.html">DNA & Historical Fiction</a>
         </div>
       </div>
-      <div class="nav-item"><a href="about.html">About</a></div>
-      <div class="nav-item"><a href="contact.html">Contact</a></div>
+      <div class="nav-item"><a href="../about.html">About</a></div>
+      <div class="nav-item"><a href="../contact.html">Contact</a></div>
     </div>
   </nav>
-        </header>
 
-        <section class="page-header">
-            <h1 class="header">Business Books</h1>
-            <p>Leadership, strategy, and enterprise</p>
-        </section>
-
-        <div class="seo-intro">
-<p>Business books occupy a peculiar shelf — they're written to be consumed quickly, often by people reading on lunch breaks or during commutes, yet the best ones contain frameworks that genuinely change how you think about work, leadership, and strategy. The trick is separating the signal from the noise. Most business books are built around a single good idea stretched into 250 pages. The great ones earn every chapter.</p>
-<p>The most useful business books tend to fall into a few categories: strategy (how to think about competition and markets), management (how to build and lead organizations), personal effectiveness (how to make yourself and your team more productive), and finance/money (how to understand the numbers that govern business decisions). The best authors in each category — from Michael Porter on strategy to Morgan Housel on financial behavior — have done the deep research that makes their frameworks stick.</p>
-<p>Whether you're building a startup, managing a team, or trying to understand what separates companies that last from those that flame out, there's a business book that has your answer. Find it in our reviews below, or see our <a href="best-books-about-productivity.html">best books about productivity</a> guide.</p>
-</div>
-
-<div class="best-of">
-<h2>🌟 Best Business Books Worth Reading</h2>
-<p>The business book shelf is crowded with thin volumes repackaging one idea. These are the ones that actually contain enough substance to justify reading all the way through — books that have shaped how leaders think about competition, strategy, and organizational design.</p>
-<ul>
-<li><strong>Good to Great</strong> — Jim Collins · <a href="https://www.amazon.com/dp/0066620992/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Innovator's Dilemma</strong> — Clayton Christensen · <a href="https://www.amazon.com/dp/0875845851/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Hard Thing About Hard Things</strong> — Ben Horowitz · <a href="https://www.amazon.com/dp/0062273205/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Shoe Dog</strong> — Phil Knight · <a href="https://www.amazon.com/dp/1476716216/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Psychology of Money</strong> — Morgan Housel · <a href="https://www.amazon.com/dp/0857197681/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Zero to One</strong> — Peter Thiel · <a href="https://www.amazon.com/dp/0804139296/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>The Lean Startup</strong> — Eric Ries · <a href="https://www.amazon.com/dp/0307887898/?tag=bithues-20" rel="nofollow">Amazon</a></li>
-<li><strong>Goodreads Choice Awards Business Book of 2019</strong> — Atomic Habits summary</li>
-</ul>
-</div>
-
-<section class="book-grid">
+    
+    <header class="hero">
+        <div class="hero-eyebrow">Category</div>
+        <h1>Business <em>Books</em></h1>
+        <p class="hero-sub">Leadership, strategy, and enterprise</p>
+    </header>
+    <div class="divider"></div>
+    <section class="section">
+        <div class="cards-grid">
 <div class="book-card">
 <h3><a href="../reviews/the-power-of-changing-your-mind.html">The Power of Changing Your Mind</a></h3>
 <p class="author">by Evan R. Cole</p>
@@ -99,27 +147,28 @@
 <p class="tldr">A self-help guide to valuing your own time.</p>
 <a href="../reviews/35.html" class="read-more">Read Review →</a>
 </div>
-</section>
+        </div>
+    </section>
 
 
         <section class="genre-tags">
-            <a href="category/science-fiction.html" class="genre-tag">Science Fiction</a>
-            <a href="category/fantasy.html" class="genre-tag">Fantasy</a>
-            <a href="category/mystery.html" class="genre-tag">Mystery</a>
-            <a href="category/thriller.html" class="genre-tag">Thriller</a>
-            <a href="category/nonfiction.html" class="genre-tag">Nonfiction</a>
-            <a href="category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
-            <a href="category/self-help.html" class="genre-tag">Self-Help</a>
-            <a href="category/children.html" class="genre-tag">Children's Fiction</a>
-            <a href="category/romance.html" class="genre-tag">Romance</a>
-            <a href="category/dystopian.html" class="genre-tag">Dystopian</a>
+            <a href="../category/science-fiction.html" class="genre-tag">Science Fiction</a>
+            <a href="../category/fantasy.html" class="genre-tag">Fantasy</a>
+            <a href="../category/mystery.html" class="genre-tag">Mystery</a>
+            <a href="../category/thriller.html" class="genre-tag">Thriller</a>
+            <a href="../category/nonfiction.html" class="genre-tag">Nonfiction</a>
+            <a href="../category/historical-fiction.html" class="genre-tag">Historical Fiction</a>
+            <a href="../category/self-help.html" class="genre-tag">Self-Help</a>
+            <a href="../category/children.html" class="genre-tag">Children's Fiction</a>
+            <a href="../category/romance.html" class="genre-tag">Romance</a>
+            <a href="../category/dystopian.html" class="genre-tag">Dystopian</a>
         </section>
 
 
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Bithues <span>Reading Lab</span></div>
-    <p>&copy; <span id="year"></span> Bithues Reading Lab &middot; <a href="press.html">Press</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="privacy.html">Privacy</a></p>
+    <p>&copy; <span id="year"></span> Bithues Reading Lab &middot; <a href="../press.html">Press</a> &middot; <a href="../contact.html">Contact</a> &middot; <a href="../privacy.html">Privacy</a></p>
   </footer>
 
   <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
