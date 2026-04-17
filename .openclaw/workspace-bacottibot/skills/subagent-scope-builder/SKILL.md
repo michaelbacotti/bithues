@@ -96,6 +96,32 @@ Add this block to every subagent task:
 
 ---
 
+## Website Subagent Additions
+
+For any website task subagent, always include:
+
+```
+WEBSITE RULES (in addition to Scope Formula above):
+- Read the homepage BEFORE touching any page — nav, footer, hero, card styles, shared CSS
+- Run `curl -s -o /dev/null -w "%{http_code}"` on any URL you create or怀疑 is broken
+- Check sitemap for any new stale entries after your changes
+- If you delete a file: verify canonical tag exists and target is live before deleting
+- If you create a new page: add it to sitemap.xml and link from at least one parent page
+- Compare your output to the homepage for: nav structure, footer, hero section, card class, typography
+- Report: files changed, links checked, style consistency status, any remaining issues
+```
+
+### Website Task Scope Sizes
+
+| Task | Recommended |
+|------|-------------|
+| Fix 1–5 broken links | One subagent, direct link checks |
+| Update nav/dropdown on N pages | One subagent, batch by template |
+| Add section to homepage | One subagent, main session for style comparison |
+| Rebuild a corrupted page | Main session preferred (subagent only after shell verified) |
+| Bulk style alignment (50+ pages) | Sequential subagents by directory, push between batches |
+| Any visual redesign | Main session only — never subagent for visual work |
+
 ## Spawn Syntax Reference
 
 ```javascript

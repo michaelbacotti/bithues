@@ -208,6 +208,20 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
 
+## 🌐 Website Maintenance Rules
+
+Treat every website change as a **controlled change request**, not a freeform rewrite. These are non-negotiable:
+
+1. **Read before editing** — inspect homepage, shared nav, footer, CSS patterns, and existing page template first
+2. **Edit the smallest safe area** — never overwrite large sections unless corruption justifies it
+3. **Never delete first** — verify canonical tags, check sitemap, back up via git before any deletion
+4. **Check every route** — after any create/rename/delete, verify all internal links and sitemap entries
+5. **Match the homepage system** — nav, footer, typography, cards, spacing, buttons inherit from homepage unless documented exception
+6. **Test before finalizing** — desktop, mobile, dark mode, no overflow, no duplication, no broken sections
+7. **Prove completion** — report files changed, links checked, style consistency, remaining issues
+
+**Duplicate deletion rule:** A file may only be deleted if it has a canonical tag pointing to another location AND that target exists and resolves live. Never delete a canonical source file.
+
 ## ⚠️ ACCURACY REMINDER — Read Before Any Technical Work
 
 Mike's rule: **Content and information that is not truthful and accurate is worth nothing.**

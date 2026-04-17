@@ -84,6 +84,30 @@ This was catastrophic. Sensitive business data went to a cloud service (Google D
 
 ---
 
+## Website Engineering Team Discipline (adopted 2026-04-17)
+
+From Perplexity advice, formalizing website operations as a disciplined engineering team:
+
+**Maintenance mode is default for existing sites.** Creation mode is for net-new projects.
+
+**5-role subagent team:** Planner → Content → Style → Route → QA. One role per subagent.
+
+**Duplicate Deletion Checklist (non-negotiable before any file deletion):**
+1. File has `<link rel="canonical">` pointing to different location ✓
+2. Canonical target file exists on disk ✓
+3. Canonical target resolves live (curl check) ✓
+4. No hardcoded links from other pages to the file being deleted ✓
+5. Sitemap entry removed or updated ✓
+
+**Pre-flight check before any publish:**
+1. No broken internal links
+2. No missing referenced assets
+3. No homepage style drift
+4. No deleted critical files
+5. No missing sections introduced by the edit
+
+**Skills updated:** `website-bot/SKILL.md` (major rewrite), `subagent-scope-builder/SKILL.md` (website-specific additions)
+
 ## Git Repo Size Incident (2026-04-12)
 - Git repo at `/Users/mike/.git` appeared to be 99GB due to embedded website git repos inside the workspace
 - **Actual size after cleanup: 7.5GB** — measurement error in initial report
@@ -338,3 +362,10 @@ Mike's explicit instruction: **tax filings and documents are the source of truth
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-08.md:158:177 -->
 - - Candidate: Dependability Forecast Page Created: New page: dependability.us/dependability-forecast.html; S&P 500 bullish thesis, weekly/monthly contract tables for 2026; Wall Street targets: Morgan Stanley 7,800, Goldman 7,600, JPMorgan 7,500, Citi 7,700, Barclays 7,400; Option spread strate - confidence: 0.00 - evidence: memory/2026-04-02.md:20-23 - recalls: 0 - status: staged - Candidate: Dependability Entity Clarified: Dependability Holding LLC = all stock, options, trading, investment management; Succession Holding LLC = real estate, subsidiary management; All trading/options matters → tag to Dependability - confidence: 0.00 - evidence: memory/2026-04-02.md:26-28 - recalls: 0 - status: staged - Candidate: Bithues Nav Redesigned: Hover dropdown menus: Reviews (7 categories), Stories, Articles; Full-width navy nav bar; Brand "Bithues Reading Lab" links to home - confidence: 0.00 - evidence: memory/2026-04-02.md:31-33 - recalls: 0 - status: staged - Candidate: Subagent Spam Issue: Subagent completion notifications kept flooding the session; Killed stuck subagents that were looping on approval timeouts; Fixed by ensuring subagents write results to files before finishing - confidence: 0.00 - evidence: memory/2026-04-02.md:36-38 - recalls: 0 - status: staged [score=0.841 recalls=10 avg=0.369 source=memory/2026-04-08.md:158-177]
+
+## Promoted From Short-Term Memory (2026-04-17)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-04-02.md:1:35 -->
+- # 2026-04-02 Daily Notes ## Major Changes Today ### Website Redesign — Navy/Gold Standard - All 3 sites (bithues, dependability, succession) updated to a unified professional design - Design: Navy #0a1628, Gold #c8a96e, Playfair Display + Inter fonts - Sticky navy nav with gold bottom border, gradient hero with SVG pattern overlay - All pages updated — subagents and direct pushes ### Bithues Cloudflare → GitHub Pages Migration - Cloudflare Pages build kept failing (git submodule error) - Deleted Cloudflare Pages project - Enabled GitHub Pages on michaelbacotti/bithues via GitHub API - DNS at Cloudflare updated to point to GitHub Pages IPs (185.199.108-111.153) - Cloudflare proxy is OFF (DNS only) — correct for GitHub Pages - Future pushes auto-deploy immediately, no build step needed ### Dependability Forecast Page Created - New page: dependability.us/dependability-forecast.html - S&P 500 bullish thesis, weekly/monthly contract tables for 2026 - Wall Street targets: Morgan Stanley 7,800, Goldman 7,600, JPMorgan 7,500, Citi 7,700, Barclays 7,400 - Option spread strategies updated to Mike's preferences (vertical/diagonal spreads, always sell an option) ### Dependability Entity Clarified - Dependability Holding LLC = all stock, options, trading, investment management - Succession Holding LLC = real estate, subsidiary management - All trading/options matters → tag to Dependability ### Bithues Nav Redesigned - Hover dropdown menus: Reviews (7 categories), Stories, Articles - Full-width navy nav bar - Brand "Bithues Reading Lab" links to home ### Subagent Spam Issue [score=0.863 recalls=8 avg=0.426 source=memory/2026-04-02.md:1-35]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-13.md:439:463 -->
+- - `scripts/amazon-book-tracker/generate-bithues-page.js` — Node.js page generator for bithues.com (not Python — python3 exec is blocked) **Dashboard preview:** `file:///Users/mike/.openclaw/workspace-bacottibot/scripts/amazon-book-tracker/dashboard.html` **First scrape results (46 ASINs, ~50 min):** - 42 books successfully scraped (4 NOT_FOUND/unknown) - 4.81 avg stars, 55 reviews total, best BSR #361,968 (Shadow Work Journal) - 30 books flagged "Need Review" — Amazon blocks review counts in headless; review counts are unreliable **Key scraper limitation confirmed:** Amazon anti-bot blocks review counts from headless Playwright. Stars, BSR, title, author, and price all extract reliably. Review counts show as 0 or ? for blocked books. Manual KDP dashboard check is the reliable source for review counts. ### Bithues Book Tracker Page — Created Generated `websites/bithues/Website/bithues/book-tracker.html` using `generate-bithues-page.js`. **Features:** - Navy/gold theme matching bithues.com - Same navbar + footer as rest of site - "Book Tracker" linked in Reviews dropdown (catalog.html → book-tracker.html) - 6-stat header row (Books, Avg Stars, Reviews, Best BSR, Free/KU, Need Review) - Card grid with: stars + reviews, BSR badge (color-coded), title (affiliate link), author, category rank, price (affiliate link with bithues-20) - Affiliate links throughout (`?tag=bithues-20`) **Preview:** `file:///Users/mike/.openclaw/workspace-bacottibot/websites/bithues/Website/bithues/book-tracker.html` [score=0.836 recalls=7 avg=0.516 source=memory/2026-04-13.md:439-463]
