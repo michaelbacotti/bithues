@@ -4,6 +4,7 @@
 **Source file:** `websites/bithues/Website/dependability-us/dependability-forecast.html`
 **Live URL:** `https://www.dependability.us/dependability-forecast.html`
 **Reference copy:** `Reference_Files/good-forecast-template-d2082fe.html`
+**Visual reference (14 screenshots):** `Reference_Files/forecast-screenshots/`
 
 ---
 
