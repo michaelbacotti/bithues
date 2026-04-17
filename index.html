@@ -418,8 +418,9 @@
     const container = document.getElementById('featured-reviews');
     const shuffled = shuffleArray([...allBooks]).slice(0, 3);
     container.innerHTML = shuffled.map(book => {
+      const audibleBadge = book.audible ? ' <span class="review-tag" style="background:var(--gold);color:var(--navy);">🎧 Audiobook</span>' : '';
       return '<div class="card">' +
-        '<div style="margin-bottom:.5rem;"><span class="review-tag">' + book.category + '</span> <span class="review-time">' + book.time + '</span></div>' +
+        '<div style="margin-bottom:.5rem;"><span class="review-tag">' + book.category + '</span>' + audibleBadge + ' <span class="review-time">' + book.time + '</span></div>' +
         '<h3><a href="' + book.url + '">' + book.title + '</a></h3>' +
         '<p class="author">by ' + book.author + '</p>' +
         '<p class="tldr">' + book.tldr + '</p></div>';
