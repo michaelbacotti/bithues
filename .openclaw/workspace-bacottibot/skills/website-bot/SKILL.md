@@ -124,7 +124,7 @@ Some pages are hand-designed with inline CSS, complex layouts, or full sector da
 
 **Before any script or cron job touches a page:** verify it produces output of equivalent quality. A script that overwrites a hand-designed page with a generic shell is a **breaking change**, not an update.
 
-**If `generate-forecast.py` or any cron job targets a protected page:** the script must be fixed to preserve the full page structure before it runs again. Do not let the cron job overwrite a protected page "just this once."
+**If `generate-forecast.py` or any cron job targets a protected page:** the script must be fixed to preserve the full page structure before it runs again. Do not let the cron job overwrite a protected page "just this once." ✅ `generate-forecast.py` was rewritten (2026-04-17) — now produces full inline-CSS page matching the canonical version with all 14 sectors, thesis, and trade sections.
 
 ---
 
