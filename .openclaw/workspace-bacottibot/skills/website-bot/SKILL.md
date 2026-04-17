@@ -114,6 +114,31 @@ curl -s -o /dev/null -w "%{http_code}" "https://www.sitename.com/problem-page.ht
 
 ---
 
+## Protected Pages (CRITICAL — Never Overwrite)
+
+Some pages are hand-designed with inline CSS, complex layouts, or full sector data. **Automated scripts must NEVER overwrite these files.** If a cron job or script targets one of these, the script must be fixed first.
+
+| File | Repo | Protection reason |
+|------|------|-------------------|
+| `dependability-forecast.html` | `dependability-us` | Hand-designed with inline CSS, 14-sector table, hero gradient — NOT a generic shell |
+
+**Before any script or cron job touches a page:** verify it produces output of equivalent quality. A script that overwrites a hand-designed page with a generic shell is a **breaking change**, not an update.
+
+**If `generate-forecast.py` or any cron job targets a protected page:** the script must be fixed to preserve the full page structure before it runs again. Do not let the cron job overwrite a protected page "just this once."
+
+---
+
+## Forecasting Page-Specific Rules
+
+When working on `dependability-forecast.html`:
+- **Always check the day-of-week is correct.** The page is published on weekdays. "Wednesday April 17" must be corrected to "Friday April 17" if the actual day is Friday. Check BOTH the badge/header AND the body text.
+- The canonical reference copy is at `Reference_Files/good-forecast-template-d2082fe.html`
+- Restore from the reference copy (not git history) to avoid pulling broken remote commits
+- After restoring, commit IMMEDIATELY before any other git operations
+- After restoring, push before the 4:15 PM ET cron job runs
+
+---
+
 ## Pre-Flight Check (Before Any Publish)
 
 Every task must prove completion:
