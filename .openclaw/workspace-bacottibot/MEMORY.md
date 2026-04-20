@@ -356,6 +356,19 @@ A subagent claimed Dependability Holding LLC had MNC Housing LLC at 50% ownershi
 
 **Rule going forward:** When a subagent reports a claim that contradicts established entity structure (like the entities.md table), flag it as needing verification. Never relay a subagent's claim as fact without checking the primary source.
 
+### Subagent Handling — Hard Lessons (2026-04-20)
+**Problem:** Subagents consistently timed out at 5 minutes when asked to do large batch operations (10-90 files). They started work but couldn't finish before the timeout, delivering nothing useful despite running 3-7 minutes.
+
+**What works:**
+- When a subagent times out: check if it did any work (read git history or live files), then re-spawn with NARROWER scope — not the full task
+- For large batch tasks: split into sequential batches of 3-5 files, spawn one subagent per batch
+- The main session should do the work directly IF: (a) the task is well-defined data (like adding 13 known books to a catalog), (b) subagents have failed repeatedly, or (c) the fix is trivial (like adding a noindex meta tag)
+- Always verify after spawning — check if the subagent actually completed before claiming done
+
+**Today:** catalog fix, review template noindex, thin page expansions — all done in main session after subagents timed out. That's actually fine for one-off fixes. The subagent approach fails on batch writes because each file requires read→modify→SHA→push, which accumulates.
+
+**For AdSense rollout (90+ pages):** MUST split into batches of ~10 pages per subagent, sequential batches, not parallel.
+
 ### Tax Documents = Source of Truth (2026-04-12)
 Mike's explicit instruction: **tax filings and documents are the source of truth for business, tax, and accounting tasks.** When in doubt about entity structures, income, losses, or financial figures — read the actual tax documents, not prior memory or notes.
 
