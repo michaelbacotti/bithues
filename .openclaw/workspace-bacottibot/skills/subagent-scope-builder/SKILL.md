@@ -48,13 +48,19 @@ FAILURE RECOVERY: [what to do if timeout/error — report partial results, don't
 
 | Task size | Recommended scope |
 |-----------|-------------------|
-| Small (1-10 files) | One subagent, all in one prompt |
-| Medium (10-50 files) | One subagent, batch processing with checkpoint reporting |
-| Large (50+ files) | Sequential subagents by directory or batch |
-| Visual rewrite | Do NOT run as subagent — token-heavy, OOM risk. Do in main session. Subagent only after functional bugs are fixed.
+| 1–5 files | One subagent |
+| 6–15 files | One subagent (10 is the safe max for GitHub API read-modify-push cycles) |
+| 16–30 files | Two subagents in parallel, each doing 8-15 files |
+| 31–60 files | Three subagents sequentially, ~15-20 files each |
+| 60+ files | Sequential batches of 10 pages — NEVER more than 10 pages per subagent |
+| Visual rewrite | Do NOT run as subagent — token-heavy, OOM risk. Do in main session |
 | Any task requiring reading PDFs | Limit to 2 PDFs max per subagent |
 
-**Hard rule:** One bug fix per subagent. Do NOT combine "fix ESC key" + "fix walking speed" + "rewrite visuals" into one subagent. If one times out, you lose all three.
+**Hard rule: 10 pages per subagent maximum for GitHub API batch operations.**
+
+Reason: A GitHub read-modify-push cycle takes ~2-5 seconds per file. At 10 files that's 20-50 seconds of pure API time, plus thinking time, plus push time. A subagent with a 5-minute timeout needs 80%+ of its time for actual work, not waiting on I/O. 10 files is the safe ceiling.
+
+For simple read-only audits (word count, link check), 20-25 pages is fine. For read-modify-push, cap at 10.
 
 ---
 
@@ -75,10 +81,14 @@ Good verification (specific):
 ## Handling Timeout
 
 If a subagent times out:
-- Check the result — was anything useful delivered?
-- If partial work: spawn a new subagent with EXACTLY the remaining work (not the full task)
-- If no work delivered: spawn fresh with tighter scope
-- NEVER claim the task is done if the subagent timed out before completing
+1. Check git history or live files to see if it delivered any work
+2. If partial work: re-spawn with EXACTLY the remaining files (not the full batch)
+3. If no work delivered: re-spawn the same batch (may have been a capacity fluke)
+4. If a subagent consistently times out on the same batch: take that specific task into the main session
+5. NEVER claim the task is done if the subagent timed out before completing
+6. NEVER do the work yourself unless it's a trivial one-off (e.g., adding one meta tag, fixing one link)
+
+**The delegation contract:** If you spawn a subagent, you must see it through to completion or explicit failure. If it times out, you re-spawn with remaining scope. The buck stops with delegation, not with you doing the work.
 
 ---
 

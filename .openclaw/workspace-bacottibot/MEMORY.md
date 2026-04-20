@@ -175,6 +175,7 @@ From Perplexity advice, formalizing website operations as a disciplined engineer
 | **things-mac** | Things 3 task management |
 | **scrape-web** | Web scraping with Scrapling |
 | **website-bot** | Website creation and management |
+| **website-audit** | Batched website auditing — quality, monetization, links, schema (10 pages per subagent max) |
 | **novel-drafter** | Full-length novel writing |
 | **business-writing** | Industry research and business analysis |
 
@@ -371,6 +372,18 @@ A subagent claimed Dependability Holding LLC had MNC Housing LLC at 50% ownershi
 
 ### Tax Documents = Source of Truth (2026-04-12)
 Mike's explicit instruction: **tax filings and documents are the source of truth for business, tax, and accounting tasks.** When in doubt about entity structures, income, losses, or financial figures — read the actual tax documents, not prior memory or notes.
+
+### Indexing Status — "Getting Ready" in Google Search Console (2026-04-20)
+Sites are live and healthy (200 OK), robots.txt and sitemap.xml all correct. "Getting ready" status in Search Console means Google hasn't fully crawled/indexed yet — not an error.
+
+**To fix "Getting ready" for all 3 sites:**
+1. Go to [search.google.com/search-console](https://search.google.com/search-console)
+2. Select each property (bithues.com, dependability.us, successionholdingllc.com)
+3. In URL Inspection: type the homepage URL → click "Request Indexing"
+4. Do the same for sitemap URL (submit via sitemap section, not the deprecated ping URL)
+5. Wait 24-48h — Google will fully index once it finishes crawling all pages
+
+All three sitemaps are live and returning 200 with correct `<loc>` entries. Google is just catching up — the sites went live recently (April 2026).
 
 ### AdSense Revenue Bug — All 3 Sites (2026-04-20)
 **ALL THREE SITES load AdSense script in `<head>` but have ZERO `<ins data-ad-slot>` elements.** This means AdSense earns $0 on every page despite being registered. Ca-pub: `ca-pub-9312870448453345` (same on all 3 sites). Fix requires: Mike creates ad units in AdSense dashboard → gives me the `data-ad-slot` numbers → I add `<ins class="adsbygoogle" data-ad-slot="XXXXX"...>` elements to each page. All 3 sites (bithues, dependability, succession) have this bug on 90+ pages.
