@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bithues Reading Lab | Curated Book Reviews</title>
-  <meta name="description" content="Bithues Reading Lab — Discover your next favorite book. Curated reviews on sci-fi, fantasy, self-help, and more.">
+  <title>Bithues Reading Lab — Book Reviews & Reading Guides for Sci-Fi, Fantasy & Self-Help</title>
+  <meta name="description" content="Discover your next favorite book with Bithues Reading Lab. In-depth reviews and reading guides for sci-fi, fantasy, self-help, investing, and more — curated by genre and theme.">
+  <meta property="og:title" content="Bithues Reading Lab — Book Reviews & Reading Guides">
+  <meta property="og:description" content="Discover your next favorite book with Bithues Reading Lab. In-depth reviews and reading guides for sci-fi, fantasy, self-help, investing, and more.">
+  <meta property="og:url" content="https://www.bithues.com/">
+  <meta property="og:image" content="https://www.bithues.com/images/og-default.png">
   <meta name="google-adsense-account" content="ca-pub-9312870448453345" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -207,8 +211,21 @@
       .section { padding: 2rem 1.5rem; }
     }
   </style>
-<link rel="canonical" href="https://www.bithues.com/index.html"></head>
-<body>
+  <link rel="canonical" href="https://www.bithues.com/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Bithues Reading Lab",
+    "url": "https://www.bithues.com",
+    "logo": "https://www.bithues.com/favicon.ico",
+    "description": "Curated book reviews and reading guides for sci-fi, fantasy, self-help, and more.",
+    "sameAs": [
+      "https://twitter.com/LittleMikeReads"
+    ]
+  }
+  </script>
+</head>
 
   <!-- ── NAV ── -->
   <nav>
@@ -239,6 +256,18 @@
         <a href="articles.html">Articles ▾</a>
         <div class="dropdown">
           <a href="articles.html">All Articles</a>
+          <a href="#" style="font-weight:600;">📚 Best-of Lists ▾</a>
+          <a href="articles/books-like-project-hail-mary.html">Books Like Project Hail Mary</a>
+          <a href="articles/books-like-dark-matter.html">Books Like Dark Matter</a>
+          <a href="articles/books-like-the-midnight-library.html">Books Like The Midnight Library</a>
+          <a href="articles/books-like-anxious-people.html">Books Like Anxious People</a>
+          <a href="articles/books-like-1984.html">Books Like 1984</a>
+          <a href="articles/books-like-enders-game.html">Books Like Ender's Game</a>
+          <a href="articles/books-like-hyperion.html">Books Like Hyperion</a>
+          <a href="articles/books-like-the-name-of-the-wind.html">Books Like The Name of the Wind</a>
+          <a href="articles/books-like-atomic-habits.html">Books Like Atomic Habits</a>
+          <a href="articles/books-like-physics-of-time.html">Books Like The Physics of Time</a>
+          <div class="dropdown-divider"></div>
           <a href="articles/dna-ancestry-historical-fiction.html">DNA &amp; Historical Fiction</a>
         </div>
       </div>
@@ -284,6 +313,33 @@
     </div>
   </section>
 
+  <!-- ── BOOKS LIKE ── -->
+  <section class="section">
+    <h2 class="section-title">📖 Books Like...</h2>
+    <p class="section-sub">Loved a book? Find your next read with these curated comparisons.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <h3><a href="articles/books-like-project-hail-mary.html">Project Hail Mary</a></h3>
+        <p> Friendly aliens, hard science, and survival in space. 10 books for fans of Andy Weir.</p>
+      </div>
+      <div class="card">
+        <h3><a href="articles/books-like-enders-game.html">Ender's Game</a></h3>
+        <p>Military sci-fi with heart. If you loved Ender, try these military-strategy space battles.</p>
+      </div>
+      <div class="card">
+        <h3><a href="articles/books-like-the-midnight-library.html">The Midnight Library</a></h3>
+        <p>Literary fiction about second chances. For fans of introspective, life-affirming reads.</p>
+      </div>
+      <div class="card">
+        <h3><a href="articles/books-like-1984.html">1984</a></h3>
+        <p>Dystopian classics. Brave New World, The Handmaid's Tale, and more.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <a href="articles.html" style="color:var(--gold);font-weight:600;">See all Books Like pages →</a>
+    </div>
+  </section>
+
   <!-- ── FEATURED REVIEWS ── -->
   <section class="section">
     <h2 class="section-title">Featured Reviews</h2>
@@ -303,7 +359,7 @@
       <h3>📬 Get the weekly shortlist</h3>
       <p>One email, Friday mornings. The 2–3 best new books we reviewed that week, plus one curated reading list. No fluff.</p>
       <form class="newsletter-form" action="#" method="post">
-        <input type="email" placeholder="your@email.com" required>
+        <input type="email" placeholder="your@email.com" aria-label="Enter your email to subscribe" required>
         <button type="submit">Subscribe</button>
       </form>
       <p class="form-note">Join 1,200+ readers. Unsubscribe anytime.</p>
@@ -362,8 +418,9 @@
     const container = document.getElementById('featured-reviews');
     const shuffled = shuffleArray([...allBooks]).slice(0, 3);
     container.innerHTML = shuffled.map(book => {
+      const audibleBadge = book.audible ? ' <span class="review-tag" style="background:var(--gold);color:var(--navy);">🎧 Audiobook</span>' : '';
       return '<div class="card">' +
-        '<div style="margin-bottom:.5rem;"><span class="review-tag">' + book.category + '</span> <span class="review-time">' + book.time + '</span></div>' +
+        '<div style="margin-bottom:.5rem;"><span class="review-tag">' + book.category + '</span>' + audibleBadge + ' <span class="review-time">' + book.time + '</span></div>' +
         '<h3><a href="' + book.url + '">' + book.title + '</a></h3>' +
         '<p class="author">by ' + book.author + '</p>' +
         '<p class="tldr">' + book.tldr + '</p></div>';

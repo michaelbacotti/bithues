@@ -27,6 +27,12 @@
 - Full list: `References/book-tracker.md`
 - **E.J. Marín** - Spanish-language historical fiction
 
+## VEX IQ Robotics — Exabytes Team 603E
+- **RobotEvents:** https://www.robotevents.com/teams/VIQRC/603E
+- **Dashboard:** `memory/robotics-dashboard.html`
+- **Full record:** `memory/robotics-exabytes.md`
+- 7 confirmed awards across 4 seasons + 1 likely pending (per RobotEvents PDFs, Apr 17, 2026)
+
 ## X (Twitter) - @SpaceCat_SC001
 
 ### What works
@@ -100,3 +106,13 @@
 ---
 
 _Last updated: 2026-04-15_
+
+## Barber Appointments (added 2026-04-19)
+
+**Location:** https://www.allamericanbarberstylist.com/
+**Phone:** (603) 425-2499
+**Barber:** Candi LaFleur
+
+**Book appointment:** https://book.squareup.com/appointments/8m3kvvf82jr3or/location/SX6EA3Z032QGR/services?staff_id=gkffgw9fyrmmji
+
+**Who goes:** Michael Jr and Mason

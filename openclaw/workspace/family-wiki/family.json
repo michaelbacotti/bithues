@@ -1,0 +1,307 @@
+{
+  "familyName": "Bacotti",
+  "lastUpdated": "2026-04-17",
+  "source": "Ancestry.com fan chart (June 2021)",
+  "notes": "Last updated June 2021 on Ancestry.com. Some great-great-grandparents marked as Potential (unconfirmed hints).",
+
+  "members": [
+    {
+      "id": "mike-sr",
+      "name": "Michael Joseph Bacotti Sr",
+      "relationship": "self",
+      "born": 1979,
+      "status": "living",
+      "spouse": "michaella",
+      "children": ["mike-jr", "mason"]
+    },
+    {
+      "id": "michaella",
+      "name": "Michaella L Coutu",
+      "relationship": "spouse",
+      "status": "living",
+      "spouse": "mike-sr",
+      "children": ["mike-jr", "mason"]
+    },
+    {
+      "id": "mike-jr",
+      "name": "Michael J Bacotti Jr",
+      "relationship": "son",
+      "born": null,
+      "grade": "9th",
+      "status": "living",
+      "parents": ["mike-sr", "michaella"],
+      "notes": "Author of Little Mike children's books (littlemikebooks.com)"
+    },
+    {
+      "id": "mason",
+      "name": "Mason A Bacotti",
+      "relationship": "son",
+      "born": null,
+      "grade": "8th",
+      "status": "living",
+      "parents": ["mike-sr", "michaella"],
+      "notes": "VEX IQ robotics (Team Exabytes, 603E)"
+    },
+
+    {
+      "id": "joseph-jr",
+      "name": "Joseph Leo Bacotti Jr",
+      "relationship": "father",
+      "born": 1941,
+      "status": "living",
+      "parents": ["joseph-sr", "cecilia"],
+      "children": ["mike-sr"]
+    },
+    {
+      "id": "lillian",
+      "name": "Lillian Yolanda Sanchez",
+      "relationship": "mother",
+      "born": 1953,
+      "status": "living",
+      "maidenName": "Sanchez",
+      "parents": ["felix-sanchez", "velia-ortegon"],
+      "children": ["mike-sr"]
+    },
+
+    {
+      "id": "joseph-sr",
+      "name": "Joseph Leo Bacotti",
+      "relationship": "paternal grandfather",
+      "born": 1905,
+      "died": 1990,
+      "parents": ["antonio-bacotti", "maria-tripiccione"],
+      "children": ["joseph-jr"]
+    },
+    {
+      "id": "cecilia",
+      "name": "Cecilia Dorothy Wysocki",
+      "relationship": "paternal grandmother",
+      "born": 1908,
+      "died": 2003,
+      "maidenName": "Wysocki",
+      "parents": ["peter-wysocki", "sofia-wysocki"],
+      "children": ["joseph-jr"]
+    },
+    {
+      "id": "felix-sanchez",
+      "name": "Felix Raul Sanchez Perales",
+      "relationship": "maternal grandfather",
+      "born": 1929,
+      "died": 1994,
+      "maidenName": "Sanchez Perales",
+      "parents": ["federico-garcia", "francisca-perales-v"],
+      "children": ["lillian"]
+    },
+    {
+      "id": "velia-ortegon",
+      "name": "Velia Ortegon Alejos",
+      "relationship": "maternal grandmother",
+      "born": 1933,
+      "status": "living",
+      "maidenName": "Ortegon Alejos",
+      "parents": ["jesus-ortegon", "rosa-alejos"],
+      "children": ["lillian"]
+    },
+
+    {
+      "id": "antonio-bacotti",
+      "name": "Antonio Baclotti",
+      "relationship": "paternal great-grandfather",
+      "born": 1867,
+      "died": 1931,
+      "parents": ["antonio-baciotti", "theresa-oletta"],
+      "children": ["joseph-sr"]
+    },
+    {
+      "id": "maria-tripiccione",
+      "name": "Maria Giuseppe C Tripiccione",
+      "relationship": "paternal great-grandmother",
+      "born": 1870,
+      "status": "deceased",
+      "parents": ["francesco-tripiccione", "rosaria-montagano"],
+      "children": ["joseph-sr"]
+    },
+    {
+      "id": "peter-wysocki",
+      "name": "Peter W Wysocki",
+      "relationship": "paternal great-grandfather",
+      "born": 1885,
+      "died": 1942,
+      "parents": ["william-wysocki", "martha-lukasiewicz"],
+      "children": ["cecilia"]
+    },
+    {
+      "id": "sofia-wysocki",
+      "name": "Sofia Wysocki",
+      "relationship": "paternal great-grandmother",
+      "born": 1888,
+      "status": "deceased",
+      "children": ["cecilia"]
+    },
+    {
+      "id": "federico-garcia",
+      "name": "Federico Sanchez Garcia",
+      "relationship": "maternal great-grandfather",
+      "born": 1896,
+      "died": 1961,
+      "parents": ["felipe-sanchez", "josefa-garcia"],
+      "children": ["felix-sanchez"]
+    },
+    {
+      "id": "francisca-perales-v",
+      "name": "Francisca Perales Villarreal",
+      "relationship": "maternal great-grandmother",
+      "born": 1907,
+      "died": 1967,
+      "maidenName": "Perales Villarreal",
+      "parents": ["francisca-perales", "maria-de-jesus"],
+      "children": ["felix-sanchez"]
+    },
+    {
+      "id": "jesus-ortegon",
+      "name": "Jesus Nabor Ortegon Cavasos",
+      "relationship": "maternal great-grandfather",
+      "born": 1903,
+      "died": 2003,
+      "parents": ["jesus-ortegon-fernandez", "maria-cavos-zambrano"],
+      "children": ["velia-ortegon"]
+    },
+    {
+      "id": "rosa-alejos",
+      "name": "Rosa Juliana Alejos Soto",
+      "relationship": "maternal great-grandmother",
+      "born": 1910,
+      "died": 2006,
+      "maidenName": "Alejos Soto",
+      "parents": ["juan-alejos", "maria-guadalupe-soto"],
+      "children": ["velia-ortegon"]
+    },
+
+    {
+      "id": "antonio-baciotti",
+      "name": "Antonio Baciotti",
+      "relationship": "paternal great-great-grandfather",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["antonio-bacotti"]
+    },
+    {
+      "id": "theresa-oletta",
+      "name": "Theresa Oletta",
+      "relationship": "paternal great-great-grandmother",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["antonio-bacotti"]
+    },
+    {
+      "id": "francesco-tripiccione",
+      "name": "Francesco Trepiccione",
+      "relationship": "paternal great-great-grandfather",
+      "born": 1818,
+      "died": null,
+      "status": "deceased",
+      "children": ["maria-tripiccione"]
+    },
+    {
+      "id": "rosaria-montagano",
+      "name": "Rosaria Montagnano",
+      "relationship": "paternal great-great-grandmother",
+      "born": 1820,
+      "died": null,
+      "status": "deceased",
+      "children": ["maria-tripiccione"]
+    },
+    {
+      "id": "william-wysocki",
+      "name": "William Wysocki",
+      "relationship": "paternal great-great-grandfather",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["peter-wysocki"]
+    },
+    {
+      "id": "martha-lukasiewicz",
+      "name": "Martha Lukasiewicz",
+      "relationship": "paternal great-great-grandmother",
+      "born": 1860,
+      "died": null,
+      "status": "potential",
+      "children": ["peter-wysocki"]
+    },
+    {
+      "id": "felipe-sanchez",
+      "name": "Felipe Sanchez",
+      "relationship": "maternal great-great-grandfather",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["federico-garcia"]
+    },
+    {
+      "id": "josefa-garcia",
+      "name": "Josefa Garcia",
+      "relationship": "maternal great-great-grandmother",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["federico-garcia"]
+    },
+    {
+      "id": "francisca-perales",
+      "name": "Francisca Perales",
+      "relationship": "maternal great-great-grandmother",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["francisca-perales-v"]
+    },
+    {
+      "id": "maria-de-jesus",
+      "name": "Maria de Jesus Villarreal",
+      "relationship": "maternal great-great-grandmother",
+      "born": null,
+      "died": null,
+      "status": "potential",
+      "children": ["francisca-perales-v"]
+    },
+    {
+      "id": "jesus-ortegon-fernandez",
+      "name": "Jesus Maria Ortegon Fernandez",
+      "relationship": "maternal great-great-grandfather",
+      "born": 1880,
+      "died": 1968,
+      "status": "deceased",
+      "children": ["jesus-ortegon"]
+    },
+    {
+      "id": "maria-cavos-zambrano",
+      "name": "Maria de los Santos F Cavasos Zambrano",
+      "relationship": "maternal great-great-grandmother",
+      "born": 1875,
+      "died": null,
+      "status": "deceased",
+      "children": ["jesus-ortegon"]
+    },
+    {
+      "id": "juan-alejos",
+      "name": "Juan Alejos",
+      "relationship": "maternal great-great-grandfather",
+      "born": 1877,
+      "died": 1926,
+      "status": "deceased",
+      "children": ["rosa-alejos"]
+    },
+    {
+      "id": "maria-guadalupe-soto",
+      "name": "Maria Guadalupe Soto",
+      "relationship": "maternal great-great-grandmother",
+      "born": 1897,
+      "died": 1918,
+      "status": "deceased",
+      "children": ["rosa-alejos"]
+    }
+  ]
+}

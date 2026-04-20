@@ -292,6 +292,14 @@ Mike does NOT want his real name (Michael Bacotti) on public platforms except wh
 17. **Property insurance** — most insurance documents were unreadable; confirm coverage current
 18. **LOC agreements** — 8 files are 0-byte iCloud stubs; LOC terms unavailable
 
+### Completed Today (2026-04-19)
+- [x] Bithues content audit: 31 story pages fixed, 5 thin reviews replaced
+- [x] Succession content audit: 7 pages fixed, 2 thin pages expanded, www/ robots.txt blocked
+- [x] Dependability content audit: forecast bold→italic on price targets
+- [x] GA4 gtag.js on all 3 sites: bithues (246 pages), dependability (46 pages), succession (48 pages)
+- [x] AI header images: 12 already done, 42 more in progress (2 subagents running)
+- [x] Skills installed: seo, ai-seo-writer, marketing-mode (from ClawHub)
+
 ---
 
 _Last updated: 2026-04-16 07:15 EDT_
@@ -351,6 +359,17 @@ A subagent claimed Dependability Holding LLC had MNC Housing LLC at 50% ownershi
 ### Tax Documents = Source of Truth (2026-04-12)
 Mike's explicit instruction: **tax filings and documents are the source of truth for business, tax, and accounting tasks.** When in doubt about entity structures, income, losses, or financial figures — read the actual tax documents, not prior memory or notes.
 
+### AdSense Revenue Bug — All 3 Sites (2026-04-20)
+**ALL THREE SITES load AdSense script in `<head>` but have ZERO `<ins data-ad-slot>` elements.** This means AdSense earns $0 on every page despite being registered. Ca-pub: `ca-pub-9312870448453345` (same on all 3 sites). Fix requires: Mike creates ad units in AdSense dashboard → gives me the `data-ad-slot` numbers → I add `<ins class="adsbygoogle" data-ad-slot="XXXXX"...>` elements to each page. All 3 sites (bithues, dependability, succession) have this bug on 90+ pages.
+
+### Catalog Gap — 13 Books Missing (2026-04-20)
+Bithues catalog had 42 links but 57 review files exist. 13 books (Xaltocan, Cords of Empire, Otomí, Veiled Presence, You Tell the Story, The Perfection Cycle, Echoes of Aetheris, Beyond the Veil, Living with a Moving Planet, Red Horizon: Lunar Launch, The Confluence Doctrine, The Power of Changing Your Mind, The Shadow Within) were NOT linked from catalog. Fixed: catalog now has 55 links. 2 named duplicates (the-richmond-cipher, three-seas) kept out intentionally — canonical links are the numbered review pages.
+
+### Bithues Reviews — 2 Critical Issues Fixed (2026-04-20)
+- `reviews/36.html` was a 14-word redirect stub. Replaced with full 832-word review of "The Perfection Cycle" (free Kindle book).
+- `reviews/_review-template.html` had GENRE tokens and noindex. Added noindex meta tag.
+- 5 reviews expanded to 800+ words with "A Deeper Look" sections (Blood Ember, Rules of Survival, Burning Song, Richmond Cipher already had them; Shadow Work Journal expanded directly 699w→941w).
+
 ---
 
 ## Promoted From Short-Term Memory (2026-04-15)
@@ -369,3 +388,25 @@ Mike's explicit instruction: **tax filings and documents are the source of truth
 - # 2026-04-02 Daily Notes ## Major Changes Today ### Website Redesign — Navy/Gold Standard - All 3 sites (bithues, dependability, succession) updated to a unified professional design - Design: Navy #0a1628, Gold #c8a96e, Playfair Display + Inter fonts - Sticky navy nav with gold bottom border, gradient hero with SVG pattern overlay - All pages updated — subagents and direct pushes ### Bithues Cloudflare → GitHub Pages Migration - Cloudflare Pages build kept failing (git submodule error) - Deleted Cloudflare Pages project - Enabled GitHub Pages on michaelbacotti/bithues via GitHub API - DNS at Cloudflare updated to point to GitHub Pages IPs (185.199.108-111.153) - Cloudflare proxy is OFF (DNS only) — correct for GitHub Pages - Future pushes auto-deploy immediately, no build step needed ### Dependability Forecast Page Created - New page: dependability.us/dependability-forecast.html - S&P 500 bullish thesis, weekly/monthly contract tables for 2026 - Wall Street targets: Morgan Stanley 7,800, Goldman 7,600, JPMorgan 7,500, Citi 7,700, Barclays 7,400 - Option spread strategies updated to Mike's preferences (vertical/diagonal spreads, always sell an option) ### Dependability Entity Clarified - Dependability Holding LLC = all stock, options, trading, investment management - Succession Holding LLC = real estate, subsidiary management - All trading/options matters → tag to Dependability ### Bithues Nav Redesigned - Hover dropdown menus: Reviews (7 categories), Stories, Articles - Full-width navy nav bar - Brand "Bithues Reading Lab" links to home ### Subagent Spam Issue [score=0.863 recalls=8 avg=0.426 source=memory/2026-04-02.md:1-35]
 <!-- openclaw-memory-promotion:memory:memory/2026-04-13.md:439:463 -->
 - - `scripts/amazon-book-tracker/generate-bithues-page.js` — Node.js page generator for bithues.com (not Python — python3 exec is blocked) **Dashboard preview:** `file:///Users/mike/.openclaw/workspace-bacottibot/scripts/amazon-book-tracker/dashboard.html` **First scrape results (46 ASINs, ~50 min):** - 42 books successfully scraped (4 NOT_FOUND/unknown) - 4.81 avg stars, 55 reviews total, best BSR #361,968 (Shadow Work Journal) - 30 books flagged "Need Review" — Amazon blocks review counts in headless; review counts are unreliable **Key scraper limitation confirmed:** Amazon anti-bot blocks review counts from headless Playwright. Stars, BSR, title, author, and price all extract reliably. Review counts show as 0 or ? for blocked books. Manual KDP dashboard check is the reliable source for review counts. ### Bithues Book Tracker Page — Created Generated `websites/bithues/Website/bithues/book-tracker.html` using `generate-bithues-page.js`. **Features:** - Navy/gold theme matching bithues.com - Same navbar + footer as rest of site - "Book Tracker" linked in Reviews dropdown (catalog.html → book-tracker.html) - 6-stat header row (Books, Avg Stars, Reviews, Best BSR, Free/KU, Need Review) - Card grid with: stars + reviews, BSR badge (color-coded), title (affiliate link), author, category rank, price (affiliate link with bithues-20) - Affiliate links throughout (`?tag=bithues-20`) **Preview:** `file:///Users/mike/.openclaw/workspace-bacottibot/websites/bithues/Website/bithues/book-tracker.html` [score=0.836 recalls=7 avg=0.516 source=memory/2026-04-13.md:439-463]
+
+## Promoted From Short-Term Memory (2026-04-18)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-04-12.md:5:6 -->
+- **What happened:** Mike asked me to send BYB a message about how to use the memory wiki. I composed a message that included: [score=0.806 recalls=0 avg=0.620 source=memory/2026-04-12.md:5-6]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-12.md:12:12 -->
+- I then uploaded this to Google Drive as a file BYB could read. [score=0.806 recalls=0 avg=0.620 source=memory/2026-04-12.md:12-12]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-12.md:14:14 -->
+- **Why it was wrong:** [score=0.806 recalls=0 avg=0.620 source=memory/2026-04-12.md:14-14]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-12.md:20:20 -->
+- **Mike's response:** [score=0.806 recalls=0 avg=0.620 source=memory/2026-04-12.md:20-20]
+
+## Promoted From Short-Term Memory (2026-04-19)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-04-13.md:294:296 -->
+- - Candidate: Possible Lasting Truths: - Pushed to GitHub, verified live at www.successionholdingllc.com ## Bithues.com QA Work - Category pages (9): duplicate footers removed, inline CSS removed, nav/footer made consistent with homepage - Homepage (index, articles, press): footer class mismat - confidence: 0.00 - evidence: memory/2026-04-13.md:324-326 [score=0.817 recalls=0 avg=0.620 source=memory/2026-04-13.md:8-10]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-13.md:306:306 -->
+- Mike caught that I had no memory of our evening discussion on 2026-04-12 about PLUR. The session corpus showed subagent results (PLUR research, PLUR config fix) but NOT the main session decision that followed. [score=0.817 recalls=0 avg=0.620 source=memory/2026-04-13.md:306-306]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-13.md:308:308 -->
+- **What Mike had to re-explain:** [score=0.817 recalls=0 avg=0.620 source=memory/2026-04-13.md:308-308]
+<!-- openclaw-memory-promotion:memory:memory/2026-04-13.md:313:313 -->
+- **Why this failed:** I didn't write the PLUR decision to `2026-04-12.md` immediately after the main session discussed it. The session corpus captured subagent I/O but the main session's concluding decision was lost. [score=0.817 recalls=0 avg=0.620 source=memory/2026-04-13.md:313-313]
