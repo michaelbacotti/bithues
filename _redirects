@@ -1,0 +1,160 @@
+# === LEGACY URL REDIRECTS ===
+# Hugo uses /genres/, /reviews/1/, /stories/slug/ instead of /category/ and flat .html files
+
+# ── Genre: category/ → genres/ ──────────────────────────────────────────
+/category/adventure.html /genres/adventure/ 301
+/category/biography.html /genres/biography/ 301
+/category/business.html /genres/business/ 301
+/category/children.html /genres/children/ 301
+/category/cultural.html /genres/cultural/ 301
+/category/dystopian.html /genres/dystopian/ 301
+/category/fantasy.html /genres/fantasy/ 301
+/category/fiction.html /genres/fiction/ 301
+/category/historical-fiction.html /genres/historical-fiction/ 301
+/category/literary.html /genres/literary/ 301
+/category/mystery.html /genres/mystery/ 301
+/category/mythology.html /genres/mythology/ 301
+/category/nonfiction.html /genres/nonfiction/ 301
+/category/romance.html /genres/romance/ 301
+/category/science-fiction.html /genres/science-fiction/ 301
+/category/science.html /genres/science/ 301
+/category/self-help.html /genres/self-help/ 301
+/category/spiritual.html /genres/spiritual/ 301
+/category/thriller.html /genres/thriller/ 301
+
+# ── Reviews: numeric .html → /reviews/N/ ─────────────────────────────────
+/reviews/1.html /reviews/1/ 301
+/reviews/2.html /reviews/2/ 301
+/reviews/3.html /reviews/3/ 301
+/reviews/4.html /reviews/4/ 301
+/reviews/5.html /reviews/5/ 301
+/reviews/6.html /reviews/6/ 301
+/reviews/7.html /reviews/7/ 301
+/reviews/8.html /reviews/8/ 301
+/reviews/9.html /reviews/9/ 301
+/reviews/10.html /reviews/10/ 301
+/reviews/11.html /reviews/11/ 301
+/reviews/12.html /reviews/12/ 301
+/reviews/13.html /reviews/13/ 301
+/reviews/14.html /reviews/14/ 301
+/reviews/15.html /reviews/15/ 301
+/reviews/16.html /reviews/16/ 301
+/reviews/17.html /reviews/17/ 301
+/reviews/18.html /reviews/18/ 301
+/reviews/19.html /reviews/19/ 301
+/reviews/20.html /reviews/20/ 301
+/reviews/21.html /reviews/21/ 301
+/reviews/22.html /reviews/22/ 301
+/reviews/23.html /reviews/23/ 301
+/reviews/24.html /reviews/24/ 301
+/reviews/25.html /reviews/25/ 301
+/reviews/26.html /reviews/26/ 301
+/reviews/27.html /reviews/27/ 301
+/reviews/28.html /reviews/28/ 301
+/reviews/29.html /reviews/29/ 301
+/reviews/30.html /reviews/30/ 301
+/reviews/31.html /reviews/31/ 301
+/reviews/32.html /reviews/32/ 301
+/reviews/33.html /reviews/33/ 301
+/reviews/34.html /reviews/34/ 301
+/reviews/35.html /reviews/35/ 301
+/reviews/36.html /reviews/36/ 301
+/reviews/37.html /reviews/37/ 301
+
+# ── Stories: numeric .html → slug dirs ──────────────────────────────────
+/stories/1.html /stories/the-last-signal/ 301
+/stories/2.html /stories/the-last-winter/ 301
+/stories/3.html /stories/what-the-silence-knew/ 301
+/stories/4.html /stories/the-listen/ 301
+/stories/5.html /stories/before-the-streetlights-came-on/ 301
+/stories/6.html /stories/the-last-garden/ 301
+/stories/7.html /stories/the-space-between/ 301
+/stories/8.html /stories/they-walk-among-us/ 301
+/stories/9.html /stories/the-humble-mind/ 301
+/stories/10.html /stories/the-other-side/ 301
+/stories/11.html /stories/the-forbidden-library/ 301
+/stories/12.html /stories/the-disclosure/ 301
+/stories/13.html /stories/the-borrowed-life/ 301
+/stories/14.html /stories/the-door-between-worlds/ 301
+/stories/15.html /stories/the-last-song/ 301
+/stories/16.html /stories/rules-of-the-game/ 301
+/stories/17.html /stories/blood-ties/ 301
+/stories/18.html /stories/the-forgotten-minute/ 301
+/stories/19.html /stories/the-question/ 301
+/stories/20.html /stories/the-sound-between-stars/ 301
+/stories/21.html /stories/the-shadow-garden/ 301
+/stories/22.html /stories/the-last-arena/ 301
+/stories/23.html /stories/the-ember-song/ 301
+/stories/24.html /stories/the-harvest/ 301
+/stories/25.html /stories/oliver-and-the-ocean/ 301
+/stories/26.html /stories/the-quiet-town/ 301
+/stories/27.html /stories/jaspers-flight/ 301
+/stories/28.html /stories/city-of-wonders/ 301
+/stories/29.html /stories/the-echoes-return/ 301
+/stories/30.html /stories/american-voices/ 301
+/stories/31.html /stories/the-cartographer-of-sea-serpents/ 301
+/stories/32.html /stories/you-did-this-yourself/ 301
+/stories/33.html /stories/the-time-auction/ 301
+/stories/34.html /stories/mabi/ 301
+/stories/35.html /stories/the-last-gift/ 301
+/stories/36.html /stories/ice-memory/ 301
+
+# ── Best lists: flat → Hugo dirs ────────────────────────────────────────
+/best-apocalyptic-fiction.html /best-list/best-apocalyptic-fiction/ 301
+/best-biography-books.html /best-list/best-biography-books/ 301
+/best-books-about-friendship.html /best-list/best-books-about-friendship/ 301
+/best-books-about-grief.html /best-list/best-books-about-grief/ 301
+/best-books-about-money.html /best-list/best-books-about-money/ 301
+/best-books-about-productivity.html /best-list/best-books-about-productivity/ 301
+/best-books-for-anxious-people.html /best-list/best-books-for-anxious-people/ 301
+/best-books-for-couples.html /best-list/best-books-for-couples/ 301
+/best-books-for-dad.html /best-list/best-books-for-dad/ 301
+/best-books-for-entrepreneurs.html /best-list/best-books-for-entrepreneurs/ 301
+/best-books-for-men.html /best-list/best-books-for-men/ 301
+/best-fantasy-books.html /best-list/best-fantasy-books/ 301
+/best-historical-fiction.html /best-list/best-historical-fiction/ 301
+/best-sci-fi-books.html /best-list/best-sci-fi-books/ 301
+/best-self-help-books.html /best-list/best-self-help-books/ 301
+/best-space-opera-books.html /best-list/best-space-opera-books/ 301
+/best-thriller-books.html /best-list/best-thriller-books/ 301
+/best-time-travel-books.html /best-list/best-time-travel-books/ 301
+
+# ── Books-like: flat → Hugo dirs ─────────────────────────────────────────
+/books-like-1984.html /books-like/books-like-1984/ 301
+/books-like-atomic-habits.html /books-like/books-like-atomic-habits/ 301
+/books-like-dark-matter.html /books-like/books-like-dark-matter/ 301
+/books-like-dune.html /books-like/books-like-dune/ 301
+/books-like-foundation.html /books-like/books-like-foundation/ 301
+/books-like-hyperion.html /books-like/books-like-hyperion/ 301
+/books-like-project-hail-mary.html /books-like/books-like-project-hail-mary/ 301
+/books-like-psychology-of-money.html /books-like/books-like-psychology-of-money/ 301
+/books-like-sci-fi-beginners.html /books-like/books-like-sci-fi-beginners/ 301
+/books-like-the-martian.html /books-like/books-like-the-martian/ 301
+/books-like-the-midnight-library.html /books-like/books-like-the-midnight-library/ 301
+/books-like-the-name-of-the-wind.html /books-like/books-like-the-name-of-the-wind/ 301
+
+# ── Section index pages: flat → Hugo dirs ──────────────────────────────
+/articles.html /articles/ 301
+/authors.html /authors/ 301
+/book-tracker.html /book-tracker/ 301
+/reading-lists.html /reading-lists/ 301
+/stories.html /stories/ 301
+
+# ── Root flat pages ──────────────────────────────────────────────────────
+/adventure.html /genres/adventure/ 301
+/biography.html /genres/biography/ 301
+/business.html /genres/business/ 301
+/children.html /genres/children/ 301
+/cultural.html /genres/cultural/ 301
+/dystopian.html /genres/dystopian/ 301
+/fantasy.html /genres/fantasy/ 301
+/fiction.html /genres/fiction/ 301
+/historical-fiction.html /genres/historical-fiction/ 301
+/literary.html /genres/literary/ 301
+
+# ── Policy pages ─────────────────────────────────────────────────────────
+/editorial-policy.html /privacy.html 301
+/affiliate-disclosure.html /privacy.html 301
+/reviewer-bio.html /about.html 301
+/contact.html /about/ 301
+/press.html /about/ 301

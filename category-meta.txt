@@ -1,0 +1,20 @@
+adventure,Adventure Books,Adventure stories strip everything down when the stakes are real.,3
+biography,Biography Books,In-depth biography reviews — lives that changed the world, told honestly.,8
+business,Business Books,Book reviews for entrepreneurs, investors, and builders.,10
+children,Children's Books,Story books for young readers — adventures, lessons, worlds to get lost in.,5
+cultural,Cultural Books,Stories rooted in specific cultures, histories, and traditions from around the world.,6
+dystopian,Dystopian Books,Societies pushed to the edge — and the people who push back.,7
+fantasy,Fantasy Books,Epic quests, hidden realms, and magic that costs something.,12
+fiction,Fiction Books,Literary fiction, cross-genre, and the books that don't fit neatly.,15
+historical-fiction,Historical Fiction Books,History filtered through story — the past as it was lived.,9
+literary,Literary Fiction Books,Prose as craft — literary fiction that rewards close reading.,8
+mystery,Mystery Books,Who did it, why it mattered, and whether justice found its mark.,11
+mythology,Mythology Books,Ancient stories that still echo — myths retold and reimagined.,4
+nonfiction,Nonfiction Books,Real world, real ideas — history, science, memoir, and truth.,14
+political,Political Books,Power, policy, and the people caught in between.,6
+romance,Romance Books,Love stories in every shade — from enemies to allies to something more.,8
+science-fiction,Science Fiction Books,Hard sci-fi, space operas, dystopia, cyberpunk — reviewed and ranked.,18
+science,Science Books,The universe explained — physics, biology, cosmology, and the edge of knowledge.,7
+self-help,Self-Help Books,Practical advice, mental models, and frameworks that actually work.,16
+spiritual,Spiritual Books,Questions about meaning, purpose, and the nature of existence.,5
+thriller,Thriller Books,High-stakes fiction that doesn't let up — thrillers with no spoilers.,13

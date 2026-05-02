@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-9312870448453345">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9312870448453345" crossorigin="anonymous"></script>
+
+  <title>Book Catalog | Bithues Reading Lab</title>
+  <meta name="description" content="Browse our complete catalog of book reviews. Find books in sci-fi, fantasy, self-help, spirituality, and more.">
+  <link rel="canonical" href="https://www.bithues.com/catalog.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Bithues</a>
+
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="catalog.html" class="nav-link nav-link--dropdown nav-link--active">Books</a>
+        <div class="nav-dropdown-content">
+          <a href="catalog.html" class="nav-dropdown-item">All Books</a>
+          <a href="book-tracker.html" class="nav-dropdown-item">Book Tracker</a>
+          <a href="category/self-help.html" class="nav-dropdown-item">Self-Help</a>
+          <a href="category/science-fiction.html" class="nav-dropdown-item">Sci-Fi</a>
+          <a href="category/fantasy.html" class="nav-dropdown-item">Fantasy</a>
+          <a href="category/nonfiction.html" class="nav-dropdown-item">Nonfiction</a>
+          <a href="category/thriller.html" class="nav-dropdown-item">Thriller</a>
+          <a href="category/biography.html" class="nav-dropdown-item">Biography</a>
+          <a href="category/business.html" class="nav-dropdown-item">Business</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <a href="reviews/index.html" class="nav-link nav-link--dropdown">Reviews</a>
+        <div class="nav-dropdown-content">
+          <a href="reviews/index.html" class="nav-dropdown-item">All Reviews</a>
+          <a href="category/self-help.html" class="nav-dropdown-item">Self-Help</a>
+          <a href="category/science-fiction.html" class="nav-dropdown-item">Sci-Fi</a>
+          <a href="category/fantasy.html" class="nav-dropdown-item">Fantasy</a>
+          <a href="category/nonfiction.html" class="nav-dropdown-item">Nonfiction</a>
+          <a href="category/thriller.html" class="nav-dropdown-item">Thriller</a>
+          <a href="category/biography.html" class="nav-dropdown-item">Biography</a>
+          <a href="category/business.html" class="nav-dropdown-item">Business</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <a href="stories.html" class="nav-link nav-link--dropdown">Stories</a>
+        <div class="nav-dropdown-content">
+          <a href="stories.html" class="nav-dropdown-item">All Stories</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown">
+        <a href="articles.html" class="nav-link nav-link--dropdown">Articles</a>
+        <div class="nav-dropdown-content">
+          <a href="articles.html" class="nav-dropdown-item">All Articles</a>
+          <a href="articles/books-like-project-hail-mary.html" class="nav-dropdown-item">Books Like Project Hail Mary</a>
+          <a href="articles/books-like-1984.html" class="nav-dropdown-item">Books Like 1984</a>
+          <a href="articles/books-like-atomic-habits.html" class="nav-dropdown-item">Books Like Atomic Habits</a>
+        </div>
+      </div>
+
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="#" class="btn btn--primary btn--sm">Sign In</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+  <div class="container">
+    <p class="hero__eyebrow">Bithues Reading Lab</p>
+    <h1 class="hero__title">Book <em>Catalog</em></h1>
+    <p class="hero__subtitle">Browse all 36 curated books. Find your next favorite read.</p>
+    <p style="margin-top: var(--space-3); font-size: 0.9rem; color: var(--gold);">See ratings, BSR, and prices across the full catalog → <a href="book-tracker.html" style="color: var(--gold); font-weight: 600;">Book Tracker</a></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILTERS
+============================================================ -->
+<div class="container" style="padding-top: var(--space-4);">
+  <div class="catalog-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Fiction">Fiction</button>
+    <button class="filter-btn" data-filter="Nonfiction">Nonfiction</button>
+    <button class="filter-btn" data-filter="Children">Children</button>
+    <button class="filter-btn" data-filter="Science">Science</button>
+    <button class="filter-btn" data-filter="Self-Help">Self-Help</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="cards-grid" id="catalogGrid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a3d5c 0%, #0d2438 100%);">
+        <span class="book-card__genre">Fiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/1.html">The Dawn of Civilization</a></h3>
+        <p class="book-card__author">by T. Stone</p>
+        <p class="book-card__excerpt">When a brutal winter kills his father, sixteen-year-old Koda fights to turn a wandering tribe into a walled village.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #3d1a3d 0%, #240d24 100%);">
+        <span class="book-card__genre">Fiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/2.html">The Richmond Cipher</a></h3>
+        <p class="book-card__author">by E. Maris</p>
+        <p class="book-card__excerpt">In Confederate Richmond, Mary carries secrets in her memory as she moves through the Executive Mansion.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a3d5c 0%, #0d2438 100%);">
+        <span class="book-card__genre">Sci-Fi</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/3.html">Red Horizon: Lunar Launch</a></h3>
+        <p class="book-card__author">by M. A. Hale</p>
+        <p class="book-card__excerpt">Commander Marcus Hale must launch the Eos Ark to deliver 250 young colonists to Mars.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a3d5c 0%, #0d2438 100%);">
+        <span class="book-card__genre">Sci-Fi / Dystopian</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/4.html">The Confluence Doctrine</a></h3>
+        <p class="book-card__author">by Alaric Wynn</p>
+        <p class="book-card__excerpt">In a world where suffering has been designed out, Orren hears something that doesn't fit.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a5c3d 0%, #0d3824 100%);">
+        <span class="book-card__genre">Nonfiction / Science</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/5.html">Living with a Moving Planet</a></h3>
+        <p class="book-card__author">by J. T. Hartley</p>
+        <p class="book-card__excerpt">Drawing on deep-time climate records and archaeology, this book shows how humans have adapted.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a5c3d 0%, #0d3824 100%);">
+        <span class="book-card__genre">Spiritual / Nonfiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/6.html">Beyond the Veil</a></h3>
+        <p class="book-card__author">by D. E. Harlan</p>
+        <p class="book-card__excerpt">A careful tour of evidence around what happens when we die.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #5c5c1a 0%, #38380d 100%);">
+        <span class="book-card__genre">Self-Help / Nonfiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/8.html">The Power of Changing Your Mind</a></h3>
+        <p class="book-card__author">by Evan R. Cole</p>
+        <p class="book-card__excerpt">In a culture that rewards confidence, this book shows how intellectual humility is a competitive edge.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #5c5c1a 0%, #38380d 100%);">
+        <span class="book-card__genre">Self-Help / Mindset</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/9.html">The Shadow Within</a></h3>
+        <p class="book-card__author">by Elena Maris</p>
+        <p class="book-card__excerpt">Instead of treating reactions as defects, learn to treat them as information.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #3d1a5c 0%, #241038 100%);">
+        <span class="book-card__genre">Fantasy / Sci-Fi</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/10.html">Echoes of Aetheris</a></h3>
+        <p class="book-card__author">by Aetheri Codex</p>
+        <p class="book-card__excerpt">Nine thousand years before history, a wounded alien ship falls onto a frozen steppe.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a3d5c 0%, #0d2438 100%);">
+        <span class="book-card__genre">Sci-Fi</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/12.html">Resonance Drift</a></h3>
+        <p class="book-card__author">by R. Zyrion</p>
+        <p class="book-card__excerpt">In Eden Prime's biolum spires, harmony hums—until a family detects a pulse that defies the weave.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a3d5c 0%, #0d2438 100%);">
+        <span class="book-card__genre">Sci-Fi</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/13.html">Symbiont Bloom</a></h3>
+        <p class="book-card__author">by Elowen Tidebloom</p>
+        <p class="book-card__excerpt">On volcanic isles of Lumengrove, dawn arrives through living leaf-glass.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a5c3d 0%, #0d3824 100%);">
+        <span class="book-card__genre">Science / Nonfiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/15.html">Physics of Insight</a></h3>
+        <p class="book-card__author">by Quantum Chronos</p>
+        <p class="book-card__excerpt">What if genius isn't rare—it's hidden inside every mind, waiting for the right switch?</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a5c3d 0%, #0d3824 100%);">
+        <span class="book-card__genre">Science / Nonfiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/16.html">The Physics of Time</a></h3>
+        <p class="book-card__author">by Quantum Chronos</p>
+        <p class="book-card__excerpt">A groundbreaking exploration: what if the universe is a block of spacetime?</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #3d1a5c 0%, #241038 100%);">
+        <span class="book-card__genre">Fantasy / Adventure</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/21.html">The Burning Song</a></h3>
+        <p class="book-card__author">by Rowan Ashcroft</p>
+        <p class="book-card__excerpt">When a cave lion marks Aken, the leader makes a choice that breaks every rule.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #5c5c1a 0%, #38380d 100%);">
+        <span class="book-card__genre">Self-Help / Nonfiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/22.html">Mindful Memory</a></h3>
+        <p class="book-card__author">by D. E. Harlan</p>
+        <p class="book-card__excerpt">Empowering retirees with science-backed exercises like memory palaces.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #5c1a1a 0%, #380d0d 100%);">
+        <span class="book-card__genre">Dystopian / Thriller</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/24.html">Rules of Survival</a></h3>
+        <p class="book-card__author">by Jorak Veldt</p>
+        <p class="book-card__excerpt">Roughly one million years ago, a boy learns the band's rules—and pays for them in skin.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #5c1a1a 0%, #380d0d 100%);">
+        <span class="book-card__genre">Thriller / Mystery</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/25.html">Blood Ember</a></h3>
+        <p class="book-card__author">by Jorak Veldt</p>
+        <p class="book-card__excerpt">Three parts trace how survival habits harden into protocol, law, and chant.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a5c3d 0%, #0d3824 100%);">
+        <span class="book-card__genre">Travel / Nonfiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/30.html">Discovering Washington DC</a></h3>
+        <p class="book-card__author">by Evelyn Carter</p>
+        <p class="book-card__excerpt">Beyond the monuments—a guide to the real DC.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #5c5c1a 0%, #38380d 100%);">
+        <span class="book-card__genre">Self-Help / Mindset</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/35.html">Time Investing</a></h3>
+        <p class="book-card__author">by H Harvey</p>
+        <p class="book-card__excerpt">A self-help guide showing how to prioritize yourself and your time.</p>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="book-card__cover" style="background: linear-gradient(145deg, #1a3d5c 0%, #0d2438 100%);">
+        <span class="book-card__genre">Historical Fiction</span>
+      </div>
+      <div class="book-card__body">
+        <h3 class="book-card__title"><a href="reviews/three-seas.html">Men of the Three Seas</a></h3>
+        <p class="book-card__author">by Leander Vassos</p>
+        <p class="book-card__excerpt">Epic historical voyage across the Stone Age, Bronze Age, and Iron Age — fathers, sons, wives, and widows choosing, again and again, between hunger and risk.</p>
+        <a href="https://amzn.to/4ctNX9E" target="_blank" rel="noopener" class="btn btn--primary btn--sm" style="margin-top: var(--space-3); display: inline-block;">Buy on Amazon</a>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">Bithues</p>
+        <p class="footer-tagline">Curated book reviews and reading recommendations for curious minds.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Explore</p>
+        <ul class="footer-links">
+          <li><a href="reviews/index.html">All Reviews</a></li>
+          <li><a href="articles.html">Reading Guides</a></li>
+          <li><a href="catalog.html">Browse by Genre</a></li>
+          <li><a href="book-tracker.html">Book Tracker</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="press.html">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="disclosure.html">Affiliate Disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Bithues Reading Lab · All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all') card.style.display = '';
+        else card.style.display = card.dataset.category === filter ? '' : 'none';
+      });
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
