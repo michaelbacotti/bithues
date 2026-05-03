@@ -1,0 +1,107 @@
+{{ define "sidebar-left" }}
+{{ partial "sidebar-left.html" . }}
+{{ end }}
+
+{{ define "sidebar-right" }}
+{{ partial "sidebar-right.html" . }}
+{{ end }}
+
+{{ define "page-content" }}
+<!-- About Hero -->
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div style="text-align:center;padding:2.5rem 2rem 1.5rem;border-bottom:1px solid var(--border);">
+    <div style="font-size:.72rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">About</div>
+    <h1 style="font-family:'Lora',serif;font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:.6rem;line-height:1.2;">About Bithues Reading Lab</h1>
+    <p style="font-size:1rem;color:var(--text-mid);max-width:540px;margin:0 auto;line-height:1.6;">We read so you don't have to — and surface the 1-2 ideas that actually matter.</p>
+  </div>
+</div>
+
+<!-- Our Story -->
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div style="padding:2.5rem 1.25rem;text-align:center;border-bottom:1px solid var(--border);">
+    <h2 style="font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:1.2rem;text-align:center;">Our Story</h2>
+    <p style="max-width:38em;margin:0 auto 1.4rem;padding:0;font-size:.9rem;color:var(--text-mid);line-height:1.75;text-align:left;">Bithues Reading Lab started with a simple frustration: there are millions of books, and almost no one has time to read them all. We set out to build something we'd want for ourselves — a place that cuts through the noise, does the deep reading, and comes back with an honest take on what's actually worth your time.</p>
+    <p style="max-width:38em;margin:0 auto 0;padding:0;font-size:.9rem;color:var(--text-mid);line-height:1.75;text-align:left;">We're not a publication chasing viral takes or a bestseller list repeating what everyone else already knows. We read cover to cover, think carefully about what a book is trying to do and whether it succeeds, and share what we find in plain language. Our reviews are independent, our opinions are our own, and we don't accept payment for coverage.</p>
+  </div>
+</div>
+
+<!-- What We Cover -->
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div style="padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--border);">
+    <h2 style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);">What We Cover</h2>
+  </div>
+  <div style="padding:1.25rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;">
+    {{ range (slice
+      (dict "name" "Historical Fiction" "desc" "Civil wars, empires, forgotten lives — history as it should be told, through character and consequence.")
+      (dict "name" "Sci-Fi" "desc" "Ideas dressed as stories. Tech, space, AI, and the futures we're building whether we mean to or not.")
+      (dict "name" "Thriller" "desc" "Pacing as craft. The books that make you skip dinner because you literally cannot stop reading.")
+      (dict "name" "Dystopian" "desc" "Warning signs in fiction form. What the darkest imagined futures tell us about where we're headed.")
+      (dict "name" "Literary Fiction" "desc" "Sentences that earn their complexity. Books that linger because they said something true about being human.")
+      (dict "name" "Self-Help" "desc" "The genuinely useful frameworks, and the ones that are just confidence tricks dressed up in nice paper.")
+    ) }}
+    <div style="background:var(--bg);border-radius:var(--radius);padding:.85rem;text-align:center;">
+      <div style="font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:.25rem;">{{ .name }}</div>
+      <div style="font-size:.75rem;color:var(--text-dim);line-height:1.45;">{{ .desc }}</div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<!-- Our Review Process -->
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div style="padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--border);">
+    <h2 style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);">Our Review Process</h2>
+  </div>
+  <div style="padding:1.25rem;display:flex;flex-direction:column;gap:.6rem;">
+    {{ range $i, $step := (slice
+      (dict "title" "We read the whole book" "desc" "No cliff's notes, no skimming the last chapter. We read it the way you would.")
+      (dict "title" "We identify the strongest idea" "desc" "Every good book has something it's trying to say. We figure out what that is and whether it lands.")
+      (dict "title" "We write an honest review" "desc" "What worked, what didn't, who it's for, and whether the price of admission is worth it.")
+      (dict "title" "No pay-for-play" "desc" "We don't accept free copies in exchange for positive coverage. Our credibility is the only thing we have.")
+      (dict "title" "Links help us keep the lights on" "desc" "Book links are affiliate-enabled. If you buy through us, a small commission helps sustain the lab — at no cost to you.")
+    ) }}
+    <div style="display:flex;align-items:flex-start;gap:.85rem;padding:.6rem 0;border-bottom:1px solid var(--border);{{ if eq $i 4 }}border-bottom:none;{{ end }}">
+      <div style="flex-shrink:0;width:28px;height:28px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:.82rem;font-weight:700;line-height:1;">{{ add $i 1 }}</div>
+      <div>
+        <div style="font-size:.875rem;font-weight:600;color:var(--navy);margin-bottom:.1rem;">{{ $step.title }}</div>
+        <div style="font-size:.78rem;color:var(--text-dim);">{{ $step.desc }}</div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<!-- Get in Touch -->
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div style="padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--border);">
+    <h2 style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);">Get in Touch</h2>
+  </div>
+  <div style="padding:1.25rem;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+      <div style="display:flex;flex-direction:column;gap:.3rem;">
+        <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-dim);">Email</span>
+        <span style="font-size:.875rem;color:var(--navy);"><a href="mailto:hello@bithues.com" style="color:var(--orange);text-decoration:none;">hello@bithues.com</a></span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.3rem;">
+        <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-dim);">Location</span>
+        <span style="font-size:.875rem;color:var(--navy);">Londonderry, NH</span>
+      </div>
+    </div>
+    <div>
+      <span style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-dim);margin-bottom:.35rem;">Follow</span>
+      <div style="display:flex;gap:.6rem;">
+        <a href="#" style="font-size:.82rem;font-weight:600;color:var(--orange);text-decoration:none;">X (Twitter)</a>
+        <a href="#" style="font-size:.82rem;font-weight:600;color:var(--orange);text-decoration:none;">Goodreads</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Submit a Book -->
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div style="padding:1.25rem 1.5rem;background:linear-gradient(135deg,rgba(201,80,26,.08),rgba(201,80,26,.04));border:1.5px solid var(--orange);border-radius:var(--radius);display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+    <span style="font-size:.875rem;color:var(--navy);font-weight:500;">Know a book we should review?</span>
+    <a href="{{ "mailto:hello@bithues.com" }}" style="font-size:.82rem;font-weight:700;color:var(--orange);text-decoration:none;white-space:nowrap;">Submit a Title →</a>
+  </div>
+</div>
+{{ end }}

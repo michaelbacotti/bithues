@@ -1,0 +1,13 @@
+{{/*
+  Review Card partial for catalog/genre grids.
+  Expects .Params: title, author, genre, rating, stars, cover_gradient, href, excerpt
+*/}}
+<a href="{{ .Permalink }}" class="review-card">
+  <div class="review-card-cover" style="background:{{ .Params.cover_gradient | safeCSS }};">
+    <span class="review-card-genre">{{ .Params.genre }}</span>
+    <span class="review-card-title">{{ .Params.title }}</span>
+  </div>
+  <div class="review-card-author">{{ .Params.author }}</div>
+  <div class="review-card-stars">{{ .Params.stars }}</div>
+  {{ with .Params.excerpt }}<p class="review-card-excerpt">{{ . }}</p>{{ end }}
+</a>

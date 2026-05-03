@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+  {{ if .Permalink }}<link rel="canonical" href="{{ .Permalink }}" />{{ end }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1V9M9JHJ2"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W1V9M9JHJ2');</script>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="{{ "/" | relLangURL }}" class="logo">Bithues <span>Reading Lab</span></a>
+    <ul>
+      <li><a href="{{ "/" | relLangURL }}">Home</a></li>
+      <li><a href="{{ "/reviews" | relLangURL }}">Reviews</a></li>
+      <li><a href="{{ "/stories" | relLangURL }}">Stories</a></li>
+      <li><a href="{{ "/articles" | relLangURL }}">Articles</a></li>
+      <li><a href="{{ "/about" | relLangURL }}">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="page">
+  {{ block "page-content" . }}{{ end }}
+</main>
+
+<footer>
+  <p>© <span id="year"></span> {{ .Site.Title }} · <a href="{{ "about" | relLangURL }}">About</a> · <a href="{{ "contact" | relLangURL }}">Contact</a> · <a href="{{ "privacy" | relLangURL }}">Privacy</a></p>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

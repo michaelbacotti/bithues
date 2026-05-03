@@ -4,6 +4,8 @@ title = "Bithues Reading Lab"
 titleSeoDelimiter = " | "
 enableRobotsTXT = true
 enable404 = true
+contentDir = "hugo-src/content"
+layoutDir = "hugo-src/layouts"
 
 [taxonomies]
   genre = "genres"
