@@ -1,0 +1,93 @@
+{{ define "sidebar-left" }}
+{{ partial "sidebar-left.html" . }}
+{{ end }}
+
+{{ define "sidebar-right" }}
+{{ partial "sidebar-right.html" . }}
+{{ end }}
+
+{{ define "page-content" }}
+<!-- Book Tracker Hero -->
+<div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;">
+  <div class="catalog-hero">
+    <div class="catalog-eyebrow">Live Tracker</div>
+    <h1 class="catalog-title">Book Tracker</h1>
+    <p class="catalog-subtitle">ASIN, star ratings, BSR rankings, category, price, and review status for all titles.</p>
+  </div>
+  <div class="catalog-filter-bar">
+    <input type="text" class="catalog-filter-input" placeholder="Search books…" />
+  </div>
+  <div class="catalog-genre-row">
+    <a href="{{ "/book-tracker" | relLangURL }}" class="catalog-genre-pill active">All</a>
+    <a href="{{ "/book-tracker" | relLangURL }}?format=kindle" class="catalog-genre-pill">Kindle</a>
+    <a href="{{ "/book-tracker" | relLangURL }}?format=audiobook" class="catalog-genre-pill">Audiobook</a>
+    <a href="{{ "/book-tracker" | relLangURL }}?format=print" class="catalog-genre-pill">Print</a>
+    <a href="{{ "/book-tracker" | relLangURL }}?reviewed=true" class="catalog-genre-pill">Reviewed</a>
+    <a href="{{ "/book-tracker" | relLangURL }}?status=to-read" class="catalog-genre-pill">To Read</a>
+  </div>
+</div>
+
+<!-- Tracker Stats -->
+<div class="tracker-stats-row" style="display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;margin-bottom:.85rem;">
+  {{ range .Params.tracker_stats | default (slice (dict "label" "Total Books" "value" "42") (dict "label" "Reviewed" "value" "36") (dict "label" "To-Read" "value" "6") (dict "label" "Avg Rating" "value" "4.1★") (dict "label" "Genres" "value" "12") (dict "label" "Kindle" "value" "28")) }}
+  <div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:.85rem;text-align:center;">
+    <div style="font-size:1.35rem;font-weight:700;color:var(--navy);margin-bottom:.15rem;">{{ .value }}</div>
+    <div style="font-size:.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;">{{ .label }}</div>
+  </div>
+  {{ end }}
+</div>
+
+<!-- Tracker Table -->
+<div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;">
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:.82rem;">
+      <thead>
+        <tr style="background:var(--bg);border-bottom:1px solid var(--border);">
+          {{ range (slice "Book" "Author" "Genre" "Format" "Rating" "BSR" "Price" "Status" "Review") }}
+          <th style="padding:.7rem .85rem;text-align:left;font-weight:600;color:var(--text-mid);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;">{{ . }}</th>
+          {{ end }}
+        </tr>
+      </thead>
+      <tbody>
+        {{ range .Params.tracked_books | default (slice
+          (dict "title" "The Covenant of Months" "author" "Simon Hawkin" "genre" "Sci-Fi" "format" "Kindle" "rating" "★★★★☆" "bsr" "12,440" "price" "$4.99" "status" "Reviewed" "review_link" "#")
+          (dict "title" "The Gilded Rails" "author" "Ellis C. Owen" "genre" "Historical" "format" "Print" "rating" "★★★★★" "bsr" "8,220" "price" "$18.99" "status" "Reviewed" "review_link" "#")
+          (dict "title" "Fractured Epochs" "author" "Sable & R. Mark" "genre" "Sci-Fi" "format" "Audio" "rating" "★★★☆☆" "bsr" "22,105" "price" "$14.99" "status" "Reviewed" "review_link" "#")
+          (dict "title" "The Alchemist" "author" "Paulo Coelho" "genre" "Fiction" "format" "Kindle" "rating" "★★★★★" "bsr" "3,100" "price" "$2.99" "status" "To-Read" "review_link" "#")
+        ) }}
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:.65rem .85rem;font-weight:600;color:var(--navy);white-space:nowrap;">{{ .title }}</td>
+          <td style="padding:.65rem .85rem;color:var(--text-mid);white-space:nowrap;">{{ .author }}</td>
+          <td style="padding:.65rem .85rem;"><span style="background:var(--orange-light);color:var(--orange);font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:10px;white-space:nowrap;">{{ .genre }}</span></td>
+          <td style="padding:.65rem .85rem;color:var(--text-dim);font-size:.72rem;">{{ .format }}</td>
+          <td style="padding:.65rem .85rem;color:var(--gold);letter-spacing:1px;font-size:.78rem;">{{ .rating }}</td>
+          <td style="padding:.65rem .85rem;color:var(--text-mid);font-variant-numeric:tabular-nums;">{{ .bsr }}</td>
+          <td style="padding:.65rem .85rem;color:var(--text-mid);">{{ .price }}</td>
+          <td style="padding:.65rem .85rem;"><span style="font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:10px;{{ if eq .status "Reviewed" }}background:rgba(74,176,107,.12);color:#2e9e5b{{ else }}background:var(--orange-light);color:var(--orange){{ end }}">{{ .status }}</span></td>
+          <td style="padding:.65rem .85rem;"><a href="{{ .review_link }}" style="color:var(--orange);text-decoration:none;font-size:.75rem;font-weight:600;">{{ if eq .status "Reviewed" }}Read →{{ else }}Add →{{ end }}</a></td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+  <div class="catalog-footer">
+    <a href="#" class="btn-load-more">Load More</a>
+  </div>
+</div>
+
+<!-- Quick Links -->
+<div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+  <a href="{{ "/reviews" | relLangURL }}" style="flex:1;min-width:160px;background:var(--bg);border-radius:4px;padding:.9rem;text-align:center;text-decoration:none;">
+    <div style="font-family:'Lora',serif;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.15rem;">Browse Reviews</div>
+    <div style="font-size:.75rem;color:var(--text-dim);">36 honest reviews</div>
+  </a>
+  <a href="{{ "/reading-lists" | relLangURL }}" style="flex:1;min-width:160px;background:var(--bg);border-radius:4px;padding:.9rem;text-align:center;text-decoration:none;">
+    <div style="font-family:'Lora',serif;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.15rem;">Reading Lists</div>
+    <div style="font-size:.75rem;color:var(--text-dim);">Curated collections</div>
+  </a>
+  <a href="{{ "/" | relLangURL }}" style="flex:1;min-width:160px;background:var(--bg);border-radius:4px;padding:.9rem;text-align:center;text-decoration:none;">
+    <div style="font-family:'Lora',serif;font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.15rem;">Home</div>
+    <div style="font-size:.75rem;color:var(--text-dim);">Back to start</div>
+  </a>
+</div>
+{{ end }}

@@ -1,0 +1,90 @@
+{{ define "sidebar-left" }}
+<div class="side-section">
+  <div class="side-section-title">Browse</div>
+  <a href="{{ "/reviews" | relLangURL }}" class="side-nav-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+    My Reviews<span class="count">36</span>
+  </a>
+  <a href="{{ "/authors" | relLangURL }}" class="side-nav-item active">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    Authors
+  </a>
+  <a href="{{ "/stories" | relLangURL }}" class="side-nav-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+    Short Stories
+  </a>
+  <a href="{{ "/articles" | relLangURL }}" class="side-nav-item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+    Articles
+  </a>
+</div>
+<div class="side-section">
+  <div class="side-section-title">My Shelves</div>
+  <a href="#" class="shelf-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Sci-Fi &amp; Dystopian</a>
+  <a href="#" class="shelf-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Historical Fiction</a>
+  <a href="#" class="shelf-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Thrillers</a>
+  <a href="#" class="create-shelf-link"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Create Shelf</a>
+</div>
+{{ end }}
+
+{{ define "sidebar-right" }}
+{{ partial "sidebar-right.html" . }}
+{{ end }}
+
+{{ define "page-content" }}
+{{ $authorName := .Title }}
+{{ $reviews := where (where $.Site.RegularPages "Section" "reviews") "Params.author" $authorName }}
+{{ $reviewCount := len $reviews }}
+
+<!-- Author Hero -->
+<div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem 2.25rem;margin-bottom:1.25rem;display:flex;gap:2rem;align-items:flex-start;">
+  <div style="width:110px;height:110px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+    {{ $initials := "" }}
+    {{ range (split $authorName " ") }}
+      {{ $initials = printf "%s%s" $initials (slice . 0 1) }}
+    {{ end }}
+    <span style="font-family:'Lora',serif;font-size:2.2rem;font-weight:700;color:#fff;">{{ $initials }}</span>
+  </div>
+  <div style="flex:1;">
+    <div style="font-size:.7rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem;">Author</div>
+    <h1 style="font-family:'Lora',serif;font-size:2rem;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:.3rem;">{{ $authorName }}</h1>
+    {{ with .Params.pen_name }}<div style="font-size:.85rem;color:var(--text-dim);margin-bottom:.75rem;">Pen Name: <em>{{ . }}</em></div>{{ end }}
+    {{ with .Params.genre }}
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.85rem;">
+      {{ range . }}
+      <span style="background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:.22rem .7rem;font-size:.75rem;color:var(--text-mid);">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ with .Params.bio }}<p style="font-size:.9rem;line-height:1.75;color:var(--text-mid);">{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<!-- Stats Row -->
+<div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:.85rem 1.25rem;margin-bottom:1.25rem;display:flex;gap:1.5rem;align-items:center;font-size:.82rem;color:var(--text-dim);">
+  <span><strong style="color:var(--navy);">{{ $reviewCount }}</strong> {{ if eq $reviewCount 1 }}book{{ else }}books{{ end }} reviewed</span>
+  {{ if $reviews }}
+  {{ $totalStars := 0 }}{{ range $reviews }}{{ $totalStars = add $totalStars (int (replace $.Params.stars "★" "")) }}{{ end }}
+  <span style="color:var(--border);">·</span>
+  <span>Avg rating <strong style="color:var(--navy);">{{ printf "%.1f" (div (float $totalStars) (float $reviewCount)) }}★</strong></span>
+  {{ end }}
+</div>
+
+<!-- Books Grid -->
+<div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.75rem 2rem;margin-bottom:1.25rem;">
+  <div style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:1.25rem;">Books by {{ $authorName }}</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;">
+    {{ range $reviews }}
+    <div style="background:var(--bg);border-radius:4px;padding:.75rem;text-align:center;">
+      <div style="width:100%;aspect-ratio:2/3;border-radius:3px;box-shadow:var(--shadow-md);margin-bottom:.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.5rem;background:linear-gradient(160deg,{{ .Params.cover_gradient }});">
+        <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.65);margin-bottom:.3rem;">{{ .Params.genre }}</span>
+        <span style="font-family:'Lora',serif;font-size:.68rem;font-weight:700;color:#fff;line-height:1.3;">{{ .Title }}</span>
+      </div>
+      <div style="font-family:'Lora',serif;font-size:.82rem;font-weight:600;color:var(--navy);line-height:1.3;margin-bottom:.2rem;"><a href="{{ .RelPermalink }}" style="color:inherit;text-decoration:none;">{{ .Title }}</a></div>
+      <div style="font-size:.72rem;color:var(--text-dim);margin-bottom:.2rem;">{{ .Params.year }}</div>
+      <div style="color:var(--gold);font-size:.78rem;letter-spacing:1px;">{{ .Params.stars }}</div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

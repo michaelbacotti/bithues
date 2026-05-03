@@ -1,0 +1,52 @@
+{{ define "sidebar-left" }}
+{{ partial "sidebar-left.html" . }}
+{{ end }}
+
+{{ define "sidebar-right" }}
+{{ partial "sidebar-right.html" . }}
+{{ end }}
+
+{{ define "page-content" }}
+
+{{/* HERO */}}
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem 1.5rem;text-align:center;margin-bottom:1.25rem;">
+  <div style="font-size:.72rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;">Best Books</div>
+  <h1 style="font-family:'Lora',serif;font-size:1.75rem;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:.5rem;">{{ .Title }}</h1>
+  <p style="font-size:.95rem;color:var(--text-mid);max-width:560px;margin:0 auto;">{{ .Description }}</p>
+</div>
+
+{{/* FILTER TABS */}}
+<div class="feed-section" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:.75rem 1rem;margin-bottom:.5rem;">
+  <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+    <a href="{{ "/reviews" | relLangURL }}" class="filter-tab" style="padding:.38rem .85rem;border:1.5px solid var(--border);border-radius:20px;font-size:.8rem;font-weight:500;color:var(--text-mid);text-decoration:none;transition:all .15s;">All Topics</a>
+    {{ range .Site.Taxonomies.genres }}
+    <a href="{{ .Page.RelPermalink }}" class="filter-tab" style="padding:.38rem .85rem;border:1.5px solid var(--border);border-radius:20px;font-size:.8rem;font-weight:500;color:var(--text-mid);text-decoration:none;transition:all .15s;">{{ .Page.Title }}</a>
+    {{ end }}
+  </div>
+</div>
+
+{{/* RANKED LIST */}}
+<div class="feed-section">
+  <div class="feed-section-body">
+    <div class="ranked-list" style="display:flex;flex-direction:column;gap:.65rem;">
+      {{ range $i, $book := .Pages }}
+      <div class="ranked-item" style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.25rem;display:flex;align-items:flex-start;gap:1.1rem;">
+        <div class="rank-number" style="width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;font-family:'Lora',serif;font-size:1.25rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">{{ add $i 1 }}</div>
+        <div class="ranked-body" style="flex:1;">
+          <div class="ranked-title" style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.15rem;line-height:1.3;">
+            <a href="{{ $book.Permalink }}" style="color:inherit;text-decoration:none;">{{ $book.Params.title }}</a>
+          </div>
+          <div class="ranked-author" style="font-size:.78rem;color:var(--text-dim);margin-bottom:.4rem;">by {{ $book.Params.author }} · {{ $book.Params.genre }}</div>
+          <div class="ranked-stars" style="color:var(--gold);font-size:.82rem;letter-spacing:1.5px;margin-bottom:.45rem;">{{ $book.Params.stars }}</div>
+          <p class="rank-blurb" style="font-size:.82rem;color:var(--text-mid);line-height:1.6;margin-bottom:.5rem;">{{ $book.Params.excerpt }}</p>
+          {{ with $book.Params.why }}
+          <span class="why-badge" style="display:inline-flex;align-items:center;gap:.3rem;background:var(--orange-light);color:var(--orange);font-size:.72rem;font-weight:600;padding:.22rem .6rem;border-radius:12px;">{{ . }}</span>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}

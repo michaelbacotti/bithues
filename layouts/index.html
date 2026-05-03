@@ -1,0 +1,201 @@
+{{ define "sidebar-left" }}
+{{ partial "sidebar-left.html" . }}
+{{ end }}
+
+{{ define "sidebar-right" }}
+{{ partial "sidebar-right.html" . }}
+{{ end }}
+
+{{ define "page-content" }}
+{{ $featured := index .Site.RegularPages 0 }}
+
+<!-- SECTION 1: Featured Review -->
+<div class="feed-section">
+  <div class="feed-section-header">
+    <h2>Featured Review</h2>
+    <a href="{{ "/reviews" | relLangURL }}">See all →</a>
+  </div>
+  <div class="feed-section-body">
+    <div class="featured-card">
+      <div class="featured-cover" style="background:linear-gradient(160deg,#3d1a0a,#7a3020,#5c2208);">
+        <span class="featured-cover-genre">Historical Fiction</span>
+        <span class="featured-cover-title">The Richmond Cipher</span>
+        <span class="featured-cover-year">2026</span>
+      </div>
+      <div class="featured-body">
+        <div class="featured-eyebrow">★★★★★ &nbsp;·&nbsp; 4.81 avg &nbsp;·&nbsp; 312 ratings</div>
+        <h2 class="featured-title">The Richmond Cipher</h2>
+        <div class="featured-author">by <a href="#">Marcus Reeve</a></div>
+        <div class="featured-stars">★★★★★</div>
+        <div class="featured-rating-meta">Historical Fiction · 14 hr 20 min read · Reviewed Apr 2026</div>
+        <p class="featured-excerpt">A gripping blend of Civil War intrigue and cryptographic puzzle, The Richmond Cipher follows Union operative Samuel Hale as he races to decode a rebel dispatch that could shift the tide of battle. Reeve's meticulous research and tight plotting make this a must-read for anyone who loves history wrapped in suspense.</p>
+        <div class="featured-actions">
+          <a href="{{ "/reviews/the-richmond-cipher" | relLangURL }}" class="btn-primary">Read Full Review</a>
+          <a href="#" class="btn-ghost">Add to Shelf</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: Top Rated -->
+<div class="feed-section">
+  <div class="feed-section-header">
+    <h2>Top Rated</h2>
+    <a href="{{ "/reviews" | relLangURL }}">See all →</a>
+  </div>
+  <div class="feed-section-body">
+    <div class="book-grid-3">
+      <div class="book-thumb">
+        <div class="book-thumb-cover" style="background:linear-gradient(160deg,#0d1b2a,#1b3a5c,#0d2340);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;">
+          <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Sci-Fi</span>
+          <span style="font-family:'Lora',serif;font-size:.65rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">The Blueprint</span>
+        </div>
+        <div class="book-thumb-title">The Blueprint</div>
+        <div class="book-thumb-author">Marcus Reeve</div>
+        <div class="book-thumb-stars">★★★★★ <span style="color:#999;">4.92</span></div>
+      </div>
+      <div class="book-thumb">
+        <div class="book-thumb-cover" style="background:linear-gradient(160deg,#3d0f1e,#6b1a30,#4a1225);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;">
+          <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Thriller</span>
+          <span style="font-family:'Lora',serif;font-size:.65rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">Rules of Survival</span>
+        </div>
+        <div class="book-thumb-title">Rules of Survival</div>
+        <div class="book-thumb-author">Marcus Reeve</div>
+        <div class="book-thumb-stars">★★★★½ <span style="color:#999;">4.78</span></div>
+      </div>
+      <div class="book-thumb">
+        <div class="book-thumb-cover" style="background:linear-gradient(160deg,#0d2b1a,#1a4a2e,#0f3520);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;">
+          <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Literary Fiction</span>
+          <span style="font-family:'Lora',serif;font-size:.65rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">The Last Garden</span>
+        </div>
+        <div class="book-thumb-title">The Last Garden</div>
+        <div class="book-thumb-author">Drew兴</div>
+        <div class="book-thumb-stars">★★★★★ <span style="color:#999;">4.89</span></div>
+      </div>
+      <div class="book-thumb">
+        <div class="book-thumb-cover" style="background:linear-gradient(160deg,#2e1a0e,#5c3317,#3d2210);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;">
+          <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Self-Help</span>
+          <span style="font-family:'Lora',serif;font-size:.65rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">Shadow Work Journal</span>
+        </div>
+        <div class="book-thumb-title">Shadow Work Journal</div>
+        <div class="book-thumb-author">H.K. Bell</div>
+        <div class="book-thumb-stars">★★★★½ <span style="color:#999;">4.71</span></div>
+      </div>
+      <div class="book-thumb">
+        <div class="book-thumb-cover" style="background:linear-gradient(160deg,#2a1a4a,#4a2d7a,#351f5c);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;">
+          <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Dystopian</span>
+          <span style="font-family:'Lora',serif;font-size:.65rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">Burning Song</span>
+        </div>
+        <div class="book-thumb-title">Burning Song</div>
+        <div class="book-thumb-author">Marcus Reeve</div>
+        <div class="book-thumb-stars">★★★★★ <span style="color:#999;">4.85</span></div>
+      </div>
+      <div class="book-thumb">
+        <div class="book-thumb-cover" style="background:linear-gradient(160deg,#4a1a00,#7a3010,#5c2208);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;">
+          <span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Historical Fiction</span>
+          <span style="font-family:'Lora',serif;font-size:.65rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">Blood Ember</span>
+        </div>
+        <div class="book-thumb-title">Blood Ember</div>
+        <div class="book-thumb-author">Marcus Reeve</div>
+        <div class="book-thumb-stars">★★★★½ <span style="color:#999;">4.67</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: Recent Reviews -->
+<div class="feed-section">
+  <div class="feed-section-header">
+    <h2>Recent Reviews</h2>
+    <a href="{{ "/reviews" | relLangURL }}">See all →</a>
+  </div>
+  <div class="feed-section-body">
+    <div class="review-list">
+      <div class="review-list-item">
+        <div class="review-list-thumb" style="background:linear-gradient(160deg,#0d1b2a,#1b3a5c,#0d2340);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.4rem;">
+          <span style="font-size:.45rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.7);margin-bottom:.3rem;text-align:center;">Sci-Fi</span>
+          <span style="font-family:'Lora',serif;font-size:.55rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">The Blueprint</span>
+        </div>
+        <div class="review-list-body">
+          <div class="review-list-title"><a href="{{ "/reviews/the-blueprint" | relLangURL }}">The Blueprint</a></div>
+          <div class="review-list-author">Marcus Reeve</div>
+          <div class="review-list-stars">★★★★★</div>
+          <p class="review-list-excerpt">An ingeniously constructed sci-fi thriller that asks what happens when a prototype AI begins redesigning itself beyond human parameters. Reeve paces the tension flawlessly.</p>
+          <div class="review-list-by">— Bithues Editorial</div>
+        </div>
+      </div>
+      <div class="review-list-item">
+        <div class="review-list-thumb" style="background:linear-gradient(160deg,#2e1a0e,#5c3317,#3d2210);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.4rem;">
+          <span style="font-size:.45rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.7);margin-bottom:.3rem;text-align:center;">Self-Help</span>
+          <span style="font-family:'Lora',serif;font-size:.55rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">Shadow Work Journal</span>
+        </div>
+        <div class="review-list-body">
+          <div class="review-list-title"><a href="{{ "/reviews/shadow-work-journal" | relLangURL }}">Shadow Work Journal</a></div>
+          <div class="review-list-author">H.K. Bell</div>
+          <div class="review-list-stars">★★★★½</div>
+          <p class="review-list-excerpt">Part guided journal, part philosophical treatise — Bell delivers a framework for confronting the parts of ourselves we bury. Surprisingly moving and deeply practical.</p>
+          <div class="review-list-by">— Bithues Editorial</div>
+        </div>
+      </div>
+      <div class="review-list-item">
+        <div class="review-list-thumb" style="background:linear-gradient(160deg,#3d0f1e,#6b1a30,#4a1225);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.4rem;">
+          <span style="font-size:.45rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.7);margin-bottom:.3rem;text-align:center;">Thriller</span>
+          <span style="font-family:'Lora',serif;font-size:.55rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">Rules of Survival</span>
+        </div>
+        <div class="review-list-body">
+          <div class="review-list-title"><a href="{{ "/reviews/rules-of-survival" | relLangURL }}">Rules of Survival</a></div>
+          <div class="review-list-author">Marcus Reeve</div>
+          <div class="review-list-stars">★★★★½</div>
+          <p class="review-list-excerpt">The pacing here is relentless. Every chapter ends on a hook that makes the next one unavoidable. Reeve has perfected the art of controlled urgency in thrillers.</p>
+          <div class="review-list-by">— Bithues Editorial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: Short Stories -->
+<div class="feed-section">
+  <div class="feed-section-header">
+    <h2>Short Stories</h2>
+    <a href="{{ "/stories" | relLangURL }}">See all →</a>
+  </div>
+  <div class="feed-section-body">
+    <div class="story-list">
+      {{ range $i, $page := (first 4 (where .Site.RegularPages "Section" "stories")) }}
+      <div class="story-list-item">
+        <div class="list-num">{{ add $i 1 }}</div>
+        <div class="list-body">
+          <div class="list-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></div>
+          <div class="list-meta">{{ $page.Params.genre }} · {{ $page.Params.read_time }}</div>
+          <p class="list-excerpt">{{ $page.Params.excerpt }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: Articles -->
+<div class="feed-section">
+  <div class="feed-section-header">
+    <h2>Articles</h2>
+    <a href="{{ "/articles" | relLangURL }}">See all →</a>
+  </div>
+  <div class="feed-section-body">
+    <div class="article-list">
+      {{ range $i, $page := (first 3 (where .Site.RegularPages "Section" "articles")) }}
+      <div class="article-list-item">
+        <div class="list-num">{{ add $i 1 }}</div>
+        <div class="list-body">
+          <div class="list-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></div>
+          <div class="list-meta">{{ $page.Params.topic }} · {{ $page.Params.read_time }}</div>
+          <p class="list-excerpt">{{ $page.Params.excerpt }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
