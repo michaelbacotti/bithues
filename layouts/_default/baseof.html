@@ -8,51 +8,34 @@
   {{ if .Permalink }}<link rel="canonical" href="{{ .Permalink }}" />{{ end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1V9M9JHJ2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-W1V9M9JHJ2');
-  </script>
-  {{ block "head_extra" . }}{{ end }}
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W1V9M9JHJ2');</script>
 </head>
 <body>
 
-  {{ block "topbar" . }}
-  <div class="topbar">
-    <a href="{{ "/" | relLangURL }}" class="topbar-logo">Bithues<span>.</span></a>
-    <div class="topbar-search">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Search books, authors, genres, stories…" />
-    </div>
-    <nav class="topbar-nav">
-      <a href="{{ "/" | relLangURL }}">Home</a>
-      <a href="{{ "/reviews" | relLangURL }}">Reviews</a>
-      <a href="{{ "/stories" | relLangURL }}">Stories</a>
-      <a href="{{ "/articles" | relLangURL }}">Articles</a>
-      <a href="{{ "/about" | relLangURL }}">About</a>
-      <a href="{{ "/contact" | relLangURL }}">Contact</a>
-    </nav>
+<nav>
+  <div class="inner">
+    <a href="{{ "/" | relLangURL }}" class="logo">Bithues <span>Reading Lab</span></a>
+    <ul>
+      <li><a href="{{ "/" | relLangURL }}">Home</a></li>
+      <li><a href="{{ "/reviews" | relLangURL }}">Reviews</a></li>
+      <li><a href="{{ "/stories" | relLangURL }}">Stories</a></li>
+      <li><a href="{{ "/articles" | relLangURL }}">Articles</a></li>
+      <li><a href="{{ "/about" | relLangURL }}">About</a></li>
+    </ul>
   </div>
-  {{ end }}
+</nav>
 
-  {{ block "main" . }}
-  <div class="page-layout">
-    <aside class="sidebar-left">{{ block "sidebar-left" . }}{{ end }}</aside>
-    <main class="feed">{{ block "page-content" . }}{{ end }}</main>
-    <aside class="sidebar-right">{{ block "sidebar-right" . }}{{ end }}</aside>
-  </div>
-  {{ end }}
+<main class="page">
+  {{ block "page-content" . }}{{ end }}
+</main>
 
-  <footer>
-    <p>© <span id="year"></span> {{ .Site.Title }} · <a href="{{ "about" | relLangURL }}">About</a> · <a href="{{ "contact" | relLangURL }}">Contact</a> · <a href="{{ "privacy" | relLangURL }}">Privacy</a></p>
-  </footer>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  {{ block "scripts_extra" . }}{{ end }}
+<footer>
+  <p>© <span id="year"></span> {{ .Site.Title }} · <a href="{{ "about" | relLangURL }}">About</a> · <a href="{{ "contact" | relLangURL }}">Contact</a> · <a href="{{ "privacy" | relLangURL }}">Privacy</a></p>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>
