@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="generator" content="Hugo 0.161.1">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bithues Reading Lab | Bithues Reading Lab</title>
-  <meta name="description" content="Your reading hub at Bithues — reviews, stories, and articles across every genre." />
-  <link rel="canonical" href="https://www.bithues.com/" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1V9M9JHJ2"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W1V9M9JHJ2');</script>
-</head>
-<body>
-
-<nav>
-  <div class="inner">
-    <a href="/" class="logo">Bithues <span>Reading Lab</span></a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/reviews">Reviews</a></li>
-      <li><a href="/stories">Stories</a></li>
-      <li><a href="/articles">Articles</a></li>
-      <li><a href="/about">About</a></li>
-    </ul>
-  </div>
-</nav>
-
-<main class="page">
-  
+{{ define "page-content" }}
 <style>
 .hero { margin-bottom: 56px; }
 .hero h1 { font-family: 'Lora',serif; font-size: 2.4rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 12px; }
@@ -98,196 +66,122 @@
 }
 </style>
 
-
+<!-- HERO -->
 <section class="hero">
   <h1>Find your next great read.</h1>
   <p>Honest reviews, original stories, and reading guides across sci-fi, historical fiction, thrillers, self-help, and more.</p>
 </section>
 
-
-
-
-
-
-
+<!-- FEATURED REVIEW -->
+{{ $featured := index .Site.RegularPages 0 }}
+{{ with $featured }}
+{{ $isbn := "" }}
+{{ if .Params.isbn }}{{ $isbn = .Params.isbn }}{{ end }}
+{{ if and (not $isbn) .Params.asin }}{{ $isbn = .Params.asin }}{{ end }}
 <section class="featured">
   <div class="cover-wrap">
-    
-    <div class="cover-placeholder"  style="background:linear-gradient(135deg,#3d1a0a,#7a3020);">
-      <span class="genre"></span>
-      <span class="title"></span>
+    {{ if $isbn }}
+    <img src="https://covers.openlibrary.org/b/isbn/{{ $isbn }}-L.jpg"
+         alt="{{ .Title }} cover"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+    {{ end }}
+    <div class="cover-placeholder" {{ if $isbn }}style="display:none"{{ end }} style="background:linear-gradient(135deg,#3d1a0a,#7a3020);">
+      <span class="genre">{{ index .Params.genre 0 }}</span>
+      <span class="title">{{ .Title }}</span>
     </div>
   </div>
   <div class="info">
     <div class="eyebrow">Featured Review</div>
-    <h3></h3>
-    <div class="byline">by <a href=""></a> · <a href="/genres//"></a></div>
+    <h3>{{ .Title }}</h3>
+    <div class="byline">by <a href="{{ .Params.author_url }}">{{ .Params.author }}</a> · <a href="/genres/{{ (index .Params.genre 0) | urlize }}/">{{ index .Params.genre 0 }}</a></div>
     <div class="rating"><span class="stars">★★★★☆</span> 4.0 · 36 reviews</div>
-    <p class="excerpt"></p>
+    <p class="excerpt">{{ .Description }}</p>
     <div class="tags">
-      
+      {{ range .Params.genre }}<span class="tag">{{ . }}</span>{{ end }}
     </div>
-    <a href="/best-list/best-science-fiction-books/" class="read-btn">Read Review →</a>
+    <a href="{{ .RelPermalink }}" class="read-btn">Read Review →</a>
   </div>
 </section>
+{{ end }}
 
-
-
+<!-- LATEST REVIEWS -->
 <section>
   <div class="section-header">
     <h2>Latest Reviews</h2>
-    <a href="/reviews">View all →</a>
+    <a href="{{ "/reviews" | relLangURL }}">View all →</a>
   </div>
   <div class="review-grid">
-    
-    
-    
-    
-    <a href="/articles/books-change-how-you-think/" class="review-card">
-      <div class="card-cover" >
-        <span class="genre">66</span>
-        <span class="title">5 Mind-Bending Books That Will Change How You Think</span>
+    {{ range first 4 (after 1 .Site.RegularPages) }}
+    {{ $isbn := "" }}
+    {{ if .Params.isbn }}{{ $isbn = .Params.isbn }}{{ end }}
+    {{ if and (not $isbn) .Params.asin }}{{ $isbn = .Params.asin }}{{ end }}
+    <a href="{{ .RelPermalink }}" class="review-card">
+      <div class="card-cover" {{ with .Params.cover_gradient }}style="background:{{ . }}"{{ end }}>
+        <span class="genre">{{ index .Params.genre 0 }}</span>
+        <span class="title">{{ .Title }}</span>
       </div>
       <div class="card-body">
-        <div class="card-title">5 Mind-Bending Books That Will Change How You Think</div>
-        <div class="card-author"></div>
+        <div class="card-title">{{ .Title }}</div>
+        <div class="card-author">{{ .Params.author }}</div>
         <div class="card-rating">★★★★☆</div>
       </div>
     </a>
-    
-    
-    
-    
-    <a href="/reviews/home-for-anya/" class="review-card">
-      <div class="card-cover" style="background:ZgotmplZ">
-        <span class="genre">82</span>
-        <span class="title">A Home for Anya</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">A Home for Anya</div>
-        <div class="card-author">Lena Ashfield</div>
-        <div class="card-rating">★★★★☆</div>
-      </div>
-    </a>
-    
-    
-    
-    
-    <a href="/about/" class="review-card">
-      <div class="card-cover" >
-        <span class="genre"></span>
-        <span class="title">About</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">About</div>
-        <div class="card-author"></div>
-        <div class="card-rating">★★★★☆</div>
-      </div>
-    </a>
-    
-    
-    
-    
-    <a href="/genres/adventure/" class="review-card">
-      <div class="card-cover" >
-        <span class="genre"></span>
-        <span class="title">Adventure</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">Adventure</div>
-        <div class="card-author"></div>
-        <div class="card-rating">★★★★☆</div>
-      </div>
-    </a>
-    
+    {{ end }}
   </div>
 </section>
 
-
+<!-- BROWSE BY GENRE -->
 <section>
   <div class="section-header">
     <h2>Browse by Genre</h2>
   </div>
   <div class="genre-list">
-    <a href="/genres/sci-fi" class="genre-pill">Sci-Fi</a>
-    <a href="/genres/historical-fiction" class="genre-pill">Historical Fiction</a>
-    <a href="/genres/thriller" class="genre-pill">Thriller</a>
-    <a href="/genres/self-help" class="genre-pill">Self-Help</a>
-    <a href="/genres/literary" class="genre-pill">Literary Fiction</a>
-    <a href="/genres/fantasy" class="genre-pill">Fantasy</a>
-    <a href="/genres/mystery" class="genre-pill">Mystery</a>
-    <a href="/genres/biography" class="genre-pill">Biography</a>
-    <a href="/genres/adventure" class="genre-pill">Adventure</a>
-    <a href="/genres/dystopian" class="genre-pill">Dystopian</a>
-    <a href="/genres/romance" class="genre-pill">Romance</a>
-    <a href="/genres/children" class="genre-pill">Children's</a>
+    <a href="{{ "/genres/sci-fi" | relLangURL }}" class="genre-pill">Sci-Fi</a>
+    <a href="{{ "/genres/historical-fiction" | relLangURL }}" class="genre-pill">Historical Fiction</a>
+    <a href="{{ "/genres/thriller" | relLangURL }}" class="genre-pill">Thriller</a>
+    <a href="{{ "/genres/self-help" | relLangURL }}" class="genre-pill">Self-Help</a>
+    <a href="{{ "/genres/literary" | relLangURL }}" class="genre-pill">Literary Fiction</a>
+    <a href="{{ "/genres/fantasy" | relLangURL }}" class="genre-pill">Fantasy</a>
+    <a href="{{ "/genres/mystery" | relLangURL }}" class="genre-pill">Mystery</a>
+    <a href="{{ "/genres/biography" | relLangURL }}" class="genre-pill">Biography</a>
+    <a href="{{ "/genres/adventure" | relLangURL }}" class="genre-pill">Adventure</a>
+    <a href="{{ "/genres/dystopian" | relLangURL }}" class="genre-pill">Dystopian</a>
+    <a href="{{ "/genres/romance" | relLangURL }}" class="genre-pill">Romance</a>
+    <a href="{{ "/genres/children" | relLangURL }}" class="genre-pill">Children's</a>
   </div>
 </section>
 
-
+<!-- ARTICLES -->
 <section>
   <div class="section-header">
     <h2>Reading Guides</h2>
-    <a href="/articles">All articles →</a>
+    <a href="{{ "/articles" | relLangURL }}">All articles →</a>
   </div>
   <div class="articles-grid">
-    
-    <a href="/articles/books-change-how-you-think/" class="article-card">
-      <div class="article-tag"></div>
-      <h3>5 Mind-Bending Books That Will Change How You Think</h3>
-      <p>Five mind-bending books that will change how you think about reality, time, consciousness, and your own mind.</p>
+    {{ range first 3 (where .Site.RegularPages "Type" "articles") }}
+    <a href="{{ .RelPermalink }}" class="article-card">
+      <div class="article-tag">{{ index .Params.tags 0 }}</div>
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Description }}</p>
     </a>
-    
-    <a href="/articles/aliens-disclosure-2026/" class="article-card">
-      <div class="article-tag"></div>
-      <h3>Alien Disclosure 2026: The Year Everything Changed — And What Comes Next</h3>
-      <p>Bithues Reading Lab — Discover your next favorite book.</p>
-    </a>
-    
-    <a href="/articles/hopepunk-beginners-guide/" class="article-card">
-      <div class="article-tag"></div>
-      <h3>Beginner&#39;s Guide to Hopepunk</h3>
-      <p>What is hopepunk? A beginner&#39;s guide to the sci-fi movement that&#39;s reimagining the future.</p>
-    </a>
-    
+    {{ end }}
   </div>
 </section>
 
-
+<!-- STORIES -->
 <section>
   <div class="section-header">
     <h2>Original Stories</h2>
-    <a href="/stories">All stories →</a>
+    <a href="{{ "/stories" | relLangURL }}">All stories →</a>
   </div>
   <div class="stories-grid">
-    
-    <a href="/stories/american-voices/" class="story-card">
-      <div class="story-tag"></div>
-      <h3>American Voices — Story</h3>
-      <p>Original literary fiction short story — American Voices</p>
+    {{ range first 3 (where .Site.RegularPages "Type" "stories") }}
+    <a href="{{ .RelPermalink }}" class="story-card">
+      <div class="story-tag">{{ index .Params.tags 0 }}</div>
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Description }}</p>
     </a>
-    
-    <a href="/stories/before-the-streetlights-came-on/" class="story-card">
-      <div class="story-tag"></div>
-      <h3>Before the Streetlights Came On — Story</h3>
-      <p>Original stories short story — Before the Streetlights Came On</p>
-    </a>
-    
-    <a href="/stories/blood-ties/" class="story-card">
-      <div class="story-tag"></div>
-      <h3>Blood Ties — Story</h3>
-      <p>Original dark fantasy short story — Blood Ties</p>
-    </a>
-    
+    {{ end }}
   </div>
 </section>
-
-</main>
-
-<footer>
-  <p>© <span id="year"></span> Bithues Reading Lab · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a></p>
-</footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-
-</body>
-</html>
+{{ end }}
