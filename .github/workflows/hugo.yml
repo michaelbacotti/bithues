@@ -29,6 +29,11 @@ jobs:
       - name: Build Hugo site
         run: hugo --minify --gc
 
+      - name: Replace Hugo output with converted site
+        run: |
+          rm -rf public/*
+          cp -R blog-bithues-converted/. public/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -40,3 +45,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
