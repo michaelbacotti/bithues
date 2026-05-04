@@ -1,351 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bithues — A Book Blog</title>
+	<meta name="generator" content="Hugo 0.161.1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bithues Reading Lab | Bithues Reading Lab</title>
+  <meta name="description" content="Your reading hub at Bithues — reviews, stories, and articles across every genre." />
+  <link rel="canonical" href="https://www.bithues.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1V9M9JHJ2"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W1V9M9JHJ2');</script>
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Bithues</a>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link active">Feed</a>
-        <a href="browse.html" class="nav-link">Browse</a>
-        <a href="about.html" class="nav-link">About</a>
+<nav>
+  <div class="inner">
+    <a href="/" class="logo">Bithues <span>Reading Lab</span></a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/reviews">Reviews</a></li>
+      <li><a href="/stories">Stories</a></li>
+      <li><a href="/articles">Articles</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="page">
+  
+<style>
+.hero { margin-bottom: 56px; }
+.hero h1 { font-family: 'Lora',serif; font-size: 2.4rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 12px; }
+.hero p { font-size: 1.05rem; color: var(--text-secondary); max-width: 520px; line-height: 1.7; }
+
+.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-header h2 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+.section-header a { font-size: 0.8rem; color: var(--accent); text-decoration: none; font-weight: 500; }
+.section-header a:hover { text-decoration: underline; }
+
+.featured { display: grid; grid-template-columns: 200px 1fr; gap: 36px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 48px; transition: box-shadow 0.2s; }
+.featured:hover { box-shadow: var(--shadow-md); }
+.featured .cover-wrap { position: relative; }
+.featured .cover-wrap img { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); display: block; }
+.featured .cover-placeholder { width: 100%; aspect-ratio: 2/3; border-radius: var(--radius-sm); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; text-align: center; }
+.featured .cover-placeholder .genre { font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.featured .cover-placeholder .title { font-family: 'Lora',serif; font-size: 0.85rem; font-weight: 700; color: #fff; line-height: 1.3; }
+.featured .info .eyebrow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 8px; }
+.featured .info h3 { font-family: 'Lora',serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; }
+.featured .info .byline { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+.featured .info .byline a { color: var(--accent); text-decoration: none; }
+.featured .info .byline a:hover { text-decoration: underline; }
+.featured .info .rating { display: inline-flex; align-items: center; gap: 4px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 16px; }
+.featured .info .rating .stars { color: #f59e0b; }
+.featured .info .excerpt { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; }
+.featured .info .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.featured .info .tag { background: var(--bg); border: 1px solid var(--border); border-radius: 100px; padding: 4px 10px; font-size: 0.72rem; color: var(--text-secondary); }
+.featured .info .read-btn { display: inline-flex; margin-top: 20px; background: var(--text-primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; transition: background 0.15s; }
+.featured .info .read-btn:hover { background: #333; }
+
+.review-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 48px; }
+.review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; display: block; transition: box-shadow 0.2s, transform 0.2s; }
+.review-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.review-card .card-cover { aspect-ratio: 2/3; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; text-align: center; }
+.review-card .card-cover .genre { font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.review-card .card-cover .title { font-family: 'Lora',serif; font-size: 0.75rem; font-weight: 700; color: #fff; line-height: 1.3; }
+.review-card .card-body { padding: 14px; }
+.review-card .card-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; color: var(--text-primary); }
+.review-card .card-author { font-size: 0.72rem; color: var(--text-muted); }
+.review-card .card-rating { font-size: 0.72rem; color: #f59e0b; margin-top: 6px; }
+
+.genre-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+.genre-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 8px 16px; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+.genre-pill:hover { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+
+.articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
+.article-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-decoration: none; transition: box-shadow 0.2s; }
+.article-card:hover { box-shadow: var(--shadow-md); }
+.article-card .article-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 8px; }
+.article-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); line-height: 1.4; margin-bottom: 6px; }
+.article-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+.stories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.story-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-decoration: none; transition: box-shadow 0.2s; }
+.story-card:hover { box-shadow: var(--shadow-md); }
+.story-card .story-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7c3aed; margin-bottom: 8px; }
+.story-card h3 { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); line-height: 1.4; margin-bottom: 6px; }
+.story-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+@media (max-width: 640px) {
+  .featured { grid-template-columns: 1fr; gap: 20px; }
+  .featured .cover-wrap { max-width: 180px; margin: 0 auto; }
+  .review-grid { grid-template-columns: repeat(2, 1fr); }
+  .articles-grid, .stories-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+
+<section class="hero">
+  <h1>Find your next great read.</h1>
+  <p>Honest reviews, original stories, and reading guides across sci-fi, historical fiction, thrillers, self-help, and more.</p>
+</section>
+
+
+
+
+
+
+
+<section class="featured">
+  <div class="cover-wrap">
+    
+    <div class="cover-placeholder"  style="background:linear-gradient(135deg,#3d1a0a,#7a3020);">
+      <span class="genre"></span>
+      <span class="title"></span>
+    </div>
+  </div>
+  <div class="info">
+    <div class="eyebrow">Featured Review</div>
+    <h3></h3>
+    <div class="byline">by <a href=""></a> · <a href="/genres//"></a></div>
+    <div class="rating"><span class="stars">★★★★☆</span> 4.0 · 36 reviews</div>
+    <p class="excerpt"></p>
+    <div class="tags">
+      
+    </div>
+    <a href="/best-list/best-science-fiction-books/" class="read-btn">Read Review →</a>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="section-header">
+    <h2>Latest Reviews</h2>
+    <a href="/reviews">View all →</a>
+  </div>
+  <div class="review-grid">
+    
+    
+    
+    
+    <a href="/articles/books-change-how-you-think/" class="review-card">
+      <div class="card-cover" >
+        <span class="genre">66</span>
+        <span class="title">5 Mind-Bending Books That Will Change How You Think</span>
       </div>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div class="hero-inner">
-      <h1 class="hero-title">Bithues</h1>
-      <p class="hero-tagline">A book blog about fiction, ideas, and the worlds between the pages. Reviews, reading lists, articles, and original short fiction.</p>
-    </div>
-  </header>
-
-  <main class="main">
-    <div class="feed">
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/5-mind-bending-books-that-will-change-how-you-think.html">5 Mind-Bending Books That Will Change How You Think</a></h2>
-        <p class="card-excerpt">5 Mind-Bending Books That Will Change How You Think These books will reshape how you see reality, time, consciousness, and your own mind. Some books entertain. Some inform. But the best books do…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Story -->
-      <article class="card card--story">
-        <div class="card-meta-top">
-          <span class="tag tag--story">Short Story</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/american-voices-story.html">American Voices — Story</a></h2>
-        <p class="card-excerpt"></p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">8 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Story -->
-      <article class="card card--story">
-        <div class="card-meta-top">
-          <span class="tag tag--story">Short Story</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/before-the-streetlights-came-on-story.html">Before the Streetlights Came On — Story</a></h2>
-        <p class="card-excerpt"></p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">8 min read</span>
-        </div>
-      </article>
+      <div class="card-body">
+        <div class="card-title">5 Mind-Bending Books That Will Change How You Think</div>
+        <div class="card-author"></div>
+        <div class="card-rating">★★★★☆</div>
+      </div>
+    </a>
+    
+    
+    
+    
+    <a href="/reviews/home-for-anya/" class="review-card">
+      <div class="card-cover" style="background:ZgotmplZ">
+        <span class="genre">82</span>
+        <span class="title">A Home for Anya</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">A Home for Anya</div>
+        <div class="card-author">Lena Ashfield</div>
+        <div class="card-rating">★★★★☆</div>
+      </div>
+    </a>
+    
+    
+    
+    
+    <a href="/about/" class="review-card">
+      <div class="card-cover" >
+        <span class="genre"></span>
+        <span class="title">About</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">About</div>
+        <div class="card-author"></div>
+        <div class="card-rating">★★★★☆</div>
+      </div>
+    </a>
+    
+    
+    
+    
+    <a href="/genres/adventure/" class="review-card">
+      <div class="card-cover" >
+        <span class="genre"></span>
+        <span class="title">Adventure</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Adventure</div>
+        <div class="card-author"></div>
+        <div class="card-rating">★★★★☆</div>
+      </div>
+    </a>
+    
+  </div>
+</section>
 
 
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/beginner-39-s-guide-to-hopepunk.html">Beginner&#39;s Guide to Hopepunk</a></h2>
-        <p class="card-excerpt">Beginner&rsquo;s Guide to Hopepunk What is hopepunk? The sci-fi movement reimagining the future Hopepunk (noun): A sci-fi genre that imagines hopeful futures where humanity solves problems through…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
+<section>
+  <div class="section-header">
+    <h2>Browse by Genre</h2>
+  </div>
+  <div class="genre-list">
+    <a href="/genres/sci-fi" class="genre-pill">Sci-Fi</a>
+    <a href="/genres/historical-fiction" class="genre-pill">Historical Fiction</a>
+    <a href="/genres/thriller" class="genre-pill">Thriller</a>
+    <a href="/genres/self-help" class="genre-pill">Self-Help</a>
+    <a href="/genres/literary" class="genre-pill">Literary Fiction</a>
+    <a href="/genres/fantasy" class="genre-pill">Fantasy</a>
+    <a href="/genres/mystery" class="genre-pill">Mystery</a>
+    <a href="/genres/biography" class="genre-pill">Biography</a>
+    <a href="/genres/adventure" class="genre-pill">Adventure</a>
+    <a href="/genres/dystopian" class="genre-pill">Dystopian</a>
+    <a href="/genres/romance" class="genre-pill">Romance</a>
+    <a href="/genres/children" class="genre-pill">Children's</a>
+  </div>
+</section>
 
 
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/beginner-39-s-guide-to-quantum-physics.html">Beginner&#39;s Guide to Quantum Physics</a></h2>
-        <p class="card-excerpt">Beginner&rsquo;s Guide to Quantum Physics Wave-particle duality, superposition, entanglement — and what it means for consciousness Quantum physics is the most successful theory in human history. It…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
+<section>
+  <div class="section-header">
+    <h2>Reading Guides</h2>
+    <a href="/articles">All articles →</a>
+  </div>
+  <div class="articles-grid">
+    
+    <a href="/articles/books-change-how-you-think/" class="article-card">
+      <div class="article-tag"></div>
+      <h3>5 Mind-Bending Books That Will Change How You Think</h3>
+      <p>Five mind-bending books that will change how you think about reality, time, consciousness, and your own mind.</p>
+    </a>
+    
+    <a href="/articles/aliens-disclosure-2026/" class="article-card">
+      <div class="article-tag"></div>
+      <h3>Alien Disclosure 2026: The Year Everything Changed — And What Comes Next</h3>
+      <p>Bithues Reading Lab — Discover your next favorite book.</p>
+    </a>
+    
+    <a href="/articles/hopepunk-beginners-guide/" class="article-card">
+      <div class="article-tag"></div>
+      <h3>Beginner&#39;s Guide to Hopepunk</h3>
+      <p>What is hopepunk? A beginner&#39;s guide to the sci-fi movement that&#39;s reimagining the future.</p>
+    </a>
+    
+  </div>
+</section>
 
 
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-for-book-clubs-picks-that-spark-real-discussion.html">Best Books for Book Clubs: Picks That Spark Real Discussion</a></h2>
-        <p class="card-excerpt">Best Books for Book Clubs: Picks That Spark Real Discussion Novels that spark real discussion — no easy answers, characters worth arguing about TL;DR: A great book club book doesn&rsquo;t have a…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
+<section>
+  <div class="section-header">
+    <h2>Original Stories</h2>
+    <a href="/stories">All stories →</a>
+  </div>
+  <div class="stories-grid">
+    
+    <a href="/stories/american-voices/" class="story-card">
+      <div class="story-tag"></div>
+      <h3>American Voices — Story</h3>
+      <p>Original literary fiction short story — American Voices</p>
+    </a>
+    
+    <a href="/stories/before-the-streetlights-came-on/" class="story-card">
+      <div class="story-tag"></div>
+      <h3>Before the Streetlights Came On — Story</h3>
+      <p>Original stories short story — Before the Streetlights Came On</p>
+    </a>
+    
+    <a href="/stories/blood-ties/" class="story-card">
+      <div class="story-tag"></div>
+      <h3>Blood Ties — Story</h3>
+      <p>Original dark fantasy short story — Blood Ties</p>
+    </a>
+    
+  </div>
+</section>
 
+</main>
 
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-for-dad.html">Best Books for Dad</a></h2>
-        <p class="card-excerpt">Best Books for Dad Thoughtful gift ideas for every type of dad Father&rsquo;s Day, Christmas, or just because — finding the right book for Dad can be tricky. Does he read at all? Does he prefer…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-for-entrepreneurs.html">Best Books for Entrepreneurs</a></h2>
-        <p class="card-excerpt">Best Books for Entrepreneurs The books that actually help founders think clearer and move faster TL;DR: Most entrepreneur books are written to be referenced, not read cover to cover. These are the…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-for-retired-military-leaders.html">Best Books for Retired Military Leaders</a></h2>
-        <p class="card-excerpt">Best Books for Retired Military Leaders Thoughtfully curated reads for veterans transitioning to civilian life TL;DR: Transitioning from military to civilian life is one of the most significant…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-for-spring-2026.html">Best Books for Spring 2026</a></h2>
-        <p class="card-excerpt"></p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-for-summer-2026.html">Best Books for Summer 2026</a></h2>
-        <p class="card-excerpt">Best Books for Summer 2026 Your ultimate summer reading list — from beach reads to mind-expanding adventures Summer reading means something different to everyone. For some, it&rsquo;s beach novels by…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-books-on-discipline-and-willpower.html">Best Books on Discipline and Willpower</a></h2>
-        <p class="card-excerpt">Best Books on Discipline and Willpower Science-backed reads on building unshakeable discipline TL;DR: Willpower is finite and depletes with use — the most effective path to lasting discipline…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-business-amp-leadership-books-of-2026.html">Best Business &amp; Leadership Books of 2026</a></h2>
-        <p class="card-excerpt">Home › Articles › Best Business Books 2026 ← Back to Articles Best Business Best Business & Leadership Books of 2026 Leadership Books of 2026 The reads that will actually move the needle for you this…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-debut-novels-by-first-time-authors.html">Best Debut Novels by First-Time Authors</a></h2>
-        <p class="card-excerpt">Best Debut Novels: When Authors Arrive Fully Formed Authors who arrived fully formed — exceptional debuts across every genre TL;DR: A debut novel is a high-wire act with no safety net — and some…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-historical-fiction-for-beginners.html">Best Historical Fiction for Beginners</a></h2>
-        <p class="card-excerpt">Best Historical Fiction for Beginners: Your Gateway to the Past New to the genre? Start here — the most engaging gateway novels TL;DR: Historical fiction is history you can feel. These gateway novels…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-sci-fi-books-about-ai.html">Best Sci-Fi Books About AI</a></h2>
-        <p class="card-excerpt">Best Sci-Fi Books About AI From Asimov to today — the best fiction on AI, machine consciousness, and the ethics of thinking machines TL;DR: Science fiction has been asking the right questions about…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-sci-fi-books-of-2026.html">Best Sci-Fi Books of 2026</a></h2>
-        <p class="card-excerpt">Best Sci-Fi Books of 2026 Hopepunk, first contact thrillers, and indie voices define the year 2026 is turning out to be a remarkable year for science fiction. While the big publishers continue…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-sci-fi-on-kindle-unlimited.html">Best Sci-Fi on Kindle Unlimited</a></h2>
-        <p class="card-excerpt">Best Sci-Fi on Kindle Unlimited: Indie Gems and Trad-Pub Picks The best sci-fi hiding in your Kindle Unlimited subscription TL;DR: Kindle Unlimited isn&rsquo;t just indie self-published work — a…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-science-fiction-books-for-beginners-the-ultimate-comparison-guide.html">Best Science Fiction Books for Beginners — The Ultimate Comparison Guide</a></h2>
-        <p class="card-excerpt">Best Science Fiction Books for Beginners — The Ultimate Comparison Guide [nav placeholder - match site nav] [header: Bithues Reading Lab] Best Science Fiction Books for Beginners: The Ultimate…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-      <!-- Article -->
-      <article class="card card--article">
-        <div class="card-meta-top">
-          <span class="tag tag--article">Article</span>
-          <span class="card-date">2026-01-01</span>
-        </div>
-        <h2 class="card-title"><a href="/static/content/best-space-opera-sci-fi-novels.html">Best Space Opera Sci-Fi Novels</a></h2>
-        <p class="card-excerpt">Best Space Opera: The Ultimate Guide to Galactic Adventures Epic world-building, galactic politics, and the grandest adventure stories ever told TL;DR: Space opera is science fiction at its most…</p>
-        <div class="card-footer">
-          <span class="card-genre"></span>
-          <span class="card-read-time">10 min read</span>
-        </div>
-      </article>
-
-
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">Bithues</div>
-      <nav class="footer-nav">
-        <a href="index.html">Feed</a>
-        <a href="browse.html">Browse</a>
-        <a href="about.html">About</a>
-      </nav>
-      <p class="footer-copy">&copy; 2026 Bithues. All rights reserved.</p>
-    </div>
-  </footer>
+<footer>
+  <p>© <span id="year"></span> Bithues Reading Lab · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a></p>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>
