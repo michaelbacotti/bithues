@@ -1,4 +1,4 @@
-name: Build and Deploy Hugo to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -21,18 +21,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.161.1'
-
-      - name: Build Hugo site
-        run: hugo --minify --gc
-
-      - name: Replace Hugo output with converted site
+      - name: Copy site to public
         run: |
-          rm -rf public/*
-          cp -R blog-bithues-converted/. public/
+          rm -rf public
+          mkdir -p public
+          cp -R ./. public/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -45,4 +38,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
