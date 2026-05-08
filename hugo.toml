@@ -1,22 +1,14 @@
 baseURL = "https://www.bithues.com/"
 locale = "en-us"
-title = "Bithues Reading Lab"
-titleSeoDelimiter = " | "
-enableRobotsTXT = true
-enable404 = true
+title = "Bithues"
 contentDir = "hugo-src/content"
 layoutDir = "hugo-src/layouts"
-
-[taxonomies]
-  genre = "genres"
+publishDir = "."
+disableKinds = ["taxonomy", "term"]
 
 [markup]
   [markup.goldmark]
     renderer = { unsafe = true }
 
-[services]
-  [services.googleAnalytics]
-    ID = "G-W1V9M9JHJ2"
-
 [params]
-  description = "Your reading hub at Bithues — reviews, stories, and articles across every genre."
+  description = "Book reviews, reading guides, science fiction, fantasy, and original short stories."
