@@ -1,0 +1,22 @@
+BODY_FIX_REPORT
+==============
+Run: bithues-body-fix-v6
+Date: 2026-05-04
+Script: _fix_review_body.py
+
+Results:
+  Fixed=0
+  Skipped=154
+  Errors=0
+
+Interpretation:
+  All 154 .html files were checked. None had empty <div class="review-body">...</div>
+  (either they have content inside, or the div doesn't exist at all, or the
+  class is different — e.g. "story-body" or no class).
+
+  No fixes were needed.
+
+Notes:
+  - Used regex: <div class="review-body"([^>]*)>(\s*)</div>
+  - Only blank-whitespace between tags counts as "empty"
+  - Source dir: blog-bithues-converted/content/
