@@ -3,7 +3,7 @@ locale = "en-us"
 title = "Bithues"
 contentDir = "hugo-src/content"
 layoutDir = "hugo-src/layouts"
-publishDir = "public"
+publishDir = "."
 disableKinds = ["taxonomy", "term"]
 
 [markup]
