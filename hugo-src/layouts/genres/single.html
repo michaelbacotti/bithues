@@ -1,11 +1,3 @@
-{{ define "sidebar-left" }}
-{{ partial "sidebar-left.html" . }}
-{{ end }}
-
-{{ define "sidebar-right" }}
-{{ partial "sidebar-right.html" . }}
-{{ end }}
-
 {{ define "page-content" }}
 <!-- Genre Hero -->
 <div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem 1.5rem;text-align:center;margin-bottom:1.25rem;">
@@ -21,7 +13,7 @@
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;">
   {{ range $genreReviews }}
   <a href="{{ .RelPermalink }}" style="background:var(--bg);border-radius:4px;padding:.6rem;text-align:center;text-decoration:none;display:block;">
-    <div style="width:100%;aspect-ratio:2/3;border-radius:3px;box-shadow:var(--shadow-md);margin-bottom:.45rem;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.75rem .5rem;background:linear-gradient(160deg,{{ with .Params.cover_gradient }}{{ . }}{{ else }}#3a2d5f,#24103f{{ end }});">
+    <div style="width:100%;aspect-ratio:2/3;border-radius:3px;box-shadow:var(--shadow-md);margin-bottom:.45rem;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.75rem .5rem;background:{{ with .Params.cover_gradient }}{{ . }}{{ else }}linear-gradient(160deg,#3a2d5f,#24103f){{ end }};">
       <span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.35rem;opacity:.85;color:#fff;">{{ $genre }}</span>
       <span style="font-family:'Lora',serif;font-size:.7rem;font-weight:700;color:#fff;line-height:1.3;">{{ .Title }}</span>
     </div>
@@ -33,7 +25,7 @@
 </div>
 {{ else }}
 <div style="background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem;text-align:center;">
-  <p style="color:var(--text-mid);">No reviews in this genre yet. <a href="{{ "/reviews" | relLangURL }}" style="color:var(--orange);">Browse all reviews →</a></p>
+  <p style="color:var(--text-mid);">No reviews in this genre yet. <a href="{{ "/reviews.html" | relLangURL }}" style="color:var(--orange);">Browse all reviews →</a></p>
 </div>
 {{ end }}
 {{ end }}
