@@ -10,5 +10,3 @@ adsense: true
 ---
 
 
-
-

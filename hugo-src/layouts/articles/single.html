@@ -51,15 +51,23 @@
   </div>
 </div>
 
-{{ if .Params.hero_image }}
+{{ if .Params.cover }}
 <figure style="margin:1.5rem 0 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);">
-  <div style="width:100%;height:300px;background:linear-gradient(135deg,#0d1b2a,#1c2b3a,#253447);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <img src="{{ .Params.cover }}" alt="{{ .Title }}" style="width:100%;height:280px;object-fit:cover;" loading="lazy" />
+</figure>
+{{ else if .Params.hero_image }}
+<figure style="margin:1.5rem 0 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);">
+  <div style="width:100%;height:280px;background:linear-gradient(135deg,#0d1b2a,#1c2b3a,#253447);display:flex;flex-direction:column;align-items:center;justify-content:center;">
     <span style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.5rem;">{{ .Params.hero_image_label }}</span>
     <span style="font-family:'Lora',serif;font-size:1.3rem;font-weight:700;color:rgba(255,255,255,.75);text-align:center;line-height:1.3;">{{ .Title }}</span>
   </div>
 </figure>
 {{ end }}
 
+<style>
+.article-body p { margin-bottom: 1.25rem; }
+.article-body h2, .article-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; color: var(--navy); font-family: 'Lora', serif; }
+</style>
 <div style="max-width:680px;margin:2rem auto 0;">
   <div class="article-body" style="font-size:1.05rem;line-height:1.8;color:var(--text);">
     {{ .Content }}
