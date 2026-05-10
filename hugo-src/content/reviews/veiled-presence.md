@@ -3,6 +3,7 @@ title: "reviews"
 author: "E. C. Stroud"
 genre: "Nonfiction"
 isbn: "B0GTJN8YGG"
+cover: "https://covers.openlibrary.org/b/isbn/B0GTJN8YGG-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #3a2d5f 0%, #24103f 100%)"

@@ -3,6 +3,7 @@ title: "Horizonte Rojo: Lanzamiento Lunar"
 author: "M. A. Hale"
 genre: "Science Fiction"
 isbn: "B0GR1199SJ"
+cover: "https://covers.openlibrary.org/b/isbn/B0GR1199SJ-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #4a1f2d 0%, #301018 100%)"

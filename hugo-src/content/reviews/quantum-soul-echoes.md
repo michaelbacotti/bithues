@@ -3,6 +3,7 @@ title: "Quantum Soul Echoes"
 author: "Self-Help"
 genre: "Science"
 isbn: "B0GPNWJ314"
+cover: "https://covers.openlibrary.org/b/isbn/B0GPNWJ314-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #1a3a5c 0%, #0f2540 100%)"

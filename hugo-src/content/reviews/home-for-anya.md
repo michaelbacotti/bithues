@@ -3,6 +3,7 @@ title: "A Home for Anya"
 author: "Lena Ashfield"
 genre: "Romance"
 isbn: "B0GQK61R5H"
+cover: "https://covers.openlibrary.org/b/isbn/B0GQK61R5H-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #3a2d5f 0%, #24103f 100%)"

@@ -3,6 +3,7 @@ title: "Otomí — E. J. Marín"
 author: "E. J. Marín"
 genre: "Historical Fiction"
 isbn: "B0GS367G2M"
+cover: "https://covers.openlibrary.org/b/isbn/B0GS367G2M-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #1c3a5f 0%, #0f2540 100%)"

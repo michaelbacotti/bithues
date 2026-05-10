@@ -3,6 +3,7 @@ title: "Beyond the Veil"
 author: "Self-Help"
 genre: "Science Fiction"
 isbn: "B0GPLX1NJD"
+cover: "https://covers.openlibrary.org/b/isbn/B0GPLX1NJD-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #5a2d2d 0%, #3a1a1a 100%)"

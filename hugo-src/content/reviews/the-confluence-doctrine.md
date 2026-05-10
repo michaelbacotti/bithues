@@ -3,6 +3,7 @@ title: "The Confluence Doctrine"
 author: "Self-Help"
 genre: "Science Fiction"
 isbn: "B0GSP9S473"
+cover: "https://covers.openlibrary.org/b/isbn/B0GSP9S473-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #2d5a4a 0%, #1a3028 100%)"
