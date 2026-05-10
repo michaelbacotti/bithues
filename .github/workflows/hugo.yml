@@ -1,6 +1,8 @@
 name: Build and Deploy to GitHub Pages
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -21,10 +23,20 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.161.1'
+          extended: true
+
+      - name: Build Hugo site
+        run: |
+          ./hugo --gc --minify
+
       - name: Copy site to public
         run: |
           rm -rf public
-          rsync -a --exclude=public . public/
+          rsync -a --exclude=public --exclude=.git . public/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
