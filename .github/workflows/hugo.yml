@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Hugo site
         run: |
-          ./hugo --gc --minify
+          hugo --gc --minify
 
       - name: Copy site to public
         run: |
@@ -49,3 +49,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
