@@ -1,1 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Genres on Bithues</title><link>https://www.bithues.com/genres/</link><description>Recent content in Genres on Bithues</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://www.bithues.com/genres/index.xml" rel="self" type="application/rss+xml"/><item><title>Adventure</title><link>https://www.bithues.com/genres/adventure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/adventure/</guid><description/></item><item><title>Biography Books</title><link>https://www.bithues.com/genres/biography/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/biography/</guid><description/></item><item><title>Business Books</title><link>https://www.bithues.com/genres/business/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/business/</guid><description/></item><item><title>Children's Fiction</title><link>https://www.bithues.com/genres/children/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/children/</guid><description/></item><item><title>Cultural</title><link>https://www.bithues.com/genres/cultural/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/cultural/</guid><description/></item><item><title>Dystopian</title><link>https://www.bithues.com/genres/dystopian/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/dystopian/</guid><description/></item><item><title>Fiction</title><link>https://www.bithues.com/genres/fiction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/fiction/</guid><description/></item><item><title>Historical Fiction</title><link>https://www.bithues.com/genres/historical-fiction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/historical-fiction/</guid><description/></item><item><title>Literary Fiction</title><link>https://www.bithues.com/genres/literary/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/literary/</guid><description/></item><item><title>Mystery</title><link>https://www.bithues.com/genres/mystery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/mystery/</guid><description/></item><item><title>Mythology</title><link>https://www.bithues.com/genres/mythology/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/mythology/</guid><description/></item><item><title>Nonfiction</title><link>https://www.bithues.com/genres/nonfiction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/nonfiction/</guid><description/></item><item><title>Romance</title><link>https://www.bithues.com/genres/romance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/romance/</guid><description/></item><item><title>Science</title><link>https://www.bithues.com/genres/science/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/science/</guid><description/></item><item><title>Science Fiction Books</title><link>https://www.bithues.com/genres/science-fiction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/science-fiction/</guid><description/></item><item><title>Self-Help Books</title><link>https://www.bithues.com/genres/self-help/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/self-help/</guid><description/></item><item><title>Spiritual</title><link>https://www.bithues.com/genres/spiritual/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/spiritual/</guid><description/></item><item><title>Thriller &amp; Mystery Books</title><link>https://www.bithues.com/genres/thriller/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.bithues.com/genres/thriller/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Genres on Bithues</title>
+    <link>https://www.bithues.com/genres/</link>
+    <description>Recent content in Genres on Bithues</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://www.bithues.com/genres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adventure</title>
+      <link>https://www.bithues.com/genres/adventure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/adventure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Biography Books</title>
+      <link>https://www.bithues.com/genres/biography/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/biography/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Business Books</title>
+      <link>https://www.bithues.com/genres/business/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/business/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Children&#39;s Fiction</title>
+      <link>https://www.bithues.com/genres/children/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/children/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cultural</title>
+      <link>https://www.bithues.com/genres/cultural/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/cultural/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dystopian</title>
+      <link>https://www.bithues.com/genres/dystopian/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/dystopian/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fiction</title>
+      <link>https://www.bithues.com/genres/fiction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/fiction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Historical Fiction</title>
+      <link>https://www.bithues.com/genres/historical-fiction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/historical-fiction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Literary Fiction</title>
+      <link>https://www.bithues.com/genres/literary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/literary/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mystery</title>
+      <link>https://www.bithues.com/genres/mystery/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/mystery/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mythology</title>
+      <link>https://www.bithues.com/genres/mythology/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/mythology/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nonfiction</title>
+      <link>https://www.bithues.com/genres/nonfiction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/nonfiction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Romance</title>
+      <link>https://www.bithues.com/genres/romance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/romance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Science</title>
+      <link>https://www.bithues.com/genres/science/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/science/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Science Fiction Books</title>
+      <link>https://www.bithues.com/genres/science-fiction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/science-fiction/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Self-Help Books</title>
+      <link>https://www.bithues.com/genres/self-help/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/self-help/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spiritual</title>
+      <link>https://www.bithues.com/genres/spiritual/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/spiritual/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Thriller &amp; Mystery Books</title>
+      <link>https://www.bithues.com/genres/thriller/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://www.bithues.com/genres/thriller/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

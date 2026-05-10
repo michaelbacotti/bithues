@@ -8,61 +8,42 @@
   {{ if .Permalink }}<link rel="canonical" href="{{ .Permalink }}" />{{ end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1V9M9JHJ2"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W1V9M9JHJ2');</script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
 </head>
 <body>
 
-<!-- Blog-Style Topbar Navigation -->
-<header class="topbar">
-  <div class="topbar-logo">
-    <a href="{{ "/" | relLangURL }}" style="text-decoration:none;color:inherit;">
-      Bithues <span>Reading Lab</span>
-    </a>
-  </div>
-  <nav class="topbar-nav">
-    <a href="{{ "/" | relLangURL }}" {{ if eq .RelPermalink "/" }}class="active"{{ end }}>Feed</a>
-    <a href="{{ "/reviews" | relLangURL }}" {{ if hasPrefix .RelPermalink "/reviews" }}class="active"{{ end }}>Reviews</a>
-    <a href="{{ "/stories" | relLangURL }}" {{ if hasPrefix .RelPermalink "/stories" }}class="active"{{ end }}>Stories</a>
-    <a href="{{ "/articles" | relLangURL }}" {{ if hasPrefix .RelPermalink "/articles" }}class="active"{{ end }}>Articles</a>
-    <a href="{{ "/book-tracker" | relLangURL }}" {{ if eq .RelPermalink "/book-tracker/" }}class="active"{{ end }}>Book Tracker</a>
-    <a href="{{ "/about" | relLangURL }}" {{ if eq .RelPermalink "/about/" }}class="active"{{ end }}>About</a>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="{{ "/" | relLangURL }}" class="nav-logo">Bithues</a>
+      <div class="nav-links">
+        <a href="{{ "/" | relLangURL }}" {{ if eq .RelPermalink "/" }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>Feed</a>
+        <a href="{{ "/browse.html" | relLangURL }}" class="nav-link">Browse</a>
+        <a href="{{ "/about.html" | relLangURL }}" {{ if eq .RelPermalink "/about/" }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>About</a>
+      </div>
+    </div>
   </nav>
-</header>
 
-<!-- Page Layout: sidebar-left + main + sidebar-right -->
-<div class="page-layout">
-  {{ if (templates.Exists "partials/sidebar-left.html") }}
-  <aside class="sidebar-left">
-    {{ if (templates.Exists "templates/sidebar-left.html") }}
-    {{ template "sidebar-left" . }}
-    {{ else if .Scratch.Get "sidebar-left" }}
-    {{ .Scratch.Get "sidebar-left" | safeHTML }}
-    {{ end }}
-  </aside>
-  {{ end }}
-
-  <main class="main-content">
+  <main class="main">
     {{ block "page-content" . }}{{ end }}
   </main>
 
-  {{ if (templates.Exists "partials/sidebar-right.html") }}
-  <aside class="sidebar-right">
-    {{ if (templates.Exists "templates/sidebar-right.html") }}
-    {{ template "sidebar-right" . }}
-    {{ else if .Scratch.Get "sidebar-right" }}
-    {{ .Scratch.Get "sidebar-right" | safeHTML }}
-    {{ end }}
-  </aside>
-  {{ end }}
-</div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="{{ "/" | relLangURL }}" class="footer-brand">Bithues</a>
+      <nav class="footer-nav">
+        <a href="{{ "/reviews.html" | relLangURL }}">Reviews</a>
+        <a href="{{ "/articles.html" | relLangURL }}">Articles</a>
+        <a href="{{ "/stories.html" | relLangURL }}">Stories</a>
+        <a href="{{ "/about.html" | relLangURL }}">About</a>
+      </nav>
+      <p class="footer-copy">&copy; <span id="year"></span> {{ .Site.Title }}. All rights reserved.</p>
+    </div>
+  </footer>
 
-<footer>
-  <p>© <span id="year"></span> {{ .Site.Title }} · <a href="{{ "about" | relLangURL }}">About</a> · <a href="{{ "contact" | relLangURL }}">Contact</a> · <a href="{{ "privacy" | relLangURL }}">Privacy</a></p>
-</footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
