@@ -39,22 +39,17 @@
 <!-- Review Hero -->
 <div class="feed-section" style="margin-bottom:1.25rem;">
   <div style="padding:1.5rem 1.25rem 1rem;border-bottom:1px solid var(--border);">
+    {{ if .Params.cover }}
+    <div style="float:right;margin:0 0 1rem 1.5rem;">
+      <img src="{{ .Params.cover }}" alt="Cover of {{ .Title }}" style="width:90px;height:auto;border-radius:6px;box-shadow:0 3px 12px rgba(0,0,0,0.15);" loading="lazy" />
+    </div>
+    {{ end }}
     <div style="font-size:.72rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem;">Book Review</div>
     <h1 style="font-family:'Lora',serif;font-size:1.75rem;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:.35rem;">{{ .Title }}</h1>
     <div style="font-size:.875rem;color:var(--text-mid);margin-top:.25rem;">by {{ .Params.author }} · {{ .Params.genre }} · {{ .Params.stars }}</div>
     {{ with .Params.excerpt }}<p style="font-size:.95rem;color:var(--text-mid);line-height:1.6;margin-top:.75rem;">{{ . }}</p>{{ end }}
   </div>
 </div>
-
-{{ if .Params.cover_gradient }}
-<figure style="margin:1.5rem 0 0;">
-  <div style="width:100%;max-width:680px;aspect-ratio:2/3;border-radius:4px;box-shadow:var(--shadow-md);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem 1rem;background:{{ .Params.cover_gradient | safeCSS }};">
-    <span style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;opacity:.7;color:#fff;">{{ .Params.genre }}</span>
-    <span style="font-family:'Lora',serif;font-size:.9rem;font-weight:700;color:#fff;line-height:1.3;text-align:center;">{{ .Title }}</span>
-    <span style="font-size:.7rem;color:rgba(255,255,255,.6);margin-top:.35rem;">{{ .Params.author }}</span>
-  </div>
-</figure>
-{{ end }}
 
 <!-- Review Body -->
 <div class="feed-section">
@@ -65,12 +60,10 @@
 
     <!-- Amazon Affiliate CTA -->
     {{ if .Params.isbn }}
-    <div style="margin:2.5rem 0;padding:1.25rem 1.5rem;background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);border-left:4px solid var(--orange);display:flex;align-items:center;justify-content:space-between;gap:1rem;">
-      <div style="flex:1;">
-        <div style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;">Get the book on Amazon</div>
-        <div style="font-size:.82rem;color:var(--text-mid);line-height:1.5;">Read {{ .Title }} by {{ .Params.author }} — available on Kindle and in print.</div>
-      </div>
-      <a href="https://www.amazon.com/dp/{{ .Params.isbn }}?tag=bithues-20" target="_blank" rel="noopener sponsored" style="font-size:.85rem;font-weight:600;color:var(--orange);text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;">View on Amazon →</a>
+    <div style="margin:2.5rem 0;padding:1.25rem 1.5rem;background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);border-left:4px solid var(--orange);">
+      <div style="font-family:'Lora',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;">Get the book on Amazon</div>
+      <div style="font-size:.82rem;color:var(--text-mid);line-height:1.5;margin-bottom:.75rem;">Read {{ .Title }} by {{ .Params.author }} — available on Kindle and in print.</div>
+      <a href="https://www.amazon.com/dp/{{ .Params.isbn }}?tag=bithues-20" target="_blank" rel="noopener sponsored" style="display:inline-flex;align-items:center;gap:.35rem;font-size:.85rem;font-weight:600;color:var(--orange);text-decoration:none;">View on Amazon →</a>
     </div>
     {{ end }}
 
