@@ -1,6 +1,11 @@
 {{ define "page-content" }}
 <div class="feed-section">
   <div class="feed-section-body">
+    {{ if .Params.cover }}
+    <div style="float:right;margin:0 0 1rem 1.5rem;">
+      <img src="{{ .Params.cover }}" alt="{{ .Title }}" style="width:90px;height:auto;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);" />
+    </div>
+    {{ end }}
     <h1 class="page-title" style="font-family:'Lora',serif;font-size:1.9rem;font-weight:700;color:var(--navy);margin-bottom:1rem;">{{ .Title }}</h1>
     {{ .Content }}
   </div>

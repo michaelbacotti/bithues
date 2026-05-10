@@ -3,6 +3,7 @@ title: "The Shadow Within"
 author: "Elena Maris"
 genre: "Self-Help"
 isbn: "B0GPT6QRDW"
+cover: "https://covers.openlibrary.org/b/isbn/B0GPT6QRDW-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #2d3a5a 0%, #1a2040 100%)"

@@ -3,6 +3,7 @@ title: "The Power of Changing Your Mind"
 author: "Evan R. A. Cole"
 genre: "Self-Help"
 isbn: "B0GHQG9LLS"
+cover: "https://covers.openlibrary.org/b/isbn/B0GHQG9LLS-M.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #1c3a5f 0%, #0f2540 100%)"
