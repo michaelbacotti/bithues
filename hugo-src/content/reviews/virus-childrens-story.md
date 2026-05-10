@@ -3,7 +3,7 @@ title: "The Virus: A Children's Story"
 author: "Michael Bacotti"
 genre: "Children"
 isbn: "B0863V3CW9"
-cover: "https://covers.openlibrary.org/b/isbn/B0863V3CW9-M.jpg"
+cover: "https://images-na.ssl-images-amazon.com/images/P/B0863V3CW9.01._SCLZZZZZZZ_.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #4a1f2d 0%, #301018 100%)"

@@ -3,7 +3,7 @@ title: "The Blueprint"
 author: "Marcus Reeve"
 genre: "Science Fiction"
 isbn: "B0GQK61R5H"
-cover: "https://covers.openlibrary.org/b/isbn/B0GQK61R5H-M.jpg"
+cover: "https://images-na.ssl-images-amazon.com/images/P/B0GQK61R5H.01._SCLZZZZZZZ_.jpg"
 stars: 5
 rating: 5
 cover_gradient: "linear-gradient(135deg, #4a1f2d 0%, #301018 100%)"

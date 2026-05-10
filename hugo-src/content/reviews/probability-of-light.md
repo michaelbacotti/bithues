@@ -3,7 +3,7 @@ title: "The Probability of Light"
 author: "Maris K. Vector"
 genre: "Science Fiction"
 isbn: "B0GHNFJ88K"
-cover: "https://covers.openlibrary.org/b/isbn/B0GHNFJ88K-M.jpg"
+cover: "https://images-na.ssl-images-amazon.com/images/P/B0GHNFJ88K.01._SCLZZZZZZZ_.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #2d3a5a 0%, #1a2040 100%)"

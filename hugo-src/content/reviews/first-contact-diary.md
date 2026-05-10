@@ -3,7 +3,7 @@ title: "First Contact Diary"
 author: "Mira Ellison"
 genre: "Science Fiction"
 isbn: "B0GTSXS48K"
-cover: "https://covers.openlibrary.org/b/isbn/B0GTSXS48K-M.jpg"
+cover: "https://images-na.ssl-images-amazon.com/images/P/B0GTSXS48K.01._SCLZZZZZZZ_.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #1a3a5c 0%, #0f2540 100%)"

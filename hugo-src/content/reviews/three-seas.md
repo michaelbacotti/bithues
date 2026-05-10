@@ -3,7 +3,7 @@ title: "Men of the Three Seas"
 author: "Leander Vassos"
 genre: "Historical Fiction"
 isbn: "B0D38W5972"
-cover: "https://covers.openlibrary.org/b/isbn/B0D38W5972-M.jpg"
+cover: "https://images-na.ssl-images-amazon.com/images/P/B0D38W5972.01._SCLZZZZZZZ_.jpg"
 stars: 4
 rating: 4
 cover_gradient: "linear-gradient(135deg, #1a3a5c 0%, #0f2540 100%)"
