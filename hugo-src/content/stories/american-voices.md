@@ -4,9 +4,9 @@ title: "American Voices — Story"
 description: "Original literary fiction short story — American Voices"
 genre: "Literary Fiction"
 adsense: true
+cover: "https://media.bithues.com/tool-image-generation/image-1---7d3583b6-6185-40f7-ba47-69d3d813807f.png"
 
 ---
-
 The afternoon mail carrier had been coming to their block for nineteen years, and by 2019 she knew which houses held yapping dogs before the screen door opened, which mailboxes stuck, and which porches had been repainted since last fall. She also knew that the man in the blue house had stopped collecting his mail sometime in the spring. Not altogether — the bank statements still vanished, the coupons still arrived — but the magazines and the occasional parcel had started piling up behind the screen. By August, the pile had formed a small city on the porch steps.
 
 She mentioned it to her supervisor once, a kind of question, and was told that some people just lost interest in things. That was that.

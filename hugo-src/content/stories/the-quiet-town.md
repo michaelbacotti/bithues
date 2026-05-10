@@ -6,6 +6,3 @@ genre: "Literary Fiction"
 adsense: true
 
 ---
-
-
-

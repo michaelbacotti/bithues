@@ -6,6 +6,3 @@ genre: "Children's Fiction"
 adsense: true
 
 ---
-
-
-

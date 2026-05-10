@@ -39,8 +39,12 @@
   </div>
 </div>
 
-{{ if .Params.hero_image }}
-<figure style="margin:1.5rem 0 0;">
+{{ if .Params.cover }}
+<figure style="margin:1.5rem 0;">
+  <img src="{{ .Params.cover }}" alt="Illustration for {{ .Title }}" style="width:100%;max-width:680px;height:260px;object-fit:cover;border-radius:4px;box-shadow:var(--shadow-md);" loading="lazy" />
+</figure>
+{{ else if .Params.hero_image }}
+<figure style="margin:1.5rem 0;">
   <div style="width:100%;max-width:680px;aspect-ratio:16/9;border-radius:4px;box-shadow:var(--shadow-md);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:{{ .Params.hero_image_bg | default "linear-gradient(135deg,#1a2a3a,#0f1f2f)" }};">
     <span style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;opacity:.5;color:#fff;">Original Fiction</span>
     <span style="font-family:'Lora',serif;font-size:1.3rem;font-weight:700;color:#fff;text-align:center;line-height:1.3;">{{ .Title }}</span>
@@ -51,7 +55,11 @@
 <!-- Story Body -->
 <div class="feed-section">
   <div class="feed-section-body">
-    <div class="story-body" style="font-size:1.05rem;line-height:1.85;color:var(--text);">
+<style>
+.story-body p { margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.8; }
+.story-body em { font-style: italic; }
+</style>
+    <div class="story-body">
       {{ .Content }}
     </div>
 

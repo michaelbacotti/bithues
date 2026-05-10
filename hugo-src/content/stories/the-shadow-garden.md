@@ -6,6 +6,3 @@ genre: "Fiction"
 adsense: true
 
 ---
-
-
-

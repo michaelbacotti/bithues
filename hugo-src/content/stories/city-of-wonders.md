@@ -6,6 +6,3 @@ genre: "Travel/Adventure Fiction"
 adsense: true
 
 ---
-
-
-

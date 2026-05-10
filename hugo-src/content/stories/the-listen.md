@@ -6,6 +6,3 @@ genre: "Science Fiction"
 adsense: true
 
 ---
-
-
-

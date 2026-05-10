@@ -6,6 +6,7 @@
 title: "The Last Signal"
 genre: "Sci-Fi"
 read_time: "12 min"
+cover: "https://media.bithues.com/tool-image-generation/image-1---ff6acbf0-1209-47c1-9d22-3ef8575ec3ac.png"
 setting: "Deep-space relay station, 2147"
 excerpt: ""
 
@@ -13,11 +14,6 @@ excerpt: ""
 
 
 ---
-
-
-
-
-
 The final transmission from Station Kepler-9 arrives three weeks after the crew was reported lost.
 
 Nora Voss had listened to the silence between stars for eleven years. She'd learned its rhythms the way a sailor learns the sea — the quiet intervals, the bursts of cosmic noise, the particular static that meant a signal was coming from somewhere. She'd become patient in the way only people who listen for a living can be.

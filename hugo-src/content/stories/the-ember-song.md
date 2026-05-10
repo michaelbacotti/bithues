@@ -6,6 +6,3 @@ genre: "Fantasy"
 adsense: true
 
 ---
-
-
-

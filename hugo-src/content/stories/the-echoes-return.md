@@ -6,6 +6,3 @@ genre: "Spiritual Fiction"
 adsense: true
 
 ---
-
-
-

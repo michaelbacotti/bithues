@@ -6,6 +6,3 @@ genre: "Survival Fiction"
 adsense: true
 
 ---
-
-
-

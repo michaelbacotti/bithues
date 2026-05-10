@@ -6,6 +6,3 @@ genre: "Meta-Fiction"
 adsense: true
 
 ---
-
-
-

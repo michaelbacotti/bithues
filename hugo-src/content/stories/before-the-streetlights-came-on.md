@@ -6,6 +6,3 @@ genre: "Stories"
 adsense: true
 
 ---
-
-
-
