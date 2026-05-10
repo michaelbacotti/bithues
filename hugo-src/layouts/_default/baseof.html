@@ -17,9 +17,10 @@
     <div class="nav-inner">
       <a href="{{ "/" | relLangURL }}" class="nav-logo">Bithues</a>
       <div class="nav-links">
-        <a href="{{ "/" | relLangURL }}" {{ if eq .RelPermalink "/" }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>Feed</a>
-        <a href="{{ "/browse.html" | relLangURL }}" class="nav-link">Browse</a>
-        <a href="{{ "/about.html" | relLangURL }}" {{ if eq .RelPermalink "/about/" }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>About</a>
+        <a href="{{ "/reviews.html" | relLangURL }}" {{ if and (eq .Section "reviews") (not (eq .RelPermalink "/reviews.html")) }}class="nav-link active"{{ else if eq .RelPermalink "/reviews.html" }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>Reviews</a>
+        <a href="{{ "/articles.html" | relLangURL }}" {{ if or (eq .Section "articles") (eq .RelPermalink "/articles.html") }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>Articles</a>
+        <a href="{{ "/stories.html" | relLangURL }}" {{ if or (eq .Section "stories") (eq .RelPermalink "/stories.html") }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>Stories</a>
+        <a href="{{ "/about.html" | relLangURL }}" {{ if eq .RelPermalink "/about.html" }}class="nav-link active"{{ else }}class="nav-link"{{ end }}>About</a>
       </div>
     </div>
   </nav>
@@ -32,9 +33,8 @@
     <div class="footer-inner">
       <a href="{{ "/" | relLangURL }}" class="footer-brand">Bithues</a>
       <nav class="footer-nav">
-        <a href="{{ "/reviews.html" | relLangURL }}">Reviews</a>
-        <a href="{{ "/articles.html" | relLangURL }}">Articles</a>
-        <a href="{{ "/stories.html" | relLangURL }}">Stories</a>
+        <a href="{{ "/" | relLangURL }}">Feed</a>
+        <a href="{{ "/browse.html" | relLangURL }}">Browse</a>
         <a href="{{ "/about.html" | relLangURL }}">About</a>
       </nav>
       <p class="footer-copy">&copy; <span id="year"></span> {{ .Site.Title }}. All rights reserved.</p>
