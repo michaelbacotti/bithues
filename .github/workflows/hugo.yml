@@ -33,11 +33,6 @@ jobs:
         run: |
           hugo --gc --minify
 
-      - name: Copy site to public
-        run: |
-          rm -rf public
-          rsync -a --exclude=public --exclude=.git . public/
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -49,4 +44,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
