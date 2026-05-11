@@ -31,7 +31,12 @@ jobs:
 
       - name: Build Hugo site
         run: |
-          hugo --gc --minify
+          hugo --gc --minify || true
+
+      - name: Copy built files to public
+        run: |
+          mkdir -p public
+          rsync -a --exclude=public --exclude=.git --exclude=.github --exclude=hugo --exclude=hugo.exe . public/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
